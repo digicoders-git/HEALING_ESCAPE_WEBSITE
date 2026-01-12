@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #006cb5;
+  --color-secondary: #1db64c;
+  --color-accent: #004c8c;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #ffffff;
+  color: #1a202c;
+}
+
+@layer utilities {
+  .bg-primary-gradient {
+    background: linear-gradient(135deg, var(--color-primary) 0%, #004c8c 100%);
+  }
+
+  @keyframes slideZoom {
+    0% {
+      transform: scale(1) translateZ(0);
+    }
+
+    100% {
+      transform: scale(1.08) translateZ(0);
+    }
+  }
+
+  .swiper-slide-active .animate-optimized-zoom {
+    animation: slideZoom 10s ease-out forwards;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  @keyframes textReveal {
+    0% {
+      transform: translateY(60px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .swiper-slide-active .animate-text-reveal {
+    animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
