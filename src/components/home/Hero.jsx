@@ -21,7 +21,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative h-[90vh] md:h-[88vh] pt-10 lg:pt-0 flex items-center overflow-hidden bg-primary"
+      className="relative h-[90vh] md:h-[88vh] py-10 lg:py-0 flex items-center overflow-hidden bg-primary"
     >
       {/* Video Background with Masking */}
       <div className="absolute inset-0 z-0">
