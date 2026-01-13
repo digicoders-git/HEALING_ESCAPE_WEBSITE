@@ -21,7 +21,7 @@ const Hero = () => {
     <section
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="relative h-[90vh] md:h-[88vh] py-10 lg:py-0 flex items-center overflow-hidden bg-primary"
+      className="relative min-h-[100vh] md:min-h-[90vh] lg:h-[88vh] py-16 md:py-20 lg:py-0 flex items-center overflow-hidden bg-primary"
     >
       {/* Video Background with Masking */}
       <div className="absolute inset-0 z-0">
@@ -58,14 +58,14 @@ const Hero = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="max-w-7xl mx-auto px-4 md:px-8 relative z-20 w-full mb-0"
+        className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 relative z-20 w-full"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-left">
             <motion.div
               variants={fadeIn("right", 0.1)}
-              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded-lg shadow-lg"
+              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded-lg shadow-lg mx-auto lg:mx-0"
             >
               <Activity size={14} className="text-white animate-pulse" />
               <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-none">
@@ -73,8 +73,11 @@ const Hero = () => {
               </p>
             </motion.div>
 
-            <motion.div variants={fadeIn("right", 0.2)} className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="space-y-3 md:space-y-4"
+            >
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
                 Connecting the World to{" "}
                 <span className="text-secondary">India’s Healthcare</span>{" "}
                 <br />
@@ -83,7 +86,7 @@ const Hero = () => {
             </motion.div>
             <motion.p
               variants={fadeIn("right", 0.3)}
-              className="text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed"
+              className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:mx-0"
             >
               Your trusted partner for world-class, affordable medical treatment
               in India. We help international patients access top hospitals,
@@ -93,7 +96,7 @@ const Hero = () => {
 
             <motion.div
               variants={fadeIn("right", 0.4)}
-              className="flex flex-wrap gap-6"
+              className="flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
             >
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
@@ -119,7 +122,7 @@ const Hero = () => {
             variants={fadeIn("left", 0.5)}
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="rounded-3xl shadow-2xl p-8 w-full max-w-md border-b-4 border-primary relative overflow-hidden">
+            <div className="rounded-3xl shadow-2xl p-6 sm:p-7 md:p-8 w-full max-w-md mx-auto border-b-4 border-primary relative overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img
                   src="https://images.unsplash.com/photo-1576091160550-217359f488d5?auto=format&fit=crop&q=80&w=1000"
@@ -130,26 +133,26 @@ const Hero = () => {
               </div>
 
               <div className="relative z-10">
-                <div className="mb-6">
-                  <h3 className="text-xl font-bold text-primary leading-tight uppercase tracking-tight">
+                <div className="mb-5 md:mb-6">
+                  <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
                     Get Free Medical Consultation
                   </h3>
-                  <p className="text-slate-500 text-[9px] font-bold uppercase tracking-widest mt-1">
+                  <p className="text-slate-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mt-1">
                     Verified Response Center
                   </p>
                 </div>
 
-                <form className="space-y-3">
-                  <div className="space-y-3">
+                <form className="space-y-3 sm:space-y-3.5">
+                  <div className="space-y-3 sm:space-y-3.5">
                     <input
                       type="text"
                       placeholder="Full Name"
-                      className="w-full py-3.5 px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
+                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
                     />
 
                     <div className="grid grid-cols-2 gap-3">
                       <div className="relative">
-                        <select className="w-full py-3.5 px-5 rounded-xl border border-white bg-white/80 focus:outline-none appearance-none text-sm font-semibold text-slate-700 cursor-pointer">
+                        <select className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none appearance-none text-sm font-semibold text-slate-700 cursor-pointer">
                           <option>Country</option>
                           <option>Kenya</option>
                           <option>Nigeria</option>
@@ -163,7 +166,7 @@ const Hero = () => {
                       <input
                         type="text"
                         placeholder="City"
-                        className="w-full py-3.5 px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                       />
                     </div>
 
@@ -171,23 +174,26 @@ const Hero = () => {
                       <input
                         type="text"
                         placeholder="+91"
-                        className="w-16 py-3.5 px-2 rounded-xl border border-white bg-white/80 text-center text-sm font-bold text-primary"
+                        className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-white bg-white/80 text-center text-sm font-bold text-primary"
                       />
                       <input
                         type="text"
                         placeholder="Mobile Number"
-                        className="flex-1 py-3.5 px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                        className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                       />
                     </div>
 
                     <textarea
                       placeholder="Clinical requirement..."
                       rows="2"
-                      className="w-full py-3.5 px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
+                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                     ></textarea>
                   </div>
 
-                  <button className="w-full bg-primary hover:bg-secondary text-white font-bold py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[11px] mt-2">
+                  <button
+                    type="submit"
+                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4"
+                  >
                     Send Enquiry
                   </button>
                 </form>
