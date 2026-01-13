@@ -19,6 +19,7 @@ import logo from "../assets/logo.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -29,28 +30,55 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navLinks = [
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Specialities", path: "/specialities" },
+    { label: "Hospitals", path: "/hospitals" },
+    { label: "Doctors", path: "/doctors" },
+    {
+      label: "Knowledge",
+      path: "#",
+      dropdownItems: [
+        { label: "Blog", path: "/blogs" },
+        { label: "Video", path: "/videos" },
+        { label: "Gallery", path: "/gallery" },
+      ],
+    },
+    { label: "Contact", path: "/contact" },
+  ];
+
   return (
     <>
       {/* 1. Top Utility Bar - Not Sticky (Will scroll away) */}
       <div className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-[110]">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-8 items-center">
-            <span className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase">
+            <Link
+              to="/blogs"
+              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase"
+            >
               <BookOpen size={14} className="text-secondary" /> Blogs
-            </span>
-            <span className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase">
+            </Link>
+            <Link
+              to="/videos"
+              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase"
+            >
               <PlayCircle size={14} className="text-secondary" /> Videos
-            </span>
-            <span className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase">
+            </Link>
+            <Link
+              to="/gallery"
+              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase"
+            >
               <ImageIcon size={14} className="text-secondary" /> Gallery
-            </span>
+            </Link>
           </div>
           <div className="flex gap-8 items-center">
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-2 text-white/90">
               <Mail size={14} className="text-secondary" />{" "}
               info@healingescape.com
             </span>
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-2 text-white/90">
               <Phone size={14} className="text-secondary" /> +91 91404 05040
             </span>
             <div className="h-4 w-px bg-white/20 mx-2" />
@@ -76,39 +104,40 @@ const Navbar = () => {
               src={landLogoo}
               alt="Healing Escape Global"
               className={`transition-all duration-500 h-auto ${
-                isScrolled ? "w-[160px] md:w-[200px]" : "w-[160px] md:w-[200px]"
+                isScrolled ? "w-[160px] md:w-[180px]" : "w-[180px] md:w-[220px]"
               }`}
             />
           </Link>
 
-          {/* Desktop Nav Items - Normal Weight */}
-          <div className="hidden xl:flex items-center gap-1 sm:ml-8">
-            <NavMenuLink
-              to="/"
-              label="Home"
-              active={location.pathname === "/"}
-            />
-            <NavMenuLink
-              to="/about-us"
-              label="About Us"
-              active={location.pathname === "/about-us"}
-            />
-            <NavDropdown label="Hospitals" />
-            <NavDropdown label="Doctors" />
-            <NavDropdown label="Treatments" />
-            <NavMenuLink to="/services" label="Services" />
-            <NavMenuLink to="/journey" label="Journey" />
-            <NavDropdown label="Knowledge" />
+          {/* Desktop Nav Items */}
+          <div className="hidden xl:flex items-center gap-1">
+            {navLinks.map((item, index) =>
+              item.dropdownItems ? (
+                <NavDropdown
+                  key={index}
+                  label={item.label}
+                  items={item.dropdownItems}
+                  active={location.pathname.startsWith(item.path)}
+                />
+              ) : (
+                <NavMenuLink
+                  key={index}
+                  to={item.path}
+                  label={item.label}
+                  active={location.pathname === item.path}
+                />
+              )
+            )}
           </div>
 
-          {/* Search & Enquiry CTA */}
+          {/* Enquiry CTA */}
           <div className="hidden lg:flex items-center gap-6">
-            <button className="text-primary hover:text-secondary transition-colors p-2 rounded-full hover:bg-slate-50">
-              <Search size={22} strokeWidth={2} />
-            </button>
-            <button className="bg-secondary hover:bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-xs uppercase tracking-widest whitespace-nowrap text-center">
+            <Link
+              to="/contact"
+              className="bg-secondary hover:bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-xs uppercase tracking-widest whitespace-nowrap text-center"
+            >
               Enquiry
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -146,48 +175,59 @@ const Navbar = () => {
             </button>
           </div>
 
-          <div className="space-y-1 overflow-y-auto pr-2 flex-1">
-            <MobileNavLink
-              to="/"
-              label="Home"
-              active={location.pathname === "/"}
-              onClick={() => setIsOpen(false)}
-            />
-            <MobileNavLink
-              to="/about-us"
-              label="About Us"
-              active={location.pathname === "/about-us"}
-              onClick={() => setIsOpen(false)}
-            />
-            <MobileNavDropdown label="Our Hospitals" />
-            <MobileNavDropdown label="Top Doctors" />
-            <MobileNavDropdown label="Medical Specialties" />
-            <MobileNavLink
-              to="/services"
-              label="Global Services"
-              onClick={() => setIsOpen(false)}
-            />
-            <MobileNavLink
-              to="/journey"
-              label="Patient Journey"
-              onClick={() => setIsOpen(false)}
-            />
-            <MobileNavDropdown label="Portal Knowledge" />
+          <div className="space-y-1 overflow-y-auto pr-2 flex-1 scrollbar-thin">
+            {navLinks.map((item, index) =>
+              item.dropdownItems ? (
+                <MobileNavDropdown
+                  key={index}
+                  label={item.label}
+                  items={item.dropdownItems}
+                  onClick={() => setIsOpen(false)}
+                />
+              ) : (
+                <MobileNavLink
+                  key={index}
+                  to={item.path}
+                  label={item.label}
+                  active={location.pathname === item.path}
+                  onClick={() => setIsOpen(false)}
+                />
+              )
+            )}
 
             <div className="h-px bg-slate-100 my-8" />
 
             <div className="grid grid-cols-2 gap-3 pb-6">
-              <UtilityItem icon={<BookOpen size={16} />} label="Blogs" />
-              <UtilityItem icon={<PlayCircle size={16} />} label="Videos" />
-              <UtilityItem icon={<ImageIcon size={16} />} label="Gallery" />
+              <UtilityItem
+                icon={<BookOpen size={16} />}
+                label="Blogs"
+                to="/blogs"
+                onClick={() => setIsOpen(false)}
+              />
+              <UtilityItem
+                icon={<PlayCircle size={16} />}
+                label="Videos"
+                to="/videos"
+                onClick={() => setIsOpen(false)}
+              />
+              <UtilityItem
+                icon={<ImageIcon size={16} />}
+                label="Gallery"
+                to="/gallery"
+                onClick={() => setIsOpen(false)}
+              />
               <UtilityItem icon={<Globe size={16} />} label="English" />
             </div>
           </div>
 
           <div className="pt-6">
-            <button className="w-full bg-secondary text-white font-bold py-5 rounded-2xl shadow-xl shadow-secondary/20 uppercase tracking-widest text-sm">
+            <Link
+              to="/contact"
+              onClick={() => setIsOpen(false)}
+              className="block w-full text-center bg-secondary text-white font-bold py-5 rounded-2xl shadow-xl shadow-secondary/20 uppercase tracking-widest text-sm"
+            >
               Contact Us / Enquiry
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -213,62 +253,103 @@ const NavMenuLink = ({ to, label, active }) => (
   </Link>
 );
 
-const NavDropdown = ({ label }) => (
-  <div className="relative group px-3 py-2 cursor-pointer">
-    <div className="flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wide text-slate-600 group-hover:text-primary transition-all whitespace-nowrap">
-      {label}{" "}
-      <ChevronDown
-        size={14}
-        className="group-hover:translate-y-1 transition-transform text-slate-400 group-hover:text-secondary"
+const NavDropdown = ({ label, items, active }) => {
+  return (
+    <div className="relative group px-3 py-2 cursor-pointer">
+      <div
+        className={`flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wide transition-all whitespace-nowrap ${
+          active ? "text-primary" : "text-slate-600 group-hover:text-primary"
+        }`}
+      >
+        {label}{" "}
+        <ChevronDown
+          size={14}
+          className="group-hover:rotate-180 transition-transform text-slate-400 group-hover:text-secondary"
+        />
+      </div>
+      {/* Dropdown Menu - Dynamic Width based on content */}
+      <div className="absolute top-full left-0 mt-2 min-w-[200px] w-max bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-4 group-hover:translate-y-0 z-[101]">
+        {items.map((item, idx) => (
+          <DropdownItem key={idx} label={item.label} to={item.path} />
+        ))}
+      </div>
+      <span
+        className={`absolute bottom-0 left-3 right-3 h-[2px] bg-secondary rounded-full transform transition-all duration-300 ${
+          active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+        }`}
       />
     </div>
-    <div className="absolute top-full left-0 w-64 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 translate-y-2 group-hover:translate-y-0 z-[101]">
-      <DropdownItem label="Browse by Category" />
-      <DropdownItem label="Most Popular Choices" />
-      <DropdownItem label="International Centers" />
-    </div>
-  </div>
-);
+  );
+};
 
-const DropdownItem = ({ label }) => (
-  <a
-    href="#"
-    className="block px-4 py-2.5 text-[11px] font-bold text-slate-600 hover:bg-primary hover:text-white rounded-xl transition-all duration-300 uppercase tracking-wider"
+const DropdownItem = ({ label, to }) => (
+  <Link
+    to={to}
+    className="block px-4 py-2.5 text-[11px] font-bold text-slate-600 hover:bg-primary hover:text-white rounded-xl transition-all duration-300 uppercase tracking-wider whitespace-nowrap"
   >
     {label}
-  </a>
+  </Link>
 );
 
 const MobileNavLink = ({ to, label, active, onClick }) => (
   <Link
     to={to}
     onClick={onClick}
-    className={`block py-4 text-xl font-bold uppercase tracking-wide transition-all ${
+    className={`block py-4 text-lg font-bold uppercase tracking-wide transition-all ${
       active
-        ? "text-primary border-l-4 border-secondary pl-3"
-        : "text-slate-500"
+        ? "text-primary border-l-4 border-secondary pl-4"
+        : "text-slate-500 pl-4"
     }`}
   >
     {label}
   </Link>
 );
 
-const MobileNavDropdown = ({ label }) => (
-  <div className="py-4 border-b border-slate-100 group">
-    <div className="flex items-center justify-between text-xl font-bold uppercase tracking-wide text-slate-500 group-hover:text-primary transition-colors">
-      {label}{" "}
-      <ChevronDown
-        size={22}
-        className="text-slate-300 group-hover:text-secondary transition-colors"
-      />
-    </div>
-  </div>
-);
+const MobileNavDropdown = ({ label, items, onClick }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const UtilityItem = ({ icon, label }) => (
-  <div className="flex items-center justify-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest bg-slate-50 p-4 rounded-xl border border-slate-100 active:bg-primary transition-all">
+  return (
+    <div className="border-b border-slate-100 last:border-0">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between py-4 pl-4 text-lg font-bold uppercase tracking-wide text-slate-500 hover:text-primary transition-colors"
+      >
+        {label}
+        <ChevronDown
+          size={20}
+          className={`text-slate-300 transition-transform duration-300 ${
+            isOpen ? "rotate-180 text-secondary" : ""
+          }`}
+        />
+      </button>
+      <div
+        className={`overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-96 pb-4 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        {items.map((item, idx) => (
+          <Link
+            key={idx}
+            to={item.path}
+            onClick={onClick}
+            className="block py-3 pl-8 text-sm font-bold text-slate-500 hover:text-secondary uppercase tracking-wider"
+          >
+            {item.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const UtilityItem = ({ icon, label, to, onClick }) => (
+  <Link
+    to={to || "#"}
+    onClick={onClick}
+    className="flex items-center justify-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest bg-slate-50 p-4 rounded-xl border border-slate-100 active:bg-primary active:text-white transition-all"
+  >
     {icon} {label}
-  </div>
+  </Link>
 );
 
 export default Navbar;
