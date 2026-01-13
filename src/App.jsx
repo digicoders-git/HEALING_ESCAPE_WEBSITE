@@ -19,6 +19,7 @@ import Videos from "./pages/Videos";
 import VideoDetail from "./pages/VideoDetail";
 import Gallery from "./pages/Gallery";
 import Services from "./pages/Services";
+import FreeConsultation from "./pages/FreeConsultation";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/journey" element={<Journey />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/free-consultation" element={<FreeConsultation />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/cookie-policy" element={<CookiePolicy />} />

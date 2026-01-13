@@ -38,7 +38,11 @@ const Navbar = () => {
     { label: "Specialities", path: "/specialities" },
     { label: "Hospitals", path: "/hospitals" },
     { label: "Doctors", path: "/doctors" },
-    { label: "Services", path: "/services" },
+    { label: "Patient Journey", path: "/journey" },
+    { label: "Services", path: "#", dropdownItems: [
+      { label: "Services", path: "/services" },
+      { label: "Free Consultation", path: "/free-consultation" },
+    ] },
     {
       label: "Knowledge",
       path: "#",
@@ -48,7 +52,6 @@ const Navbar = () => {
         { label: "Gallery", path: "/gallery" },
       ],
     },
-    { label: "Patient Journey", path: "/journey" },
   ];
 
   return (
@@ -58,7 +61,7 @@ const Navbar = () => {
         // initial="hidden"
         // animate="show"
         // variants={fadeIn("down", 0.1)}
-        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-[110]"
+        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110"
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-8 items-center">
@@ -102,7 +105,7 @@ const Navbar = () => {
         // initial="hidden"
         // animate="show"
         // variants={fadeIn("down", 0.2)}
-        className={`w-full sticky top-0 z-[100] transition-all duration-500 ${
+        className={`w-full sticky top-0 z-100 transition-all duration-500 ${
           isScrolled
             ? "bg-white/80 backdrop-blur-lg shadow-lg py-2 border-b border-slate-100"
             : "bg-white py-4"
@@ -173,7 +176,7 @@ const Navbar = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "tween", duration: 0.5, ease: "circOut" }}
-            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-[150] xl:hidden"
+            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-150 xl:hidden"
           >
             <div className="p-8 pt-12 h-full flex flex-col">
               <div className="flex justify-between items-center mb-10">
