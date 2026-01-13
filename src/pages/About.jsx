@@ -52,21 +52,26 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-white overflow-hidden"
+        className="py-16 md:py-24 bg-gradient-to-br from-white via-slate-50/30 to-white overflow-hidden relative"
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
+        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             <motion.div
               variants={fadeIn("right", 0.2)}
               className="space-y-6 md:space-y-8 text-center lg:text-left"
             >
-              <div className="space-y-3">
-                <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] bg-secondary/10 px-6 py-2 rounded-full inline-block">
+              <div className="space-y-5">
+                <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] bg-gradient-to-r from-secondary/15 to-secondary/5 px-6 py-2.5 rounded-full inline-block border border-secondary/20">
                   Authentic Narrative
                 </h4>
-                <h2 className="text-3xl md:text-6xl font-extrabold text-primary tracking-tight uppercase italic leading-none">
-                  Our Story
-                </h2>
+                <div>
+                  <h2 className="text-4xl md:text-7xl font-extrabold text-primary tracking-tight uppercase italic leading-none">
+                    Our Story
+                  </h2>
+                  <div className="w-24 h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full mt-4"></div>
+                </div>
               </div>
               <div className="space-y-6 text-slate-600 font-medium leading-relaxed text-base md:text-lg">
                 <p>
@@ -74,8 +79,9 @@ const About = () => {
                   live should never determine the quality of healthcare you
                   receive.
                 </p>
-                <div className="bg-slate-50 border-l-4 md:border-l-8 border-secondary p-6 md:p-8 rounded-2xl shadow-sm text-left">
-                  <p className="italic text-primary font-bold text-lg md:text-xl leading-relaxed">
+                <div className="bg-gradient-to-br from-slate-50 to-slate-100/50 border-l-4 md:border-l-8 border-secondary p-6 md:p-10 rounded-3xl shadow-xl text-left relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
+                  <p className="italic text-primary font-bold text-lg md:text-2xl leading-relaxed relative z-10">
                     "We bridge the gap between world-class medical excellence
                     and global patients."
                   </p>
@@ -86,7 +92,8 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="relative group px-4 md:px-0"
             >
-              <div className="rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-slate-50 transform md:group-hover:scale-[1.02] transition-transform duration-700">
+              <div className="rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:group-hover:scale-[1.02] transition-all duration-700 relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent z-10"></div>
                 <img
                   src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
                   className="w-full h-[400px] md:h-[550px] object-cover"
@@ -95,16 +102,17 @@ const About = () => {
               </div>
               <motion.div
                 variants={fadeIn("up", 0.4)}
-                className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-8 bg-primary text-white p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-2xl flex items-center gap-4 md:gap-6 border-2 md:border-4 border-white"
+                className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-8 bg-gradient-to-br from-primary to-primary/90 text-white p-6 md:p-12 rounded-2xl md:rounded-3xl shadow-2xl flex items-center gap-4 md:gap-6 border-4 md:border-4 border-white hover:scale-105 transition-transform duration-300"
               >
-                <ShieldCheck
-                  size={32}
-                  md:size={48}
-                  className="text-secondary"
-                />
+                <div className="p-3 md:p-4 bg-white/10 rounded-2xl backdrop-blur-sm">
+                  <ShieldCheck
+                    size={32}
+                    className="text-secondary md:w-12 md:h-12"
+                  />
+                </div>
                 <div className="text-left font-bold uppercase tracking-widest leading-none">
                   <p className="text-xl md:text-3xl text-secondary">Trust</p>
-                  <p className="text-[8px] md:text-[10px] opacity-60 mt-1">
+                  <p className="text-[8px] md:text-[10px] opacity-80 mt-2">
                     Legacy of Care
                   </p>
                 </div>
@@ -120,22 +128,26 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-slate-50"
+        className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]"></div>
+        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <motion.div
               variants={fadeIn("up", 0.1)}
-              className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-secondary overflow-hidden relative text-center md:text-left"
+              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-secondary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-secondary/10 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all transform md:group-hover:rotate-6 mx-auto md:mx-0">
-                <Target size={32} md:size={40} />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-all duration-500"></div>
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-secondary/15 to-secondary/5 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500 transform group-hover:rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-secondary/20 shadow-lg">
+                <Target size={32} className="md:w-10 md:h-10" />
               </div>
-              <div className="space-y-3 md:space-y-4">
-                <h3 className="text-2xl md:text-3xl font-bold text-primary uppercase tracking-tight italic">
+              <div className="space-y-3 md:space-y-4 relative z-10">
+                <h3 className="text-2xl md:text-4xl font-bold text-primary uppercase tracking-tight italic">
                   Our Mission
                 </h3>
-                <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">
+                <div className="w-16 h-1 bg-gradient-to-r from-secondary to-transparent rounded-full mx-auto md:mx-0"></div>
+                <p className="text-slate-600 font-medium text-sm md:text-lg leading-relaxed">
                   To empower international patients by providing transparent,
                   personalised, and end-to-end medical tourism services.
                 </p>
@@ -143,16 +155,18 @@ const About = () => {
             </motion.div>
             <motion.div
               variants={fadeIn("up", 0.2)}
-              className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-primary overflow-hidden relative text-center md:text-left"
+              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-primary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform md:group-hover:-rotate-6 mx-auto md:mx-0">
-                <Eye size={32} md:size={40} />
+              <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500"></div>
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/15 to-primary/5 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 transform group-hover:-rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-primary/20 shadow-lg">
+                <Eye size={32} className="md:w-10 md:h-10" />
               </div>
-              <div className="space-y-3 md:space-y-4">
-                <h3 className="text-2xl md:text-3xl font-bold text-primary uppercase tracking-tight italic">
+              <div className="space-y-3 md:space-y-4 relative z-10">
+                <h3 className="text-2xl md:text-4xl font-bold text-primary uppercase tracking-tight italic">
                   Our Vision
                 </h3>
-                <p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">
+                <div className="w-16 h-1 bg-gradient-to-r from-primary to-transparent rounded-full mx-auto md:mx-0"></div>
+                <p className="text-slate-600 font-medium text-sm md:text-lg leading-relaxed">
                   To become a globally trusted bridge between patients and
                   world-class healthcare.
                 </p>

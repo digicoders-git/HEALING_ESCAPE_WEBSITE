@@ -65,62 +65,62 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-16 md:py-24 px-4 md:px-8 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-        <div className="max-w-5xl mx-auto space-y-10 relative z-10 text-center">
-          <motion.div
-            variants={fadeIn("down", 0.1)}
-            className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]"
-          >
-            🩺 Expert Medical Guidance
-          </motion.div>
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic"
-          >
-            Free Medical <br />
-            <span className="text-secondary">Consultation</span>
-          </motion.h2>
-          <motion.div
-            variants={fadeIn("up", 0.3)}
-            className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl"
-          >
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              At Healing Escape, we believe that every patient deserves clear,
-              honest, and professional medical guidance before making any
-              decision. Our Free Medical Consultation service is designed to
-              help you understand your treatment options, possible outcomes, and
-              estimated costs — without any charges and without any obligation.
-            </p>
-          </motion.div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
 
-          <motion.div
-            variants={staggerContainer(0.05, 0.3)}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 pt-8"
-          >
-            {[
-              "Understand your medical condition better",
-              "Know whether treatment in India is suitable for you",
-              "Explore the best hospital and doctor options",
-              "Get a clear idea about treatment process, duration, and cost",
-              "Make an informed and confident decision for your health",
-            ].map((benefit, i) => (
-              <motion.div
-                key={i}
-                variants={fadeIn("up", 0.1)}
-                className="flex items-start gap-3 p-4 bg-white rounded-2xl border border-slate-100 text-left shadow-sm"
-              >
-                <CheckCircle2
-                  size={16}
-                  className="text-secondary shrink-0 mt-1"
-                />
-                <span className="text-[11px] font-bold text-slate-600 uppercase tracking-wide leading-relaxed">
-                  {benefit}
-                </span>
-              </motion.div>
-            ))}
-          </motion.div>
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Left Column - Content */}
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="space-y-8 md:space-y-10"
+            >
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-2 bg-linear-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
+                  🩺 Expert Medical Guidance
+                </div>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                  Free Medical <br />
+                  <span className="text-secondary">Consultation</span>
+                </h2>
+                <div className="w-20 h-1 bg-linear-to-r from-secondary to-primary rounded-full" />
+              </div>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                At Healing Escape, we believe that every patient deserves clear,
+                honest, and professional medical guidance before making any
+                decision. Our Free Medical Consultation service is designed to
+                help you understand your treatment options, possible outcomes,
+                and estimated costs — without any charges and without any
+                obligation.
+              </p>
+            </motion.div>
+
+            {/* Right Column - Benefits */}
+            <motion.div variants={fadeIn("left", 0.2)} className="space-y-4">
+              {[
+                "Understand your medical condition better",
+                "Know whether treatment in India is suitable for you",
+                "Explore the best hospital and doctor options",
+                "Get a clear idea about treatment process, duration, and cost",
+                "Make an informed and confident decision for your health",
+              ].map((benefit, i) => (
+                <motion.div
+                  key={i}
+                  variants={fadeIn("up", 0.1 * i)}
+                  className="group flex items-start gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500"
+                >
+                  <div className="shrink-0 w-10 h-10 rounded-xl bg-linear-to-br from-secondary/10 to-primary/10 flex items-center justify-center border border-secondary/20 group-hover:scale-110 transition-transform">
+                    <CheckCircle2 size={18} className="text-secondary" />
+                  </div>
+                  <span className="text-sm font-bold text-slate-700 leading-relaxed pt-2">
+                    {benefit}
+                  </span>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 
@@ -140,7 +140,7 @@ const FreeConsultation = () => {
             >
               <div className="space-y-4">
                 <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-                  🤝 Transparency First
+                  Transparency First
                 </h4>
                 <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
                   What Does "Free Consultation" Mean?

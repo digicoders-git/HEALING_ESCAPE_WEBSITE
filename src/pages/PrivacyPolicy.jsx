@@ -265,7 +265,7 @@ const PrivacyPolicy = () => {
               <div className="flex items-center gap-4 bg-white px-8 py-4 rounded-2xl border border-slate-100 shadow-sm">
                 <Mail size={18} className="text-secondary" />
                 <span className="text-sm font-bold text-primary">
-                  info@healingescape.com
+                  shubhamsinghs24@outlook.com
                 </span>
               </div>
               <div className="flex items-center gap-4 bg-white px-8 py-4 rounded-2xl border border-slate-100 shadow-sm">

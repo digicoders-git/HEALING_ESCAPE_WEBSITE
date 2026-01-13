@@ -43,51 +43,61 @@ const Videos = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden text-center"
+        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
-        <div className="max-w-4xl mx-auto space-y-10 relative z-10">
-          <motion.div
-            variants={fadeIn("down", 0.1)}
-            className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]"
-          >
-            Visual Transparency
-          </motion.div>
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic"
-          >
-            See the Real <span className="text-secondary">Process & Care</span>
-          </motion.h2>
-          <motion.p
-            variants={fadeIn("up", 0.3)}
-            className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium"
-          >
-            Travelling to another country for medical treatment can feel
-            uncertain if you do not know what to expect. Through our videos, we
-            show you the real process, real hospitals, real doctors, and real
-            support system behind Healing Escape.
-          </motion.p>
-          <motion.div
-            variants={staggerContainer(0.05, 0.2)}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 pt-8 text-left"
-          >
-            {[
-              "Understand your journey",
-              "See quality of facilities",
-              "Learn directly from doctors",
-              "Hear from real patients",
-            ].map((benefit, i) => (
-              <motion.div
-                key={i}
-                variants={fadeIn("up", 0.1)}
-                className="flex items-center gap-3 p-4 bg-white rounded-2xl border border-slate-100 italic font-bold text-slate-400 text-[10px] uppercase tracking-widest shadow-sm"
-              >
-                <CheckCircle2 size={14} className="text-secondary shrink-0" />{" "}
-                {benefit}
-              </motion.div>
-            ))}
-          </motion.div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Left Column - Content */}
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="space-y-8 md:space-y-10"
+            >
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
+                  Visual Transparency
+                </div>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                  See the Real <br />
+                  <span className="text-secondary">Process & Care</span>
+                </h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" />
+              </div>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                Travelling to another country for medical treatment can feel
+                uncertain if you do not know what to expect. Through our videos,
+                we show you the real process, real hospitals, real doctors, and
+                real support system behind Healing Escape.
+              </p>
+            </motion.div>
+
+            {/* Right Column - Video Benefits */}
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              {[
+                { icon: "🎬", label: "Understand your journey" },
+                { icon: "🏥", label: "See quality of facilities" },
+                { icon: "👨‍⚕️", label: "Learn directly from doctors" },
+                { icon: "💙", label: "Hear from real patients" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col items-center gap-3 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500 text-center"
+                >
+                  <div className="text-3xl group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </div>
+                  <p className="text-xs font-bold text-primary uppercase tracking-wide leading-relaxed">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 

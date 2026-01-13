@@ -39,10 +39,14 @@ const Navbar = () => {
     { label: "Hospitals", path: "/hospitals" },
     { label: "Doctors", path: "/doctors" },
     { label: "Patient Journey", path: "/journey" },
-    { label: "Services", path: "#", dropdownItems: [
-      { label: "Services", path: "/services" },
-      { label: "Free Consultation", path: "/free-consultation" },
-    ] },
+    {
+      label: "Services",
+      path: "#",
+      dropdownItems: [
+        { label: "Services", path: "/services" },
+        { label: "Free Consultation", path: "/free-consultation" },
+      ],
+    },
     {
       label: "Knowledge",
       path: "#",
@@ -87,10 +91,10 @@ const Navbar = () => {
           <div className="flex gap-8 items-center">
             <span className="flex items-center gap-2 text-white/90">
               <Mail size={14} className="text-secondary" />{" "}
-              info@healingescape.com
+              shubhamsinghs24@outlook.com
             </span>
             <span className="flex items-center gap-2 text-white/90">
-              <Phone size={14} className="text-secondary" /> +91 91404 05040
+              <Phone size={14} className="text-secondary" /> +91 9506666642
             </span>
             <div className="h-4 w-px bg-white/20 mx-2" />
             <span className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase">

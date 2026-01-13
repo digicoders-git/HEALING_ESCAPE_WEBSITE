@@ -45,29 +45,84 @@ const Specialities = () => {
       {/* 1. Intro Section */}
       <section
         id="treatments-start"
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-        <div className="max-w-5xl mx-auto space-y-10 relative z-10 text-center">
-          <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]">
-            Comprehensive Care
-          </div>
-          <h2 className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
-            Choosing the Right <span className="text-secondary">Treatment</span>
-          </h2>
-          <div className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl space-y-6 md:space-y-8">
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              Choosing the right treatment and the right medical team is the
-              most important step in your healing journey. At Healing Escape, we
-              make this easier by offering you access to verified hospitals,
-              experienced doctors, and transparent treatment processes across
-              all major medical specialities.
-            </p>
-            <p className="text-slate-500 font-medium pt-8 border-t border-slate-50 italic text-sm md:text-base">
-              You can explore treatments category-wise and select the option
-              that best matches your medical needs. All treatments listed are
-              provided at NABH and JCI accredited hospitals in North India.
-            </p>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Left Column - Content */}
+            <div className="space-y-8 md:space-y-10">
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
+                  Comprehensive Care
+                </div>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                  Choosing the Right <br />
+                  <span className="text-secondary">Treatment</span>
+                </h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" />
+              </div>
+              <div className="space-y-4">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                  Choosing the right treatment and the right medical team is the
+                  most important step in your healing journey. At Healing
+                  Escape, we make this easier by offering you access to verified
+                  hospitals, experienced doctors, and transparent treatment
+                  processes across all major medical specialities.
+                </p>
+                <p className="text-sm md:text-base text-slate-500 font-medium italic">
+                  You can explore treatments category-wise and select the option
+                  that best matches your medical needs. All treatments listed
+                  are provided at NABH and JCI accredited hospitals in North
+                  India.
+                </p>
+              </div>
+            </div>
+
+            {/* Right Column - Feature Cards */}
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                {
+                  icon: "🏥",
+                  label: "Verified Hospitals",
+                  desc: "NABH & JCI Accredited",
+                },
+                {
+                  icon: "👨‍⚕️",
+                  label: "Expert Doctors",
+                  desc: "Experienced Specialists",
+                },
+                {
+                  icon: "✅",
+                  label: "Transparent Process",
+                  desc: "Clear Treatment Plans",
+                },
+                {
+                  icon: "🌍",
+                  label: "All Specialities",
+                  desc: "Comprehensive Care",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500 text-center"
+                >
+                  <div className="text-3xl group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-primary uppercase tracking-wide mb-1">
+                      {item.label}
+                    </p>
+                    <p className="text-[10px] text-slate-500 font-medium">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

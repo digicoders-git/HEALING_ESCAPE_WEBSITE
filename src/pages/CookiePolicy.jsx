@@ -230,7 +230,7 @@ const CookiePolicy = () => {
               <div className="flex items-center gap-4 bg-white px-10 py-5 rounded-2xl border border-slate-100 shadow-xl group hover:border-secondary transition-all">
                 <Mail size={18} className="text-secondary" />
                 <span className="text-sm font-bold text-primary italic">
-                  info@healingescape.com
+                  shubhamsinghs24@outlook.com
                 </span>
               </div>
             </div>

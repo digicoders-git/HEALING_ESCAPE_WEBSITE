@@ -44,35 +44,63 @@ const Blogs = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-        <div className="max-w-5xl mx-auto space-y-10 relative z-10 text-center">
-          <motion.div
-            variants={fadeIn("down", 0.1)}
-            className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]"
-          >
-            Patient Awareness
-          </motion.div>
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic"
-          >
-            Trusted Knowledge <br />{" "}
-            <span className="text-secondary">for Your Journey</span>
-          </motion.h2>
-          <motion.div
-            variants={fadeIn("up", 0.3)}
-            className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl"
-          >
-            <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-              Travelling to another country for medical treatment can raise many
-              questions and concerns. Through our blog, we aim to answer those
-              questions and guide you at every step of your journey — from
-              understanding your treatment options to planning your travel,
-              choosing the right hospital, and recovering after treatment.
-            </p>
-          </motion.div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
+
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+            {/* Left Column - Content */}
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="space-y-8 md:space-y-10"
+            >
+              <div className="space-y-6">
+                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
+                  Patient Awareness
+                </div>
+                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                  Trusted Knowledge <br />
+                  <span className="text-secondary">for Your Journey</span>
+                </h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" />
+              </div>
+              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
+                Travelling to another country for medical treatment can raise
+                many questions and concerns. Through our blog, we aim to answer
+                those questions and guide you at every step of your journey —
+                from understanding your treatment options to planning your
+                travel, choosing the right hospital, and recovering after
+                treatment.
+              </p>
+            </motion.div>
+
+            {/* Right Column - Key Topics */}
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="grid grid-cols-2 gap-4"
+            >
+              {[
+                { icon: "📖", label: "Treatment Options" },
+                { icon: "✈️", label: "Travel Planning" },
+                { icon: "🏥", label: "Hospital Selection" },
+                { icon: "💊", label: "Recovery & Care" },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500 text-center"
+                >
+                  <div className="text-3xl group-hover:scale-110 transition-transform">
+                    {item.icon}
+                  </div>
+                  <p className="text-xs font-bold text-primary uppercase tracking-wide">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         </div>
       </motion.section>
 

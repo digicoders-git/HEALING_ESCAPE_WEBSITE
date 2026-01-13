@@ -109,11 +109,11 @@ const PageHero = ({
                 <div className="max-w-xl mx-auto border-t border-white/20 pt-6">
                   <motion.p
                     variants={fadeIn("up", 0.3)}
-                    className="text-white/80 text-sm md:text-xl font-bold tracking-widest uppercase mb-8"
+                    className="text-white/80 text-sm md:text-xl font-bold tracking-widest uppercase"
                   >
                     {slide.subtitle}
                   </motion.p>
-                  {slide.buttonLabel && (
+                  {/* {slide.buttonLabel && (
                     <motion.div variants={fadeIn("up", 0.4)}>
                       <Link
                         to={slide.buttonLink || "#"}
@@ -122,7 +122,7 @@ const PageHero = ({
                         {slide.buttonLabel}
                       </Link>
                     </motion.div>
-                  )}
+                  )} */}
                 </div>
               </motion.div>
             </div>
