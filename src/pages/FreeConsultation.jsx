@@ -56,7 +56,7 @@ const FreeConsultation = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-x-hidden">
       <PageHero slides={bannerSlides} />
 
       {/* 1. Intro Section */}
@@ -65,7 +65,7 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-linear-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
@@ -78,10 +78,8 @@ const FreeConsultation = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-linear-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  🩺 Expert Medical Guidance
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                {/* Badge Removed */}
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
                   Free Medical <br />
                   <span className="text-secondary">Consultation</span>
                 </h2>
@@ -130,7 +128,7 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
@@ -139,9 +137,7 @@ const FreeConsultation = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-4">
-                <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-                  Transparency First
-                </h4>
+                {/* Badge Removed */}
                 <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
                   What Does "Free Consultation" Mean?
                 </h2>
@@ -219,13 +215,11 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50"
       >
         <div className="max-w-7xl mx-auto text-center space-y-12 md:space-y-16">
           <motion.div variants={fadeIn("down", 0.1)} className="space-y-4">
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              🧭 Right For You
-            </h4>
+            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               Who Should Use This Service?
             </h2>
@@ -284,16 +278,14 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
           <motion.div
             variants={fadeIn("down", 0.1)}
             className="text-center space-y-4"
           >
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              🔍 Simple Process
-            </h4>
+            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               How Our Free Consultation Works
             </h2>
@@ -358,7 +350,7 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
       >
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full" />
         <div className="max-w-7xl mx-auto relative z-10 space-y-12 md:space-y-16">
@@ -366,9 +358,7 @@ const FreeConsultation = () => {
             variants={fadeIn("down", 0.1)}
             className="text-center space-y-4"
           >
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              🏥 Detailed Information
-            </h4>
+            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter italic">
               What Kind of Guidance Will You Receive?
             </h2>
@@ -417,16 +407,14 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
           <motion.div
             variants={fadeIn("down", 0.1)}
             className="text-center space-y-4"
           >
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              🇮🇳 Trusted Partner
-            </h4>
+            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               Why Get a Free Consultation <br />
               from Healing Escape?
@@ -489,66 +477,11 @@ const FreeConsultation = () => {
         </div>
       </motion.section>
 
-      {/* 7. Privacy Assurance */}
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50"
-      >
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            variants={fadeIn("up", 0.2)}
-            className="p-8 md:p-16 bg-white rounded-[2.5rem] md:rounded-[4rem] border border-slate-100 shadow-2xl space-y-8 md:space-y-10 text-center"
-          >
-            <div className="w-16 h-16 rounded-2xl bg-secondary/10 flex items-center justify-center mx-auto">
-              <Lock size={32} className="text-secondary" />
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-                🔒 Your Privacy Matters
-              </h4>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
-                Privacy & Confidentiality Assurance
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-left">
-              {[
-                "Treated as strictly confidential",
-                "Used only for medical evaluation and guidance",
-                "Never shared with any third party without your consent",
-              ].map((item, i) => (
-                <div
-                  key={i}
-                  className="p-6 bg-slate-50 rounded-2xl border border-slate-100"
-                >
-                  <div className="flex items-start gap-3">
-                    <ShieldCheck
-                      size={18}
-                      className="text-secondary shrink-0 mt-1"
-                    />
-                    <p className="text-sm font-bold text-slate-600 leading-relaxed">
-                      {item}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-3xl mx-auto">
-              We understand that your medical data is private and sensitive, and
-              we handle it with full responsibility.
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
 
       {/* 8. Consultation Form */}
       <section
         id="consultation-form"
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -562,9 +495,7 @@ const FreeConsultation = () => {
               variants={fadeIn("down", 0.1)}
               className="text-center space-y-4"
             >
-              <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-                📝 Get Started
-              </h4>
+              {/* Badge Removed */}
               <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
                 Request Your Free <br />
                 Medical Consultation
@@ -907,7 +838,7 @@ const FreeConsultation = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-5xl mx-auto">
           <motion.div
@@ -955,24 +886,6 @@ const FreeConsultation = () => {
         </div>
       </motion.section>
 
-      {/* 11. Closing Section */}
-      <section className="py-20 md:py-32 px-4 md:px-8 bg-slate-50 text-center">
-        <div className="max-w-4xl mx-auto space-y-8 md:space-y-10">
-          <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
-          <h2 className="text-2xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
-            "Your health decisions should be based on the right information, not
-            pressure. Start with a free consultation and let Healing Escape
-            guide you honestly and responsibly."
-          </h2>
-          <a
-            href="#consultation-form"
-            className="inline-flex items-center gap-3 bg-secondary hover:bg-primary text-white font-bold px-8 py-4 rounded-2xl transition-all duration-500 uppercase tracking-widest text-xs shadow-xl"
-          >
-            Get Started Now
-            <ChevronRight size={18} />
-          </a>
-        </div>
-      </section>
     </div>
   );
 };

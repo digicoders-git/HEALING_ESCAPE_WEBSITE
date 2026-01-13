@@ -46,7 +46,7 @@ const Gallery = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
@@ -59,10 +59,8 @@ const Gallery = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  Visual Evidence
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                {/* Badge Removed */}
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
                   Transparency <br />
                   <span className="text-secondary">Builds Trust</span>
                 </h2>
@@ -109,7 +107,7 @@ const Gallery = () => {
       {/* 2. Gallery Grid */}
       <section
         id="gallery-grid"
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           {/* Categories */}
@@ -205,7 +203,7 @@ const Gallery = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
       >
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full translate-y-1/2" />
         <div className="max-w-7xl mx-auto relative z-10 text-center lg:text-left">
@@ -214,10 +212,8 @@ const Gallery = () => {
               variants={fadeIn("right", 0.2)}
               className="space-y-8 md:space-y-10"
             >
-              <div className="inline-block px-5 py-2 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-[11px] font-bold uppercase tracking-widest">
-                Our Visual Standard
-              </div>
-              <h2 className="text-3xl md:text-7xl font-extrabold text-white uppercase tracking-tighter italic leading-none">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter italic leading-none">
                 Our Commitment to <br />
                 <span className="text-secondary">Transparency</span>
               </h2>

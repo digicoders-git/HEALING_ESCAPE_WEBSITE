@@ -46,7 +46,7 @@ const VideoDetail = () => {
           >
             <ArrowLeft size={16} /> Back to Gallery
           </Link>
-          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-primary tracking-tighter uppercase italic leading-none max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary tracking-tighter uppercase italic leading-none max-w-4xl">
             {video.title}
           </h1>
           <div className="flex flex-wrap items-center gap-4 md:gap-6 text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-slate-400 border-t border-slate-200 pt-6 md:pt-8">

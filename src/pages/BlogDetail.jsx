@@ -40,7 +40,7 @@ const BlogDetail = () => {
   return (
     <div className="bg-white">
       {/* 1. Article Header & Hero */}
-      <section className="relative pt-28 md:pt-[120px] pb-12 md:pb-24 px-4 sm:px-6 md:px-8 bg-slate-900 overflow-hidden">
+      <section className="relative pt-28 md:pt-[120px] pb-12 md:pb-16 px-4 sm:px-6 md:px-8 bg-slate-900 overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-10 space-y-12">
           <Link
             to="/blog"
@@ -57,7 +57,7 @@ const BlogDetail = () => {
                 <CalendarDays size={14} /> {blog.date}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-white tracking-tighter uppercase italic leading-none">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tighter uppercase italic leading-none">
               {blog.title}
             </h1>
           </div>
@@ -73,7 +73,7 @@ const BlogDetail = () => {
       </section>
 
       {/* 2. Article Content Section */}
-      <section className="py-16 md:py-32 px-4 sm:px-6 md:px-8 bg-white">
+      <section className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-white">
         <div className="max-w-4xl mx-auto space-y-20">
           {/* Introduction */}
           <div className="space-y-10">
@@ -161,13 +161,11 @@ const BlogDetail = () => {
       </section>
 
       {/* 3. Related Articles */}
-      <section className="py-16 md:py-32 px-4 sm:px-6 md:px-8 bg-slate-50 border-t border-slate-100">
+      <section className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-xs">
-              Knowledge Hub
-            </h4>
-            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
+            {/* Badge Removed */}
+            <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               Related Articles
             </h2>
           </div>

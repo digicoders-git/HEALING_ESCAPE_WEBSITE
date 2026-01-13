@@ -52,7 +52,7 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-gradient-to-br from-white via-slate-50/30 to-white overflow-hidden relative"
+        className="py-12 md:py-16 bg-gradient-to-br from-white via-slate-50/30 to-white overflow-hidden relative"
       >
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]" />
@@ -60,33 +60,20 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             <motion.div
               variants={fadeIn("right", 0.2)}
-              className="space-y-6 md:space-y-8 text-center lg:text-left"
+              className="space-y-8 text-center lg:text-left"
             >
-              <div className="space-y-5">
-                <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] bg-gradient-to-r from-secondary/15 to-secondary/5 px-6 py-2.5 rounded-full inline-block border border-secondary/20">
-                  Authentic Narrative
-                </h4>
-                <div>
-                  <h2 className="text-4xl md:text-7xl font-extrabold text-primary tracking-tight uppercase italic leading-none">
-                    Our Story
-                  </h2>
-                  <div className="w-24 h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full mt-4"></div>
-                </div>
+              <div className="space-y-6">
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight uppercase italic leading-none">
+                  Our Story
+                </h2>
+                <div className="w-24 h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full mx-auto lg:mx-0"></div>
               </div>
-              <div className="space-y-6 text-slate-600 font-medium leading-relaxed text-base md:text-lg">
-                <p>
-                  Healing Escape was founded on the simple belief that where you
-                  live should never determine the quality of healthcare you
-                  receive.
-                </p>
-                <div className="bg-gradient-to-br from-slate-50 to-slate-100/50 border-l-4 md:border-l-8 border-secondary p-6 md:p-10 rounded-3xl shadow-xl text-left relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/10 rounded-full blur-3xl"></div>
-                  <p className="italic text-primary font-bold text-lg md:text-2xl leading-relaxed relative z-10">
-                    "We bridge the gap between world-class medical excellence
-                    and global patients."
-                  </p>
-                </div>
-              </div>
+              <p className="text-slate-600 font-medium leading-relaxed text-base md:text-lg max-w-2xl mx-auto lg:mx-0">
+                Healing Escape was founded on the simple belief that where you
+                live should never determine the quality of healthcare you
+                receive. We bridge the gap between world-class medical
+                excellence and global patients
+              </p>
             </motion.div>
             <motion.div
               variants={fadeIn("left", 0.2)}
@@ -96,27 +83,10 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent z-10"></div>
                 <img
                   src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
-                  className="w-full h-[400px] md:h-[550px] object-cover"
+                  className="w-full h-[350px] md:h-[450px] object-cover"
                   alt="Clinical Coordination"
                 />
               </div>
-              <motion.div
-                variants={fadeIn("up", 0.4)}
-                className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-8 bg-gradient-to-br from-primary to-primary/90 text-white p-6 md:p-12 rounded-2xl md:rounded-3xl shadow-2xl flex items-center gap-4 md:gap-6 border-4 md:border-4 border-white hover:scale-105 transition-transform duration-300"
-              >
-                <div className="p-3 md:p-4 bg-white/10 rounded-2xl backdrop-blur-sm">
-                  <ShieldCheck
-                    size={32}
-                    className="text-secondary md:w-12 md:h-12"
-                  />
-                </div>
-                <div className="text-left font-bold uppercase tracking-widest leading-none">
-                  <p className="text-xl md:text-3xl text-secondary">Trust</p>
-                  <p className="text-[8px] md:text-[10px] opacity-80 mt-2">
-                    Legacy of Care
-                  </p>
-                </div>
-              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -128,7 +98,7 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
+        className="py-12 md:py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden"
       >
         <div className="absolute top-10 left-10 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-10 right-10 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]"></div>
@@ -182,7 +152,7 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-white"
+        className="py-12 md:py-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <motion.div
@@ -192,10 +162,7 @@ const About = () => {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.1),transparent_50%)]" />
             <div className="relative z-10 space-y-12">
               <div className="text-center space-y-4">
-                <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.5em] border-b border-white/10 pb-4 inline-block">
-                  Deep Core Logic
-                </h4>
-                <h2 className="text-4xl md:text-7xl font-bold tracking-tighter uppercase leading-none italic">
+                <h2 className="text-3xl md:text-5xl font-bold tracking-tighter uppercase leading-none italic">
                   Why We Exist
                 </h2>
               </div>
@@ -239,7 +206,7 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-white overflow-hidden"
+        className="py-12 md:py-16 bg-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row gap-12 md:gap-20 items-center">
@@ -248,10 +215,7 @@ const About = () => {
               className="lg:w-1/2 space-y-8 md:space-y-10 text-center lg:text-left"
             >
               <div className="space-y-4">
-                <h4 className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.4em] md:border-l-8 md:border-secondary md:pl-6 inline-block">
-                  Institutional Focus
-                </h4>
-                <h2 className="text-3xl md:text-6xl font-extrabold text-primary tracking-tight uppercase leading-[0.9] italic">
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight uppercase leading-[0.9] italic">
                   North India <br />
                   <span className="text-secondary">Medical Hub</span>
                 </h2>
@@ -292,20 +256,9 @@ const About = () => {
                   <motion.img
                     variants={fadeIn("up", 0.3)}
                     src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=800"
-                    className="w-full h-48 md:h-80 object-cover rounded-[2rem] md:rounded-[4rem] shadow-2xl border-2 border-white"
+                    className="w-full h-[350px] md:h-[500px] object-cover rounded-[2rem] md:rounded-[4rem] shadow-2xl border-2 border-white"
                     alt="Infrastructure"
                   />
-                  <motion.div
-                    variants={fadeIn("up", 0.4)}
-                    className="bg-secondary p-6 md:p-10 rounded-[2rem] md:rounded-[4rem] text-white text-center shadow-xl"
-                  >
-                    <p className="text-3xl md:text-5xl font-black tracking-tighter leading-none italic">
-                      HQ
-                    </p>
-                    <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] mt-2">
-                      Lucknow Oversight
-                    </p>
-                  </motion.div>
                 </div>
                 <motion.img
                   variants={fadeIn("left", 0.5)}
@@ -329,15 +282,9 @@ const About = () => {
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           <div className="text-white mb-12 md:mb-20 text-center space-y-4">
-            <motion.h4
-              variants={fadeIn("down", 0.1)}
-              className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.6em]"
-            >
-              Market Dynamics
-            </motion.h4>
             <motion.h2
               variants={fadeIn("up", 0.2)}
-              className="text-3xl md:text-7xl font-extrabold uppercase tracking-tighter text-white italic"
+              className="text-3xl md:text-5xl font-extrabold uppercase tracking-tighter text-white italic"
             >
               Global Scalability
             </motion.h2>
@@ -391,7 +338,7 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-white overflow-hidden"
+        className="py-12 md:py-16 bg-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <motion.div
@@ -403,10 +350,7 @@ const About = () => {
               className="lg:col-span-7 space-y-10 md:space-y-12 text-center lg:text-left relative z-10"
             >
               <div className="space-y-4">
-                <h4 className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.5em] px-6 py-2 md:px-8 md:py-3 bg-white rounded-full inline-block shadow-sm">
-                  Strict Ethics
-                </h4>
-                <h2 className="text-3xl md:text-6xl font-extrabold text-primary tracking-tight uppercase leading-[1.1] italic">
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight uppercase leading-[1.1] italic">
                   Pioneering <br /> Transparency
                 </h2>
               </div>
@@ -437,7 +381,7 @@ const About = () => {
               className="lg:col-span-5 relative z-10"
             >
               <img
-                src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&q=80&w=800"
+                src="https://gitanjalihospital.com/wp-content/uploads/2024/10/DSC_1103-1.jpg"
                 className="w-full h-[400px] md:h-[600px] rounded-[2.5rem] md:rounded-[5rem] object-cover shadow-2xl border-4 md:border-8 border-white"
                 alt="Ethical Care"
               />
@@ -452,19 +396,13 @@ const About = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 bg-white pb-32 md:pb-40"
+        className="py-12 md:py-16 bg-white pb-32 md:pb-40"
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
           <div className="mb-16 md:mb-24 space-y-4">
-            <motion.h4
-              variants={fadeIn("down", 0.1)}
-              className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.6em]"
-            >
-              Workforce Quality
-            </motion.h4>
             <motion.h2
               variants={fadeIn("up", 0.2)}
-              className="text-3xl md:text-7xl font-extrabold text-primary tracking-tighter uppercase leading-none italic"
+              className="text-3xl md:text-5xl font-extrabold text-primary tracking-tighter uppercase leading-none italic"
             >
               The Human Edge
             </motion.h2>
@@ -509,15 +447,13 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="lg:col-span-5"
             >
-              <div className="bg-primary p-12 md:p-16 rounded-[2.5rem] md:rounded-[5rem] aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
+              <div className=" rounded-[2.5rem] md:rounded-[5rem] aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
                 <Users
                   size={60}
                   md:size={80}
                   className="text-secondary mb-6 md:mb-8 transform md:group-hover:scale-110 transition-transform"
                 />
-                <h4 className="text-xl md:text-2xl font-black uppercase tracking-[0.2em] leading-none italic">
-                  High Velocity <br /> Team
-                </h4>
+                <img src='https://cdn.apollohospitals.com/delhi/2023/09/speciality_ah_11zon.webp' className="w-full h-[400px] md:h-[600px] rounded-[2.5rem] md:rounded-[5rem] object-cover shadow-2xl " />
               </div>
             </motion.div>
           </div>

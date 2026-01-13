@@ -58,16 +58,9 @@ const HospitalDetail = () => {
         <div className="absolute inset-0 flex items-end px-8 pb-24">
           <div className="max-w-7xl mx-auto w-full space-y-6">
             <div className="flex flex-wrap gap-3">
-              {hospital.accreditations.map((acc) => (
-                <span
-                  key={acc}
-                  className="px-5 py-2 bg-secondary text-white text-[10px] font-black rounded-xl uppercase tracking-widest shadow-xl"
-                >
-                  {acc} Accredited
-                </span>
-              ))}
+              <div className="flex flex-wrap gap-3">{/* Badges Removed */}</div>
             </div>
-            <h1 className="text-5xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none italic">
+            <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none italic">
               {hospital.name}
             </h1>
             <div className="flex items-center gap-4 text-white/80">
@@ -83,7 +76,7 @@ const HospitalDetail = () => {
       </section>
 
       {/* 2. Grid Content Sections */}
-      <section className="py-32 px-8 bg-white overflow-hidden">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24">
           <div className="lg:col-span-8 space-y-32">
             {/* About Section */}
@@ -311,15 +304,13 @@ const HospitalDetail = () => {
       {/* 3. Enquiry Form Section */}
       <section
         id="enquiry"
-        className="py-32 px-8 bg-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
             <div className="lg:col-span-12 text-center space-y-4 mb-20">
-              <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-xs">
-                Medical Request
-              </h4>
-              <h2 className="text-5xl md:text-7xl font-black text-primary tracking-tighter uppercase leading-none italic">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-none italic">
                 Request Treatment <br />{" "}
                 <span className="text-secondary">at {hospital.name}</span>
               </h2>
@@ -425,13 +416,13 @@ const HospitalDetail = () => {
       </section>
 
       {/* 4. Assurance Section */}
-      <section className="py-24 px-8 bg-white border-t border-slate-100">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto">
           <div className="bg-slate-900 rounded-[5rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] rounded-full animate-pulse" />
             <div className="relative z-10 space-y-12">
               <div className="w-24 h-2 bg-secondary mx-auto rounded-full" />
-              <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter italic leading-none">
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic leading-none">
                 Our Selection Promise
               </h2>
               <p className="text-white/60 text-xl md:text-3xl font-light max-w-4xl mx-auto leading-relaxed">

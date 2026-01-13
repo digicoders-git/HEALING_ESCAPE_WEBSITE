@@ -267,7 +267,7 @@ const Hospitals = () => {
       {/* 4. Page Content */}
       <section
         id="listing-start"
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50"
       >
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
           <motion.div
@@ -278,7 +278,7 @@ const Hospitals = () => {
             className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
           >
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
                 Verified <span className="text-secondary">Hospitals</span>
               </h2>
               <p className="text-lg md:text-xl text-slate-500 font-medium italic">
@@ -382,89 +382,6 @@ const Hospitals = () => {
         </div>
       </section>
 
-      {/* 5. Assurance Section */}
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white border-t border-slate-100"
-      >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div
-            variants={fadeIn("right", 0.2)}
-            className="space-y-10 md:space-y-12"
-          >
-            <div className="w-16 h-1 bg-secondary rounded-full" />
-            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
-              Quality <span className="text-secondary">Assurance</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-              {[
-                {
-                  icon: <ShieldCheck />,
-                  title: "Verified Hospitals",
-                  desc: "We only work with JCI/NABH accredited facilities.",
-                },
-                {
-                  icon: <Building2 />,
-                  title: "Advanced Tech",
-                  desc: "Hospitals equipped with latest medical technology.",
-                },
-                {
-                  icon: <CheckCircle2 />,
-                  title: "Patient Focus",
-                  desc: "Dedicated care teams for international patients.",
-                },
-                {
-                  icon: <UserCheck />,
-                  title: "Clinical Excellence",
-                  desc: "Highly qualified and board certified doctors.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeIn("up", 0.1 * (i + 1))}
-                  className="flex gap-4 items-start"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 shrink-0">
-                    {item.icon}
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary">
-                      {item.title}
-                    </h4>
-                    <p className="text-[9px] md:text-[10px] text-slate-400 leading-relaxed font-medium">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("left", 0.2)}
-            className="p-8 md:p-20 bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] text-white space-y-8 md:space-y-10 relative overflow-hidden shadow-2xl"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 blur-[80px] rounded-full" />
-            <motion.p
-              variants={fadeIn("up", 0.3)}
-              className="text-2xl md:text-3xl font-light italic leading-relaxed text-white/80"
-            >
-              "Healing Escape ensures you access the finest medical
-              infrastructure in India with complete transparency."
-            </motion.p>
-            <div className="pt-8 md:pt-10 border-t border-white/5">
-              <Link
-                to="/contact"
-                className="inline-block bg-secondary text-white px-10 py-4 md:px-12 md:py-5 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-primary transition-all shadow-lg"
-              >
-                Inquire Now
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
 
       <style
         dangerouslySetInnerHTML={{

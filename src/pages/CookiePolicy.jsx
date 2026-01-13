@@ -28,7 +28,7 @@ const CookiePolicy = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 2. Content Section */}
-      <section id="cookie-content" className="py-16 md:py-24 px-4 md:px-8">
+      <section id="cookie-content" className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-4xl mx-auto space-y-20">
           <div className="space-y-6 text-slate-600 leading-relaxed text-center max-w-2xl mx-auto border-b border-slate-100 pb-12">
             <p className="text-lg font-medium italic">

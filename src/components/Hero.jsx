@@ -34,7 +34,7 @@ const Hero = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-primary leading-[1.05] tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-black text-primary leading-[1.05] tracking-tight">
               Medical Care with <br />
               <span className="text-secondary">Global</span> Excellence
             </h1>

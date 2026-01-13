@@ -59,11 +59,11 @@ const SpecialityDetail = () => {
         <div className="absolute inset-0 flex items-end px-8 pb-20">
           <div className="max-w-7xl mx-auto w-full space-y-6">
             <div className="flex items-center gap-3">
-              <span className="px-5 py-2 bg-secondary text-white text-[10px] font-bold rounded-xl uppercase tracking-widest shadow-xl">
-                Advanced Medical Treatment
-              </span>
+              <div className="flex items-center gap-3">
+                {/* Badge Removed */}
+              </div>
             </div>
-            <h1 className="text-5xl md:text-8xl font-extrabold text-white uppercase tracking-tighter leading-none italic">
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter leading-none italic">
               {treatment.title}
             </h1>
             <p className="text-white/70 text-xl md:text-2xl font-medium max-w-3xl leading-relaxed italic">
@@ -74,7 +74,7 @@ const SpecialityDetail = () => {
       </section>
 
       {/* 2. Structured Content Sections */}
-      <section className="py-32 px-8 bg-white">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
           <div className="lg:col-span-8 space-y-32">
             {/* What is this Treatment? */}
@@ -370,15 +370,13 @@ const SpecialityDetail = () => {
       {/* 3. Enquiry Form Section */}
       <section
         id="enquiry"
-        className="py-32 px-8 bg-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
             <div className="lg:col-span-12 text-center space-y-4 mb-20 animate-fade-in-up">
-              <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-xs">
-                Treatment Request
-              </h4>
-              <h2 className="text-5xl md:text-7xl font-extrabold text-primary tracking-tighter uppercase leading-none italic">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tighter uppercase leading-none italic">
                 Get a Treatment Plan <br />{" "}
                 <span className="text-secondary">for {treatment.title}</span>
               </h2>
@@ -484,7 +482,7 @@ const SpecialityDetail = () => {
       </section>
 
       {/* 4. Closing Line */}
-      <section className="py-24 px-8 bg-white border-t border-slate-100 text-center">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-t border-slate-100 text-center">
         <div className="max-w-4xl mx-auto space-y-8">
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
           <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">

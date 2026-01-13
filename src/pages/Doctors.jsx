@@ -39,7 +39,7 @@ const Doctors = () => {
       : doctorsData.filter((doc) => doc.speciality === activeFilter);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-x-hidden">
       <PageHero slides={bannerSlides} />
 
       {/* 1. Header Section */}
@@ -48,20 +48,20 @@ const Doctors = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white relative overflow-hidden"
       >
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] -z-10" />
         <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-6">
           <motion.div
             variants={fadeIn("down", 0.1)}
-            className="w-16 md:w-24 h-1.5 bg-secondary rounded-full"
+            className="w-16 md:w-24 h-1.5 rounded-full"
           />
           <motion.h2
             variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-8xl font-extrabold text-primary uppercase tracking-tighter italic leading-none"
+            className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-none"
           >
-            Expert Medical <br />
-            <span className="text-secondary">Specialists</span>
+            Expert Medical
+            <span className="text-secondary"> Specialists</span>
           </motion.h2>
           <motion.p
             variants={fadeIn("up", 0.3)}
@@ -161,14 +161,14 @@ const Doctors = () => {
       </div>
 
       {/* 5. Doctors Grid Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-50/50">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-slate-50/50">
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
           <motion.div
             variants={fadeIn("up", 0.1)}
             className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
           >
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
                 Leading <span className="text-secondary">Clinicians</span>
               </h2>
               <p className="text-lg md:text-xl text-slate-500 font-medium italic">
@@ -211,9 +211,7 @@ const Doctors = () => {
                       className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 md:group-hover:scale-110"
                     />
                     {/* Category Badge */}
-                    <div className="absolute top-5 left-5 px-3 py-1.5 md:px-4 md:py-2 bg-white/95 backdrop-blur-md rounded-lg md:rounded-xl text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-primary border border-slate-100 shadow-lg">
-                      {doctor.speciality}
-                    </div>
+                    {/* Badge Removed */}
                   </div>
 
                   {/* Content Section */}
@@ -257,13 +255,13 @@ const Doctors = () => {
                         to={`/doctor/${doctor.id}`}
                         className="flex-1 bg-primary text-white text-center py-4 md:py-5 rounded-xl md:rounded-2xl font-bold text-[10px] uppercase tracking-widest shadow-xl hover:bg-secondary transition-all flex items-center justify-center gap-2 md:gap-3"
                       >
-                        View Profile <ChevronRight size={14} />
+                        View Profile <ChevronRight className="w-3.5 h-3.5" />
                       </Link>
                       <Link
                         to="/contact"
                         className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 hover:bg-secondary hover:text-white transition-all shadow-sm"
                       >
-                        <Stethoscope size={18} md:size={20} />
+                        <Stethoscope className="w-[18px] h-[18px] md:w-[20px] md:h-[20px]" />
                       </Link>
                     </div>
                   </div>
@@ -283,88 +281,6 @@ const Doctors = () => {
         </div>
       </section>
 
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white border-t border-slate-100"
-      >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <motion.div
-            variants={fadeIn("right", 0.2)}
-            className="space-y-10 md:space-y-12"
-          >
-            <div className="w-16 h-1 bg-secondary rounded-full" />
-            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
-              Medical <span className="text-secondary">Excellence</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-              {[
-                {
-                  icon: <ShieldCheck />,
-                  title: "Carefully Verified",
-                  desc: "Every doctor is vetted for clinical credentials & ethics.",
-                },
-                {
-                  icon: <HospitalIcon />,
-                  title: "Top Hospitals",
-                  desc: "Associated with India's most reputed medical centers.",
-                },
-                {
-                  icon: <CheckCircle2 />,
-                  title: "Ethical Practice",
-                  desc: "Committed to honest guidance and patient-first care.",
-                },
-                {
-                  icon: <UserCheck />,
-                  title: "Patient Focused",
-                  desc: "Experienced in managing international patient journeys.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeIn("up", 0.1 * (i + 1))}
-                  className="flex gap-4 items-start p-2 rounded-2xl md:hover:bg-slate-50 transition-all border border-transparent"
-                >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 shrink-0">
-                    {item.icon}
-                  </div>
-                  <div className="space-y-1">
-                    <h4 className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-primary">
-                      {item.title}
-                    </h4>
-                    <p className="text-[9px] md:text-[10px] text-slate-400 leading-relaxed font-medium">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-          <motion.div
-            variants={fadeIn("left", 0.2)}
-            className="p-8 md:p-20 bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] text-white space-y-8 md:space-y-10 relative overflow-hidden shadow-2xl"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 blur-[80px] rounded-full" />
-            <motion.p
-              variants={fadeIn("up", 0.3)}
-              className="text-2xl md:text-3xl font-light italic leading-relaxed text-white/80"
-            >
-              "We connect you only with the top 1% of medical experts who meet
-              the highest standards of medical expertise and ethics."
-            </motion.p>
-            <div className="pt-8 md:pt-10 border-t border-white/5">
-              <Link
-                to="/contact"
-                className="inline-block bg-secondary text-white px-10 py-4 md:px-12 md:py-5 rounded-xl md:rounded-2xl text-[10px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-primary transition-all shadow-lg"
-              >
-                Inquire Now
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </motion.section>
 
       <style
         dangerouslySetInnerHTML={{

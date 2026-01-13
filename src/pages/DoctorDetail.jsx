@@ -40,7 +40,7 @@ const DoctorDetail = () => {
   return (
     <div className="bg-white">
       {/* 1. Profile Overview Section */}
-      <section className="relative pt-32 pb-24 px-8 bg-slate-900 overflow-hidden">
+      <section className="relative pt-12 md:pt-16 pb-12 md:pb-16 px-4 md:px-8 bg-slate-900 overflow-hidden">
         {/* Decorative Blobs */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
@@ -59,24 +59,15 @@ const DoctorDetail = () => {
                   />
                 </div>
                 {/* Floating Stat */}
-                <div className="absolute -bottom-8 -right-8 bg-secondary text-white p-8 rounded-[2.5rem] shadow-2xl border-4 border-white inline-block animate-bounce-slow">
-                  <p className="text-4xl font-black leading-none">
-                    {doctor.experience}+
-                  </p>
-                  <p className="text-[10px] uppercase font-black tracking-widest mt-1">
-                    Years Exp.
-                  </p>
-                </div>
+                {/* Floating Stat Removed */}
               </div>
             </div>
 
             {/* Content Side */}
             <div className="lg:w-2/3 space-y-8">
               <div className="space-y-4">
-                <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 text-secondary text-[11px] font-black uppercase tracking-widest">
-                  <Stethoscope size={14} /> Expert Clinical Faculty
-                </div>
-                <h1 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-tight italic">
+                {/* Badge Removed */}
+                <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-tight italic">
                   {doctor.name}
                 </h1>
                 <p className="text-secondary font-black text-xl uppercase tracking-widest">
@@ -122,7 +113,7 @@ const DoctorDetail = () => {
       </section>
 
       {/* 2. Detailed Profile Sections Wrapper */}
-      <section className="py-32 px-8 bg-white overflow-hidden">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
           <div className="lg:col-span-8 space-y-24">
             {/* About the Doctor */}
@@ -258,14 +249,9 @@ const DoctorDetail = () => {
               </div>
               <div className="space-y-4 pt-6 border-t border-slate-200">
                 <div className="flex flex-wrap gap-2">
-                  {doctor.hospital.accreditation?.map((acc, i) => (
-                    <span
-                      key={i}
-                      className="px-5 py-2 bg-primary text-white text-[10px] font-black rounded-xl uppercase tracking-widest shadow-lg"
-                    >
-                      {acc} Accredited
-                    </span>
-                  ))}
+                  {doctor.hospital.accreditation?.map((acc, i) => ({
+                    /* Badges Removed */
+                  }))}
                 </div>
                 <ul className="space-y-3 pt-4">
                   {[
@@ -291,16 +277,14 @@ const DoctorDetail = () => {
       {/* 3. Global Consultation Form Section */}
       <section
         id="appointment"
-        className="py-32 px-8 bg-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
             <div className="lg:col-span-12 text-center space-y-4 mb-16">
-              <h4 className="text-secondary font-black uppercase tracking-[0.4em] text-xs">
-                Medical Consultation
-              </h4>
-              <h2 className="text-5xl md:text-7xl font-black text-primary tracking-tighter uppercase leading-none italic">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-none italic">
                 Book a Consultation <br />{" "}
                 <span className="text-secondary">with {doctor.name}</span>
               </h2>
@@ -403,13 +387,13 @@ const DoctorDetail = () => {
       </section>
 
       {/* 4. Healing Escape Assurance */}
-      <section className="py-24 px-8 bg-white border-t border-slate-100">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto">
           <div className="bg-primary rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/20 blur-[100px] rounded-full" />
             <div className="relative z-10 space-y-10">
               <div className="w-20 h-2 bg-secondary mx-auto rounded-full" />
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter italic">
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic">
                 Our Commitment
               </h2>
               <p className="text-white/70 text-lg md:text-2xl font-light max-w-3xl mx-auto leading-relaxed">

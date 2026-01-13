@@ -106,7 +106,7 @@ const Journey = () => {
       ],
       color: "bg-indigo-500",
       image:
-        "https://images.unsplash.com/photo-1454165833762-02e708a30337?auto=format&fit=crop&q=80&w=600",
+        "https://media.istockphoto.com/id/1496003846/ru/%D1%84%D0%BE%D1%82%D0%BE/%D1%81%D1%87%D0%B0%D1%81%D1%82%D0%BB%D0%B8%D0%B2%D0%B0%D1%8F-%D0%B8%D0%BD%D0%B4%D0%B8%D0%B9%D1%81%D0%BA%D0%B0%D1%8F-%D0%B6%D0%B5%D0%BD%D1%89%D0%B8%D0%BD%D0%B0-%D0%BC%D0%B5%D0%B4%D1%81%D0%B5%D1%81%D1%82%D1%80%D0%B0-%D0%B8%D0%BB%D0%B8-%D0%BC%D0%B5%D0%B4%D0%B8%D1%86%D0%B8%D0%BD%D1%81%D0%BA%D0%B8%D0%B9-%D0%BF%D0%B5%D1%80%D1%81%D0%BE%D0%BD%D0%B0%D0%BB-%D0%B4%D0%B0%D1%8E%D1%82-%D0%BF%D1%8F%D1%82%D0%B5%D1%80%D0%BA%D1%83-%D0%BC%D0%B0%D0%BB%D0%B5%D0%BD%D1%8C%D0%BA%D0%BE%D0%B9-%D0%B4%D0%B5%D0%B2%D0%BE%D1%87%D0%BA%D0%B5.jpg?s=612x612&w=0&k=20&c=S_kJtrxnBmjvHOalzMt_HF1h6ANdD9C1TRr3jf94I4M=",
     },
     {
       id: 4,
@@ -143,7 +143,7 @@ const Journey = () => {
       points: ["Family coordination", "Clinical oversight", "Progress updates"],
       color: "bg-rose-500",
       image:
-        "https://images.unsplash.com/photo-1538108197017-c1a966b39bf3?auto=format&fit=crop&q=80&w=600",
+        "https://schillerinstitute.com/wp-content/uploads/2021/05/india_hospital-710x466.jpg",
     },
     {
       id: 7,
@@ -157,7 +157,7 @@ const Journey = () => {
       ],
       color: "bg-amber-500",
       image:
-        "https://images.unsplash.com/photo-1545208393-596cc74699fe?auto=format&fit=crop&q=80&w=600",
+        "https://t3.ftcdn.net/jpg/05/20/72/02/360_F_520720217_GAqEdbkJM6HAhO2aQ1PEYOz8nKjc8K5Z.jpg",
     },
     {
       id: 8,
@@ -209,7 +209,7 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
@@ -220,10 +220,8 @@ const Journey = () => {
               variants={fadeIn("right", 0.2)}
               className="lg:w-1/2 space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left"
             >
-              <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] sm:text-xs font-black uppercase tracking-[0.3em]">
-                Excellence in Care
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
                 Transparent &{" "}
                 <span className="text-secondary">Patient-Centric</span> Process
               </h2>
@@ -270,17 +268,15 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 bg-white relative"
+        className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-white relative"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeIn("down", 0.1)}
             className="text-center mb-12 md:mb-20 lg:mb-32 space-y-3 md:space-y-4"
           >
-            <h4 className="text-secondary font-black uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[10px] sm:text-xs">
-              Operational Excellence
-            </h4>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
+            {/* Badge Removed */}
+            <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Treatment Workflow
             </h2>
             <div className="w-16 sm:w-20 md:w-24 h-1 sm:h-1.5 bg-secondary mx-auto rounded-full mt-3 md:mt-4" />
@@ -381,9 +377,9 @@ const Journey = () => {
                           alt={step.title}
                         />
                         <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-linear-to-t from-black/80 to-transparent w-full">
-                          <span className="text-white font-black text-4xl md:text-6xl opacity-30 uppercase tracking-tighter italic">
+                          {/* <span className="text-white font-black text-3xl md:text-5xl opacity-30 uppercase tracking-tighter italic">
                             Step 0{step.id}
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                     </div>
@@ -401,7 +397,7 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-32 px-4 md:px-8 bg-primary relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-primary relative overflow-hidden"
       >
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-secondary/10 blur-[150px] rounded-full" />
         <div className="max-w-7xl mx-auto text-center text-white relative z-10">
@@ -413,7 +409,7 @@ const Journey = () => {
           </motion.div>
           <motion.h2
             variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-7xl font-extrabold mb-10 md:mb-16 uppercase tracking-tighter italic leading-none"
+            className="text-3xl md:text-5xl font-extrabold mb-10 md:mb-16 uppercase tracking-tighter italic leading-none"
           >
             Our Promise
           </motion.h2>
@@ -474,7 +470,7 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <motion.div
           variants={fadeIn("up", 0.1)}
@@ -484,7 +480,7 @@ const Journey = () => {
           <div className="relative z-10 space-y-8 md:space-y-12">
             <motion.h2
               variants={fadeIn("up", 0.2)}
-              className="text-3xl md:text-7xl font-extrabold text-white uppercase tracking-tighter italic leading-none"
+              className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter italic leading-none"
             >
               Ready to <span className="text-secondary">Begin?</span>
             </motion.h2>

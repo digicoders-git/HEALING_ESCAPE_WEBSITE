@@ -45,24 +45,23 @@ const Specialities = () => {
       {/* 1. Intro Section */}
       <section
         id="treatments-start"
-        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10 text-center">
+          <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic lg:pb-10">
+                  Choosing the Right 
+                  <span className="text-secondary"> Treatment</span>
+                </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left Column - Content */}
             <div className="space-y-8 md:space-y-10">
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  Comprehensive Care
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
-                  Choosing the Right <br />
-                  <span className="text-secondary">Treatment</span>
-                </h2>
-                <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" />
+                {/* Badge Removed */}
+                
+                {/* <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" /> */}
               </div>
               <div className="space-y-4">
                 <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
@@ -128,13 +127,11 @@ const Specialities = () => {
       </section>
 
       {/* 2. Key Treatment Categories Grid */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white text-center">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white text-center">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-20 space-y-4">
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              Medical Excellence
-            </h4>
-            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
+            {/* Badge Removed */}
+            <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               Key Treatment Categories
             </h2>
           </div>
@@ -181,64 +178,6 @@ const Specialities = () => {
         </div>
       </section>
 
-      {/* 3. Assurance Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-900 overflow-hidden relative">
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="bg-white/5 backdrop-blur-md rounded-[2.5rem] md:rounded-[4rem] border border-white/10 p-8 md:p-24 space-y-12 md:space-y-16">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-              <div className="space-y-6 md:space-y-8">
-                <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-3xl md:text-6xl font-extrabold text-white uppercase tracking-tighter italic leading-none">
-                  Our Commitment to{" "}
-                  <span className="text-secondary">Ethical Guidance</span>
-                </h2>
-                <p className="text-white/60 text-lg md:text-xl font-light italic">
-                  At Healing Escape, we don't just offer treatments — we offer
-                  trusted, safe, and well-planned healthcare solutions designed
-                  around your needs.
-                </p>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-                {[
-                  {
-                    icon: <ShieldCheck />,
-                    title: "Medically Necessary",
-                    desc: "We recommend treatments only when required.",
-                  },
-                  {
-                    icon: <Building2 />,
-                    title: "Verified Entities",
-                    desc: "Connecting you with JCI/NABH accredited providers.",
-                  },
-                  {
-                    icon: <CheckCircle2 />,
-                    title: "Full Transparency",
-                    desc: "Clear treatment planning and fixed cost estimates.",
-                  },
-                  {
-                    icon: <UserCheck />,
-                    title: "Patient First",
-                    desc: "Every decision is made keeping your health in focus.",
-                  },
-                ].map((item, i) => (
-                  <div key={i} className="space-y-3 md:space-y-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-white/10 flex items-center justify-center text-secondary border border-white/10">
-                      {item.icon}
-                    </div>
-                    <h4 className="text-[10px] md:text-[11px] font-bold text-white uppercase tracking-widest">
-                      {item.title}
-                    </h4>
-                    <p className="text-[10px] text-white/40 font-medium leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <style
         dangerouslySetInnerHTML={{

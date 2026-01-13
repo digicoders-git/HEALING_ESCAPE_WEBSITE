@@ -44,7 +44,7 @@ const Blogs = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
@@ -57,10 +57,8 @@ const Blogs = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  Patient Awareness
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                {/* Badge Removed */}
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
                   Trusted Knowledge <br />
                   <span className="text-secondary">for Your Journey</span>
                 </h2>
@@ -107,7 +105,7 @@ const Blogs = () => {
       {/* 2. Blog Listing Area */}
       <section
         id="blog-listing"
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16">
@@ -136,10 +134,8 @@ const Blogs = () => {
                 </div>
 
                 <div className="p-8 md:p-10 bg-slate-900 rounded-[2.5rem] md:rounded-[3rem] text-white space-y-6 relative overflow-hidden">
+                  {/* Badge Removed */}
                   <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full" />
-                  <h4 className="text-lg font-bold uppercase tracking-tight italic">
-                    Our Promise
-                  </h4>
                   <p className="text-white/50 text-xs font-medium leading-relaxed">
                     We focus on clarity, honesty, and practical value rather
                     than medical jargon or promotional language.
@@ -230,7 +226,7 @@ const Blogs = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 border-t border-slate-100 text-center"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 border-t border-slate-100 text-center"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -238,10 +234,8 @@ const Blogs = () => {
             className="bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 shadow-xl border border-slate-100 space-y-10 md:space-y-12"
           >
             <div className="space-y-4 text-center">
-              <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-                Knowledge Ethics
-              </h4>
-              <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
+              {/* Badge Removed */}
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
                 Our Content Ethics
               </h2>
             </div>
@@ -271,7 +265,7 @@ const Blogs = () => {
       </motion.section>
 
       {/* 5. Closing Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white text-center">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white text-center">
         <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
           <h2 className="text-2xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">

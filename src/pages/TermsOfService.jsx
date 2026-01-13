@@ -28,7 +28,7 @@ const TermsOfService = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 2. Content Section */}
-      <section id="terms-content" className="py-16 md:py-24 px-4 md:px-8">
+      <section id="terms-content" className="py-12 md:py-16 px-4 md:px-8">
         <div className="max-w-4xl mx-auto space-y-16">
           <div className="space-y-6 text-slate-600 leading-relaxed text-center">
             <p className="text-lg font-medium italic">

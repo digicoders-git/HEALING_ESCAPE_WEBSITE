@@ -88,21 +88,10 @@ const PageHero = ({
                 key={index}
                 className="space-y-6 max-w-4xl"
               >
-                {showLogoLabel && (
-                  <motion.div
-                    variants={fadeIn("down", 0.1)}
-                    className="flex items-center justify-center gap-4 mb-2"
-                  >
-                    <div className="w-10 h-0.5 bg-secondary rounded-full" />
-                    <span className="text-secondary font-black text-[10px] uppercase tracking-[0.5em]">
-                      Healing Escape Global
-                    </span>
-                    <div className="w-10 h-0.5 bg-secondary rounded-full" />
-                  </motion.div>
-                )}
+                {/* Badge Removed */}
                 <motion.h1
                   variants={fadeIn("up", 0.2)}
-                  className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-none"
+                  className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase leading-none"
                 >
                   {slide.title}
                 </motion.h1>

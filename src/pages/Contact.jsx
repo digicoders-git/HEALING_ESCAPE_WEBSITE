@@ -134,7 +134,7 @@ const Contact = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
@@ -147,10 +147,8 @@ const Contact = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  Reach Out
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                {/* Badge Removed */}
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
                   Connect with <br />
                   <span className="text-secondary">Healing Escape</span>
                 </h2>
@@ -215,7 +213,7 @@ const Contact = () => {
       {/* 2. Main Contact Form Area */}
       <section
         id="enquiry-form"
-        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
@@ -274,9 +272,8 @@ const Contact = () => {
 
                 <div className="p-8 md:p-10 bg-slate-900 rounded-[2.5rem] md:rounded-[3rem] text-white space-y-6 relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full" />
-                  <h4 className="text-lg font-bold uppercase tracking-tight italic text-secondary">
-                    Our Commitment
-                  </h4>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full" />
+                  {/* Badge Removed */}
                   <div className="space-y-4">
                     {[
                       "Response to every enquiry",
@@ -440,12 +437,10 @@ const Contact = () => {
       </section>
 
       {/* 3. Steps Area */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 border-y border-slate-100">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 border-y border-slate-100">
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
           <div className="text-center space-y-4">
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              The Process
-            </h4>
+            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               What Happens Next?
             </h2>
@@ -485,7 +480,7 @@ const Contact = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-white overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden"
       >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
           <motion.div
@@ -493,7 +488,7 @@ const Contact = () => {
             className="space-y-8 md:space-y-10 text-center lg:text-left"
           >
             <div className="w-16 h-1 bg-secondary rounded-full mx-auto lg:mx-0" />
-            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
+            <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Find Us in <br className="hidden md:block" />{" "}
               <span className="text-secondary">Lucknow</span>
             </h2>
@@ -528,7 +523,7 @@ const Contact = () => {
         </div>
       </motion.section>
 
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white text-center">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white text-center">
         <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
           <h2 className="text-2xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">

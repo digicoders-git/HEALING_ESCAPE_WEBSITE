@@ -43,7 +43,7 @@ const Videos = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
@@ -56,10 +56,8 @@ const Videos = () => {
               className="space-y-8 md:space-y-10"
             >
               <div className="space-y-6">
-                <div className="inline-block px-4 py-2 bg-gradient-to-r from-secondary/10 to-primary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em] border border-secondary/20">
-                  Visual Transparency
-                </div>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
+                {/* Badge Removed */}
+                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
                   See the Real <br />
                   <span className="text-secondary">Process & Care</span>
                 </h2>
@@ -104,7 +102,7 @@ const Videos = () => {
       {/* 2. Video Grid Section */}
       <section
         id="video-grid"
-        className="py-16 md:py-24 px-4 md:px-8 bg-white text-center"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white text-center"
       >
         <div className="max-w-7xl mx-auto">
           {/* Category Tabs */}
@@ -198,15 +196,13 @@ const Videos = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
+        className="py-12 md:py-16 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
       >
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 blur-[120px] rounded-full" />
         <div className="max-w-7xl mx-auto relative z-10 text-center space-y-12 md:space-y-16">
           <motion.div variants={fadeIn("down", 0.1)} className="space-y-4">
-            <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
-              Visual Ethics
-            </h4>
-            <h2 className="text-3xl md:text-6xl font-extrabold text-white uppercase tracking-tighter italic">
+            {/* Badge Removed */}
+            <h2 className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter italic">
               Our Video Promise
             </h2>
           </motion.div>
@@ -249,7 +245,7 @@ const Videos = () => {
       </motion.section>
 
       {/* 4. Closing Line */}
-      <section className="py-20 md:py-32 px-4 md:px-8 bg-white text-center">
+      <section className="py-12 md:py-16 px-4 md:px-8 bg-white text-center">
         <div className="max-w-4xl mx-auto space-y-8 md:space-y-10">
           <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
           <h2 className="text-2xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
