@@ -38,7 +38,7 @@ const VideoDetail = () => {
   return (
     <div className="bg-white">
       {/* 1. Header Area */}
-      <section className="pt-[140px] pb-12 px-8 bg-slate-50">
+      <section className="pt-28 md:pt-[140px] pb-8 md:pb-12 px-4 sm:px-6 md:px-8 bg-slate-50">
         <div className="max-w-6xl mx-auto space-y-8">
           <Link
             to="/videos"
@@ -46,10 +46,10 @@ const VideoDetail = () => {
           >
             <ArrowLeft size={16} /> Back to Gallery
           </Link>
-          <h1 className="text-4xl md:text-6xl font-extrabold text-primary tracking-tighter uppercase italic leading-none max-w-4xl">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-primary tracking-tighter uppercase italic leading-none max-w-4xl">
             {video.title}
           </h1>
-          <div className="flex items-center gap-6 text-[11px] font-bold uppercase tracking-widest text-slate-400 border-t border-slate-200 pt-8">
+          <div className="flex flex-wrap items-center gap-4 md:gap-6 text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-slate-400 border-t border-slate-200 pt-6 md:pt-8">
             <span className="px-4 py-1.5 bg-primary text-white rounded-full">
               {video.category}
             </span>
@@ -61,9 +61,9 @@ const VideoDetail = () => {
       </section>
 
       {/* 2. Video Player & Content Area */}
-      <section className="py-24 px-8 bg-white">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
-          <div className="lg:col-span-8 space-y-20">
+      <section className="py-12 md:py-24 px-4 sm:px-6 md:px-8 bg-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="lg:col-span-8 space-y-12 md:space-y-20">
             {/* Main Player Area */}
             <div className="relative rounded-[4rem] overflow-hidden bg-primary aspect-video shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] ring-8 ring-slate-50">
               {/* This would be an iframe if URLs were real */}
@@ -82,11 +82,11 @@ const VideoDetail = () => {
             <div className="space-y-10 group animate-fade-in-up">
               <div className="flex items-center gap-6">
                 <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-3xl font-extrabold text-primary uppercase tracking-tight italic">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-primary uppercase tracking-tight italic">
                   About This Video
                 </h2>
               </div>
-              <p className="text-xl text-slate-600 leading-relaxed font-medium italic border-l-4 border-slate-100 pl-10 py-4">
+              <p className="text-base sm:text-lg md:text-xl text-slate-600 leading-relaxed font-medium italic border-l-4 border-slate-100 pl-6 md:pl-10 py-2 md:py-4">
                 {video.description}
               </p>
             </div>
@@ -95,15 +95,15 @@ const VideoDetail = () => {
             <div className="space-y-12 animate-fade-in-up">
               <div className="flex items-center gap-6">
                 <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-3xl font-extrabold text-primary uppercase tracking-tight italic">
+                <h2 className="text-2xl md:text-3xl font-extrabold text-primary uppercase tracking-tight italic">
                   What This Video Covers
                 </h2>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                 {video.whatYouWillLearn.map((item, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-4 p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-secondary transition-colors group"
+                    className="flex items-start gap-4 p-5 md:p-8 bg-slate-50 rounded-2xl md:rounded-3xl border border-slate-100 hover:border-secondary transition-colors group"
                   >
                     <div className="w-10 h-10 rounded-2xl bg-white shadow-xl flex items-center justify-center text-secondary shrink-0 group-hover:scale-110 transition-transform">
                       <CheckCircle2 size={18} />

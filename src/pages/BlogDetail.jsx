@@ -40,7 +40,7 @@ const BlogDetail = () => {
   return (
     <div className="bg-white">
       {/* 1. Article Header & Hero */}
-      <section className="relative pt-[120px] pb-24 px-8 bg-slate-900 overflow-hidden">
+      <section className="relative pt-28 md:pt-[120px] pb-12 md:pb-24 px-4 sm:px-6 md:px-8 bg-slate-900 overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-10 space-y-12">
           <Link
             to="/blog"
@@ -57,7 +57,7 @@ const BlogDetail = () => {
                 <CalendarDays size={14} /> {blog.date}
               </span>
             </div>
-            <h1 className="text-4xl md:text-7xl font-extrabold text-white tracking-tighter uppercase italic leading-none">
+            <h1 className="text-3xl sm:text-4xl md:text-7xl font-extrabold text-white tracking-tighter uppercase italic leading-none">
               {blog.title}
             </h1>
           </div>
@@ -73,7 +73,7 @@ const BlogDetail = () => {
       </section>
 
       {/* 2. Article Content Section */}
-      <section className="py-32 px-8 bg-white">
+      <section className="py-16 md:py-32 px-4 sm:px-6 md:px-8 bg-white">
         <div className="max-w-4xl mx-auto space-y-20">
           {/* Introduction */}
           <div className="space-y-10">
@@ -101,7 +101,7 @@ const BlogDetail = () => {
           <div className="p-12 md:p-16 bg-slate-50 rounded-[4rem] border border-slate-100 space-y-10 group hover:border-secondary transition-all">
             <div className="flex items-center gap-6">
               <div className="w-12 h-1 bg-secondary rounded-full" />
-              <h3 className="text-3xl font-extrabold text-primary uppercase tracking-tighter italic">
+              <h3 className="text-xl md:text-3xl font-extrabold text-primary uppercase tracking-tighter italic">
                 How This Helps You as a Patient
               </h3>
             </div>
@@ -128,8 +128,8 @@ const BlogDetail = () => {
           {/* Personal Guidance Box */}
           <div className="p-12 md:p-20 bg-primary rounded-[4rem] text-white space-y-8 shadow-2xl relative overflow-hidden text-center group">
             <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] rounded-full group-hover:scale-125 transition-transform" />
-            <div className="relative z-10 space-y-8">
-              <h3 className="text-3xl md:text-5xl font-extrabold uppercase tracking-tighter italic leading-none">
+            <div className="relative z-10 space-y-6 md:space-y-8">
+              <h3 className="text-2xl md:text-5xl font-extrabold uppercase tracking-tighter italic leading-none">
                 Need Personal Guidance?
               </h3>
               <p className="text-white/60 text-lg md:text-xl font-light italic max-w-2xl mx-auto">
@@ -137,10 +137,10 @@ const BlogDetail = () => {
                 personalised medical opinion, hospital recommendation, or cost
                 estimate, our team at Healing Escape is here to help you.
               </p>
-              <div className="pt-8">
+              <div className="pt-4 md:pt-8">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center gap-4 bg-secondary text-white font-bold py-5 px-12 rounded-2xl uppercase tracking-widest text-xs hover:bg-white hover:text-primary transition-all"
+                  className="inline-flex items-center gap-2 md:gap-4 bg-secondary text-white font-bold py-4 md:py-5 px-8 md:px-12 rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white hover:text-primary transition-all"
                 >
                   Request Medical Opinion <Send size={16} />
                 </Link>
@@ -151,7 +151,7 @@ const BlogDetail = () => {
           {/* Conclusion */}
           <div className="text-center pt-20 border-t border-slate-100 space-y-8">
             <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
-            <p className="text-2xl md:text-4xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
+            <p className="text-lg md:text-4xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
               "Choosing the right treatment and the right medical team is
               crucial for a successful outcome. Your medical journey to India
               can be safe, smooth, and stress-free."
@@ -161,13 +161,13 @@ const BlogDetail = () => {
       </section>
 
       {/* 3. Related Articles */}
-      <section className="py-32 px-8 bg-slate-50 border-t border-slate-100">
+      <section className="py-16 md:py-32 px-4 sm:px-6 md:px-8 bg-slate-50 border-t border-slate-100">
         <div className="max-w-7xl mx-auto space-y-20">
           <div className="text-center space-y-4">
             <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-xs">
               Knowledge Hub
             </h4>
-            <h2 className="text-4xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
+            <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
               Related Articles
             </h2>
           </div>

@@ -209,51 +209,51 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-12 md:py-16 lg:py-24 px-4 sm:px-6 md:px-8 bg-slate-50 relative overflow-hidden"
       >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16">
             <motion.div
               variants={fadeIn("right", 0.2)}
-              className="lg:w-1/2 space-y-6 md:space-y-8 text-center lg:text-left"
+              className="lg:w-1/2 space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left"
             >
-              <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
+              <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] sm:text-xs font-black uppercase tracking-[0.3em]">
                 Excellence in Care
               </div>
-              <h2 className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
                 Transparent &{" "}
                 <span className="text-secondary">Patient-Centric</span> Process
               </h2>
-              <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                 At Healing Escape, we understand that travelling for medical
                 treatment is a major decision. Our transparent, step-by-step
                 process ensures your journey is safe, smooth, and stress-free.
               </p>
               <motion.div
                 variants={fadeIn("up", 0.4)}
-                className="p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-[2rem] border border-white shadow-2xl relative group overflow-hidden text-left"
+                className="p-5 sm:p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-2xl md:rounded-[2rem] border border-white shadow-2xl relative group overflow-hidden text-left"
               >
                 <div className="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-secondary" />
-                <p className="italic text-primary font-bold text-lg md:text-xl relative z-10 leading-relaxed">
+                <p className="italic text-primary font-bold text-base sm:text-lg md:text-xl relative z-10 leading-relaxed">
                   "Below is a detailed explanation of how we take care of you at
                   every stage of your treatment journey."
                 </p>
               </motion.div>
             </motion.div>
-            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
               {promises.map((promise, index) => (
                 <motion.div
                   key={index}
                   variants={fadeIn("up", 0.1 * (index + 1))}
-                  className="flex items-center gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-2xl transition-all duration-500 group"
+                  className="flex items-center gap-3 sm:gap-4 p-4 sm:p-5 md:p-6 bg-white rounded-xl sm:rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-2xl transition-all duration-500 group"
                 >
-                  <div className="p-3 bg-slate-50 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-500 shrink-0">
+                  <div className="p-2.5 sm:p-3 bg-slate-50 rounded-lg sm:rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-500 shrink-0">
                     {promise.icon}
                   </div>
-                  <span className="font-extrabold text-primary uppercase text-[9px] md:text-[10px] tracking-widest leading-none italic">
+                  <span className="font-extrabold text-primary uppercase text-[9px] sm:text-[10px] tracking-widest leading-tight italic">
                     {promise.text}
                   </span>
                 </motion.div>
@@ -270,25 +270,25 @@ const Journey = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.1 }}
-        className="py-24 md:py-32 px-4 md:px-8 bg-white relative"
+        className="py-16 md:py-24 lg:py-32 px-4 sm:px-6 md:px-8 bg-white relative"
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
             variants={fadeIn("down", 0.1)}
-            className="text-center mb-20 md:mb-32 space-y-4"
+            className="text-center mb-12 md:mb-20 lg:mb-32 space-y-3 md:space-y-4"
           >
-            <h4 className="text-secondary font-black uppercase tracking-[0.5em] text-[10px] md:text-xs">
+            <h4 className="text-secondary font-black uppercase tracking-[0.3em] sm:tracking-[0.5em] text-[10px] sm:text-xs">
               Operational Excellence
             </h4>
-            <h2 className="text-4xl md:text-7xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Treatment Workflow
             </h2>
-            <div className="w-20 md:w-24 h-1.5 bg-secondary mx-auto rounded-full mt-4" />
+            <div className="w-16 sm:w-20 md:w-24 h-1 sm:h-1.5 bg-secondary mx-auto rounded-full mt-3 md:mt-4" />
           </motion.div>
 
           <div className="relative" ref={timelineRef}>
             {/* Animated Line Container */}
-            <div className="absolute left-1/2 top-0 bottom-0 w-[2px] bg-slate-100 transform -translate-x-1/2 hidden lg:block">
+            <div className="absolute left-4 sm:left-8 md:left-1/2 top-0 bottom-0 w-[2px] bg-slate-100 md:transform md:-translate-x-1/2">
               <div
                 className="absolute top-0 left-0 w-full bg-linear-to-b from-secondary to-primary transition-all duration-200 ease-out rounded-full"
                 style={{ height: `${scrollProgress}%` }}
@@ -297,7 +297,7 @@ const Journey = () => {
               </div>
             </div>
 
-            <div className="space-y-20 md:space-y-32">
+            <div className="space-y-12 sm:space-y-16 md:space-y-20 lg:space-y-32">
               {steps.map((step, index) => (
                 <div
                   key={step.id}
