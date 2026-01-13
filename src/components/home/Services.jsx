@@ -6,6 +6,8 @@ import {
   HeartHandshake,
   UserRoundCheck,
 } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 
 const services = [
   {
@@ -43,9 +45,18 @@ const services = [
 const Services = () => {
   return (
     <section className="py-16 bg-primary text-white overflow-hidden relative">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+      <motion.div
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="max-w-7xl mx-auto px-4 md:px-8 relative z-10"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-4 space-y-6 text-center lg:text-left">
+          <motion.div
+            variants={fadeIn("right", 0.2)}
+            className="lg:col-span-4 space-y-6 text-center lg:text-left"
+          >
             <div className="space-y-3">
               <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.3em]">
                 Our Core
@@ -60,13 +71,14 @@ const Services = () => {
             <button className="bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-lg uppercase tracking-widest text-[9px] hover:bg-white hover:text-primary transition-all">
               Details Explore
             </button>
-          </div>
+          </motion.div>
 
           <div className="lg:col-span-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {services.map((item, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  variants={fadeIn("up", 0.1)}
                   className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all group"
                 >
                   <div className="text-secondary mb-3 transform group-hover:-translate-y-1 transition-transform">
@@ -78,12 +90,12 @@ const Services = () => {
                   <p className="text-white/50 text-[10px] font-medium leading-relaxed">
                     {item.desc}
                   </p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

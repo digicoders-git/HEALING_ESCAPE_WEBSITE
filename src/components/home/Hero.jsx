@@ -1,6 +1,8 @@
 import { useState, useRef } from "react";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
+import { motion } from "framer-motion";
 import homeVideo from "../../assets/homeVideo.mp4";
+import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
@@ -51,33 +53,48 @@ const Hero = () => {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-20 w-full mb-0">
+      <motion.div
+        variants={staggerContainer(0.2, 0.3)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="max-w-7xl mx-auto px-4 md:px-8 relative z-20 w-full mb-0"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded-lg shadow-lg">
+            <motion.div
+              variants={fadeIn("right", 0.1)}
+              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded-lg shadow-lg"
+            >
               <Activity size={14} className="text-white animate-pulse" />
               <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-none">
                 Global Medical Portal
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div variants={fadeIn("right", 0.2)} className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
                 Connecting the World to{" "}
                 <span className="text-secondary">India’s Healthcare</span>{" "}
                 <br />
                 Excellence
               </h1>
-              <p className="text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed">
-                Your trusted partner for world-class, affordable medical
-                treatment in India. We help international patients access top
-                hospitals, leading doctors, and seamless medical journeys across
-                India — especially North India.
-              </p>
-            </div>
+            </motion.div>
+            <motion.p
+              variants={fadeIn("right", 0.3)}
+              className="text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed"
+            >
+              Your trusted partner for world-class, affordable medical treatment
+              in India. We help international patients access top hospitals,
+              leading doctors, and seamless medical journeys across India —
+              especially North India.
+            </motion.p>
 
-            <div className="flex flex-wrap gap-6">
+            <motion.div
+              variants={fadeIn("right", 0.4)}
+              className="flex flex-wrap gap-6"
+            >
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
                   <ShieldCheck size={16} className="text-secondary" />
@@ -94,11 +111,14 @@ const Hero = () => {
                   Global Support
                 </span>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Side: Inquiry Form */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <motion.div
+            variants={fadeIn("left", 0.5)}
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
             <div className="rounded-3xl shadow-2xl p-8 w-full max-w-md border-b-4 border-primary relative overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img
@@ -173,9 +193,9 @@ const Hero = () => {
                 </form>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

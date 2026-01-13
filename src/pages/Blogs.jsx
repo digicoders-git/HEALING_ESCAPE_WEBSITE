@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import PageHero from "../components/PageHero";
 import { blogData, blogCategories } from "../data/blogData";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 const bannerSlides = [
   {
@@ -37,17 +39,32 @@ const Blogs = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 1. Intro Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+      >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="max-w-5xl mx-auto space-y-10 relative z-10 text-center">
-          <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]">
+          <motion.div
+            variants={fadeIn("down", 0.1)}
+            className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]"
+          >
             Patient Awareness
-          </div>
-          <h2 className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
+          </motion.div>
+          <motion.h2
+            variants={fadeIn("up", 0.2)}
+            className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic"
+          >
             Trusted Knowledge <br />{" "}
             <span className="text-secondary">for Your Journey</span>
-          </h2>
-          <div className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl">
+          </motion.h2>
+          <motion.div
+            variants={fadeIn("up", 0.3)}
+            className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl"
+          >
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
               Travelling to another country for medical treatment can raise many
               questions and concerns. Through our blog, we aim to answer those
@@ -55,9 +72,9 @@ const Blogs = () => {
               understanding your treatment options to planning your travel,
               choosing the right hospital, and recovering after treatment.
             </p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 2. Blog Listing Area */}
       <section
@@ -115,42 +132,56 @@ const Blogs = () => {
 
             {/* Articles Grid */}
             <div className="lg:col-span-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-                {filteredBlogs.map((blog, index) => (
-                  <Link
-                    to={`/blogs/${blog.id}`}
-                    key={blog.id}
-                    className="group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-2 animate-fade-in-up"
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <div className="h-48 md:h-56 overflow-hidden relative">
-                      <img
-                        src={blog.image}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110"
-                        alt={blog.title}
-                      />
-                      <div className="absolute top-4 left-4 px-4 py-2 bg-white/95 backdrop-blur-md rounded-xl text-[9px] font-bold uppercase tracking-widest text-primary border border-slate-100 shadow-lg">
-                        {blog.category}
-                      </div>
-                    </div>
-                    <div className="p-6 md:p-8 space-y-4 md:space-y-6">
-                      <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
-                        <Calendar size={12} className="text-secondary" />{" "}
-                        {blog.date}
-                      </div>
-                      <h3 className="text-lg md:text-xl font-bold text-primary uppercase tracking-tight leading-tight group-hover:text-secondary transition-colors line-clamp-2 italic">
-                        {blog.title}
-                      </h3>
-                      <p className="text-xs md:text-sm font-medium text-slate-500 line-clamp-3 leading-relaxed">
-                        {blog.excerpt}
-                      </p>
-                      <div className="pt-2 md:pt-4 flex items-center gap-3 text-secondary font-bold uppercase text-[10px] tracking-widest md:group-hover:gap-5 transition-all">
-                        Read More <ArrowRight size={16} />
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
+              <motion.div
+                variants={staggerContainer(0.05, 0.1)}
+                initial="hidden"
+                animate="show"
+                className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
+              >
+                <AnimatePresence mode="popLayout">
+                  {filteredBlogs.map((blog, index) => (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.4 }}
+                      key={blog.id}
+                    >
+                      <Link
+                        to={`/blogs/${blog.id}`}
+                        className="block group bg-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-2 h-full"
+                      >
+                        <div className="h-48 md:h-56 overflow-hidden relative">
+                          <img
+                            src={blog.image}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110"
+                            alt={blog.title}
+                          />
+                          <div className="absolute top-4 left-4 px-4 py-2 bg-white/95 backdrop-blur-md rounded-xl text-[9px] font-bold uppercase tracking-widest text-primary border border-slate-100 shadow-lg">
+                            {blog.category}
+                          </div>
+                        </div>
+                        <div className="p-6 md:p-8 space-y-4 md:space-y-6">
+                          <div className="flex items-center gap-2 text-slate-400 text-[10px] font-bold uppercase tracking-widest">
+                            <Calendar size={12} className="text-secondary" />{" "}
+                            {blog.date}
+                          </div>
+                          <h3 className="text-lg md:text-xl font-bold text-primary uppercase tracking-tight leading-tight group-hover:text-secondary transition-colors line-clamp-2 italic">
+                            {blog.title}
+                          </h3>
+                          <p className="text-xs md:text-sm font-medium text-slate-500 line-clamp-3 leading-relaxed">
+                            {blog.excerpt}
+                          </p>
+                          <div className="pt-2 md:pt-4 flex items-center gap-3 text-secondary font-bold uppercase text-[10px] tracking-widest md:group-hover:gap-5 transition-all">
+                            Read More <ArrowRight size={16} />
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
 
               {filteredBlogs.length === 0 && (
                 <div className="py-20 text-center space-y-6">
@@ -166,9 +197,18 @@ const Blogs = () => {
       </section>
 
       {/* 4. Ethics Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 border-t border-slate-100 text-center">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 border-t border-slate-100 text-center"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 shadow-xl border border-slate-100 space-y-10 md:space-y-12">
+          <motion.div
+            variants={fadeIn("up", 0.1)}
+            className="bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 shadow-xl border border-slate-100 space-y-10 md:space-y-12"
+          >
             <div className="space-y-4 text-center">
               <h4 className="text-secondary font-bold uppercase tracking-[0.4em] text-[10px]">
                 Knowledge Ethics
@@ -184,8 +224,9 @@ const Blogs = () => {
                 "Necessary Procedures Only",
                 "Honest Guidance",
               ].map((item, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  variants={fadeIn("up", 0.1 * (idx + 1))}
                   className="flex flex-col items-center gap-3 md:gap-4 text-center"
                 >
                   <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center border border-slate-100 text-secondary">
@@ -194,12 +235,12 @@ const Blogs = () => {
                   <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-primary leading-tight">
                     {item}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Closing Section */}
       <section className="py-16 md:py-24 px-4 md:px-8 bg-white text-center">

@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 const bannerSlides = [
   {
@@ -45,10 +47,19 @@ const About = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 2. Company Story */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            <div className="space-y-6 md:space-y-8 text-center lg:text-left">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="space-y-6 md:space-y-8 text-center lg:text-left"
+            >
               <div className="space-y-3">
                 <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.3em] bg-secondary/10 px-6 py-2 rounded-full inline-block">
                   Authentic Narrative
@@ -70,8 +81,11 @@ const About = () => {
                   </p>
                 </div>
               </div>
-            </div>
-            <div className="relative group px-4 md:px-0">
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="relative group px-4 md:px-0"
+            >
               <div className="rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-slate-50 transform md:group-hover:scale-[1.02] transition-transform duration-700">
                 <img
                   src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
@@ -79,7 +93,10 @@ const About = () => {
                   alt="Clinical Coordination"
                 />
               </div>
-              <div className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-8 bg-primary text-white p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-2xl flex items-center gap-4 md:gap-6 border-2 md:border-4 border-white">
+              <motion.div
+                variants={fadeIn("up", 0.4)}
+                className="absolute -bottom-6 -right-2 md:-bottom-8 md:-right-8 bg-primary text-white p-6 md:p-10 rounded-2xl md:rounded-3xl shadow-2xl flex items-center gap-4 md:gap-6 border-2 md:border-4 border-white"
+              >
                 <ShieldCheck
                   size={32}
                   md:size={48}
@@ -91,17 +108,26 @@ const About = () => {
                     Legacy of Care
                   </p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 3. Mission & Vision */}
-      <section className="py-16 md:py-24 bg-slate-50">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-slate-50"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            <div className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-secondary overflow-hidden relative text-center md:text-left">
+            <motion.div
+              variants={fadeIn("up", 0.1)}
+              className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-secondary overflow-hidden relative text-center md:text-left"
+            >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-secondary/10 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all transform md:group-hover:rotate-6 mx-auto md:mx-0">
                 <Target size={32} md:size={40} />
               </div>
@@ -114,8 +140,11 @@ const About = () => {
                   personalised, and end-to-end medical tourism services.
                 </p>
               </div>
-            </div>
-            <div className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-primary overflow-hidden relative text-center md:text-left">
+            </motion.div>
+            <motion.div
+              variants={fadeIn("up", 0.2)}
+              className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl transition-all md:hover:border-primary overflow-hidden relative text-center md:text-left"
+            >
               <div className="w-16 h-16 md:w-20 md:h-20 bg-primary/10 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform md:group-hover:-rotate-6 mx-auto md:mx-0">
                 <Eye size={32} md:size={40} />
               </div>
@@ -128,15 +157,24 @@ const About = () => {
                   world-class healthcare.
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 4. Why We Exist */}
-      <section className="py-16 md:py-24 bg-white">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-white"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="bg-primary rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden shadow-2xl">
+          <motion.div
+            variants={fadeIn("up", 0.1)}
+            className="bg-primary rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden shadow-2xl"
+          >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.1),transparent_50%)]" />
             <div className="relative z-10 space-y-12">
               <div className="text-center space-y-4">
@@ -148,9 +186,12 @@ const About = () => {
                 </h2>
               </div>
               <div className="text-center max-w-4xl mx-auto space-y-10 md:space-y-12">
-                <p className="text-xl md:text-4xl text-white font-black leading-tight italic">
+                <motion.p
+                  variants={fadeIn("up", 0.3)}
+                  className="text-xl md:text-4xl text-white font-black leading-tight italic"
+                >
                   "We exist to turn medical fear into healing confidence."
-                </p>
+                </motion.p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                   {[
                     "Simplify complexity",
@@ -158,8 +199,9 @@ const About = () => {
                     "Ethical transparency",
                     "Clinical oversight",
                   ].map((text, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      variants={fadeIn("up", 0.1 * (i + 1))}
                       className="flex flex-col items-center gap-4 p-6 md:p-8 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors group"
                     >
                       <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
@@ -168,20 +210,29 @@ const About = () => {
                       <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">
                         {text}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 5. Why North India Focus */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="flex flex-col lg:flex-row gap-12 md:gap-20 items-center">
-            <div className="lg:w-1/2 space-y-8 md:space-y-10 text-center lg:text-left">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="lg:w-1/2 space-y-8 md:space-y-10 text-center lg:text-left"
+            >
               <div className="space-y-4">
                 <h4 className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.4em] md:border-l-8 md:border-secondary md:pl-6 inline-block">
                   Institutional Focus
@@ -202,8 +253,9 @@ const About = () => {
                     "International Flight Hubs",
                     "Multi-Speciality Research",
                   ].map((item, i) => (
-                    <div
+                    <motion.div
                       key={i}
+                      variants={fadeIn("right", 0.1 * (i + 1))}
                       className="flex items-center gap-4 md:gap-6 bg-slate-50 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm md:hover:translate-x-4 transition-all duration-500 text-left"
                     >
                       <div className="bg-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-md text-secondary shrink-0">
@@ -212,49 +264,69 @@ const About = () => {
                       <span className="text-xs md:text-base font-bold text-primary uppercase tracking-wide leading-none">
                         {item}
                       </span>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="lg:w-1/2 relative">
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="lg:w-1/2 relative"
+            >
               <div className="grid grid-cols-2 gap-4 md:gap-8 items-end">
                 <div className="space-y-4 md:space-y-8">
-                  <img
+                  <motion.img
+                    variants={fadeIn("up", 0.3)}
                     src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=800"
                     className="w-full h-48 md:h-80 object-cover rounded-[2rem] md:rounded-[4rem] shadow-2xl border-2 border-white"
                     alt="Infrastructure"
                   />
-                  <div className="bg-secondary p-6 md:p-10 rounded-[2rem] md:rounded-[4rem] text-white text-center shadow-xl">
+                  <motion.div
+                    variants={fadeIn("up", 0.4)}
+                    className="bg-secondary p-6 md:p-10 rounded-[2rem] md:rounded-[4rem] text-white text-center shadow-xl"
+                  >
                     <p className="text-3xl md:text-5xl font-black tracking-tighter leading-none italic">
                       HQ
                     </p>
                     <p className="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] mt-2">
                       Lucknow Oversight
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
-                <img
+                <motion.img
+                  variants={fadeIn("left", 0.5)}
                   src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=800"
                   className="w-full h-[350px] md:h-[500px] object-cover rounded-[2.5rem] md:rounded-[5rem] shadow-2xl border-2 border-white"
                   alt="Medical Hub"
                 />
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 6. Industry Stats */}
-      <section className="py-16 md:py-20 bg-primary relative overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-20 bg-primary relative overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           <div className="text-white mb-12 md:mb-20 text-center space-y-4">
-            <h4 className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.6em]">
+            <motion.h4
+              variants={fadeIn("down", 0.1)}
+              className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.6em]"
+            >
               Market Dynamics
-            </h4>
-            <h2 className="text-3xl md:text-7xl font-extrabold uppercase tracking-tighter text-white italic">
+            </motion.h4>
+            <motion.h2
+              variants={fadeIn("up", 0.2)}
+              className="text-3xl md:text-7xl font-extrabold uppercase tracking-tighter text-white italic"
+            >
               Global Scalability
-            </h2>
+            </motion.h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
@@ -279,8 +351,9 @@ const About = () => {
                 icon: <ShieldCheck size={32} md:size={40} />,
               },
             ].map((stat, i) => (
-              <div
+              <motion.div
                 key={i}
+                variants={fadeIn("up", 0.1 * (i + 1))}
                 className="bg-white/5 border border-white/10 p-6 md:p-12 rounded-[2rem] md:rounded-[3.5rem] text-center space-y-2 md:space-y-4 shadow-2xl hover:bg-white/10 transition-all group"
               >
                 <div className="text-secondary flex justify-center md:group-hover:-translate-y-2 transition-transform">
@@ -292,17 +365,29 @@ const About = () => {
                 <p className="text-white/40 text-[8px] md:text-[11px] font-bold uppercase tracking-[0.3em] leading-tight pt-2">
                   {stat.label}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 7. Ethical Commitment */}
-      <section className="py-16 md:py-24 bg-white overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="bg-slate-50 rounded-[2.5rem] md:rounded-[5rem] p-8 md:p-24 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center shadow-inner relative overflow-hidden">
-            <div className="lg:col-span-7 space-y-10 md:space-y-12 text-center lg:text-left relative z-10">
+          <motion.div
+            variants={fadeIn("up", 0.1)}
+            className="bg-slate-50 rounded-[2.5rem] md:rounded-[5rem] p-8 md:p-24 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center shadow-inner relative overflow-hidden"
+          >
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="lg:col-span-7 space-y-10 md:space-y-12 text-center lg:text-left relative z-10"
+            >
               <div className="space-y-4">
                 <h4 className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.5em] px-6 py-2 md:px-8 md:py-3 bg-white rounded-full inline-block shadow-sm">
                   Strict Ethics
@@ -318,8 +403,9 @@ const About = () => {
                   "Patient Data Security",
                   "Zero-Conflict System",
                 ].map((item, i) => (
-                  <div
+                  <motion.div
                     key={i}
+                    variants={fadeIn("right", 0.1 * (i + 1))}
                     className="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm md:hover:border-secondary transition-colors text-left"
                   >
                     <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
@@ -328,38 +414,59 @@ const About = () => {
                     <span className="text-sm md:text-lg font-bold text-primary uppercase tracking-tight leading-none">
                       {item}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-            <div className="lg:col-span-5 relative z-10">
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="lg:col-span-5 relative z-10"
+            >
               <img
                 src="https://images.unsplash.com/photo-1542884748-2b87b36c6b90?auto=format&fit=crop&q=80&w=800"
                 className="w-full h-[400px] md:h-[600px] rounded-[2.5rem] md:rounded-[5rem] object-cover shadow-2xl border-4 md:border-8 border-white"
                 alt="Ethical Care"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 8. Our Team */}
-      <section className="py-16 md:py-24 bg-white pb-32 md:pb-40">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 bg-white pb-32 md:pb-40"
+      >
         <div className="max-w-7xl mx-auto px-4 md:px-8 text-center">
           <div className="mb-16 md:mb-24 space-y-4">
-            <h4 className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.6em]">
+            <motion.h4
+              variants={fadeIn("down", 0.1)}
+              className="text-secondary font-bold text-[10px] md:text-[12px] uppercase tracking-[0.6em]"
+            >
               Workforce Quality
-            </h4>
-            <h2 className="text-3xl md:text-7xl font-extrabold text-primary tracking-tighter uppercase leading-none italic">
+            </motion.h4>
+            <motion.h2
+              variants={fadeIn("up", 0.2)}
+              className="text-3xl md:text-7xl font-extrabold text-primary tracking-tighter uppercase leading-none italic"
+            >
               The Human Edge
-            </h2>
+            </motion.h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center">
-            <div className="lg:col-span-7 space-y-10 md:space-y-12">
-              <p className="text-xl md:text-4xl font-extrabold text-primary text-center lg:text-left leading-tight italic">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="lg:col-span-7 space-y-10 md:space-y-12"
+            >
+              <motion.p
+                variants={fadeIn("up", 0.3)}
+                className="text-xl md:text-4xl font-extrabold text-primary text-center lg:text-left leading-tight italic"
+              >
                 Our growth is powered by doctors, case managers, and logistics
                 experts.
-              </p>
+              </motion.p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 text-center">
                 {[
                   "Dedicated Case Managers",
@@ -367,8 +474,9 @@ const About = () => {
                   "Multilingual Coordinators",
                   "Specialized Support Staff",
                 ].map((item, i) => (
-                  <div
+                  <motion.div
                     key={i}
+                    variants={fadeIn("up", 0.1 * (i + 1))}
                     className="flex flex-col items-center gap-4 bg-slate-50 p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-slate-100 md:hover:bg-white md:hover:border-secondary transition-all shadow-sm group"
                   >
                     <HeartHandshake
@@ -379,11 +487,14 @@ const About = () => {
                     <span className="text-[12px] md:text-[14px] font-black uppercase tracking-widest text-primary pt-2 md:pt-4 leading-none italic">
                       {item}
                     </span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
-            <div className="lg:col-span-5">
+            </motion.div>
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              className="lg:col-span-5"
+            >
               <div className="bg-primary p-12 md:p-16 rounded-[2.5rem] md:rounded-[5rem] aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
                 <Users
                   size={60}
@@ -394,10 +505,10 @@ const About = () => {
                   High Velocity <br /> Team
                 </h4>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

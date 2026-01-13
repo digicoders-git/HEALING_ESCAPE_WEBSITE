@@ -17,11 +17,13 @@ import {
 import PageHero from "../components/PageHero";
 import { specialitiesData } from "../data/specialitiesData";
 import { citiesList } from "../data/hospitalsData";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 const bannerSlides = [
   {
     image:
-      "https://images.unsplash.com/photo-1516383740770-fbcc5cbece02?auto=format&fit=crop&q=80&w=2000",
+      "https://media.istockphoto.com/id/984666526/ru/%D0%B2%D0%B8%D0%B4%D0%B5%D0%BE/%D0%B0%D1%84%D1%80%D0%BE-%D0%B0%D0%BC%D0%B5%D1%80%D0%B8%D0%BA%D0%B0%D0%BD%D1%81%D0%BA%D0%B8%D0%B9-%D0%B4%D0%BE%D0%BA%D1%82%D0%BE%D1%80-%D0%B8%D1%81%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D1%83%D1%8E%D1%89%D0%B8%D0%B9-%D0%BF%D0%BB%D0%B0%D0%BD%D1%88%D0%B5%D1%82-%D0%B4%D0%BB%D1%8F-%D0%BF%D1%80%D0%BE%D1%81%D0%BC%D0%BE%D1%82%D1%80%D0%B0-%D0%B2-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%BD%D0%B5%D1%82%D0%B5.jpg?s=640x640&k=20&c=uWkVtCzJttjo3JLuIor7_NUXEbN6GgGho1dEsrrkN9k=",
     title: "Contact Us",
     subtitle: "We Are Here to Guide You at Every Step of Your Medical Journey",
     buttonLabel: "Send Enquiry",
@@ -127,25 +129,40 @@ const Contact = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 1. Intro Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden text-center">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden text-center"
+      >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="max-w-5xl mx-auto space-y-10 relative z-10">
-          <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]">
+          <motion.div
+            variants={fadeIn("down", 0.1)}
+            className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] font-bold uppercase tracking-[0.3em]"
+          >
             Reach Out
-          </div>
-          <h2 className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
+          </motion.div>
+          <motion.h2
+            variants={fadeIn("up", 0.2)}
+            className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic"
+          >
             Connect with <br />{" "}
             <span className="text-secondary">Healing Escape</span>
-          </h2>
-          <div className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl">
+          </motion.h2>
+          <motion.div
+            variants={fadeIn("up", 0.3)}
+            className="p-6 md:p-16 bg-white rounded-[2.5rem] md:rounded-[3.5rem] border border-slate-100 shadow-2xl"
+          >
             <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
               Our team is here to listen to you, understand your medical needs,
               and guide you honestly and professionally at every step of your
               journey to recovery.
             </p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* 2. Main Contact Form Area */}
       <section
@@ -155,68 +172,55 @@ const Contact = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-16">
             {/* Left Side: Contact Info */}
-            <div className="lg:col-span-4 space-y-10">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+              className="lg:col-span-4 space-y-10"
+            >
               <div className="space-y-8 md:space-y-10">
                 <div className="space-y-6">
                   <h3 className="text-xl font-bold text-primary uppercase tracking-tighter italic border-l-4 border-secondary pl-4">
                     Contact Details
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-6 md:gap-8">
-                    <div className="flex gap-4 group">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
-                        <MapPin size={20} />
+                    {[
+                      {
+                        icon: <MapPin size={20} />,
+                        label: "Location",
+                        val: "Lucknow, Uttar Pradesh, India",
+                      },
+                      {
+                        icon: <Phone size={20} />,
+                        label: "Phone",
+                        val: "+91-91404 05040",
+                      },
+                      {
+                        icon: <Mail size={20} />,
+                        label: "Email",
+                        val: "info@healingescape.com",
+                      },
+                      {
+                        icon: <Clock size={20} />,
+                        label: "Hours",
+                        val: "Mon - Sat: 10AM - 7PM (IST)",
+                      },
+                    ].map((item, i) => (
+                      <div key={i} className="flex gap-4 group">
+                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                            {item.label}
+                          </p>
+                          <p className="text-sm font-bold text-primary italic">
+                            {item.val}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                          Location
-                        </p>
-                        <p className="text-sm font-bold text-primary italic">
-                          Lucknow, Uttar Pradesh, India
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 group">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
-                        <Phone size={20} />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                          Phone
-                        </p>
-                        <p className="text-sm font-bold text-primary italic">
-                          +91-91404 05040
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 group">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
-                        <Mail size={20} />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                          Email
-                        </p>
-                        <p className="text-sm font-bold text-primary italic">
-                          info@healingescape.com
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-4 group">
-                      <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
-                        <Clock size={20} />
-                      </div>
-                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                          Hours
-                        </p>
-                        <p className="text-sm font-bold text-primary italic">
-                          Mon - Sat: 10AM - 7PM (IST)
-                        </p>
-                      </div>
-                    </div>
+                    ))}
                   </div>
                 </div>
 
@@ -241,10 +245,16 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Side: Form */}
-            <div className="lg:col-span-8">
+            <motion.div
+              variants={fadeIn("left", 0.2)}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, amount: 0.1 }}
+              className="lg:col-span-8"
+            >
               <div className="bg-white">
                 <div className="space-y-10 md:space-y-12">
                   <div className="space-y-4">
@@ -376,7 +386,7 @@ const Contact = () => {
                   </form>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -422,9 +432,18 @@ const Contact = () => {
       </section>
 
       {/* 4. Map Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-white overflow-hidden"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div className="space-y-8 md:space-y-10 text-center lg:text-left">
+          <motion.div
+            variants={fadeIn("right", 0.2)}
+            className="space-y-8 md:space-y-10 text-center lg:text-left"
+          >
             <div className="w-16 h-1 bg-secondary rounded-full mx-auto lg:mx-0" />
             <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Find Us in <br className="hidden md:block" />{" "}
@@ -443,9 +462,12 @@ const Contact = () => {
                 Official Healing Escape HQ
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="h-[350px] md:h-[500px] w-full bg-slate-100 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-slate-50 shadow-2xl">
+          <motion.div
+            variants={fadeIn("left", 0.2)}
+            className="h-[350px] md:h-[500px] w-full bg-slate-100 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-slate-50 shadow-2xl"
+          >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227822.6037221524!2d80.77769805023176!3d26.84859648069349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1768289417351!5m2!1sen!2sin"
               className="w-full h-full"
@@ -454,9 +476,9 @@ const Contact = () => {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             ></iframe>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <section className="py-16 md:py-24 px-4 md:px-8 bg-white text-center">
         <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">

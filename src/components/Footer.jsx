@@ -9,15 +9,22 @@ import {
   ExternalLink,
   ShieldCheck,
 } from "lucide-react";
-// import landLogoo from "../../assets/landLogoo.png";
-import landLogoo from "../assets/landLogoo.png";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import landLogoo from "../assets/landLogoo.png";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 const Footer = () => {
   return (
     <footer className="bg-primary text-white pt-16 pb-8 px-4 md:px-8 relative overflow-hidden">
       {/* 1. News/Notice Banner (Unique Medical Feature) */}
-      <div className="max-w-7xl mx-auto mb-16">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={fadeIn("up", 0.1)}
+        className="max-w-7xl mx-auto mb-16"
+      >
         <div className="bg-secondary/10 border border-secondary/20 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6 backdrop-blur-sm">
           <div className="flex items-center gap-4">
             <div className="bg-secondary p-3 rounded-xl text-white">
@@ -37,11 +44,20 @@ const Footer = () => {
             View Offer Letter
           </button>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
+      <motion.div
+        variants={staggerContainer(0.1, 0.2)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10"
+      >
         {/* Column 1: About */}
-        <div className="lg:col-span-1 space-y-6">
+        <motion.div
+          variants={fadeIn("up", 0.1)}
+          className="lg:col-span-1 space-y-6"
+        >
           <img
             src={landLogoo}
             alt="Healing Escape Global"
@@ -58,17 +74,17 @@ const Footer = () => {
               NABH Partner Portal
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Column 2: Quick Links */}
-        <div className="space-y-6">
+        <motion.div variants={fadeIn("up", 0.2)} className="space-y-6">
           <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-secondary border-b border-white/10 pb-2">
             Quick Links
           </h4>
           <ul className="space-y-3 text-white/80 text-xs font-bold">
             <li>
               <Link
-                to="/"
+                to="/hospitals"
                 className="hover:text-secondary transition-colors inline-flex items-center gap-2"
               >
                 <ExternalLink size={12} /> Find Hospitals
@@ -76,7 +92,7 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                to="/about-us"
+                to="/journey"
                 className="hover:text-secondary transition-colors inline-flex items-center gap-2"
               >
                 <ExternalLink size={12} /> Medical Visa Info
@@ -84,25 +100,25 @@ const Footer = () => {
             </li>
             <li>
               <Link
-                to="/journey"
+                to="/services"
                 className="hover:text-secondary transition-colors inline-flex items-center gap-2"
               >
-                <ExternalLink size={12} /> Patient Guide
+                <ExternalLink size={12} /> Our Services
               </Link>
             </li>
             <li>
               <Link
-                to="/success-stories"
+                to="/gallery"
                 className="hover:text-secondary transition-colors inline-flex items-center gap-2"
               >
-                <ExternalLink size={12} /> Success Stories
+                <ExternalLink size={12} /> Hospital Gallery
               </Link>
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Column 3: Treatments */}
-        <div className="space-y-6">
+        <motion.div variants={fadeIn("up", 0.3)} className="space-y-6">
           <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-secondary border-b border-white/10 pb-2">
             Treatments
           </h4>
@@ -133,10 +149,10 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Column 4: Contact Info */}
-        <div className="space-y-6">
+        <motion.div variants={fadeIn("up", 0.4)} className="space-y-6">
           <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-secondary border-b border-white/10 pb-2">
             Contact Info
           </h4>
@@ -154,10 +170,10 @@ const Footer = () => {
               <span>info@healingescape.com</span>
             </li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Column 5: Social Media */}
-        <div className="space-y-6">
+        <motion.div variants={fadeIn("up", 0.5)} className="space-y-6">
           <h4 className="font-bold text-xs uppercase tracking-[0.2em] text-secondary border-b border-white/10 pb-2">
             Social Connect
           </h4>
@@ -190,11 +206,17 @@ const Footer = () => {
           <div className="pt-4 p-4 rounded-xl bg-white/5 border border-white/10 text-[9px] font-bold text-white/40 uppercase tracking-widest text-center">
             Scan for Digital Brochure
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Bottom Bar */}
-      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
+      <motion.div
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        variants={fadeIn("up", 0.6)}
+        className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6"
+      >
         <p className="text-white/80 text-[10px] font-bold uppercase tracking-[0.2em]">
           © 2026 Healing Escape Global. Design and Developed by{" "}
           <a
@@ -206,17 +228,26 @@ const Footer = () => {
           </a>
         </p>
         <div className="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-white/80">
-          <a href="#" className="hover:text-secondary transition-colors">
+          <Link
+            to="/privacy-policy"
+            className="hover:text-secondary transition-colors"
+          >
             Privacy Policy
-          </a>
-          <a href="#" className="hover:text-secondary transition-colors">
+          </Link>
+          <Link
+            to="/terms-of-service"
+            className="hover:text-secondary transition-colors"
+          >
             Terms of Service
-          </a>
-          <a href="#" className="hover:text-secondary transition-colors">
+          </Link>
+          <Link
+            to="/cookie-policy"
+            className="hover:text-secondary transition-colors"
+          >
             Cookie Policy
-          </a>
+          </Link>
         </div>
-      </div>
+      </motion.div>
 
       {/* Corporate Watermark */}
       <div className="absolute -bottom-10 -right-10 opacity-5 pointer-events-none select-none">

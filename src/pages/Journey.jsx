@@ -17,6 +17,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 const bannerSlides = [
   {
@@ -25,7 +27,7 @@ const bannerSlides = [
     title: "Patient Journey",
     subtitle: "Your Treatment. Our Complete Responsibility.",
     buttonLabel: "Start Your Journey",
-    buttonLink: "/contact",
+    buttonLink: "#workflow-start",
   },
   {
     image:
@@ -64,7 +66,7 @@ const Journey = () => {
     {
       id: 1,
       title: "Initial Inquiry",
-      icon: <MessageSquare className="w-8 h-8" />,
+      icon: <MessageSquare className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "You can contact Healing Escape through our Website inquiry form, WhatsApp, phone call, or email.",
       points: [
@@ -79,7 +81,7 @@ const Journey = () => {
     {
       id: 2,
       title: "Medical Assessment & Consultation",
-      icon: <Stethoscope className="w-8 h-8" />,
+      icon: <Stethoscope className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Our medical team carefully reviews all your medical reports to shortlist suitable specialists.",
       points: [
@@ -94,7 +96,7 @@ const Journey = () => {
     {
       id: 3,
       title: "Treatment Plan & Cost Estimate",
-      icon: <ClipboardList className="w-8 h-8" />,
+      icon: <ClipboardList className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Healing Escape provides a detailed and transparent treatment proposal.",
       points: [
@@ -109,7 +111,7 @@ const Journey = () => {
     {
       id: 4,
       title: "Medical Visa & Travel Assistance",
-      icon: <Plane className="w-8 h-8" />,
+      icon: <Plane className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "We provide end-to-end guidance for your travel and visa process.",
       points: [
@@ -124,7 +126,7 @@ const Journey = () => {
     {
       id: 5,
       title: "Arrival in India & Admission",
-      icon: <Hospital className="w-8 h-8" />,
+      icon: <Hospital className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Our representative receives you at the airport and coordinates your admission.",
       points: ["Airport pickup", "Hospital registration", "Language support"],
@@ -135,7 +137,7 @@ const Journey = () => {
     {
       id: 6,
       title: "Treatment & Hospital Stay",
-      icon: <Activity className="w-8 h-8" />,
+      icon: <Activity className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Treatment at NABH / JCI accredited hospitals by experienced specialists.",
       points: ["Family coordination", "Clinical oversight", "Progress updates"],
@@ -146,7 +148,7 @@ const Journey = () => {
     {
       id: 7,
       title: "Recovery & Local Support",
-      icon: <CalendarCheck className="w-8 h-8" />,
+      icon: <CalendarCheck className="w-6 h-6 md:w-8 md:h-8" />,
       content: "Post-treatment recovery phase closely supported by our team.",
       points: [
         "Discharge formalities",
@@ -160,7 +162,7 @@ const Journey = () => {
     {
       id: 8,
       title: "Return Journey & Follow-Up",
-      icon: <HeartHandshake className="w-8 h-8" />,
+      icon: <HeartHandshake className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Our support remains connected for your continued care back home.",
       points: ["Return planning", "Follow-up coordination", "Report reviews"],
@@ -172,16 +174,28 @@ const Journey = () => {
 
   const promises = [
     {
-      icon: <ShieldCheck className="w-6 h-6" />,
+      icon: <ShieldCheck className="w-5 h-5 md:w-6 md:h-6" />,
       text: "100% Ethical Guidance",
     },
-    { icon: <UserCheck className="w-6 h-6" />, text: "Patient-First Approach" },
-    { icon: <Search className="w-6 h-6" />, text: "Complete Transparency" },
-    { icon: <HandCoins className="w-6 h-6" />, text: "No Hidden Costs" },
-    { icon: <Eye className="w-6 h-6" />, text: "No Unnecessary Procedures" },
     {
-      icon: <CheckCircle2 className="w-6 h-6" />,
-      text: "End-to-End Responsibility",
+      icon: <UserCheck className="w-5 h-5 md:w-6 md:h-6" />,
+      text: "Patient-First Approach",
+    },
+    {
+      icon: <Search className="w-5 h-5 md:w-6 md:h-6" />,
+      text: "Complete Transparency",
+    },
+    {
+      icon: <HandCoins className="w-5 h-5 md:w-6 md:h-6" />,
+      text: "No Hidden Costs",
+    },
+    {
+      icon: <Eye className="w-5 h-5 md:w-6 md:h-6" />,
+      text: "No Unnecessary Actions",
+    },
+    {
+      icon: <CheckCircle2 className="w-5 h-5 md:w-6 md:h-6" />,
+      text: "End-to-End Care",
     },
   ];
 
@@ -190,64 +204,87 @@ const Journey = () => {
       <PageHero slides={bannerSlides} />
 
       {/* Intro Section */}
-      <section className="py-24 px-8 bg-slate-50 relative overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+      >
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2 space-y-8">
-              <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-xs font-black uppercase tracking-[0.3em]">
+          <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16">
+            <motion.div
+              variants={fadeIn("right", 0.2)}
+              className="lg:w-1/2 space-y-6 md:space-y-8 text-center lg:text-left"
+            >
+              <div className="inline-block px-4 py-1.5 bg-secondary/10 text-secondary rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em]">
                 Excellence in Care
               </div>
-              <h2 className="text-4xl md:text-6xl font-black text-primary leading-tight uppercase tracking-tighter">
+              <h2 className="text-3xl md:text-6xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
                 Transparent &{" "}
                 <span className="text-secondary">Patient-Centric</span> Process
               </h2>
-              <p className="text-lg text-slate-600 leading-relaxed font-medium">
+              <p className="text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                 At Healing Escape, we understand that travelling for medical
                 treatment is a major decision. Our transparent, step-by-step
                 process ensures your journey is safe, smooth, and stress-free.
               </p>
-              <div className="p-8 bg-white/80 backdrop-blur-md rounded-3xl border border-white shadow-2xl relative group overflow-hidden">
-                <div className="absolute top-0 left-0 w-2 h-full bg-secondary" />
-                <p className="italic text-primary font-bold text-xl relative z-10">
+              <motion.div
+                variants={fadeIn("up", 0.4)}
+                className="p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-[2rem] border border-white shadow-2xl relative group overflow-hidden text-left"
+              >
+                <div className="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-secondary" />
+                <p className="italic text-primary font-bold text-lg md:text-xl relative z-10 leading-relaxed">
                   "Below is a detailed explanation of how we take care of you at
                   every stage of your treatment journey."
                 </p>
-              </div>
-            </div>
-            <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-4">
+              </motion.div>
+            </motion.div>
+            <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
               {promises.map((promise, index) => (
-                <div
+                <motion.div
                   key={index}
-                  className="flex items-center gap-4 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500 group"
+                  variants={fadeIn("up", 0.1 * (index + 1))}
+                  className="flex items-center gap-4 p-5 md:p-6 bg-white rounded-2xl border border-slate-100 shadow-sm md:hover:shadow-2xl transition-all duration-500 group"
                 >
-                  <div className="p-3 bg-slate-50 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-500">
+                  <div className="p-3 bg-slate-50 rounded-xl text-secondary group-hover:bg-secondary group-hover:text-white transition-colors duration-500 shrink-0">
                     {promise.icon}
                   </div>
-                  <span className="font-black text-primary uppercase text-[10px] tracking-widest leading-none">
+                  <span className="font-extrabold text-primary uppercase text-[9px] md:text-[10px] tracking-widest leading-none italic">
                     {promise.text}
                   </span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Steps Section */}
-      <section className="py-32 px-8 bg-white relative">
+      <motion.section
+        id="workflow-start"
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.1 }}
+        className="py-24 md:py-32 px-4 md:px-8 bg-white relative"
+      >
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-32 space-y-4">
-            <h4 className="text-secondary font-black uppercase tracking-[0.5em] text-xs">
+          <motion.div
+            variants={fadeIn("down", 0.1)}
+            className="text-center mb-20 md:mb-32 space-y-4"
+          >
+            <h4 className="text-secondary font-black uppercase tracking-[0.5em] text-[10px] md:text-xs">
               Operational Excellence
             </h4>
-            <h2 className="text-5xl md:text-7xl font-black text-primary uppercase tracking-tighter">
+            <h2 className="text-4xl md:text-7xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Treatment Workflow
             </h2>
-            <div className="w-24 h-1.5 bg-secondary mx-auto rounded-full" />
-          </div>
+            <div className="w-20 md:w-24 h-1.5 bg-secondary mx-auto rounded-full mt-4" />
+          </motion.div>
 
           <div className="relative" ref={timelineRef}>
             {/* Animated Line Container */}
@@ -260,107 +297,127 @@ const Journey = () => {
               </div>
             </div>
 
-            <div className="space-y-32">
+            <div className="space-y-20 md:space-y-32">
               {steps.map((step, index) => (
                 <div
                   key={step.id}
-                  className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 relative ${
+                  className={`flex flex-col lg:flex-row items-center gap-12 md:gap-24 relative ${
                     index % 2 === 0 ? "" : "lg:flex-row-reverse"
                   }`}
                 >
                   {/* Text Side */}
-                  <div
-                    className={`lg:w-1/2 w-full ${
+                  <motion.div
+                    variants={fadeIn(index % 2 === 0 ? "right" : "left", 0.2)}
+                    className={`lg:w-1/2 w-full text-center ${
                       index % 2 === 0 ? "lg:text-right" : "lg:text-left"
                     }`}
                   >
-                    <div className="inline-block p-4 rounded-3xl bg-slate-50 border border-slate-100 mb-8 transform hover:rotate-6 transition-transform shadow-sm">
+                    <div className="inline-block p-3 md:p-4 rounded-[1.5rem] md:rounded-3xl bg-slate-50 border border-slate-100 mb-6 md:mb-8 md:hover:rotate-6 transition-transform shadow-sm">
                       <div
-                        className={`p-4 rounded-2xl ${step.color} text-white shadow-xl`}
+                        className={`p-4 rounded-xl md:rounded-2xl ${step.color} text-white shadow-xl`}
                       >
                         {step.icon}
                       </div>
                     </div>
                     <div
-                      className={`flex items-center gap-4 mb-6 ${
+                      className={`flex items-center gap-4 mb-4 md:mb-6 justify-center ${
                         index % 2 === 0 ? "lg:justify-end" : "lg:justify-start"
                       }`}
                     >
                       {index % 2 !== 0 && (
-                        <span className="text-5xl font-black text-slate-100">
+                        <span className="hidden md:block text-4xl md:text-5xl font-black text-slate-100">
                           0{step.id}
                         </span>
                       )}
-                      <h3 className="text-3xl font-black text-primary uppercase tracking-tight">
+                      <h3 className="text-2xl md:text-3xl font-extrabold text-primary uppercase tracking-tight italic">
                         {step.title}
                       </h3>
-                      {index % 2 === 0 && (
-                        <span className="text-5xl font-black text-slate-100">
+                      {(index % 2 === 0 || window.innerWidth < 1024) && (
+                        <span className="text-4xl md:text-5xl font-black text-slate-100">
                           0{step.id}
                         </span>
                       )}
                     </div>
-                    <p className="text-slate-600 mb-8 text-lg font-medium leading-relaxed max-w-xl lg:mx-0 mx-auto">
+                    <p className="text-slate-600 mb-6 md:mb-8 text-base md:text-lg font-medium leading-relaxed max-w-xl lg:mx-0 mx-auto italic">
                       {step.content}
                     </p>
                     <div
-                      className={`flex flex-wrap gap-3 ${
+                      className={`flex flex-wrap gap-2 md:gap-3 justify-center ${
                         index % 2 === 0 ? "lg:justify-end" : "lg:justify-start"
                       }`}
                     >
                       {step.points.map((point, idx) => (
-                        <div
+                        <motion.div
                           key={idx}
-                          className="flex items-center gap-2 px-5 py-2.5 bg-slate-50 text-slate-500 rounded-2xl text-[11px] font-black border border-slate-100 uppercase tracking-widest hover:border-secondary hover:text-secondary transition-colors"
+                          variants={fadeIn("up", 0.1 * (idx + 1))}
+                          className="flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-500 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] font-extrabold border border-slate-100 uppercase tracking-widest md:hover:border-secondary md:hover:text-secondary transition-colors italic"
                         >
-                          <CheckCircle2 size={14} className="text-secondary" />
+                          <CheckCircle2
+                            size={14}
+                            className="text-secondary shrink-0"
+                          />
                           {point}
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Icon Node for Mobile */}
-                  <div className="lg:hidden w-8 h-8 rounded-full border-4 border-slate-100 bg-white flex items-center justify-center mb-8">
+                  <div className="lg:hidden w-8 h-8 rounded-full border-4 border-slate-100 bg-white flex items-center justify-center -my-8 z-10">
                     <div className={`w-3 h-3 rounded-full ${step.color}`} />
                   </div>
 
                   {/* Image Side */}
-                  <div className="lg:w-1/2 w-full">
+                  <motion.div
+                    variants={fadeIn(index % 2 === 0 ? "left" : "right", 0.2)}
+                    className="lg:w-1/2 w-full px-4 md:px-0"
+                  >
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-primary/10 rounded-[3rem] blur-2xl group-hover:bg-secondary/20 transition-all duration-700" />
-                      <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white transform group-hover:-translate-y-2 transition-all duration-700">
+                      <div className="absolute inset-0 bg-primary/10 rounded-[2.5rem] md:rounded-[3rem] blur-2xl md:group-hover:bg-secondary/20 transition-all duration-700" />
+                      <div className="relative rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white md:group-hover:-translate-y-2 transition-all duration-700">
                         <img
                           src={step.image}
-                          className="w-full h-[400px] object-cover"
+                          className="w-full h-[300px] md:h-[400px] object-cover bg-slate-100"
                           alt={step.title}
                         />
-                        <div className="absolute bottom-0 left-0 p-8 bg-linear-to-t from-black/80 to-transparent w-full">
-                          <span className="text-white font-black text-6xl opacity-30 uppercase tracking-tighter">
+                        <div className="absolute bottom-0 left-0 p-6 md:p-8 bg-linear-to-t from-black/80 to-transparent w-full">
+                          <span className="text-white font-black text-4xl md:text-6xl opacity-30 uppercase tracking-tighter italic">
                             Step 0{step.id}
                           </span>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Promise Section */}
-      <section className="py-32 px-8 bg-primary relative overflow-hidden">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-32 px-4 md:px-8 bg-primary relative overflow-hidden"
+      >
         <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-secondary/10 blur-[150px] rounded-full" />
         <div className="max-w-7xl mx-auto text-center text-white relative z-10">
-          <div className="inline-block p-6 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 mb-8">
-            <HeartHandshake className="w-16 h-16 text-secondary" />
-          </div>
-          <h2 className="text-5xl md:text-7xl font-black mb-16 uppercase tracking-tighter">
+          <motion.div
+            variants={fadeIn("up", 0.1)}
+            className="inline-block p-4 md:p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 mb-6 md:mb-8"
+          >
+            <HeartHandshake className="w-12 h-12 md:w-16 md:h-16 text-secondary" />
+          </motion.div>
+          <motion.h2
+            variants={fadeIn("up", 0.2)}
+            className="text-3xl md:text-7xl font-extrabold mb-10 md:mb-16 uppercase tracking-tighter italic leading-none"
+          >
             Our Promise
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-24">
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-16 md:mb-24">
             {[
               {
                 title: "Integrity",
@@ -370,32 +427,36 @@ const Journey = () => {
               {
                 title: "Values",
                 text: "No unnecessary procedures and no hidden costs. Honest advice, always.",
-                icon: <ShieldCheck size={32} />,
+                icon: <HandCoins size={32} />,
               },
               {
                 title: "Responsibility",
                 text: "Patient-first approach with end-to-end responsibility.",
-                icon: <ShieldCheck size={32} />,
+                icon: <Activity size={32} />,
               },
             ].map((item, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="group p-12 bg-white/5 backdrop-blur-2xl rounded-[3rem] border border-white/10 text-left hover:bg-white/10 transition-all duration-500"
+                variants={fadeIn("up", 0.1 * (i + 1))}
+                className="group p-8 md:p-12 bg-white/5 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3rem] border border-white/10 text-center md:text-left md:hover:bg-white/10 transition-all duration-500 shadow-xl"
               >
-                <div className="w-16 h-16 rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary mb-8 transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary mb-6 md:mb-8 mx-auto md:mx-0 transition-transform md:group-hover:scale-110">
                   {item.icon}
                 </div>
-                <h3 className="text-secondary font-black text-2xl mb-4 uppercase tracking-wide">
+                <h3 className="text-secondary font-black text-xl md:text-2xl mb-4 uppercase tracking-wide italic">
                   {item.title}
                 </h3>
-                <p className="text-white/70 text-lg leading-relaxed font-medium">
+                <p className="text-white/70 text-base md:text-lg leading-relaxed font-medium italic">
                   {item.text}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-          <div className="max-w-4xl mx-auto border-t border-white/10 pt-20">
-            <p className="text-2xl md:text-3xl font-light italic text-white/95">
+          <motion.div
+            variants={fadeIn("up", 0.6)}
+            className="max-w-4xl mx-auto border-t border-white/10 pt-16 md:pt-20"
+          >
+            <p className="text-xl md:text-3xl font-light italic text-white/95 leading-relaxed">
               "With Healing Escape, your treatment becomes a carefully managed,
               safe, and{" "}
               <span className="text-secondary font-bold">
@@ -403,32 +464,58 @@ const Journey = () => {
               </span>
               "
             </p>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* CTA Section */}
-      <section className="py-24 px-8 bg-white">
-        <div className="max-w-7xl mx-auto bg-slate-900 rounded-[4rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-white"
+      >
+        <motion.div
+          variants={fadeIn("up", 0.1)}
+          className="max-w-7xl mx-auto bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl"
+        >
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary/20 blur-[120px] rounded-full animate-float" />
-          <div className="relative z-10 space-y-12">
-            <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter">
-              Ready to Begin?
-            </h2>
-            <p className="text-white/50 text-xl font-light">
+          <div className="relative z-10 space-y-8 md:space-y-12">
+            <motion.h2
+              variants={fadeIn("up", 0.2)}
+              className="text-3xl md:text-7xl font-extrabold text-white uppercase tracking-tighter italic leading-none"
+            >
+              Ready to <span className="text-secondary">Begin?</span>
+            </motion.h2>
+            <motion.p
+              variants={fadeIn("up", 0.3)}
+              className="text-white/50 text-lg md:text-xl font-light italic"
+            >
               Connect with our medical experts today for a personalized plan.
-            </p>
-            <div className="flex flex-col md:flex-row justify-center gap-6">
-              <button className="bg-secondary hover:bg-white hover:text-primary text-white font-black py-6 px-12 rounded-3xl transition-all duration-500 uppercase tracking-widest text-sm">
+            </motion.p>
+            <motion.div
+              variants={fadeIn("up", 0.4)}
+              className="flex flex-col sm:flex-row justify-center gap-4 md:gap-6"
+            >
+              <a
+                href="/contact"
+                className="bg-secondary hover:bg-white hover:text-primary text-white font-black py-4 md:py-6 px-8 md:px-12 rounded-xl md:rounded-3xl transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl"
+              >
                 Start Enquiry Now
-              </button>
-              <button className="bg-white/5 hover:bg-white/10 text-white font-black py-6 px-12 rounded-3xl border border-white/10 transition-all duration-500 uppercase tracking-widest text-sm">
+              </a>
+              <a
+                href="https://wa.me/919140405040"
+                target="_blank"
+                rel="noreferrer"
+                className="bg-white/5 hover:bg-white/10 text-white font-black py-4 md:py-6 px-8 md:px-12 rounded-xl md:rounded-3xl border border-white/10 transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl"
+              >
                 Contact on WhatsApp
-              </button>
-            </div>
+              </a>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
       <style
         dangerouslySetInnerHTML={{

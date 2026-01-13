@@ -18,7 +18,11 @@ import BlogDetail from "./pages/BlogDetail";
 import Videos from "./pages/Videos";
 import VideoDetail from "./pages/VideoDetail";
 import Gallery from "./pages/Gallery";
+import Services from "./pages/Services";
 import Contact from "./pages/Contact";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import CookiePolicy from "./pages/CookiePolicy";
 
 const App = () => {
   return (
@@ -29,8 +33,12 @@ const App = () => {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<About />} />
+          <Route path="/about" element={<About />} />
           <Route path="/journey" element={<Journey />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
           <Route path="/doctors" element={<Doctors />} />
           <Route path="/doctor/:id" element={<DoctorDetail />} />
           <Route path="/hospitals" element={<Hospitals />} />

@@ -19,6 +19,8 @@ import {
   hospitalSpecialities,
   accreditationList,
 } from "../data/hospitalsData";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 // Custom Modern Dropdown Component
 const CustomDropdown = ({ label, options, value, onChange, icon: Icon }) => {
@@ -268,7 +270,13 @@ const Hospitals = () => {
         className="py-16 md:py-24 px-4 md:px-8 bg-slate-50"
       >
         <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+          <motion.div
+            variants={fadeIn("up", 0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
+          >
             <div className="space-y-4">
               <h2 className="text-4xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic">
                 Verified <span className="text-secondary">Hospitals</span>
@@ -286,68 +294,82 @@ const Hospitals = () => {
                 Facilities Found
               </span>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            {filteredHospitals.map((hosp, index) => (
-              <Link
-                to={`/hospital/${hosp.id}`}
-                key={hosp.id}
-                className="group bg-white rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-2 animate-fade-in-up"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="relative h-56 md:h-64 overflow-hidden">
-                  <img
-                    src={hosp.image}
-                    alt={hosp.name}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                  />
-                  <div className="absolute top-4 right-4 flex flex-col gap-2">
-                    {hosp.accreditations.map((acc) => (
-                      <span
-                        key={acc}
-                        className="bg-secondary text-white px-3 py-1.5 rounded-xl text-[8px] md:text-[9px] font-bold uppercase tracking-widest"
-                      >
-                        {acc}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="p-8 md:p-10 space-y-6">
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <MapPin size={14} className="text-secondary" />
-                    <span className="text-[10px] font-bold uppercase tracking-widest">
-                      {hosp.city}
-                    </span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-primary italic uppercase tracking-tight group-hover:text-secondary transition-colors line-clamp-1">
-                    {hosp.name}
-                  </h3>
-                  <div className="flex flex-wrap gap-2 h-16 md:h-20 overflow-hidden content-start">
-                    {hosp.specialities.map((spec) => (
-                      <span
-                        key={spec}
-                        className="bg-slate-50 text-slate-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border border-slate-100"
-                      >
-                        {spec}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <CheckCircle2 size={16} className="text-secondary" />
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                        Verified
-                      </span>
+          <motion.div
+            variants={staggerContainer(0.05, 0.1)}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredHospitals.map((hosp, index) => (
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4 }}
+                  key={hosp.id}
+                >
+                  <Link
+                    to={`/hospital/${hosp.id}`}
+                    className="block group bg-white rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-2 h-full"
+                  >
+                    <div className="relative h-56 md:h-64 overflow-hidden">
+                      <img
+                        src={hosp.image}
+                        alt={hosp.name}
+                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                      />
+                      <div className="absolute top-4 right-4 flex flex-col gap-2">
+                        {hosp.accreditations.map((acc) => (
+                          <span
+                            key={acc}
+                            className="bg-secondary text-white px-3 py-1.5 rounded-xl text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-center"
+                          >
+                            {acc}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    <span className="text-secondary font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 md:group-hover:gap-4 transition-all">
-                      Details <ChevronRight size={14} />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+                    <div className="p-8 md:p-10 space-y-6">
+                      <div className="flex items-center gap-2 text-slate-400">
+                        <MapPin size={14} className="text-secondary" />
+                        <span className="text-[10px] font-bold uppercase tracking-widest">
+                          {hosp.city}
+                        </span>
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-primary italic uppercase tracking-tight group-hover:text-secondary transition-colors line-clamp-1">
+                        {hosp.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2 h-16 md:h-20 overflow-hidden content-start">
+                        {hosp.specialities.map((spec) => (
+                          <span
+                            key={spec}
+                            className="bg-slate-50 text-slate-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border border-slate-100"
+                          >
+                            {spec}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <CheckCircle2 size={16} className="text-secondary" />
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            Verified
+                          </span>
+                        </div>
+                        <span className="text-secondary font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 md:group-hover:gap-4 transition-all">
+                          Details <ChevronRight size={14} />
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
 
           {filteredHospitals.length === 0 && (
             <div className="py-24 md:py-40 text-center">
@@ -361,9 +383,18 @@ const Hospitals = () => {
       </section>
 
       {/* 5. Assurance Section */}
-      <section className="py-16 md:py-24 px-4 md:px-8 bg-white border-t border-slate-100">
+      <motion.section
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="py-16 md:py-24 px-4 md:px-8 bg-white border-t border-slate-100"
+      >
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div className="space-y-10 md:space-y-12">
+          <motion.div
+            variants={fadeIn("right", 0.2)}
+            className="space-y-10 md:space-y-12"
+          >
             <div className="w-16 h-1 bg-secondary rounded-full" />
             <h2 className="text-3xl md:text-6xl font-extrabold text-primary uppercase tracking-tighter italic leading-none">
               Quality <span className="text-secondary">Assurance</span>
@@ -391,7 +422,11 @@ const Hospitals = () => {
                   desc: "Highly qualified and board certified doctors.",
                 },
               ].map((item, i) => (
-                <div key={i} className="flex gap-4 items-start">
+                <motion.div
+                  key={i}
+                  variants={fadeIn("up", 0.1 * (i + 1))}
+                  className="flex gap-4 items-start"
+                >
                   <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 shrink-0">
                     {item.icon}
                   </div>
@@ -403,16 +438,22 @@ const Hospitals = () => {
                       {item.desc}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
-          </div>
-          <div className="p-8 md:p-20 bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] text-white space-y-8 md:space-y-10 relative overflow-hidden shadow-2xl">
+          </motion.div>
+          <motion.div
+            variants={fadeIn("left", 0.2)}
+            className="p-8 md:p-20 bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] text-white space-y-8 md:space-y-10 relative overflow-hidden shadow-2xl"
+          >
             <div className="absolute top-0 right-0 w-64 h-64 bg-secondary/10 blur-[80px] rounded-full" />
-            <p className="text-2xl md:text-3xl font-light italic leading-relaxed text-white/80">
+            <motion.p
+              variants={fadeIn("up", 0.3)}
+              className="text-2xl md:text-3xl font-light italic leading-relaxed text-white/80"
+            >
               "Healing Escape ensures you access the finest medical
               infrastructure in India with complete transparency."
-            </p>
+            </motion.p>
             <div className="pt-8 md:pt-10 border-t border-white/5">
               <Link
                 to="/contact"
@@ -421,9 +462,9 @@ const Hospitals = () => {
                 Inquire Now
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       <style
         dangerouslySetInnerHTML={{

@@ -1,13 +1,24 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 
 const AboutSnapshot = () => {
   return (
-    <section className="py-12 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+    <section className="py-12 bg-white overflow-hidden">
+      <motion.div
+        variants={staggerContainer(0.2, 0.1)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+        className="max-w-7xl mx-auto px-4 md:px-8"
+      >
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Visual Side */}
-          <div className="lg:w-1/2 relative">
+          <motion.div
+            variants={fadeIn("right", 0.2)}
+            className="lg:w-1/2 relative"
+          >
             <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-xl border-4 border-slate-50">
               <img
                 src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"
@@ -16,7 +27,10 @@ const AboutSnapshot = () => {
               />
             </div>
             {/* Authentic Data Card */}
-            <div className="absolute -bottom-6 -left-6 z-20 bg-primary text-white p-6 rounded-2xl shadow-xl max-w-xs border-2 border-white">
+            <motion.div
+              variants={fadeIn("up", 0.4)}
+              className="absolute -bottom-6 -left-6 z-20 bg-primary text-white p-6 rounded-2xl shadow-xl max-w-xs border-2 border-white"
+            >
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 size={16} className="text-secondary" />
@@ -29,11 +43,14 @@ const AboutSnapshot = () => {
                   clinical outcomes in India.
                 </p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Content Side */}
-          <div className="lg:w-1/2 space-y-6">
+          <motion.div
+            variants={fadeIn("left", 0.2)}
+            className="lg:w-1/2 space-y-6"
+          >
             <div className="space-y-3">
               <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.25em] border-l-4 border-secondary pl-4">
                 Institutional Profile
@@ -74,9 +91,9 @@ const AboutSnapshot = () => {
                 Company Profile
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

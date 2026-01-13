@@ -12,9 +12,11 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import landLogo from "../assets/landLogo.png";
 import landLogoo from "../assets/landLogoo.png";
 import logo from "../assets/logo.png";
+import { fadeIn } from "../utils/framerVariants";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +38,7 @@ const Navbar = () => {
     { label: "Specialities", path: "/specialities" },
     { label: "Hospitals", path: "/hospitals" },
     { label: "Doctors", path: "/doctors" },
+    { label: "Services", path: "/services" },
     {
       label: "Knowledge",
       path: "#",
@@ -45,13 +48,18 @@ const Navbar = () => {
         { label: "Gallery", path: "/gallery" },
       ],
     },
-    { label: "Contact", path: "/contact" },
+    { label: "Patient Journey", path: "/journey" },
   ];
 
   return (
     <>
       {/* 1. Top Utility Bar - Not Sticky (Will scroll away) */}
-      <div className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-[110]">
+      <div
+        // initial="hidden"
+        // animate="show"
+        // variants={fadeIn("down", 0.1)}
+        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-[110]"
+      >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-8 items-center">
             <Link
@@ -91,6 +99,9 @@ const Navbar = () => {
 
       {/* 2. Main Navigation - Sticky (Will stay at top) */}
       <nav
+        // initial="hidden"
+        // animate="show"
+        // variants={fadeIn("down", 0.2)}
         className={`w-full sticky top-0 z-[100] transition-all duration-500 ${
           isScrolled
             ? "bg-white/80 backdrop-blur-lg shadow-lg py-2 border-b border-slate-100"
@@ -155,82 +166,86 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Sidebar Navigation */}
-      <div
-        className={`fixed inset-0 bg-white/95 backdrop-blur-xl z-[150] xl:hidden transition-all duration-500 ${
-          isOpen
-            ? "translate-x-0 opacity-100"
-            : "translate-x-full opacity-0 invisible"
-        }`}
-      >
-        <div className="p-8 pt-12 h-full flex flex-col">
-          <div className="flex justify-between items-center mb-10">
-            <Link to="/" onClick={() => setIsOpen(false)}>
-              <img src={landLogoo} alt="Logo" className="w-[150px]" />
-            </Link>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-3 bg-slate-100 rounded-full text-primary"
-            >
-              <X size={28} />
-            </button>
-          </div>
-
-          <div className="space-y-1 overflow-y-auto pr-2 flex-1 scrollbar-thin">
-            {navLinks.map((item, index) =>
-              item.dropdownItems ? (
-                <MobileNavDropdown
-                  key={index}
-                  label={item.label}
-                  items={item.dropdownItems}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ x: "100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: "100%", opacity: 0 }}
+            transition={{ type: "tween", duration: 0.5, ease: "circOut" }}
+            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-[150] xl:hidden"
+          >
+            <div className="p-8 pt-12 h-full flex flex-col">
+              <div className="flex justify-between items-center mb-10">
+                <Link to="/" onClick={() => setIsOpen(false)}>
+                  <img src={landLogoo} alt="Logo" className="w-[150px]" />
+                </Link>
+                <button
                   onClick={() => setIsOpen(false)}
-                />
-              ) : (
-                <MobileNavLink
-                  key={index}
-                  to={item.path}
-                  label={item.label}
-                  active={location.pathname === item.path}
+                  className="p-3 bg-slate-100 rounded-full text-primary"
+                >
+                  <X size={28} />
+                </button>
+              </div>
+
+              <div className="space-y-1 overflow-y-auto pr-2 flex-1 scrollbar-thin">
+                {navLinks.map((item, index) =>
+                  item.dropdownItems ? (
+                    <MobileNavDropdown
+                      key={index}
+                      label={item.label}
+                      items={item.dropdownItems}
+                      onClick={() => setIsOpen(false)}
+                    />
+                  ) : (
+                    <MobileNavLink
+                      key={index}
+                      to={item.path}
+                      label={item.label}
+                      active={location.pathname === item.path}
+                      onClick={() => setIsOpen(false)}
+                    />
+                  )
+                )}
+
+                <div className="h-px bg-slate-100 my-8" />
+
+                <div className="grid grid-cols-2 gap-3 pb-6">
+                  <UtilityItem
+                    icon={<BookOpen size={16} />}
+                    label="Blogs"
+                    to="/blogs"
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <UtilityItem
+                    icon={<PlayCircle size={16} />}
+                    label="Videos"
+                    to="/videos"
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <UtilityItem
+                    icon={<ImageIcon size={16} />}
+                    label="Gallery"
+                    to="/gallery"
+                    onClick={() => setIsOpen(false)}
+                  />
+                  <UtilityItem icon={<Globe size={16} />} label="English" />
+                </div>
+              </div>
+
+              <div className="pt-6">
+                <Link
+                  to="/contact"
                   onClick={() => setIsOpen(false)}
-                />
-              )
-            )}
-
-            <div className="h-px bg-slate-100 my-8" />
-
-            <div className="grid grid-cols-2 gap-3 pb-6">
-              <UtilityItem
-                icon={<BookOpen size={16} />}
-                label="Blogs"
-                to="/blogs"
-                onClick={() => setIsOpen(false)}
-              />
-              <UtilityItem
-                icon={<PlayCircle size={16} />}
-                label="Videos"
-                to="/videos"
-                onClick={() => setIsOpen(false)}
-              />
-              <UtilityItem
-                icon={<ImageIcon size={16} />}
-                label="Gallery"
-                to="/gallery"
-                onClick={() => setIsOpen(false)}
-              />
-              <UtilityItem icon={<Globe size={16} />} label="English" />
+                  className="block w-full text-center bg-secondary text-white font-bold py-5 rounded-2xl shadow-xl shadow-secondary/20 uppercase tracking-widest text-sm"
+                >
+                  Contact Us / Enquiry
+                </Link>
+              </div>
             </div>
-          </div>
-
-          <div className="pt-6">
-            <Link
-              to="/contact"
-              onClick={() => setIsOpen(false)}
-              className="block w-full text-center bg-secondary text-white font-bold py-5 rounded-2xl shadow-xl shadow-secondary/20 uppercase tracking-widest text-sm"
-            >
-              Contact Us / Enquiry
-            </Link>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

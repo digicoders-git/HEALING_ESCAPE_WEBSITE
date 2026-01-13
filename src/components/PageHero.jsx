@@ -2,6 +2,8 @@ import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, EffectFade } from "swiper/modules";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
 // Import Swiper styles
 import "swiper/css";
@@ -79,33 +81,50 @@ const PageHero = ({
 
             {/* Text Content */}
             <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-              <div className="space-y-6 max-w-4xl">
+              <motion.div
+                variants={staggerContainer(0.2, 0.4)}
+                initial="hidden"
+                whileInView="show"
+                key={index}
+                className="space-y-6 max-w-4xl"
+              >
                 {showLogoLabel && (
-                  <div className="flex items-center justify-center gap-4 mb-2 animate-text-reveal [animation-delay:200ms]">
+                  <motion.div
+                    variants={fadeIn("down", 0.1)}
+                    className="flex items-center justify-center gap-4 mb-2"
+                  >
                     <div className="w-10 h-0.5 bg-secondary rounded-full" />
                     <span className="text-secondary font-black text-[10px] uppercase tracking-[0.5em]">
                       Healing Escape Global
                     </span>
                     <div className="w-10 h-0.5 bg-secondary rounded-full" />
-                  </div>
+                  </motion.div>
                 )}
-                <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-none animate-text-reveal [animation-delay:400ms]">
+                <motion.h1
+                  variants={fadeIn("up", 0.2)}
+                  className="text-3xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter uppercase leading-none"
+                >
                   {slide.title}
-                </h1>
-                <div className="max-w-xl mx-auto border-t border-white/20 pt-6 animate-text-reveal [animation-delay:600ms]">
-                  <p className="text-white/80 text-sm md:text-xl font-bold tracking-widest uppercase mb-8">
+                </motion.h1>
+                <div className="max-w-xl mx-auto border-t border-white/20 pt-6">
+                  <motion.p
+                    variants={fadeIn("up", 0.3)}
+                    className="text-white/80 text-sm md:text-xl font-bold tracking-widest uppercase mb-8"
+                  >
                     {slide.subtitle}
-                  </p>
+                  </motion.p>
                   {slide.buttonLabel && (
-                    <Link
-                      to={slide.buttonLink || "#"}
-                      className="inline-block bg-secondary hover:bg-white hover:text-primary text-white font-black py-4 px-12 rounded-2xl shadow-xl transition-all duration-500 uppercase tracking-widest text-xs border-2 border-secondary hover:border-white"
-                    >
-                      {slide.buttonLabel}
-                    </Link>
+                    <motion.div variants={fadeIn("up", 0.4)}>
+                      <Link
+                        to={slide.buttonLink || "#"}
+                        className="inline-block bg-secondary hover:bg-white hover:text-primary text-white font-black py-4 px-12 rounded-2xl shadow-xl transition-all duration-500 uppercase tracking-widest text-xs border-2 border-secondary hover:border-white"
+                      >
+                        {slide.buttonLabel}
+                      </Link>
+                    </motion.div>
                   )}
                 </div>
-              </div>
+              </motion.div>
             </div>
           </SwiperSlide>
         ))}
