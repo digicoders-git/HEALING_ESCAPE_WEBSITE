@@ -42,7 +42,7 @@ const bannerSlides = [
 
 const About = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white overflow-x-hidden">
       {/* 1. Top Banner Slider */}
       <PageHero slides={bannerSlides} />
 
