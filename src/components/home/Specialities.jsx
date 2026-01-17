@@ -47,7 +47,7 @@ const Specialities = () => {
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="max-w-7xl mx-auto px-4 md:px-8"
+        className="max-w-5xl mx-auto px-4 md:px-8"
       >
         <motion.div
           variants={fadeIn("up", 0.1)}
@@ -67,9 +67,9 @@ const Specialities = () => {
             <motion.div
               key={idx}
               variants={fadeIn("up", 0.1)}
-              className="group bg-white p-6 border border-slate-100 hover:border-primary transition-all duration-300 rounded-3xl hover:shadow-lg relative overflow-hidden"
+              className="group bg-white p-6 border border-slate-100 hover:border-primary transition-all duration-300 rounded hover:shadow-lg relative overflow-hidden"
             >
-              <div className="text-secondary bg-secondary/5 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <div className="text-secondary bg-secondary/5 w-12 h-12 rounded flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all duration-300">
                 {item.icon}
               </div>
               <div className="space-y-1 relative z-10">

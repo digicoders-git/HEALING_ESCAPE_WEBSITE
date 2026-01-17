@@ -4,7 +4,7 @@ const FinalCTA = () => {
   return (
     <section className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="p-10 md:p-16 rounded-[2.5rem] bg-gradient-to-br from-primary to-accent text-white relative overflow-hidden shadow-2xl">
+        <div className="p-10 md:p-16 rounded bg-gradient-to-br from-primary to-accent text-white relative overflow-hidden shadow-2xl">
           <div className="relative z-10 flex flex-col items-center text-center gap-8 max-w-4xl mx-auto">
             <div className="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center shadow-xl animate-bounce">
               <PhoneCall size={24} />
@@ -20,10 +20,10 @@ const FinalCTA = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-              <button className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded-xl shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
+              <button className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
                 <CheckCircle size={18} /> Get Free Consultation
               </button>
-              <button className="w-full lg:w-auto bg-white/10 backdrop-blur-md hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded-xl border border-white/20 transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
+              <button className="w-full lg:w-auto bg-white/10 backdrop-blur-md hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded border border-white/20 transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
                 <MessageCircle size={18} /> WhatsApp Now
               </button>
             </div>

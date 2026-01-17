@@ -49,7 +49,7 @@ const steps = [
 const Journey = () => {
   return (
     <section className="py-12 bg-slate-50 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         <div className="text-center mb-10 space-y-2">
           <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] px-3 py-1 bg-secondary/10 rounded inline-block">
             The Clinical Pathway
@@ -63,13 +63,13 @@ const Journey = () => {
           {steps.map((step, idx) => (
             <div
               key={idx}
-              className="bg-white p-5 border border-slate-100 shadow-sm relative group hover:shadow-lg transition-all duration-500 rounded-2xl"
+              className="bg-white p-5 border border-slate-100 shadow-sm relative group hover:shadow-lg transition-all duration-500 rounded"
             >
-              <div className="absolute top-2 right-2 w-6 h-6 bg-primary text-white text-[9px] font-bold flex items-center justify-center rounded-md shadow-sm">
+              <div className="absolute top-2 right-2 w-6 h-6 bg-primary text-white text-[9px] font-bold flex items-center justify-center rounded shadow-sm">
                 0{idx + 1}
               </div>
 
-              <div className="w-10 h-10 bg-slate-50 text-primary flex items-center justify-center rounded-lg mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+              <div className="w-10 h-10 bg-slate-50 text-primary flex items-center justify-center rounded mb-4 group-hover:bg-primary group-hover:text-white transition-all">
                 {step.icon}
               </div>
 
@@ -83,7 +83,7 @@ const Journey = () => {
               </div>
             </div>
           ))}
-          <div className="p-5 border-2 border-dashed border-secondary text-primary flex flex-col justify-center items-center text-center rounded-2xl">
+          <div className="p-5 border-2 border-dashed border-secondary text-primary flex flex-col justify-center items-center text-center rounded">
             <Heart size={24} className="text-secondary mb-2 animate-pulse" />
             <h3 className="font-bold text-xs uppercase tracking-widest text-secondary">
               Complete Recovery

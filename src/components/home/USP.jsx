@@ -67,16 +67,16 @@ const USP = () => {
 
           <div className="lg:col-span-6">
             <div className="relative">
-              <div className="absolute inset-0 bg-primary/5 rounded-[2rem] translate-x-2 translate-y-2" />
-              <div className="relative bg-white border border-slate-100 p-4 rounded-[2rem] shadow-lg">
+              <div className="absolute inset-0 bg-primary/5 rounded translate-x-2 translate-y-2" />
+              <div className="relative bg-white border border-slate-100 p-4 rounded shadow-lg">
                 <img
                   src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000"
-                  className="w-full h-[300px] object-cover rounded-3xl"
+                  className="w-full h-[300px] object-cover rounded"
                   alt="Clinical Excellence"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50">
+                {/* <div className="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-50">
                   <div className="flex items-center gap-3">
-                    <div className="bg-secondary p-2 rounded-xl text-white">
+                    <div className="bg-secondary p-2 rounded text-white">
                       <Star size={16} fill="currentColor" />
                     </div>
                     <div>
@@ -88,7 +88,7 @@ const USP = () => {
                       </p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

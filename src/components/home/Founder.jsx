@@ -12,13 +12,13 @@ const Founder = () => {
         viewport={{ once: true, amount: 0.25 }}
         className="max-w-7xl mx-auto px-4 md:px-8"
       >
-        <div className="bg-white rounded-[2rem] p-8 md:p-12 shadow-xl border border-slate-50 relative">
+        <div className="bg-white rounded p-8 md:p-12 shadow-xl border border-slate-50 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <motion.div
               variants={fadeIn("right", 0.2)}
               className="lg:col-span-4 relative group"
             >
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] border-4 border-slate-50 shadow-md">
+              <div className="relative rounded overflow-hidden aspect-[4/5] border-4 border-slate-50 shadow-md">
                 <img
                   src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1000"
                   alt="Founder"
@@ -28,7 +28,7 @@ const Founder = () => {
               </div>
               <motion.div
                 variants={fadeIn("up", 0.4)}
-                className="absolute -bottom-4 -right-4 bg-secondary p-4 rounded-2xl shadow-lg text-white border-2 border-white"
+                className="absolute -bottom-4 -right-4 bg-secondary p-4 rounded shadow-lg text-white border-2 border-white"
               >
                 <Quote size={24} />
               </motion.div>
@@ -67,7 +67,7 @@ const Founder = () => {
               </div>
 
               <div className="pt-2">
-                <button className="flex items-center gap-2 bg-primary text-white font-bold py-3 px-8 rounded-xl hover:bg-secondary transition-all uppercase tracking-widest text-[9px] shadow-sm">
+                <button className="flex items-center gap-2 bg-primary text-white font-bold py-3 px-8 rounded hover:bg-secondary transition-all uppercase tracking-widest text-[9px] shadow-sm">
                   Founder’s Message <ArrowRight size={14} />
                 </button>
               </div>

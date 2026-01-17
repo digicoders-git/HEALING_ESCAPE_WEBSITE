@@ -104,7 +104,7 @@ const Hero = () => {
           <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-left">
             <motion.div
               variants={fadeIn("right", 0.1)}
-              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded-lg shadow-lg mx-auto lg:mx-0"
+              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded shadow-lg mx-auto lg:mx-0"
             >
               <Activity size={14} className="text-white animate-pulse" />
               <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-none">
@@ -161,7 +161,7 @@ const Hero = () => {
             variants={fadeIn("left", 0.5)}
             className="lg:col-span-5 flex justify-center lg:justify-end"
           >
-            <div className="rounded-3xl shadow-2xl p-6 sm:p-7 md:p-8 w-full max-w-md mx-auto border-b-4 border-primary relative overflow-hidden">
+            <div className="rounded shadow-2xl p-6 sm:p-7 md:p-8 w-full max-w-md mx-auto relative overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img
                   src="https://images.unsplash.com/photo-1576091160550-217359f488d5?auto=format&fit=crop&q=80&w=1000"
@@ -188,7 +188,7 @@ const Hero = () => {
                       placeholder="Full Name"
                       value={formData.fullName}
                       onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
+                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
                       required
                     />
 
@@ -210,7 +210,7 @@ const Hero = () => {
                         placeholder="City"
                         value={formData.city}
                         onChange={(e) => setFormData({...formData, city: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                       />
                     </div>
 
@@ -219,14 +219,14 @@ const Hero = () => {
                         type="text"
                         value={formData.countryCode}
                         onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
-                        className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-white bg-white/80 text-center text-sm font-bold text-primary"
+                        className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded border border-white bg-white/80 text-center text-sm font-bold text-primary"
                       />
                       <input
                         type="text"
                         placeholder="Mobile Number"
                         value={formData.mobile}
                         onChange={(e) => setFormData({...formData, mobile: e.target.value})}
-                        className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                        className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                         required
                       />
                     </div>
@@ -236,7 +236,7 @@ const Hero = () => {
                       rows="2"
                       value={formData.clinicalRequirement}
                       onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
-                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
+                      className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                       required
                     ></textarea>
                   </div>
@@ -244,7 +244,7 @@ const Hero = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Submitting..." : "Send Enquiry"}
                   </button>

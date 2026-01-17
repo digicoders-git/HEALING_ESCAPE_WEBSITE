@@ -79,7 +79,7 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="relative group px-4 md:px-0"
             >
-              <div className="rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:group-hover:scale-[1.02] transition-all duration-700 relative">
+              <div className="rounded md:rounded overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:group-hover:scale-[1.02] transition-all duration-700 relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent z-10"></div>
                 <img
                   src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
@@ -106,10 +106,10 @@ const About = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
             <motion.div
               variants={fadeIn("up", 0.1)}
-              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-secondary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
+              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded md:rounded border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-secondary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
             >
               <div className="absolute top-0 right-0 w-40 h-40 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-all duration-500"></div>
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-secondary/15 to-secondary/5 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500 transform group-hover:rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-secondary/20 shadow-lg">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-secondary/15 to-secondary/5 roundedmd:rounded-3xl flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all duration-500 transform group-hover:rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-secondary/20 shadow-lg">
                 <Target size={32} className="md:w-10 md:h-10" />
               </div>
               <div className="space-y-3 md:space-y-4 relative z-10">
@@ -125,10 +125,10 @@ const About = () => {
             </motion.div>
             <motion.div
               variants={fadeIn("up", 0.2)}
-              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-primary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
+              className="bg-gradient-to-br from-white to-slate-50/50 p-8 md:p-12 rounded md:rounded border-2 border-slate-100 shadow-xl space-y-6 md:space-y-8 group hover:shadow-2xl hover:border-primary/40 transition-all duration-500 overflow-hidden relative text-center md:text-left"
             >
               <div className="absolute top-0 right-0 w-40 h-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500"></div>
-              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/15 to-primary/5 rounded-[1.5rem] md:rounded-3xl flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 transform group-hover:-rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-primary/20 shadow-lg">
+              <div className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-primary/15 to-primary/5 rounded md:rounded flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 transform group-hover:-rotate-12 group-hover:scale-110 mx-auto md:mx-0 border-2 border-primary/20 shadow-lg">
                 <Eye size={32} className="md:w-10 md:h-10" />
               </div>
               <div className="space-y-3 md:space-y-4 relative z-10">
@@ -157,7 +157,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <motion.div
             variants={fadeIn("up", 0.1)}
-            className="bg-primary rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-white relative overflow-hidden shadow-2xl"
+            className="bg-primary rounded md:rounded p-8 md:p-24 text-white relative overflow-hidden shadow-2xl"
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,165,0,0.1),transparent_50%)]" />
             <div className="relative z-10 space-y-12">
@@ -183,9 +183,9 @@ const About = () => {
                     <motion.div
                       key={i}
                       variants={fadeIn("up", 0.1 * (i + 1))}
-                      className="flex flex-col items-center gap-4 p-6 md:p-8 bg-white/5 rounded-[2rem] border border-white/10 hover:bg-white/10 transition-colors group"
+                      className="flex flex-col items-center gap-4 p-6 md:p-8 bg-white/5 rounded border border-white/10 hover:bg-white/10 transition-colors group"
                     >
-                      <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded-2xl bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
+                      <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
                         <ArrowRight size={18} md:size={20} />
                       </div>
                       <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">
@@ -234,9 +234,9 @@ const About = () => {
                     <motion.div
                       key={i}
                       variants={fadeIn("right", 0.1 * (i + 1))}
-                      className="flex items-center gap-4 md:gap-6 bg-slate-50 p-4 md:p-6 rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm md:hover:translate-x-4 transition-all duration-500 text-left"
+                      className="flex items-center gap-4 md:gap-6 bg-slate-50 p-4 md:p-6 rounded md:rounded border border-slate-100 shadow-sm md:hover:translate-x-4 transition-all duration-500 text-left"
                     >
-                      <div className="bg-white p-3 md:p-4 rounded-xl md:rounded-2xl shadow-md text-secondary shrink-0">
+                      <div className="bg-white p-3 md:p-4 rounded md:rounded shadow-md text-secondary shrink-0">
                         <MapPin size={20} md:size={24} />
                       </div>
                       <span className="text-xs md:text-base font-bold text-primary uppercase tracking-wide leading-none">
@@ -256,14 +256,14 @@ const About = () => {
                   <motion.img
                     variants={fadeIn("up", 0.3)}
                     src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=800"
-                    className="w-full h-[350px] md:h-[500px] object-cover rounded-[2rem] md:rounded-[4rem] shadow-2xl border-2 border-white"
+                    className="w-full h-[350px] md:h-[500px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
                     alt="Infrastructure"
                   />
                 </div>
                 <motion.img
                   variants={fadeIn("left", 0.5)}
                   src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=800"
-                  className="w-full h-[350px] md:h-[500px] object-cover rounded-[2.5rem] md:rounded-[5rem] shadow-2xl border-2 border-white"
+                  className="w-full h-[350px] md:h-[500px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
                   alt="Medical Hub"
                 />
               </div>
@@ -315,7 +315,7 @@ const About = () => {
               <motion.div
                 key={i}
                 variants={fadeIn("up", 0.1 * (i + 1))}
-                className="bg-white/5 border border-white/10 p-6 md:p-12 rounded-[2rem] md:rounded-[3.5rem] text-center space-y-2 md:space-y-4 shadow-2xl hover:bg-white/10 transition-all group"
+                className="bg-white/5 border border-white/10 p-6 md:p-12 rounded md:rounded text-center space-y-2 md:space-y-4 shadow-2xl hover:bg-white/10 transition-all group"
               >
                 <div className="text-secondary flex justify-center md:group-hover:-translate-y-2 transition-transform">
                   {stat.icon}
@@ -343,7 +343,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <motion.div
             variants={fadeIn("up", 0.1)}
-            className="bg-slate-50 rounded-[2.5rem] md:rounded-[5rem] p-8 md:p-24 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center shadow-inner relative overflow-hidden"
+            className="bg-slate-50 rounded md:rounded p-8 md:p-24 border border-slate-100 grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center shadow-inner relative overflow-hidden"
           >
             <motion.div
               variants={fadeIn("right", 0.2)}
@@ -364,9 +364,9 @@ const About = () => {
                   <motion.div
                     key={i}
                     variants={fadeIn("right", 0.1 * (i + 1))}
-                    className="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white rounded-2xl md:rounded-3xl border border-slate-100 shadow-sm md:hover:border-secondary transition-colors text-left"
+                    className="flex items-center gap-4 md:gap-6 p-4 md:p-6 bg-white rounded md:rounded border border-slate-100 shadow-sm md:hover:border-secondary transition-colors text-left"
                   >
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded md:rounded bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
                       <ShieldCheck size={20} md:size={24} />
                     </div>
                     <span className="text-sm md:text-lg font-bold text-primary uppercase tracking-tight leading-none">
@@ -382,7 +382,7 @@ const About = () => {
             >
               <img
                 src="https://gitanjalihospital.com/wp-content/uploads/2024/10/DSC_1103-1.jpg"
-                className="w-full h-[400px] md:h-[600px] rounded-[2.5rem] md:rounded-[5rem] object-cover shadow-2xl border-4 md:border-8 border-white"
+                className="w-full h-[400px] md:h-[600px] rounded md:rounded object-cover shadow-2xl border-4 md:border-8 border-white"
                 alt="Ethical Care"
               />
             </motion.div>
@@ -429,7 +429,7 @@ const About = () => {
                   <motion.div
                     key={i}
                     variants={fadeIn("up", 0.1 * (i + 1))}
-                    className="flex flex-col items-center gap-4 bg-slate-50 p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] border border-slate-100 md:hover:bg-white md:hover:border-secondary transition-all shadow-sm group"
+                    className="flex flex-col items-center gap-4 bg-slate-50 p-8 md:p-10 rounded md:rounded border border-slate-100 md:hover:bg-white md:hover:border-secondary transition-all shadow-sm group"
                   >
                     <HeartHandshake
                       size={40}
@@ -447,13 +447,13 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="lg:col-span-5"
             >
-              <div className=" rounded-[2.5rem] md:rounded-[5rem] aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
+              <div className=" rounded aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
                 <Users
                   size={60}
                   md:size={80}
                   className="text-secondary mb-6 md:mb-8 transform md:group-hover:scale-110 transition-transform"
                 />
-                <img src='https://cdn.apollohospitals.com/delhi/2023/09/speciality_ah_11zon.webp' className="w-full h-[400px] md:h-[600px] rounded-[2.5rem] md:rounded-[5rem] object-cover shadow-2xl " />
+                <img src='https://cdn.apollohospitals.com/delhi/2023/09/speciality_ah_11zon.webp' className="w-full h-[400px] md:h-[600px] rounded object-cover shadow-2xl " />
               </div>
             </motion.div>
           </div>
