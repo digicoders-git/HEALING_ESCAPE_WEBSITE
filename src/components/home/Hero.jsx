@@ -1,11 +1,23 @@
 import { useState, useRef } from "react";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
 import { motion } from "framer-motion";
+import ModernSelect from "../ModernSelect";
 import homeVideo from "../../assets/homeVideo.mp4";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
+import { createFreeConsultation } from "../../apis/enquiry";
+import { toast } from 'react-toastify';
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+  const [formData, setFormData] = useState({
+    fullName: "",
+    country: "",
+    city: "",
+    countryCode: "+91",
+    mobile: "",
+    clinicalRequirement: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef(null);
 
   const handleMouseMove = (e) => {
@@ -14,6 +26,33 @@ const Hero = () => {
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
       setMousePos({ x, y });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const response = await createFreeConsultation(formData);
+      
+      if (response.success) {
+        toast.success("Enquiry submitted successfully! We will contact you soon.");
+        // Reset form
+        setFormData({
+          fullName: "",
+          country: "",
+          city: "",
+          countryCode: "+91",
+          mobile: "",
+          clinicalRequirement: ""
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting enquiry:", error);
+      toast.error("Failed to submit enquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -142,30 +181,35 @@ const Hero = () => {
                   </p>
                 </div>
 
-                <form className="space-y-3 sm:space-y-3.5">
+                <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
                   <div className="space-y-3 sm:space-y-3.5">
                     <input
                       type="text"
                       placeholder="Full Name"
+                      value={formData.fullName}
+                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                       className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
+                      required
                     />
 
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="relative">
-                        <select className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none appearance-none text-sm font-semibold text-slate-700 cursor-pointer">
-                          <option>Country</option>
-                          <option>Kenya</option>
-                          <option>Nigeria</option>
-                          <option>UAE</option>
-                        </select>
-                        <ChevronDown
-                          size={14}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
-                        />
-                      </div>
+                      <ModernSelect
+                        options={[
+                          { value: "Kenya", label: "Kenya" },
+                          { value: "Nigeria", label: "Nigeria" },
+                          { value: "UAE", label: "UAE" },
+                          { value: "Bangladesh", label: "Bangladesh" }
+                        ]}
+                        value={formData.country}
+                        onChange={(value) => setFormData({...formData, country: value})}
+                        placeholder="Country"
+                        className="w-full"
+                      />
                       <input
                         type="text"
                         placeholder="City"
+                        value={formData.city}
+                        onChange={(e) => setFormData({...formData, city: e.target.value})}
                         className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                       />
                     </div>
@@ -173,28 +217,36 @@ const Hero = () => {
                     <div className="flex gap-2">
                       <input
                         type="text"
-                        placeholder="+91"
+                        value={formData.countryCode}
+                        onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
                         className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-white bg-white/80 text-center text-sm font-bold text-primary"
                       />
                       <input
                         type="text"
                         placeholder="Mobile Number"
+                        value={formData.mobile}
+                        onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                         className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                        required
                       />
                     </div>
 
                     <textarea
                       placeholder="Clinical requirement..."
                       rows="2"
+                      value={formData.clinicalRequirement}
+                      onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
                       className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
+                      required
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4"
+                    disabled={isSubmitting}
+                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    Send Enquiry
+                    {isSubmitting ? "Submitting..." : "Send Enquiry"}
                   </button>
                 </form>
               </div>

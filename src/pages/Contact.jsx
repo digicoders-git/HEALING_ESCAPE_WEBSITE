@@ -15,10 +15,13 @@ import {
   Smartphone,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
+import ModernSelect from "../components/ModernSelect";
 import { specialitiesData } from "../data/specialitiesData";
 import { citiesList } from "../data/hospitalsData";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
+import { createEnquiry } from "../apis/enquiry";
+import { toast } from 'react-toastify';
 
 const bannerSlides = [
   {
@@ -31,98 +34,55 @@ const bannerSlides = [
   },
 ];
 
-const FormDropdown = ({
-  label,
-  options,
-  value,
-  onChange,
-  icon: Icon,
-  placeholder,
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  return (
-    <div className="relative space-y-2" ref={dropdownRef}>
-      <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
-        {label}
-      </label>
-      <button
-        type="button"
-        onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between bg-slate-50 border ${
-          isOpen
-            ? "border-secondary ring-4 ring-secondary/5"
-            : "border-slate-100"
-        } px-6 md:px-8 py-4 md:py-5 rounded-[1.5rem] md:rounded-3xl transition-all duration-300 group`}
-      >
-        <div className="flex items-center gap-3 md:gap-4 overflow-hidden">
-          <span className="text-secondary opacity-60 shrink-0">
-            <Icon size={18} />
-          </span>
-          <span
-            className={`text-sm font-bold truncate ${
-              value ? "text-primary" : "text-slate-400 opacity-60"
-            }`}
-          >
-            {value || placeholder}
-          </span>
-        </div>
-        <ChevronDown
-          size={18}
-          className={`text-slate-300 transition-transform duration-500 shrink-0 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-
-      {/* Dropdown Menu */}
-      <div
-        className={`absolute top-full left-0 w-full mt-2 bg-white rounded-[2rem] md:rounded-[2.5rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 p-3 md:p-4 z-[60] transition-all duration-300 origin-top ${
-          isOpen
-            ? "opacity-100 scale-100 visible"
-            : "opacity-0 scale-95 invisible"
-        }`}
-      >
-        <div className="max-h-[250px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200 pr-1">
-          {options.map((opt) => (
-            <button
-              key={opt}
-              type="button"
-              onClick={() => {
-                onChange(opt);
-                setIsOpen(false);
-              }}
-              className={`w-full text-left px-5 md:px-6 py-3 md:py-4 rounded-xl md:rounded-2xl text-[11px] md:text-[12px] font-bold transition-all ${
-                value === opt
-                  ? "bg-secondary text-white"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-primary"
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Contact = () => {
   const [treatment, setTreatment] = useState("");
   const [city, setCity] = useState("");
+  const [formData, setFormData] = useState({
+    fullName: "",
+    country: "",
+    email: "",
+    phone: "",
+    preferredCity: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const treatmentOptions = specialitiesData.map((s) => s.title);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    try {
+      const enquiryData = {
+        ...formData,
+        preferredCity: city || "Any City"
+      };
+      
+      const response = await createEnquiry(enquiryData);
+      
+      if (response.success) {
+        toast.success("Enquiry submitted successfully! We will contact you soon.");
+        // Reset form
+        setFormData({
+          fullName: "",
+          country: "",
+          email: "",
+          phone: "",
+          preferredCity: "",
+          message: ""
+        });
+        setCity("");
+      }
+    } catch (error) {
+      console.error("Error submitting enquiry:", error);
+      toast.error("Failed to submit enquiry. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -312,7 +272,7 @@ const Contact = () => {
                     </p>
                   </div>
 
-                  <form className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                  <form className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
                         Full Name
@@ -324,8 +284,11 @@ const Contact = () => {
                         />
                         <input
                           type="text"
+                          value={formData.fullName}
+                          onChange={(e) => setFormData({...formData, fullName: e.target.value})}
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Your Name"
+                          required
                         />
                       </div>
                     </div>
@@ -340,8 +303,11 @@ const Contact = () => {
                         />
                         <input
                           type="text"
+                          value={formData.country}
+                          onChange={(e) => setFormData({...formData, country: e.target.value})}
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="e.g. Oman, Kenya"
+                          required
                         />
                       </div>
                     </div>
@@ -356,8 +322,11 @@ const Contact = () => {
                         />
                         <input
                           type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData({...formData, email: e.target.value})}
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Email"
+                          required
                         />
                       </div>
                     </div>
@@ -372,28 +341,39 @@ const Contact = () => {
                         />
                         <input
                           type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="WhatsApp Number"
+                          required
                         />
                       </div>
                     </div>
 
-                    <FormDropdown
-                      label="Select Treatment"
-                      options={treatmentOptions}
-                      value={treatment}
-                      onChange={setTreatment}
-                      icon={Building2}
-                      placeholder="Select Speciality"
-                    />
-                    <FormDropdown
-                      label="Preferred City"
-                      options={citiesList}
-                      value={city}
-                      onChange={setCity}
-                      icon={MapPin}
-                      placeholder="Any City"
-                    />
+                    {/* <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
+                        Select Treatment
+                      </label>
+                      <ModernSelect
+                        options={treatmentOptions.map(t => ({ value: t, label: t }))}
+                        value={treatment}
+                        onChange={setTreatment}
+                        placeholder="Select Speciality"
+                        className="w-full"
+                      />
+                    </div> */}
+                    <div className="space-y-2">
+                      <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
+                        Preferred City
+                      </label>
+                      <ModernSelect
+                        options={citiesList.map(c => ({ value: c, label: c }))}
+                        value={city}
+                        onChange={setCity}
+                        placeholder="Any City"
+                        className="w-full"
+                      />
+                    </div>
 
                     <div className="md:col-span-2 space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
@@ -401,31 +381,27 @@ const Contact = () => {
                       </label>
                       <textarea
                         rows="4"
+                        value={formData.message}
+                        onChange={(e) => setFormData({...formData, message: e.target.value})}
                         className="w-full px-6 md:px-8 py-4 md:py-6 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm resize-none"
                         placeholder="Describe your medical condition..."
+                        required
                       />
                     </div>
 
                     <div className="md:col-span-2 space-y-6">
-                      <div className="p-6 md:p-8 border-2 border-dashed border-slate-100 rounded-[2rem] bg-slate-50 text-center hover:border-secondary transition-all cursor-pointer group/upload">
-                        <Upload
-                          size={24}
-                          className="text-secondary mx-auto mb-3 group-hover:scale-110 transition-transform"
-                        />
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                          Upload Medical Reports (PDF/JPG)
-                        </p>
-                      </div>
-
                       <button
                         type="submit"
-                        className="w-full bg-primary hover:bg-secondary text-white font-bold py-5 md:py-6 rounded-xl md:rounded-2xl transition-all duration-500 uppercase tracking-[0.4em] text-[10px] md:text-[11px] shadow-2xl flex items-center justify-center gap-4 md:gap-6 group/btn"
+                        disabled={isSubmitting}
+                        className="w-full bg-primary hover:bg-secondary text-white font-bold py-5 md:py-6 rounded-xl md:rounded-2xl transition-all duration-500 uppercase tracking-[0.4em] text-[10px] md:text-[11px] shadow-2xl flex items-center justify-center gap-4 md:gap-6 group/btn disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Request Opinion{" "}
-                        <Send
-                          size={18}
-                          className="group-hover/btn:translate-x-2 transition-transform"
-                        />
+                        {isSubmitting ? "Submitting..." : "Request Opinion"}
+                        {!isSubmitting && (
+                          <Send
+                            size={18}
+                            className="group-hover/btn:translate-x-2 transition-transform"
+                          />
+                        )}
                       </button>
                     </div>
                   </form>

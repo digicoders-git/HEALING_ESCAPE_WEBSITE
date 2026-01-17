@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   HeartPulse,
   Activity,
@@ -14,7 +15,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
-import { specialitiesData } from "../data/specialitiesData";
+import Loader from "../components/Loader";
+import { getSpecialities } from "../apis/speciality";
 
 const bannerSlides = [
   {
@@ -38,6 +40,31 @@ const iconMap = {
 };
 
 const Specialities = () => {
+  const [specialities, setSpecialities] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSpecialities = async () => {
+      try {
+        const data = await getSpecialities({ page: 1, limit: 50 });
+        setSpecialities(data.specialities || []);
+      } catch (error) {
+        console.error("Error fetching specialities:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSpecialities();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white">
       <PageHero slides={bannerSlides} />
@@ -136,42 +163,49 @@ const Specialities = () => {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
-            {specialitiesData.map((spec, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {specialities.map((spec, index) => (
               <Link
-                to={`/speciality/${spec.id}`}
-                key={spec.id}
-                className="group bg-white rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-4 animate-fade-in-up"
+                to={`/speciality/${spec._id}`}
+                key={spec._id}
+                className="group bg-white rounded overflow-hidden border border-slate-100 hover:shadow-2xl hover:border-secondary/20 transition-all duration-700 md:hover:-translate-y-2 animate-fade-in-up relative"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <div className="relative h-[200px] md:h-[250px] overflow-hidden">
+                <div className="relative h-[180px] md:h-[200px] overflow-hidden">
                   <img
                     src={spec.image}
                     alt={spec.title}
                     className="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-110 grayscale group-hover:grayscale-0"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/40 to-transparent opacity-80" />
-
-                  {/* Icon Overlay */}
-                  <div className="absolute top-6 left-6 md:top-8 md:left-8 w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 group-hover:bg-secondary group-hover:border-secondary transition-all">
-                    {iconMap[spec.icon] || <Activity />}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
+                  
+                  
+                  
+                  {/* Category Badge */}
+                  <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20">
+                    <span className="text-white text-xs font-bold uppercase tracking-widest">
+                      Treatment
+                    </span>
                   </div>
                 </div>
 
-                <div className="p-8 md:p-10 space-y-5 md:space-y-6 text-left">
-                  <h3 className="text-xl md:text-2xl font-bold text-primary uppercase tracking-tight leading-tight group-hover:text-secondary transition-colors italic">
+                <div className="p-5 space-y-4 text-left">
+                  <h3 className="text-lg font-bold text-primary uppercase tracking-tight leading-tight group-hover:text-secondary transition-colors italic line-clamp-2">
                     {spec.title}
                   </h3>
-                  <p className="text-sm md:text-base text-slate-500 font-medium leading-relaxed line-clamp-2">
+                  <p className="text-sm text-slate-500 font-medium leading-relaxed line-clamp-3">
                     {spec.description}
                   </p>
-                  <div className="pt-4 md:pt-6 flex items-center gap-3 text-secondary group-hover:gap-5 transition-all">
-                    <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-widest">
-                      Explore Procedure
+                  <div className="pt-2 flex items-center gap-2 text-secondary group-hover:gap-4 transition-all">
+                    <span className="text-xs font-bold uppercase tracking-widest">
+                      Explore
                     </span>
-                    <ArrowRight size={18} />
+                    <ArrowRight size={16} />
                   </div>
                 </div>
+                
+                {/* Hover Gradient Border */}
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-secondary/0 via-secondary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               </Link>
             ))}
           </div>

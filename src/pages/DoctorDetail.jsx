@@ -1,27 +1,47 @@
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
-  Stethoscope,
   MapPin,
-  Clock,
-  Hospital,
   ArrowRight,
-  ShieldCheck,
   CheckCircle2,
   GraduationCap,
-  Trophy,
   Award,
   Activity,
-  Phone,
-  Mail,
-  Globe,
   Upload,
   Send,
+  Star,
+  Users,
+  Shield,
 } from "lucide-react";
-import { doctorsData } from "../data/doctorsData";
+import Loader from "../components/Loader";
+import { getDoctorById } from "../apis/doctor";
 
 const DoctorDetail = () => {
   const { id } = useParams();
-  const doctor = doctorsData.find((doc) => doc.id === parseInt(id));
+  const [doctor, setDoctor] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDoctor = async () => {
+      try {
+        const data = await getDoctorById(id);
+        setDoctor(data.doctor);
+      } catch (error) {
+        console.error("Error fetching doctor:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDoctor();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   if (!doctor) {
     return (
@@ -39,72 +59,34 @@ const DoctorDetail = () => {
 
   return (
     <div className="bg-white">
-      {/* 1. Profile Overview Section */}
-      <section className="relative pt-12 md:pt-16 pb-12 md:pb-16 px-4 md:px-8 bg-slate-900 overflow-hidden">
-        {/* Decorative Blobs */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/20 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/10 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/2" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col lg:flex-row gap-16 items-center lg:items-start text-center lg:text-left">
-            {/* Image Side */}
-            <div className="lg:w-1/3 w-full max-w-sm shrink-0">
-              <div className="relative group">
-                <div className="absolute inset-0 bg-secondary/20 rounded-[4rem] blur-2xl group-hover:bg-primary/30 transition-all duration-700" />
-                <div className="relative rounded-[4rem] overflow-hidden border-8 border-white/10 shadow-2xl aspect-4/5">
-                  <img
-                    src={doctor.photo}
-                    alt={doctor.name}
-                    className="w-full h-full object-cover grayscale transition-all duration-1000 group-hover:grayscale-0 scale-105 group-hover:scale-110"
-                  />
-                </div>
-                {/* Floating Stat */}
-                {/* Floating Stat Removed */}
-              </div>
+      {/* Hero Section */}
+      <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/80 pt-[72px]">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
+        
+        <div className="relative h-full flex items-center px-4 md:px-8">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
+            <div className="w-32 h-32 rounded-2xl overflow-hidden border-4 border-white/20 shrink-0">
+              <img
+                src={doctor.photo}
+                alt={doctor.name}
+                className="w-full h-full object-cover"
+              />
             </div>
-
-            {/* Content Side */}
-            <div className="lg:w-2/3 space-y-8">
-              <div className="space-y-4">
-                {/* Badge Removed */}
-                <h1 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter leading-tight italic">
-                  {doctor.name}
-                </h1>
-                <p className="text-secondary font-black text-xl uppercase tracking-widest">
-                  {doctor.designation}
-                </p>
-                <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                  <div className="flex items-center gap-2 text-white/60 font-medium">
-                    <GraduationCap size={18} className="text-secondary" />{" "}
-                    {doctor.qualification}
-                  </div>
-                  <div className="flex items-center gap-2 text-white/60 font-medium">
-                    <MapPin size={18} className="text-secondary" />{" "}
-                    {doctor.hospital.city}, India
-                  </div>
+            <div className="text-center md:text-left space-y-3">
+              <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">
+                {doctor.name}
+              </h1>
+              <p className="text-secondary font-bold text-lg">
+                {doctor.designation}
+              </p>
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-white/80">
+                <div className="flex items-center gap-2">
+                  <GraduationCap size={16} className="text-secondary" />
+                  <span className="text-sm">{doctor.qualification}</span>
                 </div>
-              </div>
-
-              <div className="p-10 bg-white/5 backdrop-blur-md rounded-[3rem] border border-white/10">
-                <p className="text-white/80 text-lg md:text-xl font-light leading-relaxed italic">
-                  "{doctor.summary}"
-                </p>
-              </div>
-
-              <div className="flex flex-wrap gap-6 pt-4">
-                <a
-                  href="#appointment"
-                  className="bg-secondary text-white font-black py-5 px-10 rounded-3xl transition-all duration-500 uppercase tracking-widest text-xs shadow-2xl shadow-secondary/20 hover:scale-105 active:scale-95"
-                >
-                  Consult Now
-                </a>
-                <div className="flex items-center gap-4 text-white">
-                  <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center border border-white/10">
-                    <Trophy size={20} className="text-secondary" />
-                  </div>
-                  <span className="text-sm font-black uppercase tracking-widest">
-                    Board Certified
-                  </span>
+                <div className="flex items-center gap-2">
+                  <MapPin size={16} className="text-secondary" />
+                  <span className="text-sm">{doctor.hospital.city}, India</span>
                 </div>
               </div>
             </div>
@@ -112,327 +94,262 @@ const DoctorDetail = () => {
         </div>
       </section>
 
-      {/* 2. Detailed Profile Sections Wrapper */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20">
-          <div className="lg:col-span-8 space-y-24">
-            {/* About the Doctor */}
-            <div id="about" className="space-y-8 animate-fade-in-up">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">
-                  About {doctor.name}
-                </h2>
+      {/* Main Content */}
+      <section className="py-6 px-4 md:px-8">
+        <div className="max-w-4xl mx-auto space-y-6">
+          {/* About Section */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h2 className="text-xl font-bold text-primary uppercase italic">
+                About Doctor
+              </h2>
+            </div>
+            <p className="text-slate-600 leading-relaxed">
+              {doctor.about}
+            </p>
+            <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-start gap-4">
+              <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
+                <Award size={20} className="text-secondary" />
               </div>
-              <p className="text-xl text-slate-600 leading-relaxed font-medium">
-                {doctor.about}
+              <p className="text-slate-600 text-sm">
+                Dr. {doctor.name.split(" ").slice(-1)} regularly updates skills through medical conferences and international training programs.
               </p>
-              <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 flex items-start gap-8">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-xl flex items-center justify-center shrink-0">
-                  <Award size={24} className="text-secondary" />
-                </div>
-                <p className="text-slate-500 italic leading-relaxed">
-                  Dr. {doctor.name.split(" ").slice(-1)} regularly updates
-                  his/her skills through medical conferences, workshops, and
-                  international training programs.
+            </div>
+          </div>
+
+          {/* Experience & Expertise */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h2 className="text-xl font-bold text-primary uppercase italic">
+                Experience & Expertise
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-3">
+                <p className="text-slate-600">
+                  With over {doctor.experience} years of experience, Dr. {doctor.name.split(" ").slice(-1)} has handled thousands of complex cases.
                 </p>
-              </div>
-            </div>
-
-            {/* Experience & Expertise */}
-            <div id="expertise" className="space-y-12 animate-fade-in-up">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">
-                  Experience & Expertise
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-6">
-                  <p className="text-lg text-slate-600 font-medium">
-                    With over {doctor.experience} years of experience, Dr.{" "}
-                    {doctor.name.split(" ").slice(-1)} has handled thousands of
-                    complex cases, including high-risk and advanced-stage
-                    conditions.
-                  </p>
-                  <p className="text-slate-500 font-medium italic">
-                    Known for achieving high success rates and maintaining
-                    international standards of patient safety and care.
-                  </p>
-                </div>
-                <div className="bg-primary p-12 rounded-[3.5rem] text-white space-y-6 group hover:rotate-2 transition-all shadow-2xl">
-                  <h4 className="text-xl font-bold uppercase tracking-widest text-secondary">
-                    Expert Areas
-                  </h4>
-                  <ul className="space-y-4">
-                    {doctor.expertise.map((item, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center gap-4 text-white/90 font-black text-sm uppercase tracking-wide"
-                      >
-                        <div className="w-2 h-2 rounded-full bg-secondary" />{" "}
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Procedures & Treatments */}
-            <div id="procedures" className="space-y-12 animate-fade-in-up">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">
-                  Procedures & Treatments
-                </h2>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {doctor.procedures.map((proc, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-6 p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-secondary transition-all group"
-                  >
-                    <div className="w-12 h-12 rounded-2xl bg-white shadow-md flex items-center justify-center text-secondary group-hover:bg-secondary group-hover:text-white transition-all">
-                      <Activity size={20} />
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                      <Users className="text-secondary" size={16} />
                     </div>
-                    <span className="text-primary font-black uppercase text-xs tracking-widest leading-none">
-                      {proc}
-                    </span>
+                    <div>
+                      <p className="text-xs font-bold text-slate-400 uppercase">Experience</p>
+                      <p className="text-xs font-bold text-primary">{doctor.experience} Years</p>
+                    </div>
                   </div>
-                ))}
+                  <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                      <Shield className="text-secondary" size={16} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-slate-400 uppercase">Success Rate</p>
+                      <p className="text-xs font-bold text-primary">High</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
+                    <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
+                      <Star className="text-secondary" size={16} />
+                    </div>
+                    <div>
+                      <p className="text-xs font-bold text-slate-400 uppercase">Standards</p>
+                      <p className="text-xs font-bold text-primary">International</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-primary rounded-2xl text-white space-y-3">
+                <h4 className="text-lg font-bold uppercase italic text-secondary">
+                  Expert Areas
+                </h4>
+                <div className="space-y-2">
+                  {doctor.expertise.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-secondary" />
+                      <span className="text-sm text-white/90">{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
 
-            {/* Why Choose Section */}
-            <div id="why" className="space-y-12 animate-fade-in-up">
-              <div className="flex items-center gap-6">
-                <div className="w-16 h-1 bg-secondary rounded-full" />
-                <h2 className="text-4xl font-black text-primary uppercase tracking-tight">
+          {/* Procedures & Treatments */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h2 className="text-xl font-bold text-primary uppercase italic">
+                Procedures & Treatments
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {doctor.procedures.map((proc, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 p-3 bg-slate-50 rounded-lg border border-slate-100 hover:border-secondary transition-colors"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
+                    <Activity size={16} />
+                  </div>
+                  <span className="text-sm text-slate-700">
+                    {proc}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Why Choose & Hospital Info */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Why Choose */}
+            <div className="space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-1 bg-secondary rounded-full" />
+                <h3 className="text-lg font-bold text-primary uppercase italic">
                   Why Choose Dr. {doctor.name.split(" ").slice(1)}
-                </h2>
+                </h3>
               </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-6">
-                {doctor.whyChoose.map((point, i) => (
-                  <div key={i} className="flex items-start gap-4 p-4">
-                    <div className="p-1 px-3 bg-secondary/10 text-secondary rounded-lg font-black shrink-0">
-                      {i + 1}
-                    </div>
-                    <p className="text-slate-600 font-bold uppercase text-[11px] tracking-widest py-1 leading-relaxed">
+              <div className="space-y-2">
+                {doctor.whyChoose?.length > 0 ? doctor.whyChoose.slice(0, 4).map((point, i) => (
+                  <div key={i} className="flex items-start gap-2">
+                    <CheckCircle2 size={14} className="text-secondary shrink-0 mt-0.5" />
+                    <p className="text-sm text-slate-700">
                       {point}
                     </p>
                   </div>
-                ))}
+                )) : (
+                  <p className="text-slate-600 text-sm">
+                    Highly experienced and trusted by patients worldwide
+                  </p>
+                )}
               </div>
             </div>
-          </div>
 
-          {/* Sidebar Area: Forms & Quick Info */}
-          <div className="lg:col-span-4 space-y-12">
-            {/* Hospital Card */}
-            <div className="p-12 bg-slate-50 rounded-[4rem] border border-slate-100 space-y-8 sticky top-32 transition-all hover:bg-white hover:shadow-2xl hover:border-secondary/30 group">
-              <div className="w-20 h-20 rounded-3xl bg-white flex items-center justify-center text-secondary shadow-xl transform group-hover:rotate-6 transition-transform">
-                <Hospital size={36} />
-              </div>
-              <div className="space-y-4">
-                <h3 className="text-2xl font-black text-primary uppercase tracking-tight">
+            {/* Hospital Info */}
+            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-8 h-1 bg-secondary rounded-full" />
+                <h3 className="text-lg font-bold text-primary uppercase italic">
                   Hospital Affiliation
                 </h3>
-                <div className="space-y-2">
-                  <p className="text-secondary font-black text-lg">
-                    {doctor.hospital.name}
-                  </p>
-                  <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">
-                    {doctor.hospital.city}, India
-                  </p>
-                </div>
               </div>
-              <div className="space-y-4 pt-6 border-t border-slate-200">
-                <div className="flex flex-wrap gap-2">
-                  {doctor.hospital.accreditation?.map((acc, i) => ({
-                    /* Badges Removed */
-                  }))}
-                </div>
-                <ul className="space-y-3 pt-4">
-                  {[
-                    "Advanced Medical Technology",
-                    "International Patient Desk",
-                    "Clinical Excellence",
-                  ].map((item, i) => (
-                    <li
+              <div className="space-y-2">
+                <p className="text-secondary font-bold">
+                  {doctor.hospital.name}
+                </p>
+                <p className="text-slate-500 text-sm">
+                  {doctor.hospital.city}, India
+                </p>
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {doctor.hospital.accreditation?.slice(0, 2).map((acc, i) => (
+                    <span
                       key={i}
-                      className="flex items-center gap-3 text-slate-500 font-bold text-[10px] uppercase tracking-[0.2em]"
+                      className="bg-secondary text-white px-2 py-1 rounded text-xs font-bold uppercase"
                     >
-                      <CheckCircle2 size={12} className="text-secondary" />{" "}
-                      {item}
-                    </li>
+                      {acc}
+                    </span>
                   ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Global Consultation Form Section */}
-      <section
+      {/* Consultation Form Section */}
+      {/* <section
         id="appointment"
-        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="py-6 px-4 md:px-8 bg-slate-50"
       >
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-12 text-center space-y-4 mb-16">
-              {/* Badge Removed */}
-              <h2 className="text-3xl md:text-5xl font-black text-primary tracking-tighter uppercase leading-none italic">
-                Book a Consultation <br />{" "}
-                <span className="text-secondary">with {doctor.name}</span>
-              </h2>
-              <p className="text-slate-500 font-medium max-w-2xl mx-auto pt-6 text-lg">
-                If you would like to consult Dr.{" "}
-                {doctor.name.split(" ").slice(-1)} or receive a treatment plan
-                and cost estimate, please fill out the form below. Our team at
-                Healing Escape will review your details and arrange a
-                consultation at the earliest.
-              </p>
-            </div>
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center space-y-2 mb-6">
+            <h2 className="text-xl md:text-2xl font-bold text-primary uppercase italic">
+              Book Consultation with <span className="text-secondary">{doctor.name}</span>
+            </h2>
+            <p className="text-slate-500 max-w-xl mx-auto text-sm">
+              Fill out the form below to receive a personalized consultation.
+            </p>
+          </div>
 
-            <div className="lg:col-span-12">
-              <div className="bg-white p-12 md:p-20 rounded-[4rem] shadow-2xl border border-slate-100 relative group">
-                <div className="absolute top-0 right-20 w-32 h-32 bg-secondary/5 rounded-full -translate-y-1/2 animate-pulse" />
-
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">
-                      Full Name
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="John Doe"
-                      className="w-full px-8 py-5 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary transition-all font-bold placeholder:opacity-30"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">
-                      Country
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g., Nigeria, Oman, USA"
-                      className="w-full px-8 py-5 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary transition-all font-bold placeholder:opacity-30"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="john@example.com"
-                      className="w-full px-8 py-5 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary transition-all font-bold placeholder:opacity-30"
-                    />
-                  </div>
-                  <div className="space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">
-                      Phone / WhatsApp
-                    </label>
-                    <input
-                      type="tel"
-                      placeholder="+1 234 567 890"
-                      className="w-full px-8 py-5 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary transition-all font-bold placeholder:opacity-30"
-                    />
-                  </div>
-                  <div className="md:col-span-2 space-y-3">
-                    <label className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400 ml-4">
-                      Describe Medical Problem
-                    </label>
-                    <textarea
-                      rows="4"
-                      placeholder="Brief details about your condition..."
-                      className="w-full px-8 py-5 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary transition-all font-bold placeholder:opacity-30 resize-none"
-                    />
-                  </div>
-
-                  {/* Upload Field */}
-                  <div className="md:col-span-2">
-                    <div className="border-2 border-dashed border-slate-200 rounded-3xl p-10 text-center space-y-4 hover:border-secondary transition-colors cursor-pointer group/upload bg-slate-50/50">
-                      <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-sm group-hover/upload:scale-110 transition-transform">
-                        <Upload size={24} className="text-secondary" />
-                      </div>
-                      <div className="space-y-1">
-                        <p className="text-sm font-black text-primary uppercase tracking-widest">
-                          Upload Medical Reports
-                        </p>
-                        <p className="text-xs text-slate-400 font-bold uppercase tracking-widest">
-                          (PDF, Images, X-Rays - Max 10MB)
-                        </p>
-                      </div>
-                      <input type="file" className="hidden" />
-                    </div>
-                  </div>
-
-                  <div className="md:col-span-2 text-center pt-10">
-                    <button
-                      type="submit"
-                      className="bg-primary text-white font-black py-6 px-16 rounded-4xl transition-all duration-500 uppercase tracking-[0.3em] text-xs shadow-2xl hover:bg-secondary hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto"
-                    >
-                      Request Consultation <Send size={18} />
-                    </button>
-                  </div>
-                </form>
+          <div className="bg-white p-5 rounded-2xl shadow-lg border border-slate-100">
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary text-sm"
+                  placeholder="Your full name"
+                />
               </div>
-            </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Country
+                </label>
+                <input
+                  type="text"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary text-sm"
+                  placeholder="Your country"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary text-sm"
+                  placeholder="Your email"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary text-sm"
+                  placeholder="Your phone number"
+                />
+              </div>
+              <div className="md:col-span-2 space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Medical Problem
+                </label>
+                <textarea
+                  rows="2"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary resize-none text-sm"
+                  placeholder="Brief details about your condition..."
+                />
+              </div>
+              <div className="md:col-span-2 space-y-1">
+                <label className="text-xs font-bold uppercase text-slate-400">
+                  Upload Reports
+                </label>
+                <div className="bg-slate-50 border border-slate-100 rounded-lg p-2 flex items-center justify-between cursor-pointer hover:border-secondary transition-colors">
+                  <span className="text-xs text-slate-400">Select medical reports</span>
+                  <Upload size={14} className="text-secondary" />
+                </div>
+              </div>
+
+              <div className="md:col-span-2 text-center pt-2">
+                <button
+                  type="submit"
+                  className="bg-primary hover:bg-secondary text-white font-bold py-2 px-6 rounded-lg transition-all uppercase text-sm flex items-center gap-2 mx-auto"
+                >
+                  Request Consultation <Send size={14} />
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* 4. Healing Escape Assurance */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-primary rounded-[4rem] p-12 md:p-24 text-center text-white relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/20 blur-[100px] rounded-full" />
-            <div className="relative z-10 space-y-10">
-              <div className="w-20 h-2 bg-secondary mx-auto rounded-full" />
-              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic">
-                Our Commitment
-              </h2>
-              <p className="text-white/70 text-lg md:text-2xl font-light max-w-3xl mx-auto leading-relaxed">
-                At Healing Escape, we connect you not just with doctors — but
-                with the right experts for your health, your safety, and your
-                future. All our doctors are carefully verified and associated
-                with reputed hospitals.
-              </p>
-              <div className="flex flex-wrap justify-center gap-10 opacity-60">
-                {[
-                  "Ethics First",
-                  "No Commissions",
-                  "Total Transparency",
-                  "Patient Care",
-                ].map((txt, idx) => (
-                  <span
-                    key={idx}
-                    className="text-[10px] font-black uppercase tracking-[0.4em]"
-                  >
-                    {txt}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes bounce-slow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        .animate-bounce-slow { animation: bounce-slow 4s infinite ease-in-out; }
-      `,
-        }}
-      />
     </div>
   );
 };

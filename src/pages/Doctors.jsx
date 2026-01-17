@@ -1,22 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
-  Stethoscope,
   MapPin,
   Clock,
-  Hospital as HospitalIcon,
   Search,
-  CheckCircle2,
-  ChevronRight,
-  SlidersHorizontal,
-  X,
-  UserCheck,
-  ShieldCheck,
+  ArrowRight,
+  Star,
+  Award,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
-import { doctorsData, specialitiesList } from "../data/doctorsData";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeIn, staggerContainer } from "../utils/framerVariants";
+import Loader from "../components/Loader";
+import { getDoctors } from "../apis/doctor";
 
 const bannerSlides = [
   {
@@ -24,71 +18,73 @@ const bannerSlides = [
       "https://media.istockphoto.com/id/1321691574/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B4%D1%80%D1%83%D0%B6%D0%B5%D0%BB%D1%8E%D0%B1%D0%BD%D1%8B%D0%B9-%D0%B2%D1%80%D0%B0%D1%87-%D1%80%D0%B0%D0%B7%D0%B3%D0%BE%D0%B2%D0%B0%D1%80%D0%B8%D0%B2%D0%B0%D0%B5%D1%82-%D1%81-%D0%BA%D1%80%D0%B0%D1%81%D0%B8%D0%B2%D0%BE%D0%B9-%D1%81%D1%82%D0%B0%D1%80%D1%88%D0%B5%D0%B9-%D0%BF%D0%B0%D1%86%D0%B8%D0%B5%D0%BD%D1%82%D0%BA%D0%BE%D0%B9-%D0%BE%D1%82%D0%B4%D1%8B%D1%85%D0%B0%D1%8E%D1%89%D0%B5%D0%B9-%D0%B2-%D0%BF%D0%BE%D1%81%D1%82%D0%B5%D0%BB%D0%B8-%D0%BE%D0%B1%D1%8A%D1%8F%D1%81%D0%BD%D1%8F%D0%B5%D1%82.jpg?s=612x612&w=0&k=20&c=N3owHj8_iguVgjtFCkEOmin-LX2jDSb2SROqBDweb70=",
     title: "World-Class Specialists",
     subtitle: "Find the Right Doctor for Your Treatment in India",
-    buttonLabel: "Explore Specialities",
-    buttonLink: "#listing-start",
+    buttonLabel: "Explore Doctors",
+    buttonLink: "#doctors",
   },
 ];
 
 const Doctors = () => {
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+
+  // Extract unique specialities from doctors data
+  const specialitiesList = ["All", ...new Set(doctors.map(d => d.speciality))];
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const data = await getDoctors({ page: 1, limit: 50 });
+        // Filter only active doctors
+        const activeDoctors = data.doctors?.filter(d => d.isActive) || [];
+        setDoctors(activeDoctors);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDoctors();
+  }, []);
 
   const filteredDoctors =
     activeFilter === "All"
-      ? doctorsData
-      : doctorsData.filter((doc) => doc.speciality === activeFilter);
+      ? doctors
+      : doctors.filter((doc) => doc.speciality === activeFilter);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   return (
-    <div className="bg-white overflow-x-hidden">
+    <div className="bg-white">
       <PageHero slides={bannerSlides} />
 
-      {/* 1. Header Section */}
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-12 md:py-16 px-4 md:px-8 bg-white relative overflow-hidden"
-      >
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] -z-10" />
-        <div className="max-w-7xl mx-auto flex flex-col items-center text-center space-y-6">
-          <motion.div
-            variants={fadeIn("down", 0.1)}
-            className="w-16 md:w-24 h-1.5 rounded-full"
-          />
-          <motion.h2
-            variants={fadeIn("up", 0.2)}
-            className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-none"
-          >
-            Expert Medical
-            <span className="text-secondary"> Specialists</span>
-          </motion.h2>
-          <motion.p
-            variants={fadeIn("up", 0.3)}
-            className="text-lg md:text-2xl text-slate-500 font-medium max-w-3xl leading-relaxed italic"
-          >
-            "Our doctors are leaders in their respective fields, with years of
-            experience in treating complex medical cases and international
-            patients."
-          </motion.p>
-        </div>
-      </motion.section>
-
-      {/* 2. Filter Section - Desktop Sticky */}
-      <section
-        id="listing-start"
-        className="hidden lg:block sticky top-[56px] z-50 bg-white/95 backdrop-blur-lg border-b border-slate-100 shadow-sm"
-      >
-        <div className="max-w-7xl mx-auto px-8 py-4">
-          <div className="flex flex-wrap items-center justify-center gap-3">
+      {/* Filter Section */}
+      <section className="py-6 px-4 md:px-8 bg-slate-50 border-b border-slate-100">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-primary uppercase italic">
+              Our Specialists
+            </h2>
+            <div className="flex items-center gap-2 text-sm text-slate-500">
+              <span className="font-bold text-secondary">{filteredDoctors.length}</span>
+              <span>doctors found</span>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2">
             {specialitiesList.map((spec) => (
               <button
                 key={spec}
                 onClick={() => setActiveFilter(spec)}
-                className={`px-6 py-2.5 rounded-2xl text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   activeFilter === spec
-                    ? "bg-primary text-white shadow-xl shadow-primary/20 scale-105"
-                    : "bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-100"
+                    ? "bg-secondary text-white"
+                    : "bg-white text-slate-600 border border-slate-200 hover:border-secondary"
                 }`}
               >
                 {spec}
@@ -98,205 +94,86 @@ const Doctors = () => {
         </div>
       </section>
 
-      {/* 3. Mobile Filter Floating Trigger */}
-      <div className="lg:hidden fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] w-full max-w-[200px] px-4 text-center">
-        <button
-          onClick={() => setIsMobileFilterOpen(true)}
-          className="w-full bg-primary text-white py-4 rounded-2xl shadow-2xl flex items-center justify-center gap-3 font-bold uppercase tracking-[0.2em] text-[10px] border border-white/10"
-        >
-          <SlidersHorizontal size={18} className="text-secondary shrink-0" />{" "}
-          Specialty Filter
-        </button>
-      </div>
-
-      {/* 4. Mobile Filter Drawer */}
-      <div
-        className={`lg:hidden fixed inset-0 z-[200] transition-all duration-500 ${
-          isMobileFilterOpen ? "visible" : "invisible"
-        }`}
-      >
-        <div
-          className={`absolute inset-0 bg-primary/60 backdrop-blur-md transition-opacity duration-500 ${
-            isMobileFilterOpen ? "opacity-100" : "opacity-0"
-          }`}
-          onClick={() => setIsMobileFilterOpen(false)}
-        />
-        <div
-          className={`absolute bottom-0 left-0 w-full bg-white rounded-t-[2.5rem] md:rounded-t-[3.5rem] p-6 md:p-8 pb-10 transition-transform duration-500 h-[70vh] flex flex-col ${
-            isMobileFilterOpen ? "translate-y-0" : "translate-y-full"
-          }`}
-        >
-          <div className="w-12 h-1.5 bg-slate-100 rounded-full mx-auto mb-6 shrink-0" />
-          <div className="flex justify-between items-center mb-8 shrink-0">
-            <h3 className="text-xl font-extrabold text-primary uppercase tracking-tighter italic">
-              Specialties
-            </h3>
-            <button
-              onClick={() => setIsMobileFilterOpen(false)}
-              className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400"
-            >
-              <X size={20} />
-            </button>
-          </div>
-
-          <div className="flex-1 overflow-y-auto pr-1 space-y-2 scrollbar-thin scrollbar-thumb-slate-200">
-            {specialitiesList.map((spec) => (
-              <button
-                key={spec}
-                onClick={() => {
-                  setActiveFilter(spec);
-                  setIsMobileFilterOpen(false);
-                }}
-                className={`w-full text-left px-5 py-3.5 rounded-xl text-[11px] font-bold uppercase tracking-widest transition-all ${
-                  activeFilter === spec
-                    ? "bg-secondary text-white shadow-lg"
-                    : "bg-slate-50 text-slate-500 border border-slate-100"
-                }`}
-              >
-                {spec}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 5. Doctors Grid Section */}
-      <section className="py-12 md:py-16 px-4 md:px-8 bg-slate-50/50">
-        <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
-          <motion.div
-            variants={fadeIn("up", 0.1)}
-            className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
-          >
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
-                Leading <span className="text-secondary">Clinicians</span>
-              </h2>
-              <p className="text-lg md:text-xl text-slate-500 font-medium italic">
-                Selected for their board certifications, success rates and
-                ethical practice.
-              </p>
-            </div>
-            <div className="flex items-center gap-4 bg-white px-6 py-3 rounded-2xl border border-slate-200 w-fit">
-              <span className="text-secondary font-extrabold text-2xl">
-                {filteredDoctors.length}
-              </span>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Doctors Found
-              </span>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={staggerContainer(0.05, 0.1)}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredDoctors.map((doctor, index) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  key={doctor.id}
-                  className="group bg-white rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-700"
+      {/* Doctors Grid Section */}
+      <section id="doctors" className="py-6 px-4 md:px-8">
+        <div className="max-w-6xl mx-auto">
+          {filteredDoctors.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredDoctors.map((doctor) => (
+                <div
+                  key={doctor._id}
+                  className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-md transition-all"
                 >
                   {/* Image Section */}
-                  <div className="relative h-72 md:h-80 overflow-hidden bg-slate-100">
+                  <div className="h-48 overflow-hidden relative">
                     <img
                       src={doctor.photo}
                       alt={doctor.name}
-                      className="w-full h-full object-cover transition-all duration-1000 grayscale group-hover:grayscale-0 md:group-hover:scale-110"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                     />
-                    {/* Category Badge */}
-                    {/* Badge Removed */}
+                    <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 rounded text-xs font-bold">
+                      {doctor.hospital.city}
+                    </div>
                   </div>
 
                   {/* Content Section */}
-                  <div className="p-8 md:p-10 space-y-6 md:space-y-8">
-                    <div className="space-y-2">
-                      <h3 className="text-xl md:text-2xl font-bold text-primary italic uppercase tracking-tight group-hover:text-secondary transition-colors line-clamp-1">
+                  <div className="p-4 space-y-3">
+                    <div className="space-y-1">
+                      <h3 className="font-bold text-primary group-hover:text-secondary transition-colors line-clamp-1">
                         {doctor.name}
                       </h3>
-                      <p className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
-                        {doctor.qualification}
+                      <p className="text-xs text-slate-500 uppercase font-medium">
+                        {doctor.speciality}
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4 md:gap-6 pt-6 border-t border-slate-50">
-                      <div className="space-y-1.5">
-                        <div className="flex items-center gap-2 text-secondary">
-                          <Clock size={14} className="md:w-4 md:h-4" />
-                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
-                            Experience
-                          </span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded bg-secondary/10 flex items-center justify-center">
+                          <Clock size={12} className="text-secondary" />
                         </div>
-                        <p className="text-base md:text-lg font-bold text-primary italic">
-                          {doctor.experience}+ Yrs
-                        </p>
+                        <div>
+                          <p className="text-xs text-slate-400 uppercase font-bold">Experience</p>
+                          <p className="text-sm font-bold text-primary">{doctor.experience}+ Yrs</p>
+                        </div>
                       </div>
-                      <div className="space-y-1.5">
-                        <div className="flex items-center gap-2 text-secondary">
-                          <HospitalIcon size={14} className="md:w-4 md:h-4" />
-                          <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest">
-                            Location
-                          </span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-6 h-6 rounded bg-secondary/10 flex items-center justify-center">
+                          <Award size={12} className="text-secondary" />
                         </div>
-                        <p className="text-xs md:text-sm font-bold text-slate-500 line-clamp-1 italic">
-                          {doctor.hospital.name}
-                        </p>
+                        <div>
+                          <p className="text-xs text-slate-400 uppercase font-bold">Rating</p>
+                          <div className="flex items-center gap-1">
+                            <Star size={12} className="text-yellow-400 fill-current" />
+                            <span className="text-sm font-bold text-primary">4.8</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="pt-6 flex items-center justify-between gap-4">
+                    <div className="pt-2">
                       <Link
-                        to={`/doctor/${doctor.id}`}
-                        className="flex-1 bg-primary text-white text-center py-4 md:py-5 rounded-xl md:rounded-2xl font-bold text-[10px] uppercase tracking-widest shadow-xl hover:bg-secondary transition-all flex items-center justify-center gap-2 md:gap-3"
+                        to={`/doctor/${doctor._id}`}
+                        className="w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm uppercase hover:bg-secondary transition-colors flex items-center justify-center gap-2"
                       >
-                        View Profile <ChevronRight className="w-3.5 h-3.5" />
-                      </Link>
-                      <Link
-                        to="/contact"
-                        className="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 hover:bg-secondary hover:text-white transition-all shadow-sm"
-                      >
-                        <Stethoscope className="w-[18px] h-[18px] md:w-[20px] md:h-[20px]" />
+                        View Profile <ArrowRight size={14} />
                       </Link>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </AnimatePresence>
-          </motion.div>
-
-          {filteredDoctors.length === 0 && (
-            <div className="py-24 md:py-40 text-center">
-              <Search size={48} className="mx-auto text-slate-100 mb-6" />
-              <h3 className="text-lg md:text-xl font-bold text-primary uppercase italic">
+            </div>
+          ) : (
+            <div className="py-20 text-center">
+              <Search size={48} className="mx-auto text-slate-200 mb-4" />
+              <h3 className="text-lg font-bold text-primary uppercase italic">
                 No doctors found matching your criteria.
               </h3>
             </div>
           )}
         </div>
       </section>
-
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fade-in-up 0.6s ease-out forwards; }
-        .scrollbar-thin::-webkit-scrollbar { width: 4px; }
-        .scrollbar-thumb-slate-200::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
-      `,
-        }}
-      />
     </div>
   );
 };
-
 export default Doctors;

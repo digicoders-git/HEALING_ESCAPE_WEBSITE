@@ -229,8 +229,9 @@ const Journey = () => {
                 At Healing Escape, we understand that travelling for medical
                 treatment is a major decision. Our transparent, step-by-step
                 process ensures your journey is safe, smooth, and stress-free.
+                <br/>Below is a detailed explanation of how we take care of you at every stage of your treatment journey.
               </p>
-              <motion.div
+              {/* <motion.div
                 variants={fadeIn("up", 0.4)}
                 className="p-5 sm:p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-2xl md:rounded-[2rem] border border-white shadow-2xl relative group overflow-hidden text-left"
               >
@@ -239,7 +240,7 @@ const Journey = () => {
                   "Below is a detailed explanation of how we take care of you at
                   every stage of your treatment journey."
                 </p>
-              </motion.div>
+              </motion.div> */}
             </motion.div>
             <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
               {promises.map((promise, index) => (

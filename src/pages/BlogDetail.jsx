@@ -1,25 +1,50 @@
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import {
   Calendar,
-  Tag,
   ArrowLeft,
-  ChevronRight,
-  ShieldCheck,
-  Send,
-  CalendarDays,
   ArrowRight,
-  MessageSquare,
+  Send,
+  CheckCircle2,
 } from "lucide-react";
-import { blogData } from "../data/blogData";
+import Loader from "../components/Loader";
+import { getBlogById, getBlogs } from "../apis/blog";
 
 const BlogDetail = () => {
   const { id } = useParams();
-  const blog = blogData.find((b) => b.id === parseInt(id));
+  const [blog, setBlog] = useState(null);
+  const [relatedArticles, setRelatedArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Find related articles (excluding current)
-  const relatedArticles = blogData
-    .filter((b) => b.id !== parseInt(id))
-    .slice(0, 3);
+  useEffect(() => {
+    const fetchBlogData = async () => {
+      try {
+        const [blogData, allBlogsData] = await Promise.all([
+          getBlogById(id),
+          getBlogs({ page: 1, limit: 50 })
+        ]);
+        
+        setBlog(blogData.blog);
+        
+        // Get related articles (excluding current blog)
+        const activeBlogs = allBlogsData.blogs?.filter(b => b.isActive && b._id !== id) || [];
+        setRelatedArticles(activeBlogs.slice(0, 3));
+      } catch (error) {
+        console.error("Error fetching blog data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBlogData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   if (!blog) {
     return (
@@ -28,7 +53,7 @@ const BlogDetail = () => {
           Article Not Found
         </h2>
         <Link
-          to="/blog"
+          to="/blogs"
           className="text-secondary font-bold uppercase tracking-widest border-b-2 border-secondary pb-1"
         >
           Back to Knowledge Hub
@@ -39,85 +64,89 @@ const BlogDetail = () => {
 
   return (
     <div className="bg-white">
-      {/* 1. Article Header & Hero */}
-      <section className="relative pt-28 md:pt-[120px] pb-12 md:pb-16 px-4 sm:px-6 md:px-8 bg-slate-900 overflow-hidden">
-        <div className="max-w-4xl mx-auto relative z-10 space-y-12">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-3 text-white/50 hover:text-secondary transition-colors text-[10px] font-bold uppercase tracking-[0.3em]"
-          >
-            <ArrowLeft size={16} /> Back to Blog
-          </Link>
-          <div className="space-y-6">
-            <div className="flex items-center gap-4 text-secondary text-[11px] font-bold uppercase tracking-[0.2em]">
-              <span className="px-4 py-1.5 bg-secondary/10 border border-secondary/20 rounded-full">
+      {/* Hero Section */}
+      <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/80 pt-[72px]">
+        <img
+          src={blog.image}
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          alt={blog.title}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
+        
+        <div className="relative h-full flex items-center px-4 md:px-8">
+          <div className="max-w-4xl mx-auto text-center space-y-4">
+            <Link
+              to="/blogs"
+              className="inline-flex items-center gap-2 text-white/70 hover:text-secondary transition-colors text-sm mb-4"
+            >
+              <ArrowLeft size={16} /> Back to Blog
+            </Link>
+            <div className="flex items-center justify-center gap-4 text-secondary text-sm mb-2">
+              <span className="px-3 py-1 bg-secondary/20 backdrop-blur-sm rounded-full border border-secondary/30">
                 {blog.category}
               </span>
               <span className="flex items-center gap-2">
-                <CalendarDays size={14} /> {blog.date}
+                <Calendar size={14} /> {blog.date}
               </span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tighter uppercase italic leading-none">
+            <h1 className="text-2xl md:text-4xl font-bold text-white leading-tight">
               {blog.title}
             </h1>
-          </div>
-
-          <div className="relative rounded-[4rem] overflow-hidden border-8 border-white/5 aspect-video shadow-2xl">
-            <img
-              src={blog.image}
-              className="w-full h-full object-cover"
-              alt={blog.title}
-            />
           </div>
         </div>
       </section>
 
-      {/* 2. Article Content Section */}
-      <section className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-white">
-        <div className="max-w-4xl mx-auto space-y-20">
+      {/* Main Content */}
+      <section className="py-6 px-4 md:px-8">
+        <div className="max-w-4xl mx-auto space-y-6">
           {/* Introduction */}
-          <div className="space-y-10">
-            <div className="flex items-center gap-6">
-              <div className="w-16 h-1 bg-secondary rounded-full" />
-              <h2 className="text-2xl font-bold text-primary uppercase tracking-tighter italic">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h2 className="text-xl font-bold text-primary uppercase italic">
                 Introduction
               </h2>
             </div>
-            <p className="text-xl md:text-2xl text-slate-600 leading-relaxed font-medium italic border-l-4 border-slate-100 pl-10 py-4">
+            <p className="text-slate-600 leading-relaxed border-l-4 border-slate-100 pl-4">
               {blog.introduction}
             </p>
           </div>
 
           {/* Main Content */}
-          <div className="prose prose-2xl prose-slate max-w-none text-slate-500 font-medium leading-loose">
-            {blog.content.split("\n\n").map((para, i) => (
-              <p key={i} className="mb-10">
-                {para}
-              </p>
-            ))}
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h2 className="text-xl font-bold text-primary uppercase italic">
+                Article Content
+              </h2>
+            </div>
+            <div className="prose max-w-none text-slate-600">
+              {blog.content?.split("\n\n").map((para, i) => (
+                <p key={i} className="mb-4 leading-relaxed">
+                  {para}
+                </p>
+              ))}
+            </div>
           </div>
 
-          {/* How this helps Section */}
-          <div className="p-12 md:p-16 bg-slate-50 rounded-[4rem] border border-slate-100 space-y-10 group hover:border-secondary transition-all">
-            <div className="flex items-center gap-6">
-              <div className="w-12 h-1 bg-secondary rounded-full" />
-              <h3 className="text-xl md:text-3xl font-extrabold text-primary uppercase tracking-tighter italic">
-                How This Helps You as a Patient
+          {/* Key Benefits */}
+          <div className="p-6 bg-slate-50 rounded-2xl border border-slate-100 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-1 bg-secondary rounded-full" />
+              <h3 className="text-lg font-bold text-primary uppercase italic">
+                How This Helps You
               </h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {[
-                "Understand your treatment options better",
+                "Understand treatment options better",
                 "Ask the right questions to doctors",
-                "Plan your medical journey more confidently",
-                "Avoid confusion and unnecessary stress",
-                "Make informed and safe decisions",
+                "Plan your medical journey confidently",
+                "Make informed decisions",
               ].map((point, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="w-8 h-8 rounded-xl bg-white shadow-xl flex items-center justify-center text-secondary shrink-0">
-                    <ChevronRight size={16} />
-                  </div>
-                  <p className="text-[13px] font-bold text-slate-600 uppercase tracking-widest leading-relaxed pt-1">
+                <div key={i} className="flex items-center gap-2">
+                  <CheckCircle2 size={14} className="text-secondary shrink-0" />
+                  <p className="text-sm text-slate-700">
                     {point}
                   </p>
                 </div>
@@ -125,74 +154,55 @@ const BlogDetail = () => {
             </div>
           </div>
 
-          {/* Personal Guidance Box */}
-          <div className="p-12 md:p-20 bg-primary rounded-[4rem] text-white space-y-8 shadow-2xl relative overflow-hidden text-center group">
-            <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/10 blur-[100px] rounded-full group-hover:scale-125 transition-transform" />
-            <div className="relative z-10 space-y-6 md:space-y-8">
-              <h3 className="text-2xl md:text-5xl font-extrabold uppercase tracking-tighter italic leading-none">
-                Need Personal Guidance?
-              </h3>
-              <p className="text-white/60 text-lg md:text-xl font-light italic max-w-2xl mx-auto">
-                Every patient’s condition is different. If you would like a
-                personalised medical opinion, hospital recommendation, or cost
-                estimate, our team at Healing Escape is here to help you.
-              </p>
-              <div className="pt-4 md:pt-8">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 md:gap-4 bg-secondary text-white font-bold py-4 md:py-5 px-8 md:px-12 rounded-xl md:rounded-2xl uppercase tracking-widest text-[10px] md:text-xs hover:bg-white hover:text-primary transition-all"
-                >
-                  Request Medical Opinion <Send size={16} />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Conclusion */}
-          <div className="text-center pt-20 border-t border-slate-100 space-y-8">
-            <div className="w-20 h-1 bg-secondary mx-auto rounded-full" />
-            <p className="text-lg md:text-4xl font-extrabold text-primary uppercase tracking-tighter italic leading-tight">
-              "Choosing the right treatment and the right medical team is
-              crucial for a successful outcome. Your medical journey to India
-              can be safe, smooth, and stress-free."
+          {/* CTA Section */}
+          <div className="p-6 bg-primary rounded-2xl text-white text-center space-y-4">
+            <h3 className="text-xl font-bold uppercase italic">
+              Need Personal Guidance?
+            </h3>
+            <p className="text-white/80">
+              Get personalized medical opinion and hospital recommendations from our team.
             </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-secondary text-white font-bold py-2 px-6 rounded-lg uppercase text-sm hover:bg-white hover:text-primary transition-colors"
+            >
+              Request Medical Opinion <Send size={14} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* 3. Related Articles */}
-      <section className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-slate-50 border-t border-slate-100">
-        <div className="max-w-7xl mx-auto space-y-20">
-          <div className="text-center space-y-4">
-            {/* Badge Removed */}
-            <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
+      {/* Related Articles */}
+      <section className="py-6 px-4 md:px-8 bg-slate-50 border-t border-slate-100">
+        <div className="max-w-4xl mx-auto space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-1 bg-secondary rounded-full" />
+            <h2 className="text-xl font-bold text-primary uppercase italic">
               Related Articles
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {relatedArticles.map((art, idx) => (
               <Link
-                to={`/blog/${art.id}`}
+                to={`/blogs/${art._id}`}
                 key={idx}
-                className="group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 hover:shadow-2xl transition-all h-full flex flex-col"
+                className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-md transition-all"
               >
-                <div className="h-48 overflow-hidden">
+                <div className="h-32 overflow-hidden">
                   <img
                     src={art.image}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                     alt={art.title}
                   />
                 </div>
-                <div className="p-8 flex-1 flex flex-col justify-between space-y-4">
-                  <h4 className="text-lg font-bold text-primary uppercase tracking-tight italic group-hover:text-secondary transition-colors line-clamp-2">
+                <div className="p-4 space-y-2">
+                  <h4 className="font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 text-sm">
                     {art.title}
                   </h4>
-                  <div className="flex items-center gap-2 text-secondary group-hover:gap-4 transition-all">
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em]">
-                      Read More
-                    </span>
-                    <ArrowRight size={14} />
+                  <div className="flex items-center gap-2 text-secondary">
+                    <span className="text-xs font-bold uppercase">Read More</span>
+                    <ArrowRight size={12} />
                   </div>
                 </div>
               </Link>
@@ -200,18 +210,6 @@ const BlogDetail = () => {
           </div>
         </div>
       </section>
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
-      `,
-        }}
-      />
     </div>
   );
 };

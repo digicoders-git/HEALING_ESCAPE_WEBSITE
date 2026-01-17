@@ -13,103 +13,44 @@ import {
   X,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
-import {
-  hospitalsData,
-  citiesList,
-  hospitalSpecialities,
-  accreditationList,
-} from "../data/hospitalsData";
+import ModernSelect from "../components/ModernSelect";
+import Loader from "../components/Loader";
+import { getHospitals } from "../apis/hospital";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
 
-// Custom Modern Dropdown Component
-const CustomDropdown = ({ label, options, value, onChange, icon: Icon }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  return (
-    <div className="relative flex-1" ref={dropdownRef}>
-      <label className="hidden md:block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">
-        {label}
-      </label>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className={`w-full flex items-center justify-between bg-white border ${
-          isOpen
-            ? "border-secondary ring-4 ring-secondary/5"
-            : "border-slate-100"
-        } px-4 py-3 md:px-5 md:py-4 rounded-xl md:rounded-2xl transition-all duration-300 group`}
-      >
-        <div className="flex items-center gap-2 md:gap-3">
-          <span className="text-secondary opacity-60">
-            <Icon size={14} className="md:w-4 md:h-4" />
-          </span>
-          <span className="text-[12px] md:text-[13px] font-bold text-primary truncate">
-            {value === "All"
-              ? label.includes("City")
-                ? "All Cities"
-                : label.includes("Speciality")
-                ? "All Specialities"
-                : "All Accreditations"
-              : value}
-          </span>
-        </div>
-        <ChevronDown
-          size={14}
-          className={`text-slate-300 transition-transform duration-500 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-
-      {/* Dropdown Menu */}
-      <div
-        className={`absolute top-full left-0 w-full mt-2 bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-slate-100 p-2 z-[60] transition-all duration-300 origin-top ${
-          isOpen
-            ? "opacity-100 scale-100 visible"
-            : "opacity-0 scale-95 invisible"
-        }`}
-      >
-        <div className="max-h-[250px] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200 pr-1">
-          {options.map((opt) => (
-            <button
-              key={opt}
-              onClick={() => {
-                onChange(opt);
-                setIsOpen(false);
-              }}
-              className={`w-full text-left px-4 py-2.5 rounded-xl text-[11px] md:text-[12px] font-bold transition-all ${
-                value === opt
-                  ? "bg-secondary text-white"
-                  : "text-slate-600 hover:bg-slate-50 hover:text-primary"
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const Hospitals = () => {
+  const [hospitals, setHospitals] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [cityFilter, setCityFilter] = useState("All");
   const [specFilter, setSpecFilter] = useState("All");
   const [accFilter, setAccFilter] = useState("All");
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  const filteredHospitals = hospitalsData.filter((hosp) => {
+  // Extract unique values from hospitals data
+  const citiesList = ["All", ...new Set(hospitals.map(h => h.city))];
+  const hospitalSpecialities = ["All", ...new Set(hospitals.flatMap(h => h.specialities))];
+  const accreditationList = ["All", ...new Set(hospitals.flatMap(h => h.accreditations))];
+
+  useEffect(() => {
+    const fetchHospitals = async () => {
+      try {
+        const data = await getHospitals({ page: 1, limit: 50 });
+        // Filter only active hospitals
+        const activeHospitals = data.hospitals?.filter(h => h.isActive) || [];
+        setHospitals(activeHospitals);
+      } catch (error) {
+        console.error("Error fetching hospitals:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchHospitals();
+  }, []);
+
+  const filteredHospitals = hospitals.filter((hosp) => {
     const cityMatch = cityFilter === "All" || hosp.city === cityFilter;
     const specMatch =
       specFilter === "All" || hosp.specialities.includes(specFilter);
@@ -117,6 +58,14 @@ const Hospitals = () => {
       accFilter === "All" || hosp.accreditations.includes(accFilter);
     return cityMatch && specMatch && accMatch;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   const bannerSlides = [
     {
@@ -139,27 +88,42 @@ const Hospitals = () => {
         <div className="max-w-7xl mx-auto px-8 py-4">
           <div className="flex items-end gap-6">
             <div className="flex-1 grid grid-cols-3 gap-4">
-              <CustomDropdown
-                label="Select City"
-                options={citiesList}
-                value={cityFilter}
-                onChange={setCityFilter}
-                icon={MapPin}
-              />
-              <CustomDropdown
-                label="Select Speciality"
-                options={hospitalSpecialities}
-                value={specFilter}
-                onChange={setSpecFilter}
-                icon={Building2}
-              />
-              <CustomDropdown
-                label="Select Accreditation"
-                options={accreditationList}
-                value={accFilter}
-                onChange={setAccFilter}
-                icon={ShieldCheck}
-              />
+              <div className="flex-1">
+                <label className="hidden md:block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">
+                  Select City
+                </label>
+                <ModernSelect
+                  options={citiesList.map(c => ({ value: c, label: c === "All" ? "All Cities" : c }))}
+                  value={cityFilter}
+                  onChange={setCityFilter}
+                  placeholder="All Cities"
+                  className="w-full"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="hidden md:block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">
+                  Select Speciality
+                </label>
+                <ModernSelect
+                  options={hospitalSpecialities.map(s => ({ value: s, label: s === "All" ? "All Specialities" : s }))}
+                  value={specFilter}
+                  onChange={setSpecFilter}
+                  placeholder="All Specialities"
+                  className="w-full"
+                />
+              </div>
+              <div className="flex-1">
+                <label className="hidden md:block text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 ml-1">
+                  Select Accreditation
+                </label>
+                <ModernSelect
+                  options={accreditationList.map(a => ({ value: a, label: a === "All" ? "All Accreditations" : a }))}
+                  value={accFilter}
+                  onChange={setAccFilter}
+                  placeholder="All Accreditations"
+                  className="w-full"
+                />
+              </div>
             </div>
             <div className="shrink-0 pb-1">
               <button
@@ -222,36 +186,36 @@ const Hospitals = () => {
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-2">
                 Location
               </label>
-              <CustomDropdown
-                label="City"
-                options={citiesList}
+              <ModernSelect
+                options={citiesList.map(c => ({ value: c, label: c === "All" ? "All Cities" : c }))}
                 value={cityFilter}
                 onChange={setCityFilter}
-                icon={MapPin}
+                placeholder="All Cities"
+                className="w-full"
               />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-2">
                 Speciality
               </label>
-              <CustomDropdown
-                label="Speciality"
-                options={hospitalSpecialities}
+              <ModernSelect
+                options={hospitalSpecialities.map(s => ({ value: s, label: s === "All" ? "All Specialities" : s }))}
                 value={specFilter}
                 onChange={setSpecFilter}
-                icon={Building2}
+                placeholder="All Specialities"
+                className="w-full"
               />
             </div>
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-2">
                 Accreditation
               </label>
-              <CustomDropdown
-                label="Accreditation"
-                options={accreditationList}
+              <ModernSelect
+                options={accreditationList.map(a => ({ value: a, label: a === "All" ? "All Accreditations" : a }))}
                 value={accFilter}
                 onChange={setAccFilter}
-                icon={ShieldCheck}
+                placeholder="All Accreditations"
+                className="w-full"
               />
             </div>
             <button
@@ -267,114 +231,103 @@ const Hospitals = () => {
       {/* 4. Page Content */}
       <section
         id="listing-start"
-        className="py-12 md:py-16 px-4 md:px-8 bg-slate-50"
+        className="py-8 px-4 md:px-8 bg-white"
       >
-        <div className="max-w-7xl mx-auto space-y-12 md:space-y-16">
-          <motion.div
-            variants={fadeIn("up", 0.1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            className="flex flex-col lg:flex-row lg:items-end justify-between gap-8"
-          >
-            <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
+        <div className="max-w-6xl mx-auto space-y-8">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div className="space-y-2">
+              <h2 className="text-2xl md:text-3xl font-bold text-primary uppercase italic">
                 Verified <span className="text-secondary">Hospitals</span>
               </h2>
-              <p className="text-lg md:text-xl text-slate-500 font-medium italic">
-                Internationally accredited facilities selected for clinical
-                excellence.
+              <p className="text-slate-500 font-medium">
+                Internationally accredited facilities for quality healthcare.
               </p>
             </div>
-            <div className="flex items-center gap-4 bg-white px-6 py-3 rounded-2xl border border-slate-200 w-fit">
-              <span className="text-secondary font-extrabold text-2xl">
+            <div className="flex items-center gap-3 bg-slate-50 px-4 py-2 rounded-xl border border-slate-200">
+              <span className="text-secondary font-bold text-xl">
                 {filteredHospitals.length}
               </span>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Facilities Found
+              <span className="text-xs font-bold text-slate-400 uppercase">
+                Hospitals Found
               </span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            variants={staggerContainer(0.05, 0.1)}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredHospitals.map((hosp, index) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  key={hosp.id}
-                >
-                  <Link
-                    to={`/hospital/${hosp.id}`}
-                    className="block group bg-white rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border border-slate-200 hover:shadow-2xl transition-all duration-700 md:hover:-translate-y-2 h-full"
-                  >
-                    <div className="relative h-56 md:h-64 overflow-hidden">
-                      <img
-                        src={hosp.image}
-                        alt={hosp.name}
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                      />
-                      <div className="absolute top-4 right-4 flex flex-col gap-2">
-                        {hosp.accreditations.map((acc) => (
-                          <span
-                            key={acc}
-                            className="bg-secondary text-white px-3 py-1.5 rounded-xl text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-center"
-                          >
-                            {acc}
-                          </span>
-                        ))}
-                      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredHospitals.map((hosp, index) => (
+              <Link
+                to={`/hospital/${hosp._id}`}
+                key={hosp._id}
+                className="group bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-lg hover:border-secondary/20 transition-all duration-500"
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={hosp.image}
+                    alt={hosp.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute top-3 right-3 flex flex-col gap-1">
+                    {hosp.accreditations.slice(0, 2).map((acc) => (
+                      <span
+                        key={acc}
+                        className="bg-secondary text-white px-2 py-1 rounded-lg text-xs font-bold uppercase"
+                      >
+                        {acc}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="absolute bottom-3 left-3 px-2 py-1 bg-white/90 backdrop-blur-sm rounded-lg">
+                    <div className="flex items-center gap-1">
+                      <MapPin size={12} className="text-secondary" />
+                      <span className="text-xs font-bold text-slate-700">
+                        {hosp.city}
+                      </span>
                     </div>
-                    <div className="p-8 md:p-10 space-y-6">
-                      <div className="flex items-center gap-2 text-slate-400">
-                        <MapPin size={14} className="text-secondary" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">
-                          {hosp.city}
-                        </span>
-                      </div>
-                      <h3 className="text-xl md:text-2xl font-bold text-primary italic uppercase tracking-tight group-hover:text-secondary transition-colors line-clamp-1">
-                        {hosp.name}
-                      </h3>
-                      <div className="flex flex-wrap gap-2 h-16 md:h-20 overflow-hidden content-start">
-                        {hosp.specialities.map((spec) => (
-                          <span
-                            key={spec}
-                            className="bg-slate-50 text-slate-500 px-3 py-1 rounded-lg text-[9px] font-bold uppercase tracking-widest border border-slate-100"
-                          >
-                            {spec}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="pt-6 border-t border-slate-50 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <CheckCircle2 size={16} className="text-secondary" />
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                            Verified
-                          </span>
-                        </div>
-                        <span className="text-secondary font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 md:group-hover:gap-4 transition-all">
-                          Details <ChevronRight size={14} />
-                        </span>
-                      </div>
+                  </div>
+                </div>
+                
+                <div className="p-5 space-y-4">
+                  <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-tight">
+                    {hosp.name}
+                  </h3>
+                  
+                  <div className="flex flex-wrap gap-1 h-12 overflow-hidden">
+                    {hosp.specialities.slice(0, 3).map((spec) => (
+                      <span
+                        key={spec}
+                        className="bg-slate-50 text-slate-600 px-2 py-1 rounded text-xs font-medium border border-slate-100"
+                      >
+                        {spec}
+                      </span>
+                    ))}
+                    {hosp.specialities.length > 3 && (
+                      <span className="bg-slate-100 text-slate-500 px-2 py-1 rounded text-xs font-medium">
+                        +{hosp.specialities.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center justify-between pt-3 border-t border-slate-100">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 size={14} className="text-secondary" />
+                      <span className="text-xs font-bold text-slate-400 uppercase">
+                        Verified
+                      </span>
                     </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+                    <div className="flex items-center gap-2 text-secondary group-hover:gap-3 transition-all">
+                      <span className="text-xs font-bold uppercase">View Details</span>
+                      <ChevronRight size={14} />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
 
           {filteredHospitals.length === 0 && (
-            <div className="py-24 md:py-40 text-center">
-              <Search size={48} className="mx-auto text-slate-100 mb-6" />
-              <h3 className="text-xl font-bold text-primary uppercase italic">
+            <div className="py-20 text-center">
+              <Search size={48} className="mx-auto text-slate-200 mb-4" />
+              <h3 className="text-lg font-bold text-primary uppercase">
                 No hospitals found matching your criteria.
               </h3>
             </div>

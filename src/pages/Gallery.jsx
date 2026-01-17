@@ -1,19 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   X,
   Maximize2,
   Image as ImageIcon,
-  ShieldCheck,
-  Building2,
-  Stethoscope,
-  ChevronRight,
-  ArrowRight,
-  CheckCircle2,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
-import { galleryData, galleryCategories } from "../data/galleryData";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeIn, staggerContainer } from "../utils/framerVariants";
+import Loader from "../components/Loader";
+import { getGalleries } from "../apis/gallery";
 
 const bannerSlides = [
   {
@@ -28,295 +21,161 @@ const bannerSlides = [
 ];
 
 const Gallery = () => {
+  const [gallery, setGallery] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // Extract unique categories from gallery data
+  const galleryCategories = ["All", ...new Set(gallery.map(g => g.category))];
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const data = await getGalleries({ page: 1, limit: 50 });
+        // Filter only active gallery items
+        const activeGallery = data.gallery?.filter(g => g.isActive) || [];
+        setGallery(activeGallery);
+      } catch (error) {
+        console.error("Error fetching gallery:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGallery();
+  }, []);
+
   const filteredImages =
     activeCategory === "All"
-      ? galleryData
-      : galleryData.filter((img) => img.category === activeCategory);
+      ? gallery
+      : gallery.filter((img) => img.category === activeCategory);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader size={50} />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">
       <PageHero slides={bannerSlides} />
 
-      {/* 1. Intro Section */}
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
-      >
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[120px]" />
-
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* Left Column - Content */}
-            <motion.div
-              variants={fadeIn("right", 0.2)}
-              className="space-y-8 md:space-y-10"
-            >
-              <div className="space-y-6">
-                {/* Badge Removed */}
-                <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic">
-                  Transparency <br />
-                  <span className="text-secondary">Builds Trust</span>
-                </h2>
-                <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" />
-              </div>
-              <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
-                Choosing a hospital in another country can be difficult if you
-                cannot see the facilities in advance. Through our gallery, we
-                show you the actual environment where treatment and recovery
-                take place, so you can make your decision with clarity and
-                confidence.
-              </p>
-            </motion.div>
-
-            {/* Right Column - Image/Visual */}
-            <motion.div variants={fadeIn("left", 0.2)} className="relative">
-              <div className="aspect-square rounded-[3rem] overflow-hidden border-8 border-white shadow-2xl">
-                <img
-                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=800"
-                  alt="Hospital Facility"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-xl border border-slate-100">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-xl bg-linear-to-br from-secondary/10 to-primary/10 flex items-center justify-center border border-secondary/20">
-                    <CheckCircle2 size={24} className="text-secondary" />
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold text-primary uppercase tracking-widest">
-                      100% Real
-                    </p>
-                    <p className="text-[10px] text-slate-500 font-medium">
-                      Actual Facilities
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+      {/* Filter Section */}
+      <section className="py-6 px-4 md:px-8 bg-slate-50 border-b border-slate-100">
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-bold text-primary uppercase italic">
+              Photo Gallery
+            </h2>
+            <div className="flex items-center gap-2 text-sm text-slate-500">
+              <span className="font-bold text-secondary">{filteredImages.length}</span>
+              <span>images found</span>
+            </div>
           </div>
-        </div>
-      </motion.section>
-
-      {/* 2. Gallery Grid */}
-      <section
-        id="gallery-grid"
-        className="py-12 md:py-16 px-4 md:px-8 bg-white"
-      >
-        <div className="max-w-7xl mx-auto">
-          {/* Categories */}
-          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12 md:mb-20">
+          <div className="flex flex-wrap gap-2">
             {galleryCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-5 py-2.5 md:px-8 md:py-3.5 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] transition-all ${
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
                   activeCategory === cat
-                    ? "bg-primary text-white shadow-xl shadow-primary/20"
-                    : "bg-slate-50 text-slate-400 border border-slate-100 hover:bg-slate-100"
+                    ? "bg-secondary text-white"
+                    : "bg-white text-slate-600 border border-slate-200 hover:border-secondary"
                 }`}
               >
                 {cat}
               </button>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Grid Layout */}
-          <motion.div
-            variants={staggerContainer(0.05, 0.1)}
-            initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12"
-          >
-            <AnimatePresence mode="popLayout">
-              {filteredImages.map((item, index) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4 }}
-                  key={item.id}
+      {/* Gallery Grid Section */}
+      <section id="gallery-grid" className="py-6 px-4 md:px-8">
+        <div className="max-w-5xl mx-auto">
+          {filteredImages.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {filteredImages.map((item) => (
+                <div
+                  key={item._id}
                   onClick={() => setSelectedImage(item)}
-                  className="group relative h-[300px] md:h-[400px] rounded-4xl md:rounded-[3rem] overflow-hidden cursor-pointer bg-slate-100"
+                  className="group relative h-64 rounded-2xl overflow-hidden cursor-pointer bg-slate-100 border border-slate-100 hover:shadow-md transition-all"
                 >
                   <img
                     src={item.image}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 md:group-hover:scale-100"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                     alt={item.caption}
                   />
 
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-linear-to-t from-primary/95 via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-end transform translate-y-6 md:translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
-                      <span className="text-[10px] font-bold text-secondary uppercase tracking-[0.4em] mb-2 md:mb-4">
-                        {item.category}
-                      </span>
-                      <h4 className="text-white text-lg md:text-xl font-bold uppercase tracking-tight italic leading-tight">
-                        {item.caption}
-                      </h4>
-                      <div className="mt-4 md:mt-8 flex items-center gap-3 text-white/50 text-[10px] font-bold uppercase tracking-widest">
-                        View Frame{" "}
-                        <Maximize2 size={16} className="text-secondary" />
-                      </div>
+                  <div className="absolute inset-0 bg-primary/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white text-primary rounded-full flex items-center justify-center shadow-lg">
+                      <Maximize2 size={16} />
                     </div>
                   </div>
 
-                  {/* Minimal Label when not hovered */}
-                  <div className="md:hidden absolute bottom-4 left-4 right-4 p-3 bg-black/40 backdrop-blur-md rounded-xl border border-white/10">
-                    <p className="text-[10px] font-bold text-white uppercase tracking-widest truncate">
-                      {item.caption}
-                    </p>
+                  {/* Category Badge */}
+                  <div className="absolute top-3 left-3 px-2 py-1 bg-white/90 rounded text-xs font-bold">
+                    {item.category}
                   </div>
 
-                  {/* Desktop Minimal Label */}
-                  <div className="hidden md:block absolute bottom-6 left-6 right-6 p-4 bg-white/20 backdrop-blur-md rounded-2xl border border-white/20 opacity-100 group-hover:opacity-0 transition-opacity">
-                    <p className="text-[10px] font-bold text-white uppercase tracking-widest truncate">
+                  {/* Caption */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-primary/90 to-transparent">
+                    <h3 className="text-white font-bold text-sm line-clamp-2">
                       {item.caption}
-                    </p>
+                    </h3>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </AnimatePresence>
-          </motion.div>
-
-          {filteredImages.length === 0 && (
-            <div className="py-24 text-center space-y-6">
-              <ImageIcon size={48} className="mx-auto text-slate-100" />
-              <p className="text-slate-400 font-bold uppercase tracking-widest italic">
+            </div>
+          ) : (
+            <div className="py-20 text-center">
+              <ImageIcon size={48} className="mx-auto text-slate-200 mb-4" />
+              <h3 className="text-lg font-bold text-primary uppercase italic">
                 No images found in this category.
-              </p>
+              </h3>
             </div>
           )}
         </div>
       </section>
 
-      {/* 3. Visual Content Promise */}
-      <motion.section
-        variants={staggerContainer(0.2, 0.1)}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="py-12 md:py-16 px-4 md:px-8 bg-slate-900 overflow-hidden relative"
-      >
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full translate-y-1/2" />
-        <div className="max-w-7xl mx-auto relative z-10 text-center lg:text-left">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
-            <motion.div
-              variants={fadeIn("right", 0.2)}
-              className="space-y-8 md:space-y-10"
-            >
-              {/* Badge Removed */}
-              <h2 className="text-3xl md:text-5xl font-extrabold text-white uppercase tracking-tighter italic leading-none">
-                Our Commitment to <br />
-                <span className="text-secondary">Transparency</span>
-              </h2>
-              <p className="text-white/50 text-lg md:text-xl font-light italic leading-relaxed">
-                Our gallery is not just a collection of photos — it is a
-                transparent window into the quality, care, and comfort that
-                await you in India.
-              </p>
-            </motion.div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
-              {[
-                {
-                  icon: <ShieldCheck />,
-                  title: "Real Facilities",
-                  desc: "All images are of real hospitals & care centers.",
-                },
-                {
-                  icon: <Building2 />,
-                  title: "Zero Stock",
-                  desc: "Actual site photographs, never generic imagery.",
-                },
-                {
-                  icon: <Stethoscope />,
-                  title: "Clinical Reality",
-                  desc: "Actual treatment environments shown.",
-                },
-                {
-                  icon: <ChevronRight />,
-                  title: "Honest Look",
-                  desc: "Building confidence through genuine data.",
-                },
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeIn("up", 0.1 * (i + 1))}
-                  className="p-8 md:p-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] md:rounded-[3rem] space-y-4 shadow-2xl"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-secondary border border-white/10">
-                    {item.icon}
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="text-[10px] md:text-[11px] font-bold text-white uppercase tracking-widest">
-                      {item.title}
-                    </h4>
-                    <p className="text-[9px] md:text-[10px] text-white/40 font-medium leading-relaxed italic">
-                      {item.desc}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.section>
-
-      {/* 4. Lightbox View */}
+      {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-[200] bg-primary/95 backdrop-blur-xl flex items-center justify-center p-4 md:p-20 transition-all animate-fade-in"
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <button className="absolute top-6 right-6 md:top-10 md:right-10 text-white/50 hover:text-white transition-colors">
-            <X size={32} />
+          <button 
+            className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-all z-10"
+            onClick={(e) => {
+              e.stopPropagation();
+              setSelectedImage(null);
+            }}
+          >
+            <X size={20} />
           </button>
           <div
-            className="max-w-6xl w-full h-full relative flex items-center justify-center"
+            className="max-w-4xl w-full relative"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={selectedImage.image}
-              className="max-h-full max-w-full object-contain rounded-2xl md:rounded-3xl shadow-2xl"
+              className="w-full max-h-[80vh] object-contain rounded-xl"
               alt={selectedImage.caption}
             />
-            {/* Caption on lightbox - hide on very small screens to avoid clutter */}
-            <div className="hidden sm:block absolute bottom-6 md:bottom-10 left-6 md:left-10 right-6 md:right-10 p-6 md:p-10 bg-black/40 backdrop-blur-md rounded-[2rem] md:rounded-[3rem] border border-white/10 space-y-1 md:space-y-2 shadow-2xl">
-              <span className="text-secondary font-bold text-[10px] md:text-xs uppercase tracking-[0.4em]">
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
+              <div className="text-secondary text-xs font-bold uppercase mb-1">
                 {selectedImage.category}
-              </span>
-              <h2 className="text-white text-xl md:text-3xl font-extrabold uppercase italic tracking-tighter">
+              </div>
+              <h2 className="text-white text-xl font-bold">
                 {selectedImage.caption}
               </h2>
             </div>
           </div>
         </div>
       )}
-
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
-        .animate-fade-in { animation: fade-in 0.5s ease-out; }
-      `,
-        }}
-      />
     </div>
   );
 };

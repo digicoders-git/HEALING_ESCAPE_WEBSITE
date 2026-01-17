@@ -6,6 +6,7 @@ import {
   Award,
   ShieldCheck,
 } from "lucide-react";
+import ModernSelect from "../components/ModernSelect";
 import homeImg from "../assets/homeImg.png";
 
 const Hero = () => {
@@ -111,7 +112,16 @@ const Hero = () => {
               <div className="grid grid-cols-1 gap-4">
                 <ModernInput placeholder="Patient Name" type="text" />
                 <div className="grid grid-cols-2 gap-4">
-                  <ModernSelect options={["India", "UAE", "USA", "UK"]} />
+                  <ModernSelect 
+                    options={[
+                      { value: "India", label: "India" },
+                      { value: "UAE", label: "UAE" },
+                      { value: "USA", label: "USA" },
+                      { value: "UK", label: "UK" }
+                    ]}
+                    placeholder="Country"
+                    className="w-full"
+                  />
                   <ModernInput placeholder="City" type="text" />
                 </div>
                 <div className="flex gap-3">
@@ -157,18 +167,6 @@ const ModernInput = ({ placeholder, type = "text", center }) => (
   />
 );
 
-const ModernSelect = ({ options }) => (
-  <div className="relative">
-    <select className="w-full py-4 px-6 rounded-2xl border border-slate-100 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-primary/5 focus:bg-white transition-all text-sm font-extrabold text-slate-700 appearance-none cursor-pointer">
-      {options.map((opt) => (
-        <option key={opt}>{opt}</option>
-      ))}
-    </select>
-    <ChevronDown
-      size={18}
-      className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
-    />
-  </div>
-);
+
 
 export default Hero;
