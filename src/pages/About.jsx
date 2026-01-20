@@ -185,9 +185,9 @@ const About = () => {
                       variants={fadeIn("up", 0.1 * (i + 1))}
                       className="flex flex-col items-center gap-4 p-6 md:p-8 bg-white/5 rounded border border-white/10 hover:bg-white/10 transition-colors group"
                     >
-                      <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
+                      {/* <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
                         <ArrowRight size={18} md:size={20} />
-                      </div>
+                      </div> */}
                       <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">
                         {text}
                       </span>

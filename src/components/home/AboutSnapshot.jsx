@@ -85,7 +85,7 @@ const AboutSnapshot = () => {
 
             <div className="pt-2">
               <Link
-                to="/about-us"
+                to="/about"
                 className="inline-block bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px]"
               >
                 Company Profile

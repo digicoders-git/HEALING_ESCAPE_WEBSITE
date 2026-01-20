@@ -17,6 +17,10 @@ import {
   MessageSquare,
   ChevronRight,
   ChevronDown,
+  Circle,
+  List,
+  LifeBuoy,
+  CircleSmall,
 } from "lucide-react";
 import ModernSelect from "../components/ModernSelect";
 import PageHero from "../components/PageHero";
@@ -173,9 +177,9 @@ const FreeConsultation = () => {
                     "We consult with suitable specialists or hospitals (if required)",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <ChevronRight
+                      <CircleSmall
                         size={20}
-                        className="text-secondary shrink-0 mt-1"
+                        className="text-secondary shrink-0"
                       />
                       <span className="text-sm font-bold text-slate-600">
                         {item}
@@ -210,9 +214,9 @@ const FreeConsultation = () => {
 
               <div className="grid grid-cols-1 gap-4">
                 {[
-                  "✅ There is no consultation fee",
-                  "✅ There is no obligation to come to India",
-                  "✅ The final decision is always yours",
+                  "There is no consultation fee",
+                  "There is no obligation to come to India",
+                  "The final decision is always yours",
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -551,7 +555,7 @@ const FreeConsultation = () => {
                         placeholder="Full Name"
                         value={formData.fullName}
                         onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400 "
                         required
                       />
 
@@ -577,7 +581,7 @@ const FreeConsultation = () => {
                           placeholder="City"
                           value={formData.city}
                           onChange={(e) => setFormData({...formData, city: e.target.value})}
-                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                           required
                         />
                       </div>
@@ -587,14 +591,14 @@ const FreeConsultation = () => {
                           type="text"
                           value={formData.countryCode}
                           onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
-                          className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-white bg-white/80 text-center text-sm font-bold text-primary"
+                          className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-primary bg-white/80 text-center text-sm font-bold text-primary"
                         />
                         <input
                           type="tel"
                           placeholder="Mobile Number"
                           value={formData.mobile}
                           onChange={(e) => setFormData({...formData, mobile: e.target.value})}
-                          className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                          className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                           required
                         />
                       </div>
@@ -631,7 +635,7 @@ const FreeConsultation = () => {
                         rows="3"
                         value={formData.clinicalRequirement}
                         onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                         required
                       ></textarea>
                     </div>

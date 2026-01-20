@@ -65,12 +65,6 @@ const Founder = () => {
                   patients.
                 </p>
               </div>
-
-              <div className="pt-2">
-                <button className="flex items-center gap-2 bg-primary text-white font-bold py-3 px-8 rounded hover:bg-secondary transition-all uppercase tracking-widest text-[9px] shadow-sm">
-                  Founder’s Message <ArrowRight size={14} />
-                </button>
-              </div>
             </motion.div>
           </div>
         </div>

@@ -309,9 +309,9 @@ const Hospitals = () => {
                   
                   <div className="flex items-center justify-between pt-3 border-t border-slate-100">
                     <div className="flex items-center gap-2">
-                      <CheckCircle2 size={14} className="text-secondary" />
+                      {/* <CheckCircle2 size={14} className="text-secondary" /> */}
                       <span className="text-xs font-bold text-slate-400 uppercase">
-                        Verified
+                        
                       </span>
                     </div>
                     <div className="flex items-center gap-2 text-secondary group-hover:gap-3 transition-all">

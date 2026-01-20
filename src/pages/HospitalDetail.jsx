@@ -77,8 +77,8 @@ const HospitalDetail = () => {
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <div className="flex items-center justify-center gap-2 mb-2">
-              <div className="px-3 py-1 bg-secondary/20 backdrop-blur-sm rounded-full border border-secondary/30">
-                <span className="text-xs font-bold text-secondary uppercase tracking-wider">
+              <div className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-secondary/30">
+                <span className="text-xs font-bold text-white uppercase tracking-wider">
                   {hospital.city}, India
                 </span>
               </div>

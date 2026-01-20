@@ -57,10 +57,7 @@ const Services = () => {
             variants={fadeIn("right", 0.2)}
             className="lg:col-span-4 space-y-6 text-center lg:text-left"
           >
-            <div className="space-y-3">
-              <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.3em]">
-                Our Core
-              </h4>
+            <div className="space-y-4">
               <h2 className="text-2xl md:text-4xl font-bold leading-tight">
                 Patient Support
               </h2>
@@ -68,9 +65,6 @@ const Services = () => {
                 We manage clinical complexity so you focus on healing.
               </p>
             </div>
-            <button className="bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-lg uppercase tracking-widest text-[9px] hover:bg-white hover:text-primary transition-all">
-              Details Explore
-            </button>
           </motion.div>
 
           <div className="lg:col-span-8">

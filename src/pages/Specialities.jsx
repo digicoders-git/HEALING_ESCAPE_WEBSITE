@@ -47,7 +47,9 @@ const Specialities = () => {
     const fetchSpecialities = async () => {
       try {
         const data = await getSpecialities({ page: 1, limit: 50 });
-        setSpecialities(data.specialities || []);
+        // Filter only active specialities
+        const activeSpecialities = data.specialities?.filter(s => s.isActive) || [];
+        setSpecialities(activeSpecialities);
       } catch (error) {
         console.error("Error fetching specialities:", error);
       } finally {
@@ -133,7 +135,7 @@ const Specialities = () => {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500 text-center"
+                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500 text-center"
                 >
                   <div className="text-3xl group-hover:scale-110 transition-transform">
                     {item.icon}
@@ -182,7 +184,7 @@ const Specialities = () => {
                   
                   
                   {/* Category Badge */}
-                  <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-xl border border-white/20">
+                  <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded border border-white/20">
                     <span className="text-white text-xs font-bold uppercase tracking-widest">
                       Treatment
                     </span>
@@ -205,7 +207,7 @@ const Specialities = () => {
                 </div>
                 
                 {/* Hover Gradient Border */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-secondary/0 via-secondary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+                <div className="absolute inset-0 rounded bg-gradient-to-r from-secondary/0 via-secondary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
               </Link>
             ))}
           </div>

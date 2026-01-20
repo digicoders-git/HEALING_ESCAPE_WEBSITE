@@ -1,4 +1,5 @@
 import { MessageCircle, CheckCircle, PhoneCall } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
@@ -20,9 +21,9 @@ const FinalCTA = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-              <button className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
+              <Link to='/free-consultation' className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
                 <CheckCircle size={18} /> Get Free Consultation
-              </button>
+              </Link>
               <button className="w-full lg:w-auto bg-white/10 backdrop-blur-md hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded border border-white/20 transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
                 <MessageCircle size={18} /> WhatsApp Now
               </button>

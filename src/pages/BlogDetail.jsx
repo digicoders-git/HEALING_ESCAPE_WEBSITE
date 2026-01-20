@@ -81,8 +81,8 @@ const BlogDetail = () => {
             >
               <ArrowLeft size={16} /> Back to Blog
             </Link>
-            <div className="flex items-center justify-center gap-4 text-secondary text-sm mb-2">
-              <span className="px-3 py-1 bg-secondary/20 backdrop-blur-sm rounded-full border border-secondary/30">
+            <div className="flex items-center justify-center gap-4 text-white text-sm mb-2">
+              <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-secondary/30">
                 {blog.category}
               </span>
               <span className="flex items-center gap-2">
