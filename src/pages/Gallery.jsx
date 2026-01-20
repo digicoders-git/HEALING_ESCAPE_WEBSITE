@@ -144,38 +144,64 @@ const Gallery = () => {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          className="fixed inset-0 mt-20 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
+          {/* Close Button */}
           <button 
-            className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-all z-10"
+            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center transition-all z-20 border border-white/20 hover:border-white/40 group"
             onClick={(e) => {
               e.stopPropagation();
               setSelectedImage(null);
             }}
           >
-            <X size={20} />
+            <X size={24} className="group-hover:scale-110 transition-transform" />
           </button>
+          
+          {/* Image Container */}
           <div
-            className="max-w-4xl w-full relative"
+            className="max-w-5xl w-full relative animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
-              src={selectedImage.image}
-              className="w-full max-h-[80vh] object-contain rounded-xl"
-              alt={selectedImage.caption}
-            />
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-xl">
-              <div className="text-secondary text-xs font-bold uppercase mb-1">
-                {selectedImage.category}
+            <div className="relative bg-white/5 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <img
+                src={selectedImage.image}
+                className="w-full max-h-[85vh] object-contain"
+                alt={selectedImage.caption}
+              />
+              
+              {/* Image Info Overlay */}
+              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="px-3 py-1 bg-secondary/90 backdrop-blur-sm text-white text-xs font-bold uppercase tracking-wider rounded-full">
+                    {selectedImage.category}
+                  </span>
+                </div>
+                <h2 className="text-white text-xl md:text-2xl font-bold leading-tight">
+                  {selectedImage.caption}
+                </h2>
               </div>
-              <h2 className="text-white text-xl font-bold">
-                {selectedImage.caption}
-              </h2>
             </div>
+          </div>
+          
+          {/* Click to close hint */}
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
+            Click anywhere to close
           </div>
         </div>
       )}
+      
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes fade-in {
+              from { opacity: 0; transform: scale(0.95); }
+              to { opacity: 1; transform: scale(1); }
+            }
+            .animate-fade-in { animation: fade-in 0.3s ease-out; }
+          `,
+        }}
+      />
     </div>
   );
 };
