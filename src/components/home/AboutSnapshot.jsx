@@ -27,7 +27,7 @@ const AboutSnapshot = () => {
               />
             </div>
             {/* Authentic Data Card */}
-            <motion.div
+            {/* <motion.div
               variants={fadeIn("up", 0.4)}
               className="absolute -bottom-6 -left-6 z-20 bg-primary text-white p-6 rounded-2xl shadow-xl max-w-xs border-2 border-white"
             >
@@ -43,7 +43,7 @@ const AboutSnapshot = () => {
                   clinical outcomes in India.
                 </p>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
 
           {/* Content Side */}

@@ -49,7 +49,7 @@ const WhyIndia = () => {
                   <h3 className="font-bold text-primary text-lg leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-slate-500 text-[11px] font-medium leading-relaxed">
+                  <p className="text-slate-500 text-xs font-medium leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

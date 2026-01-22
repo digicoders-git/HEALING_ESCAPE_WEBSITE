@@ -15,11 +15,15 @@ const ModernSelect = ({
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
-  const filteredOptions = options.filter(option =>
-    option.label?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    option.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    option.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredOptions = options.filter(option => {
+  const text =
+    typeof option === "string"
+      ? option
+      : option.label || option.name || "";
+
+  return text.toLowerCase().includes(searchTerm.toLowerCase());
+});
+
 
   const selectedOption = options.find(option => 
     (option.value || option) === value

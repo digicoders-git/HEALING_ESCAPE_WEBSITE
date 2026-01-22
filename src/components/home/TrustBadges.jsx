@@ -53,7 +53,7 @@ const TrustBadges = () => {
                 <h3 className="font-bold text-white text-base uppercase tracking-wider">
                   {stat.title}
                 </h3>
-                <p className="text-white/60 text-[10px] font-medium leading-relaxed">
+                <p className="text-white/60 text-xs font-medium leading-relaxed">
                   {stat.desc}
                 </p>
               </div>

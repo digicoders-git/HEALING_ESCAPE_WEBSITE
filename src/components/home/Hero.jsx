@@ -5,7 +5,15 @@ import ModernSelect from "../ModernSelect";
 import homeVideo from "../../assets/homeVideo.mp4";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 import { createFreeConsultation } from "../../apis/enquiry";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import countries from "world-countries";
+
+const countryOptions = countries
+  .map((c) => ({
+    value: c.name.common,
+    label: c.name.common,
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
@@ -15,7 +23,7 @@ const Hero = () => {
     city: "",
     countryCode: "+91",
     mobile: "",
-    clinicalRequirement: ""
+    clinicalRequirement: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef(null);
@@ -32,12 +40,14 @@ const Hero = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await createFreeConsultation(formData);
-      
+
       if (response.success) {
-        toast.success("Enquiry submitted successfully! We will contact you soon.");
+        toast.success(
+          "Enquiry submitted successfully! We will contact you soon.",
+        );
         // Reset form
         setFormData({
           fullName: "",
@@ -45,7 +55,7 @@ const Hero = () => {
           city: "",
           countryCode: "+91",
           mobile: "",
-          clinicalRequirement: ""
+          clinicalRequirement: "",
         });
       }
     } catch (error) {
@@ -102,7 +112,7 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
           <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-left">
-            <motion.div
+            {/* <motion.div
               variants={fadeIn("right", 0.1)}
               className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded shadow-lg mx-auto lg:mx-0"
             >
@@ -110,7 +120,7 @@ const Hero = () => {
               <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-none">
                 Global Medical Portal
               </p>
-            </motion.div>
+            </motion.div> */}
 
             <motion.div
               variants={fadeIn("right", 0.2)}
@@ -133,7 +143,7 @@ const Hero = () => {
               especially North India.
             </motion.p>
 
-            <motion.div
+            {/* <motion.div
               variants={fadeIn("right", 0.4)}
               className="flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
             >
@@ -153,7 +163,7 @@ const Hero = () => {
                   Global Support
                 </span>
               </div>
-            </motion.div>
+            </motion.div> */}
           </div>
 
           {/* Right Side: Inquiry Form */}
@@ -181,35 +191,40 @@ const Hero = () => {
                   </p>
                 </div>
 
-                <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
+                <form
+                  className="space-y-3 sm:space-y-3.5"
+                  onSubmit={handleSubmit}
+                >
                   <div className="space-y-3 sm:space-y-3.5">
                     <input
                       type="text"
                       placeholder="Full Name"
                       value={formData.fullName}
-                      onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({ ...formData, fullName: e.target.value })
+                      }
                       className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
                       required
                     />
 
                     <div className="grid grid-cols-2 gap-3">
                       <ModernSelect
-                        options={[
-                          { value: "Kenya", label: "Kenya" },
-                          { value: "Nigeria", label: "Nigeria" },
-                          { value: "UAE", label: "UAE" },
-                          { value: "Bangladesh", label: "Bangladesh" }
-                        ]}
+                        options={countryOptions}
                         value={formData.country}
-                        onChange={(value) => setFormData({...formData, country: value})}
+                        onChange={(value) =>
+                          setFormData({ ...formData, country: value })
+                        }
                         placeholder="Country"
                         className="w-full"
                       />
+
                       <input
                         type="text"
                         placeholder="City"
                         value={formData.city}
-                        onChange={(e) => setFormData({...formData, city: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({ ...formData, city: e.target.value })
+                        }
                         className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                       />
                     </div>
@@ -218,14 +233,21 @@ const Hero = () => {
                       <input
                         type="text"
                         value={formData.countryCode}
-                        onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            countryCode: e.target.value,
+                          })
+                        }
                         className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded border border-white bg-white/80 text-center text-sm font-bold text-primary"
                       />
                       <input
                         type="text"
                         placeholder="Mobile Number"
                         value={formData.mobile}
-                        onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({ ...formData, mobile: e.target.value })
+                        }
                         className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                         required
                       />
@@ -235,7 +257,12 @@ const Hero = () => {
                       placeholder="Clinical requirement..."
                       rows="2"
                       value={formData.clinicalRequirement}
-                      onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          clinicalRequirement: e.target.value,
+                        })
+                      }
                       className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                       required
                     ></textarea>
