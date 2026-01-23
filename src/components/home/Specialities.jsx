@@ -8,6 +8,11 @@ import {
   Baby,
   Scissors,
   HeartPulse,
+  Dna,
+  Syringe,
+  Activity as VascularIcon,
+  Accessibility,
+  Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
@@ -35,8 +40,32 @@ const specialities = [
     icon: <Activity size={28} />,
   },
   { name: "IVF & Fertility", subtitle: "Parenthood", icon: <Baby size={28} /> },
-  { name: "Gastro", subtitle: "Digestive", icon: <Droplets size={28} /> },
-  { name: "Cosmetology", subtitle: "Aesthetic", icon: <Scissors size={28} /> },
+  {
+    name: "Hepatology",
+    subtitle: "Liver & Pancreas",
+    icon: <Droplets size={28} />,
+  },
+  {
+    name: "Plastik Surgery",
+    subtitle: "Reconstructive",
+    icon: <Scissors size={28} />,
+  },
+  {
+    name: "Bone Marrow Transplant",
+    subtitle: "Stem Cell (SCT)",
+    icon: <Dna size={28} />,
+  },
+  {
+    name: "Vascular surgery",
+    subtitle: "Blood Vessel",
+    icon: <VascularIcon size={28} />,
+  },
+  {
+    name: "Sports injury",
+    subtitle: "Trauma Care",
+    icon: <Accessibility size={28} />,
+  },
+  { name: "Pediatrics", subtitle: "Child Health", icon: <Heart size={28} /> },
 ];
 
 const Specialities = () => {
@@ -53,11 +82,11 @@ const Specialities = () => {
           variants={fadeIn("up", 0.1)}
           className="text-center mb-10 space-y-2"
         >
-          <h4 className="text-primary font-bold text-[10px] uppercase tracking-[0.25em]">
+          <h4 className="text-primary font-bold text-[12px] uppercase tracking-[0.25em]">
             Institutional Expertise
           </h4>
           <h2 className="text-2xl md:text-4xl font-bold text-primary tracking-tight">
-            Multi-Speciality Care
+            Advance Consent Treatment
           </h2>
           <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
         </motion.div>
@@ -73,10 +102,10 @@ const Specialities = () => {
                 {item.icon}
               </div>
               <div className="space-y-1 relative z-10">
-                <h3 className="font-bold text-primary text-base tracking-tight leading-none">
+                <h3 className="font-bold text-primary text-lg tracking-tight leading-none">
                   {item.name}
                 </h3>
-                <p className="text-slate-400 text-[9px] font-bold uppercase tracking-widest">
+                <p className="text-slate-400 text-[11px] font-bold uppercase tracking-widest">
                   {item.subtitle}
                 </p>
               </div>

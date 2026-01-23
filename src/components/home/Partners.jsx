@@ -15,7 +15,7 @@ const Partners = () => {
           <h2 className="text-xl font-bold text-primary">
             Our Trusted Hospital Partners
           </h2>
-          <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] mt-1 italic">
+          <p className="text-slate-400 font-bold uppercase tracking-widest text-[11px] mt-1 italic">
             Connecting you with excellence
           </p>
         </div>

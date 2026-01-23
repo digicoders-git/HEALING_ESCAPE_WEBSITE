@@ -50,10 +50,10 @@ const TrustBadges = () => {
                 {stat.icon}
               </div>
               <div className="space-y-2">
-                <h3 className="font-bold text-white text-base uppercase tracking-wider">
+                <h3 className="font-bold text-white text-lg uppercase tracking-wider">
                   {stat.title}
                 </h3>
-                <p className="text-white/60 text-xs font-medium leading-relaxed">
+                <p className="text-white/60 text-sm font-medium leading-relaxed">
                   {stat.desc}
                 </p>
               </div>

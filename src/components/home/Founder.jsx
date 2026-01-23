@@ -1,6 +1,7 @@
 import { Quote, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
+import founder from '../../assets/founder.png'
 
 const Founder = () => {
   return (
@@ -20,7 +21,7 @@ const Founder = () => {
             >
               <div className="relative rounded overflow-hidden aspect-[4/5] border-4 border-slate-50 shadow-md">
                 <img
-                  src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1000"
+                  src={founder}
                   alt="Founder"
                   className="w-full h-full object-cover"
                 />
@@ -39,13 +40,13 @@ const Founder = () => {
               className="lg:col-span-8 space-y-6"
             >
               <div className="space-y-2">
-                <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.2em]">
+                <h4 className="text-secondary font-bold text-[12px] uppercase tracking-[0.2em]">
                   Leadership
                 </h4>
                 <h2 className="text-2xl md:text-3xl font-bold text-primary tracking-tight">
                   Vision & Integrity
                 </h2>
-                <p className="text-slate-400 font-bold uppercase tracking-widest text-[9px] italic tracking-tighter">
+                <p className="text-slate-400 font-bold uppercase tracking-widest text-[11px] italic tracking-tighter">
                   A Message from our founder
                 </p>
                 <div className="w-12 h-1 bg-secondary rounded-full" />
@@ -56,7 +57,7 @@ const Founder = () => {
                   "At Healing Escape, we are committed to ethical practices and
                   service excellence."
                 </p>
-                <p className="text-slate-500 font-medium text-sm leading-relaxed">
+                <p className="text-slate-500 font-medium text-base leading-relaxed">
                   Healing Escape is founded by{" "}
                   <span className="text-primary font-bold">Shubham Singh</span>,
                   a multidisciplinary entrepreneur with international exposure

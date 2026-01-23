@@ -59,10 +59,12 @@ const Services = () => {
           >
             <div className="space-y-4">
               <h2 className="text-2xl md:text-4xl font-bold leading-tight">
-                Patient Support
+                End to End Patient Support
               </h2>
-              <p className="text-white/60 font-medium leading-relaxed text-sm">
-                We manage clinical complexity so you focus on healing.
+              <p className="text-white/60 font-medium leading-relaxed text-base">
+                We manage clinical complexity so you focus on healing.<br/>
+                Provides seamless assistance from initial diagnosis and treatment initiation through long-term therapy, ensuring patients feel supported throughout their entire healthcare journey. <br />
+                Offers crucial support through insurance verification, prior authorization assistance, and financial programs (copay/assistance) to make treatments affordable.
               </p>
             </div>
           </motion.div>
@@ -78,10 +80,10 @@ const Services = () => {
                   <div className="text-secondary mb-3 transform group-hover:-translate-y-1 transition-transform">
                     {item.icon}
                   </div>
-                  <h3 className="font-bold text-white text-base mb-2 tracking-tight">
+                  <h3 className="font-bold text-white text-lg mb-2 tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="text-white/50 text-[10px] font-medium leading-relaxed">
+                  <p className="text-white/50 text-sm font-medium leading-relaxed">
                     {item.desc}
                   </p>
                 </motion.div>

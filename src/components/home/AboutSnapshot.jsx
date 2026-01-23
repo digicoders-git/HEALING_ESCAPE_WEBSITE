@@ -2,8 +2,10 @@ import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
+import { useTranslation } from "react-i18next";
 
 const AboutSnapshot = () => {
+  const { t } = useTranslation();
   return (
     <section className="py-12 bg-white overflow-hidden">
       <motion.div
@@ -19,7 +21,7 @@ const AboutSnapshot = () => {
             variants={fadeIn("right", 0.2)}
             className="lg:w-1/2 relative"
           >
-            <div className="relative z-10 rounded-[2rem] overflow-hidden shadow-xl border-4 border-slate-50">
+            <div className="relative z-10 rounded-4xl overflow-hidden shadow-xl border-4 border-slate-50">
               <img
                 src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=1000"
                 alt="Doctor with patient"
@@ -52,8 +54,8 @@ const AboutSnapshot = () => {
             className="lg:w-1/2 space-y-6"
           >
             <div className="space-y-3">
-              <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.25em] border-l-4 border-secondary pl-4">
-                Institutional Profile
+              <h4 className="text-secondary font-bold text-[12px] uppercase tracking-[0.25em] border-l-4 border-secondary pl-4">
+                {t("institutional_profile")}
               </h4>
               <h2 className="text-2xl md:text-4xl font-bold text-primary leading-tight tracking-tight">
                 Welcome to Healing Escape Global
@@ -62,33 +64,16 @@ const AboutSnapshot = () => {
             </div>
 
             <div className="space-y-4 text-slate-600 font-medium leading-relaxed text-base">
-              <p>
-                Healing Escape is a specialized medical tourism facilitator
-                based in{" "}
-                <span className="text-primary font-bold">Lucknow, India</span>.
-                We operate as a bridge between international healthcare seekers
-                and India’s premier medical institutions.
-              </p>
-              <p className="text-xs md:text-sm">
-                Our operations are built on three core pillars:{" "}
-                <span className="text-primary font-bold">
-                  Clinical Transparency
-                </span>
-                ,{" "}
-                <span className="text-primary font-bold">Ethical Guidance</span>
-                , and{" "}
-                <span className="text-primary font-bold">Patient Safety</span>.
-                We manage every clinical and logistical touchpoint of your
-                journey.
-              </p>
+              <p>{t("about_p1")}</p>
+              <p className="text-sm md:text-base">{t("about_p2")}</p>
             </div>
 
             <div className="pt-2">
               <Link
                 to="/about"
-                className="inline-block bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px]"
+                className="inline-block bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[13px]"
               >
-                Company Profile
+                {t("company_profile")}
               </Link>
             </div>
           </motion.div>

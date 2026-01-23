@@ -1,12 +1,15 @@
 import { useState, useRef } from "react";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import ModernSelect from "../ModernSelect";
 import homeVideo from "../../assets/homeVideo.mp4";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 import { createFreeConsultation } from "../../apis/enquiry";
 import { toast } from "react-toastify";
 import countries from "world-countries";
+import jci from '../../assets/home/jci.png'
+import nabh from '../../assets/home/nabh.png'
 
 const countryOptions = countries
   .map((c) => ({
@@ -16,6 +19,7 @@ const countryOptions = countries
   .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const Hero = () => {
+  const { t } = useTranslation();
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const [formData, setFormData] = useState({
     fullName: "",
@@ -127,43 +131,39 @@ const Hero = () => {
               className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                Connecting the World to{" "}
-                <span className="text-secondary">India’s Healthcare</span>{" "}
-                <br />
-                Excellence
+                {t("hero_title")}
               </h1>
             </motion.div>
             <motion.p
               variants={fadeIn("right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:mx-0"
             >
-              Your trusted partner for world-class, affordable medical treatment
-              in India. We help international patients access top hospitals,
-              leading doctors, and seamless medical journeys across India —
-              especially North India.
+              {t("hero_desc")}
             </motion.p>
 
-            {/* <motion.div
+            <motion.div
               variants={fadeIn("right", 0.4)}
               className="flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
                   <ShieldCheck size={16} className="text-secondary" />
+                  <img src={jci} alt="" />
                 </div>
-                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest">
+                <span className="text-lg font-bold text-secondary uppercase tracking-widest">
                   JCI Accredited
                 </span>
               </div>
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
                   <Globe size={16} className="text-secondary" />
+                  <img src={nabh} alt="" />
                 </div>
-                <span className="text-[10px] font-bold text-secondary uppercase tracking-widest">
-                  Global Support
+                <span className="text-lg font-bold text-secondary uppercase tracking-widest">
+                  NABH
                 </span>
               </div>
-            </motion.div> */}
+            </motion.div>
           </div>
 
           {/* Right Side: Inquiry Form */}
@@ -184,10 +184,10 @@ const Hero = () => {
               <div className="relative z-10">
                 <div className="mb-5 md:mb-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
-                    Get Free Medical Consultation
+                    {t("get_free_consultation")}
                   </h3>
-                  <p className="text-slate-500 text-[9px] sm:text-[10px] font-bold uppercase tracking-widest mt-1">
-                    Verified Response Center
+                  <p className="text-slate-500 text-[11px] sm:text-[12px] font-bold uppercase tracking-widest mt-1">
+                    {t("verified_response")}
                   </p>
                 </div>
 
@@ -198,7 +198,7 @@ const Hero = () => {
                   <div className="space-y-3 sm:space-y-3.5">
                     <input
                       type="text"
-                      placeholder="Full Name"
+                      placeholder={t("full_name")}
                       value={formData.fullName}
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
@@ -214,13 +214,13 @@ const Hero = () => {
                         onChange={(value) =>
                           setFormData({ ...formData, country: value })
                         }
-                        placeholder="Country"
+                        placeholder={t("country")}
                         className="w-full"
                       />
 
                       <input
                         type="text"
-                        placeholder="City"
+                        placeholder={t("city")}
                         value={formData.city}
                         onChange={(e) =>
                           setFormData({ ...formData, city: e.target.value })
@@ -243,7 +243,7 @@ const Hero = () => {
                       />
                       <input
                         type="text"
-                        placeholder="Mobile Number"
+                        placeholder={t("mobile_number")}
                         value={formData.mobile}
                         onChange={(e) =>
                           setFormData({ ...formData, mobile: e.target.value })
@@ -254,7 +254,7 @@ const Hero = () => {
                     </div>
 
                     <textarea
-                      placeholder="Clinical requirement..."
+                      placeholder={t("clinical_requirement")}
                       rows="2"
                       value={formData.clinicalRequirement}
                       onChange={(e) =>
@@ -271,9 +271,9 @@ const Hero = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[12px] sm:text-[13px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Submitting..." : "Send Enquiry"}
+                    {isSubmitting ? t("submitting") : t("send_enquiry")}
                   </button>
                 </form>
               </div>

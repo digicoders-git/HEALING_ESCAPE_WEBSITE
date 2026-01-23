@@ -8,6 +8,7 @@ import {
   MapPin,
   ExternalLink,
   ShieldCheck,
+  Youtube,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -18,7 +19,7 @@ const Footer = () => {
   return (
     <footer className="bg-primary text-white pt-20 pb-8 px-4 md:px-8 relative overflow-hidden">
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary/40 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-px bg-linear-to-r from-transparent via-secondary/40 to-transparent"></div>
       <div className="absolute top-10 right-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl"></div>
 
@@ -70,19 +71,19 @@ const Footer = () => {
               alt="Healing Escape Global"
               className="h-12 w-auto brightness-200 transition-transform duration-300 group-hover:scale-105"
             />
-            <div className="absolute -bottom-2 left-0 w-20 h-1 bg-gradient-to-r from-secondary via-secondary/50 to-transparent rounded-full"></div>
+            <div className="absolute -bottom-2 left-0 w-20 h-1 bg-linear-to-r from-secondary via-secondary/50 to-transparent rounded-full"></div>
           </div>
-          <p className="text-white/70 text-sm font-medium leading-relaxed">
+          <p className="text-white/70 text-base font-medium leading-relaxed">
             Your trusted bridge to India&apos;s premier healthcare. Connecting
             global patients with JCI & NABH accredited hospitals for ethical and
             affordable healing journeys.
           </p>
-          <div className="flex items-center gap-3 bg-secondary/10 px-4 py-3 rounded-xl border border-secondary/20 hover:bg-secondary/15 hover:border-secondary/30 transition-all duration-300">
+          {/* <div className="flex items-center gap-3 bg-secondary/10 px-4 py-3 rounded-xl border border-secondary/20 hover:bg-secondary/15 hover:border-secondary/30 transition-all duration-300">
             <ShieldCheck size={18} className="text-secondary" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">
+            <span className="text-[12px] font-bold uppercase tracking-[0.2em] text-secondary">
               NABH Partner Portal
             </span>
-          </div>
+          </div> */}
         </motion.div>
 
         {/* Column 2: Quick Links */}
@@ -94,7 +95,7 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-16 h-1 bg-secondary rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-8 h-1 bg-white/30 rounded-full"></div>
           </div>
-          <ul className="space-y-4 text-white/80 text-sm font-medium">
+          <ul className="space-y-4 text-white/80 text-base font-medium">
             <li>
               <Link
                 to="/hospitals"
@@ -155,7 +156,7 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-16 h-1 bg-secondary rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-8 h-1 bg-white/30 rounded-full"></div>
           </div>
-          <ul className="space-y-4 text-white/80 text-sm font-medium">
+          <ul className="space-y-4 text-white/80 text-base font-medium">
             <li>
               <Link
                 to="/privacy-policy"
@@ -193,7 +194,7 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-8 h-1 bg-white/30 rounded-full"></div>
           </div>
           <ul className="space-y-5">
-            <li className="flex gap-4 text-white/90 text-sm group hover:text-secondary transition-colors duration-300">
+            <li className="flex gap-4 text-white/90 text-base group hover:text-secondary transition-colors duration-300">
               <MapPin
                 size={18}
                 className="text-secondary shrink-0 mt-1 group-hover:scale-110 transition-transform duration-300"
@@ -202,14 +203,14 @@ const Footer = () => {
                 Lucknow, Uttar Pradesh, India - 226010
               </span>
             </li>
-            <li className="flex items-center gap-4 text-white/90 text-sm group hover:text-secondary transition-colors duration-300">
+            <li className="flex items-center gap-4 text-white/90 text-base group hover:text-secondary transition-colors duration-300">
               <Phone
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
               />
               <span>+91 9506666642</span>
             </li>
-            <li className="flex items-center gap-4 text-white/90 text-sm group hover:text-secondary transition-colors duration-300">
+            <li className="flex items-center gap-4 text-white/90 text-base group hover:text-secondary transition-colors duration-300">
               <Mail
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
@@ -228,31 +229,25 @@ const Footer = () => {
             <div className="absolute bottom-0 left-0 w-16 h-1 bg-secondary rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-8 h-1 bg-white/30 rounded-full"></div>
           </div>
-          <div className="flex gap-4">
-            <a
-              href="#"
-              className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-secondary/50"
-            >
-              <Facebook size={20} />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-secondary/50"
-            >
-              <Twitter size={20} />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-secondary/50"
-            >
-              <Instagram size={20} />
-            </a>
-            <a
-              href="#"
-              className="w-12 h-12 rounded-xl bg-white/5 border border-white/20 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-2 shadow-lg hover:shadow-secondary/50"
-            >
-              <Linkedin size={20} />
-            </a>
+          <div className="flex flex-wrap gap-3">
+            {[
+              { Icon: Facebook, href: "#" },
+              { Icon: Twitter, href: "#" },
+              { Icon: Instagram, href: "#" },
+              { Icon: Linkedin, href: "#" },
+              { Icon: Youtube, href: "#" },
+            ].map((social, idx) => (
+              <a
+                key={idx}
+                href={social.href}
+                className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-lg group"
+              >
+                <social.Icon
+                  size={18}
+                  className="group-hover:text-white transition-colors"
+                />
+              </a>
+            ))}
           </div>
           {/* <div className="pt-6 p-5 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/20 text-[10px] font-bold text-white/60 uppercase tracking-[0.2em] text-center backdrop-blur-sm hover:border-secondary/30 transition-all duration-300">
             Scan for Digital Brochure
@@ -268,8 +263,8 @@ const Footer = () => {
         variants={fadeIn("up", 0.6)}
         className="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/10 flex items-center justify-center relative"
       >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
-        <p className="text-white/80 text-xs font-medium tracking-[0.15em] text-center">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-linear-to-r from-transparent via-secondary to-transparent"></div>
+        <p className="text-white/80 text-sm font-medium tracking-[0.15em] text-center">
           © 2026 Healing Escape Global. Design and Developed by{" "}
           <a
             target="_blank"

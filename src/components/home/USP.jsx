@@ -6,6 +6,7 @@ import {
   ClipboardCheck,
   CheckCircle,
 } from "lucide-react";
+import mod2 from '../../assets/home/mod2.png'
 
 const differentiators = [
   {
@@ -33,7 +34,7 @@ const USP = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 space-y-6">
             <div className="space-y-2">
-              <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] border-l-4 border-secondary pl-4">
+              <h4 className="text-secondary font-bold text-[12px] uppercase tracking-[0.2em] border-l-4 border-secondary pl-4">
                 The Healing Escape Edge
               </h4>
               <h2 className="text-2xl md:text-3xl font-bold text-primary leading-tight tracking-tight uppercase">
@@ -53,11 +54,11 @@ const USP = () => {
                       size={16}
                       className="text-secondary shrink-0"
                     />
-                    <h3 className="font-bold text-primary text-sm">
+                    <h3 className="font-bold text-primary text-base">
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                  <p className="text-slate-500 text-[13px] font-medium leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -70,7 +71,7 @@ const USP = () => {
               <div className="absolute inset-0 bg-primary/5 rounded translate-x-2 translate-y-2" />
               <div className="relative bg-white border border-slate-100 p-4 rounded shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1000"
+                  src={mod2}
                   className="w-full h-[300px] object-cover rounded"
                   alt="Clinical Excellence"
                 />

@@ -21,16 +21,19 @@ const FinalCTA = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-              <Link to='/free-consultation' className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
+              <Link
+                to="/free-consultation"
+                className="w-full lg:w-auto bg-secondary hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded shadow-xl transition-all duration-300 uppercase tracking-[0.15em] text-[13px] flex items-center justify-center gap-2"
+              >
                 <CheckCircle size={18} /> Get Free Consultation
               </Link>
-              <button className="w-full lg:w-auto bg-white/10 backdrop-blur-md hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded border border-white/20 transition-all duration-300 uppercase tracking-[0.15em] text-[11px] flex items-center justify-center gap-2">
+              <button className="w-full lg:w-auto bg-white/10 backdrop-blur-md hover:bg-white hover:text-primary text-white font-bold py-4 px-10 rounded border border-white/20 transition-all duration-300 uppercase tracking-[0.15em] text-[13px] flex items-center justify-center gap-2">
                 <MessageCircle size={18} /> WhatsApp Now
               </button>
             </div>
 
             <div className="pt-6 border-t border-white/10 w-full text-center">
-              <div className="flex flex-wrap items-center justify-center gap-6 text-[9px] font-bold uppercase tracking-[0.2em] text-white/40">
+              <div className="flex flex-wrap items-center justify-center gap-6 text-[11px] font-bold uppercase tracking-[0.2em] text-white/40">
                 <span className="flex items-center gap-1">
                   <CheckCircle size={12} className="text-secondary" />{" "}
                   Transparent Pricing

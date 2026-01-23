@@ -29,6 +29,14 @@ import { fadeIn, staggerContainer } from "../utils/framerVariants";
 import { specialitiesData } from "../data/specialitiesData";
 import { createFreeConsultation } from "../apis/enquiry";
 import { toast } from 'react-toastify';
+import countries from "world-countries";
+
+const countryOptions = countries
+  .map((c) => ({
+    value: c.name.common,
+    label: c.name.common,
+  }))
+  .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const bannerSlides = [
   {
@@ -82,6 +90,153 @@ const FreeConsultation = () => {
   return (
     <div className="bg-white overflow-x-hidden">
       <PageHero slides={bannerSlides} />
+
+
+      {/* 8. Consultation Form */}
+      <section
+        id="consultation-form"
+        className="py-12 md:py-16 px-4 md:px-8 bg-white"
+      >
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            variants={staggerContainer(0.2, 0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.25 }}
+            className="space-y-12 md:space-y-16"
+          >
+            <motion.div
+              variants={fadeIn("up", 0.2)}
+              className="text-center space-y-4 mb-12"
+            >
+              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
+                Request Your Free <span className="text-secondary">Consultation</span>
+              </h2>
+              <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
+                Fill out the form below and our medical coordination team will review your case within 24 hours.
+              </p>
+            </motion.div>
+
+            <motion.div
+              variants={fadeIn("up", 0.4)}
+              className="flex justify-center"
+            >
+              <div className="rounded-3xl shadow-2xl p-6 sm:p-7 md:p-8 w-full max-w-md mx-auto border-b-4 border-primary relative overflow-hidden">
+                <div className="absolute inset-0 z-0">
+                  <img
+                    src="https://images.unsplash.com/photo-1576091160550-217359f488d5?auto=format&fit=crop&q=80&w=1000"
+                    alt="Clinical Environment"
+                    className="w-full h-full object-cover blur-[4px] scale-110"
+                  />
+                  <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
+                </div>
+
+                <div className="relative z-10">
+                  <div className="mb-5 md:mb-6">
+                    <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
+                      Get Free Medical Consultation
+                    </h3>
+                  </div>
+
+                  <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
+                    <div className="space-y-3 sm:space-y-3.5">
+                      <input
+                        type="text"
+                        placeholder="Full Name"
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400 "
+                        required
+                      />
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <ModernSelect
+                        options={countryOptions}
+                        value={formData.country}
+                        onChange={(value) =>
+                          setFormData({ ...formData, country: value })
+                        }
+                        placeholder={("country")}
+                        className="w-full"
+                      />
+                        <input
+                          type="text"
+                          placeholder="City"
+                          value={formData.city}
+                          onChange={(e) => setFormData({...formData, city: e.target.value})}
+                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                          required
+                        />
+                      </div>
+
+                      <div className="flex gap-2">
+                        <input
+                          type="text"
+                          value={formData.countryCode}
+                          onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                          className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-primary bg-white/80 text-center text-sm font-bold text-primary"
+                        />
+                        <input
+                          type="tel"
+                          placeholder="Mobile Number"
+                          value={formData.mobile}
+                          onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                          className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
+                          required
+                        />
+                      </div>
+
+                      {/* <input
+                        type="email"
+                        placeholder="Email Address"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
+                        required
+                      /> */}
+
+                      {/* <div className="relative">
+                        <select 
+                          value={formData.treatment}
+                          onChange={(e) => setFormData({...formData, treatment: e.target.value})}
+                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none appearance-none text-sm font-semibold text-slate-700 cursor-pointer"
+                          required
+                        >
+                          <option value="">Select Treatment</option>
+                          {treatmentOptions.map((treatment) => (
+                            <option key={treatment} value={treatment}>{treatment}</option>
+                          ))}
+                        </select>
+                        <ChevronDown
+                          size={14}
+                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
+                        />
+                      </div> */}
+
+                      <textarea
+                        placeholder="Describe your medical condition..."
+                        rows="3"
+                        value={formData.clinicalRequirement}
+                        onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
+                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
+                        required
+                      ></textarea>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isSubmitting ? "Submitting..." : "Request Free Consultation"}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* 1. Intro Section */}
       <motion.section
@@ -502,158 +657,6 @@ const FreeConsultation = () => {
       </motion.section>
 
 
-      {/* 8. Consultation Form */}
-      <section
-        id="consultation-form"
-        className="py-12 md:py-16 px-4 md:px-8 bg-white"
-      >
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            variants={staggerContainer(0.2, 0.1)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.25 }}
-            className="space-y-12 md:space-y-16"
-          >
-            <motion.div
-              variants={fadeIn("up", 0.2)}
-              className="text-center space-y-4 mb-12"
-            >
-              <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
-                Request Your Free <span className="text-secondary">Consultation</span>
-              </h2>
-              <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
-                Fill out the form below and our medical coordination team will review your case within 24 hours.
-              </p>
-            </motion.div>
-
-            <motion.div
-              variants={fadeIn("up", 0.4)}
-              className="flex justify-center"
-            >
-              <div className="rounded-3xl shadow-2xl p-6 sm:p-7 md:p-8 w-full max-w-md mx-auto border-b-4 border-primary relative overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                  <img
-                    src="https://images.unsplash.com/photo-1576091160550-217359f488d5?auto=format&fit=crop&q=80&w=1000"
-                    alt="Clinical Environment"
-                    className="w-full h-full object-cover blur-[4px] scale-110"
-                  />
-                  <div className="absolute inset-0 bg-white/70 backdrop-blur-sm" />
-                </div>
-
-                <div className="relative z-10">
-                  <div className="mb-5 md:mb-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
-                      Get Free Medical Consultation
-                    </h3>
-                  </div>
-
-                  <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
-                    <div className="space-y-3 sm:space-y-3.5">
-                      <input
-                        type="text"
-                        placeholder="Full Name"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400 "
-                        required
-                      />
-
-                      <div className="grid grid-cols-2 gap-3">
-                        <ModernSelect
-                          options={[
-                            { value: "Kenya", label: "Kenya" },
-                            { value: "Nigeria", label: "Nigeria" },
-                            { value: "UAE", label: "UAE" },
-                            { value: "Bangladesh", label: "Bangladesh" },
-                            { value: "Iraq", label: "Iraq" },
-                            { value: "Afghanistan", label: "Afghanistan" },
-                            { value: "Other", label: "Other" }
-                          ]}
-                          value={formData.country}
-                          onChange={(value) => setFormData({...formData, country: value})}
-                          placeholder="Country"
-                          required
-                          className="w-full"
-                        />
-                        <input
-                          type="text"
-                          placeholder="City"
-                          value={formData.city}
-                          onChange={(e) => setFormData({...formData, city: e.target.value})}
-                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
-                          required
-                        />
-                      </div>
-
-                      <div className="flex gap-2">
-                        <input
-                          type="text"
-                          value={formData.countryCode}
-                          onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
-                          className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-primary bg-white/80 text-center text-sm font-bold text-primary"
-                        />
-                        <input
-                          type="tel"
-                          placeholder="Mobile Number"
-                          value={formData.mobile}
-                          onChange={(e) => setFormData({...formData, mobile: e.target.value})}
-                          className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
-                          required
-                        />
-                      </div>
-
-                      {/* <input
-                        type="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400"
-                        required
-                      /> */}
-
-                      {/* <div className="relative">
-                        <select 
-                          value={formData.treatment}
-                          onChange={(e) => setFormData({...formData, treatment: e.target.value})}
-                          className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-white bg-white/80 focus:outline-none appearance-none text-sm font-semibold text-slate-700 cursor-pointer"
-                          required
-                        >
-                          <option value="">Select Treatment</option>
-                          {treatmentOptions.map((treatment) => (
-                            <option key={treatment} value={treatment}>{treatment}</option>
-                          ))}
-                        </select>
-                        <ChevronDown
-                          size={14}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"
-                        />
-                      </div> */}
-
-                      <textarea
-                        placeholder="Describe your medical condition..."
-                        rows="3"
-                        value={formData.clinicalRequirement}
-                        onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
-                        className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
-                        required
-                      ></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? "Submitting..." : "Request Free Consultation"}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* 9. What Happens Next */}
       <motion.section

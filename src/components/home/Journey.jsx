@@ -51,7 +51,7 @@ const Journey = () => {
     <section className="py-12 bg-slate-50 relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 md:px-8 relative z-10">
         <div className="text-center mb-10 space-y-2">
-          <h4 className="text-secondary font-bold text-[10px] uppercase tracking-[0.2em] px-3 py-1 bg-secondary/10 rounded inline-block">
+          <h4 className="text-secondary font-bold text-[12px] uppercase tracking-[0.2em] px-3 py-1 bg-secondary/10 rounded inline-block">
             The Clinical Pathway
           </h4>
           <h2 className="text-2xl md:text-3xl font-bold text-primary tracking-tight uppercase">
@@ -65,7 +65,7 @@ const Journey = () => {
               key={idx}
               className="bg-white p-5 border border-slate-100 shadow-sm relative group hover:shadow-lg transition-all duration-500 rounded"
             >
-              <div className="absolute top-2 right-2 w-6 h-6 bg-primary text-white text-[9px] font-bold flex items-center justify-center rounded shadow-sm">
+              <div className="absolute top-2 right-2 w-6 h-6 bg-primary text-white text-[11px] font-bold flex items-center justify-center rounded shadow-sm">
                 0{idx + 1}
               </div>
 
@@ -74,10 +74,10 @@ const Journey = () => {
               </div>
 
               <div className="space-y-1">
-                <h3 className="font-bold text-primary text-sm leading-tight">
+                <h3 className="font-bold text-primary text-base leading-tight">
                   {step.title}
                 </h3>
-                <p className="text-slate-500 text-[10px] font-medium leading-relaxed">
+                <p className="text-slate-500 text-[13px] font-medium leading-relaxed">
                   {step.desc}
                 </p>
               </div>

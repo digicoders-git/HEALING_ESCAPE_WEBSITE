@@ -1,73 +1,68 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Check } from 'lucide-react';
+import React, { useState, useRef, useEffect } from "react";
+import { ChevronDown, Check } from "lucide-react";
 
-const ModernSelect = ({ 
-  options = [], 
-  value, 
-  onChange, 
-  placeholder = "Select option", 
+const ModernSelect = ({
+  options = [],
+  value,
+  onChange,
+  placeholder = "Select option",
   required = false,
   className = "",
-  disabled = false 
+  disabled = false,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const dropdownRef = useRef(null);
   const inputRef = useRef(null);
 
-  const filteredOptions = options.filter(option => {
-  const text =
-    typeof option === "string"
-      ? option
-      : option.label || option.name || "";
+  const filteredOptions = options.filter((option) => {
+    const text =
+      typeof option === "string" ? option : option.label || option.name || "";
 
-  return text.toLowerCase().includes(searchTerm.toLowerCase());
-});
+    return text.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
-
-  const selectedOption = options.find(option => 
-    (option.value || option) === value
+  const selectedOption = options.find(
+    (option) => (option.value || option) === value,
   );
 
-  const displayText = selectedOption 
-    ? (selectedOption.label || selectedOption.name || selectedOption)
+  const displayText = selectedOption
+    ? selectedOption.label || selectedOption.name || selectedOption
     : placeholder;
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setIsOpen(false);
-        setSearchTerm('');
+        setSearchTerm("");
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const handleSelect = (option) => {
     const optionValue = option.value || option;
     onChange(optionValue);
     setIsOpen(false);
-    setSearchTerm('');
+    setSearchTerm("");
   };
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <div
-        className={`w-full px-4 py-2 rounded-md border outline-none cursor-pointer text-sm flex items-center justify-between transition-all bg-white border-slate-200 hover:border-primary focus:border-primary ${
-          disabled ? 'opacity-50 cursor-not-allowed' : ''
-        } ${
-          isOpen ? 'border-primary ring-2 ring-primary/10' : ''
-        } ${
-          value ? 'text-slate-700' : 'text-slate-400'
+        className={`w-full px-4 py-3 rounded-md border outline-none cursor-pointer text-base flex items-center justify-between transition-all bg-white border-slate-200 hover:border-primary focus:border-primary ${
+          disabled ? "opacity-50 cursor-not-allowed" : ""
+        } ${isOpen ? "border-primary ring-2 ring-primary/10" : ""} ${
+          value ? "text-slate-700" : "text-slate-400"
         }`}
         onClick={() => !disabled && setIsOpen(!isOpen)}
       >
         <span className="truncate">{displayText}</span>
-        <ChevronDown 
-          size={16} 
-          className={`transition-transform duration-200 text-slate-400 ${isOpen ? 'rotate-180' : ''}`}
+        <ChevronDown
+          size={16}
+          className={`transition-transform duration-200 text-slate-400 ${isOpen ? "rotate-180" : ""}`}
         />
       </div>
 
@@ -86,7 +81,7 @@ const ModernSelect = ({
               />
             </div>
           )}
-          
+
           <div className="max-h-48 overflow-y-auto">
             {filteredOptions.length === 0 ? (
               <div className="px-4 py-3 text-sm text-center text-slate-400">
@@ -101,17 +96,15 @@ const ModernSelect = ({
                 return (
                   <div
                     key={index}
-                    className={`px-4 py-2 cursor-pointer text-sm flex items-center justify-between transition-colors hover:bg-slate-50 ${
-                      isSelected 
-                        ? 'bg-primary/10 text-primary' 
-                        : 'text-slate-700'
+                    className={`px-4 py-2.5 cursor-pointer text-base flex items-center justify-between transition-colors hover:bg-slate-50 ${
+                      isSelected
+                        ? "bg-primary/10 text-primary"
+                        : "text-slate-700"
                     }`}
                     onClick={() => handleSelect(option)}
                   >
                     <span className="truncate">{optionLabel}</span>
-                    {isSelected && (
-                      <Check size={16} className="text-primary" />
-                    )}
+                    {isSelected && <Check size={16} className="text-primary" />}
                   </div>
                 );
               })

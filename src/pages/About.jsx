@@ -12,11 +12,12 @@ import {
 import PageHero from "../components/PageHero";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
+import abt1 from '../assets/about/abt1.png'
 
 const bannerSlides = [
   {
     image:
-      "https://d.newsweek.com/en/full/2591345/exterior-hospitals-emergency-department.jpg?w=1200&f=3671b140c403fe0e1fb501598cec585e",
+      abt1,
     title: "About Healing Escape",
     subtitle: "Connecting the World to India’s Healthcare Excellence",
     buttonLabel: "Explore Services",
@@ -216,7 +217,7 @@ const About = () => {
             >
               <div className="space-y-4">
                 <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight uppercase leading-[0.9] italic">
-                  North India <br />
+                  Why India is<br />
                   <span className="text-secondary">Medical Hub</span>
                 </h2>
               </div>
@@ -448,12 +449,12 @@ const About = () => {
               className="lg:col-span-5"
             >
               <div className=" rounded aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
-                <Users
+                {/* <Users
                   size={60}
                   md:size={80}
                   className="text-secondary mb-6 md:mb-8 transform md:group-hover:scale-110 transition-transform"
-                />
-                <img src='https://cdn.apollohospitals.com/delhi/2023/09/speciality_ah_11zon.webp' className="w-full h-[400px] md:h-[600px] rounded object-cover shadow-2xl " />
+                /> */}
+                <img src='https://img.freepik.com/premium-photo/dedicated-team-indian-doctors_895561-15568.jpg' className="w-full h-[400px] md:h-[600px] rounded object-cover shadow-2xl " />
               </div>
             </motion.div>
           </div>

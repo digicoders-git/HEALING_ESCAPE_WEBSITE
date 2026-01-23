@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { motion, AnimatePresence } from "framer-motion";
 import landLogo from "../assets/landLogo.png";
 import landLogoo from "../assets/landLogoo.png";
@@ -19,10 +20,24 @@ import logo from "../assets/logo.png";
 import { fadeIn } from "../utils/framerVariants";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const location = useLocation();
+
+  const languages = [
+    { code: "en", label: "EN", name: "English" },
+    { code: "ar", label: "AR", name: "Arabic" },
+    { code: "fr", label: "FR", name: "French" },
+  ];
+
+  const currentLang =
+    languages.find((l) => l.code === i18n.language) || languages[0];
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang.code);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,27 +48,27 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Home", path: "/" },
-    { label: "About", path: "/about" },
-    { label: "Specialities", path: "/specialities" },
-    { label: "Hospitals", path: "/hospitals" },
-    { label: "Doctors", path: "/doctors" },
-    { label: "Patient Journey", path: "/journey" },
+    { label: t("Home"), path: "/" },
+    { label: t("About"), path: "/about" },
+    { label: t("Specialities"), path: "/specialities" },
+    { label: t("Hospitals"), path: "/hospitals" },
+    { label: t("Doctors"), path: "/doctors" },
+    { label: t("Patient Journey"), path: "/journey" },
     {
-      label: "Services",
+      label: t("Services"),
       path: "#",
       dropdownItems: [
-        { label: "Services", path: "/services" },
-        { label: "Free Consultation", path: "/free-consultation" },
+        { label: t("Services"), path: "/services" },
+        { label: t("Free Consultation"), path: "/free-consultation" },
       ],
     },
     {
-      label: "Knowledge",
+      label: t("Knowledge"),
       path: "#",
       dropdownItems: [
-        { label: "Blog", path: "/blogs" },
-        { label: "Video", path: "/videos" },
-        { label: "Gallery", path: "/gallery" },
+        { label: t("Blog"), path: "/blogs" },
+        { label: t("Video"), path: "/videos" },
+        { label: t("Gallery"), path: "/gallery" },
       ],
     },
   ];
@@ -97,9 +112,27 @@ const Navbar = () => {
               <Phone size={14} className="text-secondary" /> +91 9506666642
             </span>
             <div className="h-4 w-px bg-white/20 mx-2" />
-            <span className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase">
-              <Globe size={14} /> EN <ChevronDown size={12} />
-            </span>
+            <div className="relative group/lang cursor-pointer">
+              <span className="flex items-center gap-2 hover:text-secondary transition-colors uppercase">
+                <Globe size={14} /> {currentLang.label}{" "}
+                <ChevronDown size={12} />
+              </span>
+              <div className="absolute top-full right-0 mt-2 w-32 bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl border border-slate-100 p-1.5 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 translate-y-2 group-hover/lang:translate-y-0 z-[111]">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang)}
+                    className={`w-full text-left px-3 py-2 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider ${
+                      i18n.language === lang.code
+                        ? "bg-primary text-white"
+                        : "text-slate-600 hover:bg-slate-50 hover:text-primary"
+                    }`}
+                  >
+                    {lang.name}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -144,7 +177,7 @@ const Navbar = () => {
                   label={item.label}
                   active={location.pathname === item.path}
                 />
-              )
+              ),
             )}
           </div>
 
@@ -154,7 +187,7 @@ const Navbar = () => {
               to="/contact"
               className="bg-secondary hover:bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-xs uppercase tracking-widest whitespace-nowrap text-center"
             >
-              Enquiry
+              {t("Enquiry")}
             </Link>
           </div>
 
@@ -212,7 +245,7 @@ const Navbar = () => {
                       active={location.pathname === item.path}
                       onClick={() => setIsOpen(false)}
                     />
-                  )
+                  ),
                 )}
 
                 <div className="h-px bg-slate-100 my-8" />
@@ -236,7 +269,33 @@ const Navbar = () => {
                     to="/gallery"
                     onClick={() => setIsOpen(false)}
                   />
-                  <UtilityItem icon={<Globe size={16} />} label="English" />
+                  <div className="relative group/lang-mobile w-full">
+                    <button className="flex items-center justify-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest bg-slate-50 p-4 rounded-xl border border-slate-100 active:bg-primary active:text-white transition-all w-full">
+                      <Globe size={16} /> {currentLang.name}{" "}
+                      <ChevronDown
+                        size={14}
+                        className="group-hover/lang-mobile:rotate-180 transition-transform"
+                      />
+                    </button>
+                    <div className="absolute bottom-full left-0 w-full mb-2 bg-white shadow-2xl rounded-xl border border-slate-100 p-2 opacity-0 invisible group-hover/lang-mobile:opacity-100 group-hover/lang-mobile:visible transition-all duration-300">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            changeLanguage(lang);
+                            setActiveDropdown(null);
+                          }}
+                          className={`w-full text-left px-4 py-3 text-xs font-bold rounded-lg transition-all uppercase ${
+                            i18n.language === lang.code
+                              ? "bg-primary text-white"
+                              : "text-slate-600 hover:bg-slate-50"
+                          }`}
+                        >
+                          {lang.name}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
 
