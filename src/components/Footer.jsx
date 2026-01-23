@@ -272,7 +272,7 @@ const Footer = () => {
             href="https://digicoders.in"
             className="hover:text-secondary transition-colors duration-300 font-bold"
           >
-            #TeamDigicoders
+            #TeamDigiCoders
           </a>
         </p>
       </motion.div>
