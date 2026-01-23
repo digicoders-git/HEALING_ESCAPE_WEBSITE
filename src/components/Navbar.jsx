@@ -80,7 +80,7 @@ const Navbar = () => {
         // initial="hidden"
         // animate="show"
         // variants={fadeIn("down", 0.1)}
-        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110"
+        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110 font-['Poppins']"
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-8 items-center">
@@ -104,13 +104,13 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex gap-8 items-center">
-            <span className="flex items-center gap-2 text-white/90">
+            <a href="mailto:contactus@healingesacpeglobal.com" className="flex items-center gap-2 text-white/90">
               <Mail size={14} className="text-secondary" />{" "}
-              shubhamsinghs24@outlook.com
-            </span>
-            <span className="flex items-center gap-2 text-white/90">
+              contactus@healingesacpeglobal.com
+            </a>
+            <a href="tel:+91 9506666642" className="flex items-center gap-2 text-white/90">
               <Phone size={14} className="text-secondary" /> +91 9506666642
-            </span>
+            </a>
             <div className="h-4 w-px bg-white/20 mx-2" />
             <div className="relative group/lang cursor-pointer">
               <span className="flex items-center gap-2 hover:text-secondary transition-colors uppercase">
@@ -142,7 +142,7 @@ const Navbar = () => {
         // initial="hidden"
         // animate="show"
         // variants={fadeIn("down", 0.2)}
-        className={`w-full sticky top-0 z-100 transition-all duration-500 ${
+        className={`w-full sticky top-0 z-100 transition-all duration-500 font-['Poppins'] ${
           isScrolled
             ? "bg-white/80 backdrop-blur-lg shadow-lg py-2 border-b border-slate-100"
             : "bg-white py-4"
@@ -213,7 +213,7 @@ const Navbar = () => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0 }}
             transition={{ type: "tween", duration: 0.5, ease: "circOut" }}
-            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-150 xl:hidden"
+            className="fixed inset-0 bg-white/95 backdrop-blur-xl z-150 xl:hidden font-['Poppins']"
           >
             <div className="p-8 pt-12 h-full flex flex-col">
               <div className="flex justify-between items-center mb-10">

@@ -208,14 +208,14 @@ const Footer = () => {
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
               />
-              <span>+91 9506666642</span>
+              <a href="tel:+91 9506666642">+91 9506666642</a>
             </li>
             <li className="flex items-center gap-4 text-white/90 text-base group hover:text-secondary transition-colors duration-300">
               <Mail
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
               />
-              <span>shubhamsinghs24@outlook.com</span>
+              <a href="mailto:contactus@healingesacpeglobal.com">contactus@healingesacpeglobal.com</a>
             </li>
           </ul>
         </motion.div>
@@ -261,7 +261,7 @@ const Footer = () => {
         whileInView="show"
         viewport={{ once: true }}
         variants={fadeIn("up", 0.6)}
-        className="max-w-7xl mx-auto mt-20 pt-10 border-t border-white/10 flex items-center justify-center relative"
+        className="max-w-7xl mx-auto mt-10 pt-10 border-t border-white/10 flex items-center justify-center relative"
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-linear-to-r from-transparent via-secondary to-transparent"></div>
         <p className="text-white/80 text-sm font-medium tracking-[0.15em] text-center">
