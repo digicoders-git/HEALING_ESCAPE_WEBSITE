@@ -20,11 +20,11 @@ const Partners = () => {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12 opacity-60 grayscale hover:grayscale-0 transition-all">
+        <div className="flex flex-wrap items-center justify-center opacity-90 gap-6 md:gap-12  transition-all">
           {logos.map((logo, idx) => (
             <div
               key={idx}
-              className="flex-shrink-0 font-bold text-lg text-primary/30 hover:text-primary transition-colors italic tracking-tighter"
+              className="flex-shrink-0 font-bold text-lg text-primary transition-colors italic tracking-tighter"
             >
               {logo}
             </div>
