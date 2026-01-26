@@ -20,7 +20,7 @@ import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 const specialities = [
   {
     name: "Oncology",
-    subtitle: "Advanced Cancer",
+    subtitle: "Advanced Cancer Care",
     icon: <Microscope size={28} />,
   },
   {
@@ -41,12 +41,12 @@ const specialities = [
   },
   { name: "IVF & Fertility", subtitle: "Parenthood", icon: <Baby size={28} /> },
   {
-    name: "Hepatology",
+    name: "Gastro & Hepatology",
     subtitle: "Liver & Pancreas",
     icon: <Droplets size={28} />,
   },
   {
-    name: "Plastik Surgery",
+    name: "Plastic Surgery",
     subtitle: "Reconstructive",
     icon: <Scissors size={28} />,
   },

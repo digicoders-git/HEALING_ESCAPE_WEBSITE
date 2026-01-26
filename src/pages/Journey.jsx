@@ -85,7 +85,6 @@ const Journey = () => {
       content:
         "Our medical team carefully reviews all your medical reports to shortlist suitable specialists.",
       points: [
-        "Top North Indian hospitals",
         "Video consultations",
         "Treatment roadmap",
       ],

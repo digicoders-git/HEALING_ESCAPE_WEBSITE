@@ -19,8 +19,8 @@ const SpecialityDetail = () => {
   useEffect(() => {
     const fetchSpeciality = async () => {
       try {
-        const data = await getSpecialityById(id);
-        setTreatment(data.speciality);
+        const response = await getSpecialityById(id);
+        setTreatment(response.data || response.speciality);
       } catch (error) {
         console.error("Error fetching speciality:", error);
       } finally {
@@ -33,8 +33,8 @@ const SpecialityDetail = () => {
   // Filter hospitals that offer this speciality
   const offeringHospitals = hospitalsData.filter((h) =>
     h.specialities.some((s) =>
-      s.toLowerCase().includes(treatment?.title.split(" ")[0].toLowerCase())
-    )
+      s.toLowerCase().includes(treatment?.title.split(" ")[0].toLowerCase()),
+    ),
   );
 
   if (loading) {
@@ -49,7 +49,9 @@ const SpecialityDetail = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-xl font-bold text-primary">Treatment not found</h2>
+          <h2 className="text-xl font-bold text-primary">
+            Treatment not found
+          </h2>
         </div>
       </div>
     );
@@ -114,7 +116,10 @@ const SpecialityDetail = () => {
                       key={i}
                       className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100"
                     >
-                      <CheckCircle2 size={12} className="text-secondary shrink-0" />
+                      <CheckCircle2
+                        size={12}
+                        className="text-secondary shrink-0"
+                      />
                       <p className="text-sm text-slate-700">{point}</p>
                     </div>
                   ))}
@@ -180,7 +185,9 @@ const SpecialityDetail = () => {
                         <span>{hosp.city}</span>
                       </div>
                       <div className="flex items-center gap-1 text-secondary">
-                        <span className="text-xs font-bold uppercase">View Details</span>
+                        <span className="text-xs font-bold uppercase">
+                          View Details
+                        </span>
                         <ArrowRight size={10} />
                       </div>
                     </div>

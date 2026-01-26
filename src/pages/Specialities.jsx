@@ -12,8 +12,10 @@ import {
   ArrowRight,
   ShieldCheck,
   Building2,
-  CheckCircle2,
+  Search,
+  X,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "../components/PageHero";
 import Loader from "../components/Loader";
 import { getSpecialities } from "../apis/speciality";
@@ -42,14 +44,44 @@ const iconMap = {
 const Specialities = () => {
   const [specialities, setSpecialities] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [selectedSpec, setSelectedSpec] = useState(null);
+  const [pagination, setPagination] = useState({
+    page: 1,
+    limit: 9,
+    total: 0,
+    pages: 1,
+  });
+
+  // Debounce search
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(searchQuery);
+      setPagination((prev) => ({ ...prev, page: 1 })); // Reset to page 1 on search
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
 
   useEffect(() => {
     const fetchSpecialities = async () => {
       try {
-        const data = await getSpecialities({ page: 1, limit: 50 });
-        // Filter only active specialities
-        const activeSpecialities = data.specialities?.filter(s => s.isActive) || [];
-        setSpecialities(activeSpecialities);
+        setLoading(true);
+        const response = await getSpecialities({
+          page: pagination.page,
+          limit: pagination.limit,
+          search: debouncedSearch,
+          isActive: true,
+        });
+
+        if (response.success) {
+          setSpecialities(response.data || response.specialities || []);
+          setPagination((prev) => ({
+            ...prev,
+            total: response.total,
+            pages: response.pages,
+          }));
+        }
       } catch (error) {
         console.error("Error fetching specialities:", error);
       } finally {
@@ -57,7 +89,7 @@ const Specialities = () => {
       }
     };
     fetchSpecialities();
-  }, []);
+  }, [pagination.page, debouncedSearch, pagination.limit]);
 
   if (loading) {
     return (
@@ -81,15 +113,15 @@ const Specialities = () => {
 
         <div className="max-w-7xl mx-auto relative z-10 text-center">
           <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-[1.1] uppercase tracking-tighter italic lg:pb-10">
-                  Choosing the Right 
-                  <span className="text-secondary"> Treatment</span>
-                </h2>
+            Choosing the Right
+            <span className="text-secondary"> Treatment</span>
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Left Column - Content */}
             <div className="space-y-8 md:space-y-10">
               <div className="space-y-6">
                 {/* Badge Removed */}
-                
+
                 {/* <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" /> */}
               </div>
               <div className="space-y-4">
@@ -165,65 +197,279 @@ const Specialities = () => {
             </h2>
           </div>
 
+          {/* Search Bar */}
+          <div className="max-w-2xl mx-auto mb-12 relative group">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+              <Search
+                className="text-slate-400 group-focus-within:text-secondary mb-1 transition-colors"
+                size={20}
+              />
+            </div>
+            <input
+              type="text"
+              placeholder="Search treatments (e.g. Heart, Orthopedics, Brain...)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-12 pr-6 py-4 bg-white border-2 border-slate-100 rounded focus:border-secondary transition-all outline-none shadow-sm hover:shadow-md text-primary font-medium"
+            />
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {specialities.map((spec, index) => (
-              <Link
-                to={`/speciality/${spec._id}`}
-                key={spec._id}
-                className="group bg-white rounded overflow-hidden border border-slate-100 hover:shadow-2xl hover:border-secondary/20 transition-all duration-700 md:hover:-translate-y-2 animate-fade-in-up relative"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative h-[180px] md:h-[200px] overflow-hidden">
+            {loading ? (
+              <div className="col-span-full py-20 flex flex-col items-center justify-center gap-4">
+                <Loader size={40} />
+                <p className="text-slate-400 font-medium">
+                  Loading treatments...
+                </p>
+              </div>
+            ) : (
+              specialities.map((spec, index) => (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  key={spec._id}
+                  onClick={() => setSelectedSpec(spec)}
+                  className="group relative h-[350px] rounded overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
+                >
+                  {/* Background Image */}
                   <img
                     src={spec.image}
                     alt={spec.title}
-                    className="w-full h-full object-cover transition-all duration-1000 scale-105 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/30 to-transparent" />
-                  
-                  
-                  
-                  {/* Category Badge */}
-                  <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-md rounded border border-white/20">
-                    <span className="text-white text-xs font-bold uppercase tracking-widest">
-                      Treatment
-                    </span>
-                  </div>
-                </div>
 
-                <div className="p-5 space-y-4 text-left">
-                  <h3 className="text-lg font-bold text-primary uppercase tracking-tight leading-tight group-hover:text-secondary transition-colors italic line-clamp-2">
-                    {spec.title}
-                  </h3>
-                  <p className="text-sm text-slate-500 font-medium leading-relaxed line-clamp-3">
-                    {spec.description}
-                  </p>
-                  <div className="pt-2 flex items-center gap-2 text-secondary group-hover:gap-4 transition-all">
-                    <span className="text-xs font-bold uppercase tracking-widest">
-                      Explore
-                    </span>
-                    <ArrowRight size={16} />
+                  {/* Overlays */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-8 flex flex-col justify-end text-left transition-transform duration-500">
+                    <div className="space-y-3">
+                      <div className="w-12 h-1 bg-secondary rounded-full transform origin-left" />
+                      <h3 className="text-2xl font-bold text-white uppercase italic tracking-tight line-clamp-1">
+                        {spec.title}
+                      </h3>
+                      <p className="text-white/80 text-sm font-medium line-clamp-2 transition-opacity duration-500">
+                        {spec.description}
+                      </p>
+                      <div className="flex items-center gap-2 text-secondary font-bold text-xs uppercase tracking-[0.2em] transition-all duration-500">
+                        View Details <ArrowRight size={14} />
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                {/* Hover Gradient Border */}
-                <div className="absolute inset-0 rounded bg-gradient-to-r from-secondary/0 via-secondary/20 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              </Link>
-            ))}
+                </motion.div>
+              ))
+            )}
           </div>
+
+          {/* Empty State */}
+          {!loading && specialities.length === 0 && (
+            <div className="py-20 text-center space-y-4">
+              <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto text-slate-300">
+                <Search size={40} />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-primary italic uppercase">
+                  No treatments found
+                </h3>
+                <p className="text-slate-500">
+                  Try adjusting your search query
+                </p>
+              </div>
+              <button
+                onClick={() => setSearchQuery("")}
+                className="text-secondary font-bold uppercase tracking-widest text-xs hover:underline"
+              >
+                Clear Search
+              </button>
+            </div>
+          )}
+
+          {/* Pagination */}
+          {!loading && pagination.pages > 1 && (
+            <div className="mt-16 flex items-center justify-center gap-4">
+              <button
+                disabled={pagination.page === 1}
+                onClick={() =>
+                  setPagination((prev) => ({ ...prev, page: prev.page - 1 }))
+                }
+                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+              >
+                Prev
+              </button>
+              <div className="flex items-center gap-2">
+                {[...Array(pagination.pages)].map((_, i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() =>
+                      setPagination((prev) => ({ ...prev, page: i + 1 }))
+                    }
+                    className={`w-10 h-10 rounded-full text-sm font-bold transition-all ${
+                      pagination.page === i + 1
+                        ? "bg-primary text-white scale-110 shadow-lg"
+                        : "text-slate-400 hover:text-primary hover:bg-slate-50"
+                    }`}
+                  >
+                    {i + 1}
+                  </button>
+                ))}
+              </div>
+              <button
+                disabled={pagination.page === pagination.pages}
+                onClick={() =>
+                  setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
+                }
+                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+              >
+                Next
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
+      {/* Full View Modal */}
+      <AnimatePresence>
+        {selectedSpec && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedSpec(null)}
+              className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="relative w-full max-w-5xl bg-white rounded overflow-hidden shadow-2xl flex flex-col md:flex-row max-h-[90vh]"
+            >
+              {/* Image Side */}
+              <div className="w-full md:w-1/2 relative h-[300px] md:h-auto">
+                <img
+                  src={selectedSpec.image}
+                  alt={selectedSpec.title}
+                  className="w-full h-full object-cover"
+                />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent md:bg-gradient-to-r" /> */}
+
+                {/* Close Button Mobile */}
+                <button
+                  onClick={() => setSelectedSpec(null)}
+                  className="absolute  top-4 right-4 p-2 bg-white/20 backdrop-blur-lg rounded-full text-white md:hidden"
+                >
+                  <X size={24} />
+                </button>
+              </div>
+
+              {/* Content Side */}
+              <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto custom-scrollbar">
+                {/* Close Button Desktop */}
+                <button
+                  onClick={() => setSelectedSpec(null)}
+                  className="absolute top-8 right-8 p-2 text-slate-400 hover:text-primary transition-colors hidden md:block"
+                >
+                  <X size={28} />
+                </button>
+
+                <div className="space-y-8">
+                  <div className="space-y-2">
+                    <span className="text-secondary font-bold text-xs uppercase tracking-[0.3em]">
+                      Treatment Detail
+                    </span>
+                    <h2 className="text-3xl md:text-4xl font-extrabold text-primary uppercase italic tracking-tighter leading-none">
+                      {selectedSpec.title}
+                    </h2>
+                  </div>
+
+                  <div className="space-y-6 text-left">
+                    <div className="space-y-3">
+                      <h4 className="text-sm font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                        <div className="w-2 h-2 bg-secondary rounded-full" />
+                        About Treatment
+                      </h4>
+                      <p className="text-slate-600 leading-relaxed font-medium">
+                        {selectedSpec.description}
+                      </p>
+                    </div>
+
+                    {selectedSpec.whatIs && (
+                      <div className="space-y-3">
+                        <h4 className="text-sm font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                          <div className="w-2 h-2 bg-secondary rounded-full" />
+                          Detailed Overview
+                        </h4>
+                        <p className="text-slate-500 text-sm leading-relaxed">
+                          {selectedSpec.whatIs}
+                        </p>
+                      </div>
+                    )}
+
+                    {selectedSpec.whenRecommended && (
+                      <div className="space-y-4">
+                        <h4 className="text-sm font-bold text-primary uppercase tracking-widest flex items-center gap-2">
+                          <div className="w-2 h-2 bg-secondary rounded-full" />
+                          Recommended When
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {JSON.parse(selectedSpec.whenRecommended || "[]").map(
+                            (tag, i) => (
+                              <span
+                                key={i}
+                                className="px-3 py-1 bg-slate-50 border border-slate-100 rounded-full text-[10px] font-bold text-slate-500 uppercase tracking-widest"
+                              >
+                                {tag}
+                              </span>
+                            ),
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="pt-8 border-t border-slate-100 flex items-center justify-between">
+                      <div>
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                          Estimated Cost
+                        </p>
+                        <p className="text-2xl font-black text-primary italic">
+                          {selectedSpec.costRange || "Contact for Price"}
+                        </p>
+                      </div>
+                      <Link
+                        to="/contact"
+                        className="px-8 py-3 bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-secondary transition-all"
+                      >
+                        Inquire Now
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @keyframes fade-in-up {
-          from { opacity: 0; transform: translateY(30px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up { animation: fade-in-up 0.8s ease-out forwards; }
-      `,
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+          }
+        `,
         }}
       />
     </div>

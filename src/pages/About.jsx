@@ -13,6 +13,10 @@ import PageHero from "../components/PageHero";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
 import abt1 from '../assets/about/abt1.png'
+import whyIndia from '../assets/about/whyIndia.png'
+import slider2 from '../assets/about/whyIndia.png'
+import mareej from '../assets/about/mareej.png'
+import doctors from '../assets/about/doctors.png'
 
 const bannerSlides = [
   {
@@ -25,7 +29,7 @@ const bannerSlides = [
   },
   {
     image:
-      "https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=60&w=1400",
+      slider2,
     title: "World-Class Infrastructure",
     subtitle: "High-Tech Facilities & Internationally Accredited Hospitals",
     buttonLabel: "View Hospitals",
@@ -252,21 +256,21 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="lg:w-1/2 relative"
             >
-              <div className="grid grid-cols-2 gap-4 md:gap-8 items-end">
+              <div className="grid grid-cols-1 gap-4 md:gap-8 items-end">
                 <div className="space-y-4 md:space-y-8">
                   <motion.img
                     variants={fadeIn("up", 0.3)}
-                    src="https://images.unsplash.com/photo-1512678080530-7760d81faba6?auto=format&fit=crop&q=80&w=800"
-                    className="w-full h-[350px] md:h-[500px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
+                    src={whyIndia}
+                    className="w-full h-[250px] md:h-[350px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
                     alt="Infrastructure"
                   />
                 </div>
-                <motion.img
+                {/* <motion.img
                   variants={fadeIn("left", 0.5)}
                   src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=800"
                   className="w-full h-[350px] md:h-[500px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
                   alt="Medical Hub"
-                />
+                /> */}
               </div>
             </motion.div>
           </div>
@@ -382,7 +386,7 @@ const About = () => {
               className="lg:col-span-5 relative z-10"
             >
               <img
-                src="https://gitanjalihospital.com/wp-content/uploads/2024/10/DSC_1103-1.jpg"
+                src={mareej}
                 className="w-full h-[400px] md:h-[600px] rounded md:rounded object-cover shadow-2xl border-4 md:border-8 border-white"
                 alt="Ethical Care"
               />
@@ -448,14 +452,14 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="lg:col-span-5"
             >
-              <div className=" rounded aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group">
+              {/* <div className=" rounded aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group"> */}
                 {/* <Users
                   size={60}
                   md:size={80}
                   className="text-secondary mb-6 md:mb-8 transform md:group-hover:scale-110 transition-transform"
                 /> */}
-                <img src='https://img.freepik.com/premium-photo/dedicated-team-indian-doctors_895561-15568.jpg' className="w-full h-[400px] md:h-[600px] rounded object-cover shadow-2xl " />
-              </div>
+                <img src={doctors} className="w-full h-[250px] md:h-[350px] rounded object-cover shadow-2xl " />
+              {/* </div> */}
             </motion.div>
           </div>
         </div>
