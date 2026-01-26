@@ -89,7 +89,7 @@ const Hero = () => {
         </video>
         {/* Deep Gradient Masks */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/80 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/10 to-transparent" />
       </div>
 
       {/* Dynamic Lighting Hover Effect (Mirroring About Page) - MAX INTENSITY */}
