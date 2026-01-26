@@ -1,21 +1,27 @@
 import { useState, useRef } from "react";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 import ModernSelect from "../ModernSelect";
 import homeVideo from "../../assets/homeVideo.mp4";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
 import { createFreeConsultation } from "../../apis/enquiry";
 import { toast } from "react-toastify";
 import countries from "world-countries";
-import jci from '../../assets/home/jci.png'
-import nabh from '../../assets/home/nabh.png'
+import jci from "../../assets/home/jci.png";
+import nabh from "../../assets/home/nabh.png";
 
 const countryOptions = countries
-  .map((c) => ({
-    value: c.name.common,
-    label: c.name.common,
-  }))
+  .map((c) => {
+    const root = c.idd?.root || "";
+    const suffix = c.idd?.suffixes?.length === 1 ? c.idd.suffixes[0] : "";
+    return {
+      value: c.name.common,
+      label: c.name.common,
+      code: root + suffix,
+    };
+  })
+  .filter((c) => c.code !== "") // Filter out countries without dial codes
   .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const Hero = () => {
@@ -131,7 +137,12 @@ const Hero = () => {
               className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                {t("hero_title")}
+                <Trans
+                  i18nKey="hero_title"
+                  components={{
+                    green: <span className="text-secondary" />,
+                  }}
+                />
               </h1>
             </motion.div>
             <motion.p
@@ -211,9 +222,16 @@ const Hero = () => {
                       <ModernSelect
                         options={countryOptions}
                         value={formData.country}
-                        onChange={(value) =>
-                          setFormData({ ...formData, country: value })
-                        }
+                        onChange={(value) => {
+                          const selected = countryOptions.find(
+                            (opt) => opt.value === value,
+                          );
+                          setFormData((prev) => ({
+                            ...prev,
+                            country: value,
+                            countryCode: selected?.code || prev.countryCode,
+                          }));
+                        }}
                         placeholder={t("country")}
                         className="w-full"
                       />
@@ -250,6 +268,7 @@ const Hero = () => {
                         }
                         className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                         required
+                        maxLength="15"
                       />
                     </div>
 

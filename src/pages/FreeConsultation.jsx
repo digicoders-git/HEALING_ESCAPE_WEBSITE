@@ -28,14 +28,20 @@ import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
 import { specialitiesData } from "../data/specialitiesData";
 import { createFreeConsultation } from "../apis/enquiry";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import countries from "world-countries";
 
 const countryOptions = countries
-  .map((c) => ({
-    value: c.name.common,
-    label: c.name.common,
-  }))
+  .map((c) => {
+    const root = c.idd?.root || "";
+    const suffix = c.idd?.suffixes?.length === 1 ? c.idd.suffixes[0] : "";
+    return {
+      value: c.name.common,
+      label: c.name.common,
+      code: root + suffix,
+    };
+  })
+  .filter((c) => c.code !== "") // Filter out countries without dial codes
   .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const bannerSlides = [
@@ -56,19 +62,21 @@ const FreeConsultation = () => {
     city: "",
     countryCode: "+91",
     mobile: "",
-    clinicalRequirement: ""
+    clinicalRequirement: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await createFreeConsultation(formData);
-      
+
       if (response.success) {
-        toast.success("Free consultation request submitted successfully! We will contact you within 24 hours.");
+        toast.success(
+          "Free consultation request submitted successfully! We will contact you within 24 hours.",
+        );
         // Reset form
         setFormData({
           fullName: "",
@@ -76,7 +84,7 @@ const FreeConsultation = () => {
           city: "",
           countryCode: "+91",
           mobile: "",
-          clinicalRequirement: ""
+          clinicalRequirement: "",
         });
       }
     } catch (error) {
@@ -90,7 +98,6 @@ const FreeConsultation = () => {
   return (
     <div className="bg-white overflow-x-hidden">
       <PageHero slides={bannerSlides} />
-
 
       {/* 8. Consultation Form */}
       <section
@@ -110,10 +117,12 @@ const FreeConsultation = () => {
               className="text-center space-y-4 mb-12"
             >
               <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
-                Request Your Free <span className="text-secondary">Consultation</span>
+                Request Your Free{" "}
+                <span className="text-secondary">Consultation</span>
               </h2>
               <p className="text-lg text-slate-600 font-medium max-w-2xl mx-auto">
-                Fill out the form below and our medical coordination team will review your case within 24 hours.
+                Fill out the form below and our medical coordination team will
+                review your case within 24 hours.
               </p>
             </motion.div>
 
@@ -134,36 +143,50 @@ const FreeConsultation = () => {
                 <div className="relative z-10">
                   <div className="mb-5 md:mb-6">
                     <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
-                      Get Free Medical Consultation
+                      Get Free Consultation
                     </h3>
                   </div>
 
-                  <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
+                  <form
+                    className="space-y-3 sm:space-y-3.5"
+                    onSubmit={handleSubmit}
+                  >
                     <div className="space-y-3 sm:space-y-3.5">
                       <input
                         type="text"
                         placeholder="Full Name"
                         value={formData.fullName}
-                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({ ...formData, fullName: e.target.value })
+                        }
                         className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none focus:ring-4 focus:ring-primary/5 transition-all text-sm font-semibold text-slate-700 placeholder:text-slate-400 "
                         required
                       />
 
                       <div className="grid grid-cols-2 gap-3">
                         <ModernSelect
-                        options={countryOptions}
-                        value={formData.country}
-                        onChange={(value) =>
-                          setFormData({ ...formData, country: value })
-                        }
-                        placeholder={("country")}
-                        className="w-full"
-                      />
+                          options={countryOptions}
+                          value={formData.country}
+                          onChange={(value) => {
+                            const selected = countryOptions.find(
+                              (opt) => opt.value === value,
+                            );
+                            setFormData((prev) => ({
+                              ...prev,
+                              country: value,
+                              countryCode: selected?.code || prev.countryCode,
+                            }));
+                          }}
+                          placeholder={"Country"}
+                          className="w-full"
+                        />
                         <input
                           type="text"
                           placeholder="City"
                           value={formData.city}
-                          onChange={(e) => setFormData({...formData, city: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, city: e.target.value })
+                          }
                           className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                           required
                         />
@@ -173,16 +196,24 @@ const FreeConsultation = () => {
                         <input
                           type="text"
                           value={formData.countryCode}
-                          onChange={(e) => setFormData({...formData, countryCode: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              countryCode: e.target.value,
+                            })
+                          }
                           className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-primary bg-white/80 text-center text-sm font-bold text-primary"
                         />
                         <input
                           type="tel"
                           placeholder="Mobile Number"
                           value={formData.mobile}
-                          onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, mobile: e.target.value })
+                          }
                           className="flex-1 py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700"
                           required
+                          maxLength="15"
                         />
                       </div>
 
@@ -217,7 +248,12 @@ const FreeConsultation = () => {
                         placeholder="Describe your medical condition..."
                         rows="3"
                         value={formData.clinicalRequirement}
-                        onChange={(e) => setFormData({...formData, clinicalRequirement: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            clinicalRequirement: e.target.value,
+                          })
+                        }
                         className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded-xl border border-primary bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                         required
                       ></textarea>
@@ -228,7 +264,9 @@ const FreeConsultation = () => {
                       disabled={isSubmitting}
                       className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded-xl shadow-lg transition-all uppercase tracking-widest text-[10px] sm:text-[11px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? "Submitting..." : "Request Free Consultation"}
+                      {isSubmitting
+                        ? "Submitting..."
+                        : "Request Free Consultation"}
                     </button>
                   </form>
                 </div>
@@ -656,8 +694,6 @@ const FreeConsultation = () => {
         </div>
       </motion.section>
 
-
-
       {/* 9. What Happens Next */}
       <motion.section
         variants={staggerContainer(0.2, 0.1)}
@@ -769,7 +805,6 @@ const FreeConsultation = () => {
           </motion.div>
         </div>
       </motion.section>
-
     </div>
   );
 };
