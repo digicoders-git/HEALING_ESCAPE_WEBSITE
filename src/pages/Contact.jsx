@@ -135,7 +135,7 @@ const Contact = () => {
                 {
                   icon: <Mail size={24} />,
                   label: "Email Us",
-                  value: "shubhamsinghs24@outlook.com",
+                  value: "contactus@healingescapeglobal.com",
                 },
                 {
                   icon: <MapPin size={24} />,
@@ -205,7 +205,7 @@ const Contact = () => {
                       {
                         icon: <Mail size={20} />,
                         label: "Email",
-                        val: "shubhamsinghs24@outlook.com",
+                        val: "contactus@healingescapeglobal.com",
                       },
                       {
                         icon: <Clock size={20} />,
@@ -362,7 +362,7 @@ const Contact = () => {
                         className="w-full"
                       />
                     </div> */}
-                    <div className="space-y-2">
+                    {/* <div className="space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
                         Preferred City
                       </label>
@@ -373,7 +373,7 @@ const Contact = () => {
                         placeholder="Any City"
                         className="w-full"
                       />
-                    </div>
+                    </div> */}
 
                     <div className="md:col-span-2 space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
