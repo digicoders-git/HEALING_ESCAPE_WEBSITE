@@ -12,24 +12,22 @@ import {
 import PageHero from "../components/PageHero";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
-import abt1 from '../assets/about/abt1.png'
-import whyIndia from '../assets/about/whyIndia.png'
-import slider2 from '../assets/about/whyIndia.png'
-import mareej from '../assets/about/mareej.png'
-import doctors from '../assets/about/doctors.png'
+import abt1 from "../assets/about/abt1.png";
+import whyIndia from "../assets/about/whyIndia.png";
+import slider2 from "../assets/about/whyIndia.png";
+import mareej from "../assets/about/mareej.png";
+import doctors from "../assets/about/doctors.png";
 
 const bannerSlides = [
   {
-    image:
-      abt1,
+    image: abt1,
     title: "About Healing Escape",
     subtitle: "Connecting the World to India’s Healthcare Excellence",
     buttonLabel: "Explore Services",
     buttonLink: "/services",
   },
   {
-    image:
-      slider2,
+    image: slider2,
     title: "World-Class Infrastructure",
     subtitle: "High-Tech Facilities & Internationally Accredited Hospitals",
     buttonLabel: "View Hospitals",
@@ -190,9 +188,6 @@ const About = () => {
                       variants={fadeIn("up", 0.1 * (i + 1))}
                       className="flex flex-col items-center gap-4 p-6 md:p-8 bg-white/5 rounded border border-white/10 hover:bg-white/10 transition-colors group"
                     >
-                      {/* <div className="w-10 h-10 md:w-12 h-12 rounded-xl md:rounded bg-secondary flex items-center justify-center text-white shadow-lg transition-transform md:group-hover:scale-110">
-                        <ArrowRight size={18} md:size={20} />
-                      </div> */}
                       <span className="text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em]">
                         {text}
                       </span>
@@ -221,7 +216,8 @@ const About = () => {
             >
               <div className="space-y-4">
                 <h2 className="text-3xl md:text-5xl font-extrabold text-primary tracking-tight uppercase leading-[0.9] italic">
-                  Why India is<br />
+                  Why India is
+                  <br />
                   <span className="text-secondary">Medical Hub</span>
                 </h2>
               </div>
@@ -265,12 +261,6 @@ const About = () => {
                     alt="Infrastructure"
                   />
                 </div>
-                {/* <motion.img
-                  variants={fadeIn("left", 0.5)}
-                  src="https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&q=80&w=800"
-                  className="w-full h-[350px] md:h-[500px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
-                  alt="Medical Hub"
-                /> */}
               </div>
             </motion.div>
           </div>
@@ -438,7 +428,6 @@ const About = () => {
                   >
                     <HeartHandshake
                       size={40}
-                      md:size={48}
                       className="text-primary md:group-hover:scale-110 transition-transform"
                     />
                     <span className="text-[12px] md:text-[14px] font-black uppercase tracking-widest text-primary pt-2 md:pt-4 leading-none italic">
@@ -452,14 +441,10 @@ const About = () => {
               variants={fadeIn("left", 0.2)}
               className="lg:col-span-5"
             >
-              {/* <div className=" rounded aspect-square flex flex-col items-center justify-center text-center text-white shadow-2xl relative overflow-hidden group"> */}
-                {/* <Users
-                  size={60}
-                  md:size={80}
-                  className="text-secondary mb-6 md:mb-8 transform md:group-hover:scale-110 transition-transform"
-                /> */}
-                <img src={doctors} className="w-full h-[250px] md:h-[350px] rounded object-cover shadow-2xl " />
-              {/* </div> */}
+              <img
+                src={doctors}
+                className="w-full h-[250px] md:h-[350px] rounded object-cover shadow-2xl "
+              />
             </motion.div>
           </div>
         </div>

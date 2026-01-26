@@ -61,4 +61,47 @@ body {
   .swiper-slide-active .animate-text-reveal {
     animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  /* --- Silent Google Translate Fixes --- */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-gadget-icon,
+  #goog-gt-tt,
+  .goog-te-balloon-frame,
+  .goog-te-menu-value span:nth-child(2),
+  iframe[id=":1.container"],
+  .goog-tooltip,
+  .goog-tooltip:hover {
+    display: none !important;
+  }
+
+  body {
+    top: 0 !important;
+    position: static !important;
+  }
+
+  /* Prevent Google from wrapping and breaking design with weird highlights */
+  font {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    display: inline !important;
+    vertical-align: inherit !important;
+    color: inherit !important;
+    font-size: inherit !important;
+  }
+
+  .goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+  }
+}
+/* Text selection color fix */
+::selection {
+  background: #ffffff;   /* ya koi light color */
+  color: #0a1cff;        /* ya black */
+}
+
+/* Firefox support */
+::-moz-selection {
+  background: #ffffff;
+  color: #0a1cff;
 }

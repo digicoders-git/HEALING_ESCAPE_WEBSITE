@@ -20,7 +20,7 @@ import logo from "../assets/logo.png";
 import { fadeIn } from "../utils/framerVariants";
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
@@ -30,6 +30,7 @@ const Navbar = () => {
     { code: "en", label: "EN", name: "English" },
     { code: "ar", label: "AR", name: "Arabic" },
     { code: "fr", label: "FR", name: "French" },
+    { code: "ru", label: "RU", name: "Russian" },
   ];
 
   const currentLang =
@@ -37,7 +38,34 @@ const Navbar = () => {
 
   const changeLanguage = (lang) => {
     i18n.changeLanguage(lang.code);
+
+    // Google Translate integration
+    const triggerTranslate = () => {
+      const select = document.querySelector(".goog-te-combo");
+      if (select) {
+        select.value = lang.code;
+        select.dispatchEvent(new Event("change"));
+      } else {
+        // Retry if Google Translate isn't loaded yet
+        setTimeout(triggerTranslate, 500);
+      }
+    };
+    triggerTranslate();
   };
+
+  useEffect(() => {
+    // Initial sync with Google Translate
+    if (i18n.language !== "en") {
+      const timer = setTimeout(() => {
+        const select = document.querySelector(".goog-te-combo");
+        if (select) {
+          select.value = i18n.language;
+          select.dispatchEvent(new Event("change"));
+        }
+      }, 1500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,27 +76,27 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: t("Home"), path: "/" },
-    { label: t("About"), path: "/about" },
-    { label: t("Specialities"), path: "/specialities" },
-    { label: t("Hospitals"), path: "/hospitals" },
-    { label: t("Doctors"), path: "/doctors" },
-    { label: t("Patient Journey"), path: "/journey" },
+    { label: "Home", path: "/" },
+    { label: "About", path: "/about" },
+    { label: "Specialities", path: "/specialities" },
+    { label: "Hospitals", path: "/hospitals" },
+    { label: "Doctors", path: "/doctors" },
+    { label: "Patient Journey", path: "/journey" },
     {
-      label: t("Services"),
+      label: "Services",
       path: "#",
       dropdownItems: [
-        { label: t("Services"), path: "/services" },
-        { label: t("Free Consultation"), path: "/free-consultation" },
+        { label: "Services", path: "/services" },
+        { label: "Free Consultation", path: "/free-consultation" },
       ],
     },
     {
-      label: t("Knowledge"),
+      label: "Knowledge",
       path: "#",
       dropdownItems: [
-        { label: t("Blog"), path: "/blogs" },
-        { label: t("Video"), path: "/videos" },
-        { label: t("Gallery"), path: "/gallery" },
+        { label: "Blog", path: "/blogs" },
+        { label: "Video", path: "/videos" },
+        { label: "Gallery", path: "/gallery" },
       ],
     },
   ];
@@ -76,12 +104,7 @@ const Navbar = () => {
   return (
     <>
       {/* 1. Top Utility Bar - Not Sticky (Will scroll away) */}
-      <div
-        // initial="hidden"
-        // animate="show"
-        // variants={fadeIn("down", 0.1)}
-        className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110 font-['Poppins']"
-      >
+      <div className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110 font-['Poppins']">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-8 items-center">
             <Link
@@ -104,12 +127,18 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="flex gap-8 items-center">
-            <a href="mailto:contactus@healingesacpeglobal.com" className="flex items-center gap-2 text-white/90">
+            <a
+              href="mailto:contactus@healingesacpeglobal.com"
+              className="flex items-center gap-2 text-white/90"
+            >
               <Mail size={14} className="text-secondary" />{" "}
               contactus@healingesacpeglobal.com
             </a>
-            <a href="tel:+91 9506666642" className="flex items-center gap-2 text-white/90">
-              <Phone size={14} className="text-secondary" /> +91 9506666642
+            <a
+              href="tel:+91 8960966629"
+              className="flex items-center gap-2 text-white/90"
+            >
+              <Phone size={14} className="text-secondary" /> +91 8960966629
             </a>
             <div className="h-4 w-px bg-white/20 mx-2" />
             <div className="relative group/lang cursor-pointer">
@@ -139,9 +168,6 @@ const Navbar = () => {
 
       {/* 2. Main Navigation - Sticky (Will stay at top) */}
       <nav
-        // initial="hidden"
-        // animate="show"
-        // variants={fadeIn("down", 0.2)}
         className={`w-full sticky top-0 z-100 transition-all duration-500 font-['Poppins'] ${
           isScrolled
             ? "bg-white/80 backdrop-blur-lg shadow-lg py-2 border-b border-slate-100"
@@ -187,7 +213,7 @@ const Navbar = () => {
               to="/contact"
               className="bg-secondary hover:bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-xs uppercase tracking-widest whitespace-nowrap text-center"
             >
-              {t("Enquiry")}
+              Enquiry
             </Link>
           </div>
 

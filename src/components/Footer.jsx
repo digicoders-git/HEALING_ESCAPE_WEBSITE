@@ -208,14 +208,16 @@ const Footer = () => {
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
               />
-              <a href="tel:+91 9506666642">+91 9506666642</a>
+              <a href="tel:+91 8960966629">+91 8960966629</a>
             </li>
             <li className="flex items-center gap-4 text-white/90 text-base group hover:text-secondary transition-colors duration-300">
               <Mail
                 size={18}
                 className="text-secondary shrink-0 group-hover:scale-110 transition-transform duration-300"
               />
-              <a href="mailto:contactus@healingesacpeglobal.com">contactus@healingesacpeglobal.com</a>
+              <a href="mailto:contactus@healingesacpeglobal.com">
+                contactus@healingesacpeglobal.com
+              </a>
             </li>
           </ul>
         </motion.div>

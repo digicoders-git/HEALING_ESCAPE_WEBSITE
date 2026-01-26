@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
 import { motion } from "framer-motion";
-import { useTranslation, Trans } from "react-i18next";
 import ModernSelect from "../ModernSelect";
 import homeVideo from "../../assets/homeVideo.mp4";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
@@ -25,7 +24,6 @@ const countryOptions = countries
   .sort((a, b) => a.label.localeCompare(b.label)); // A-Z sort
 
 const Hero = () => {
-  const { t } = useTranslation();
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
   const [formData, setFormData] = useState({
     fullName: "",
@@ -122,34 +120,24 @@ const Hero = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
           <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-left">
-            {/* <motion.div
-              variants={fadeIn("right", 0.1)}
-              className="inline-flex items-center gap-2 bg-secondary px-4 py-1.5 rounded shadow-lg mx-auto lg:mx-0"
-            >
-              <Activity size={14} className="text-white animate-pulse" />
-              <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-none">
-                Global Medical Portal
-              </p>
-            </motion.div> */}
-
             <motion.div
               variants={fadeIn("right", 0.2)}
               className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                <Trans
-                  i18nKey="hero_title"
-                  components={{
-                    green: <span className="text-secondary" />,
-                  }}
-                />
+                Connecting the World to{" "}
+                <span className="text-secondary">India’s Healthcare</span>{" "}
+                Excellence
               </h1>
             </motion.div>
             <motion.p
               variants={fadeIn("right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:mx-0"
             >
-              {t("hero_desc")}
+              Your trusted partner for world-class, affordable medical treatment
+              in India. We help international patients access top hospitals,
+              leading doctors, and seamless medical journeys across India —
+              especially North India.
             </motion.p>
 
             <motion.div
@@ -195,10 +183,10 @@ const Hero = () => {
               <div className="relative z-10">
                 <div className="mb-5 md:mb-6">
                   <h3 className="text-lg sm:text-xl font-bold text-primary leading-tight uppercase tracking-tight">
-                    {t("get_free_consultation")}
+                    Get Free Consultation
                   </h3>
                   <p className="text-slate-500 text-[11px] sm:text-[12px] font-bold uppercase tracking-widest mt-1">
-                    {t("verified_response")}
+                    Verified Response Center
                   </p>
                 </div>
 
@@ -209,7 +197,7 @@ const Hero = () => {
                   <div className="space-y-3 sm:space-y-3.5">
                     <input
                       type="text"
-                      placeholder={t("full_name")}
+                      placeholder="Full Name"
                       value={formData.fullName}
                       onChange={(e) =>
                         setFormData({ ...formData, fullName: e.target.value })
@@ -232,13 +220,13 @@ const Hero = () => {
                             countryCode: selected?.code || prev.countryCode,
                           }));
                         }}
-                        placeholder={t("country")}
+                        placeholder="Country"
                         className="w-full"
                       />
 
                       <input
                         type="text"
-                        placeholder={t("city")}
+                        placeholder="City"
                         value={formData.city}
                         onChange={(e) =>
                           setFormData({ ...formData, city: e.target.value })
@@ -261,7 +249,7 @@ const Hero = () => {
                       />
                       <input
                         type="text"
-                        placeholder={t("mobile_number")}
+                        placeholder="Mobile Number"
                         value={formData.mobile}
                         onChange={(e) =>
                           setFormData({ ...formData, mobile: e.target.value })
@@ -273,7 +261,7 @@ const Hero = () => {
                     </div>
 
                     <textarea
-                      placeholder={t("clinical_requirement")}
+                      placeholder="Clinical requirement..."
                       rows="2"
                       value={formData.clinicalRequirement}
                       onChange={(e) =>
@@ -292,7 +280,7 @@ const Hero = () => {
                     disabled={isSubmitting}
                     className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[12px] sm:text-[13px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? t("submitting") : t("send_enquiry")}
+                    {isSubmitting ? "Submitting..." : "Send Enquiry"}
                   </button>
                 </form>
               </div>

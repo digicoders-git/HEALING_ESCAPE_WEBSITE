@@ -1,38 +1,27 @@
 import { Wallet, Stethoscope, Cpu, Globe, ArrowRight } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import mod1 from '../../assets/home/mod1.png'
+import mod1 from "../../assets/home/mod1.png";
 
 const WhyIndia = () => {
-  const { t } = useTranslation();
-
   const reasons = [
     {
       icon: <Wallet size={28} />,
-      title: t("Economical Care"),
-      desc: t(
-        "India combines world-class clinical expertise with advanced technology at a fraction of global costs.",
-      ),
+      title: "Economical Care",
+      desc: "India combines world-class clinical expertise with advanced technology at a fraction of global costs.",
     },
     {
       icon: <Stethoscope size={28} />,
-      title: t("Clinical Excellence"),
-      desc: t(
-        "Direct access to JCI/NABH hospitals with standardized international care outcomes.",
-      ),
+      title: "Clinical Excellence",
+      desc: "Direct access to JCI/NABH hospitals with standardized international care outcomes.",
     },
     {
       icon: <Cpu size={28} />,
-      title: t("Advanced Systems"),
-      desc: t(
-        "Experience leading-edge robotic surgery centers and modern diagnostic infrastructure.",
-      ),
+      title: "Advanced Systems",
+      desc: "Experience leading-edge robotic surgery centers and modern diagnostic infrastructure.",
     },
     {
       icon: <Globe size={28} />,
-      title: t("Minimal Wait Time"),
-      desc: t(
-        "Fast-track clinical intervention for critical cardiac and oncological requirements.",
-      ),
+      title: "Minimal Wait Time",
+      desc: "Fast-track clinical intervention for critical cardiac and oncological requirements.",
     },
   ];
   return (
@@ -45,10 +34,10 @@ const WhyIndia = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div className="lg:col-span-12 mb-6 text-center space-y-3">
               <h4 className="text-primary font-bold text-[12px] uppercase tracking-[0.3em]">
-                {t("Global Medical Hub")}
+                Global Medical Hub
               </h4>
               <h2 className="text-2xl md:text-4xl font-bold text-primary tracking-tight">
-                {t("Choice of Global Patients")}
+                Choice of Global Patients
               </h2>
               <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
             </div>
@@ -74,13 +63,6 @@ const WhyIndia = () => {
                   className="w-full h-full object-cover grayscale-[0.2] hover:grayscale-0 transition-all duration-700"
                   alt="Medical Hub India"
                 />
-                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <p className="text-white font-bold text-2xl">80%</p>
-                  <p className="text-white/60 text-[11px] font-bold uppercase tracking-widest">
-                    Cost Efficiency Advantage
-                  </p>
-                </div> */}
               </div>
             </div>
           </div>

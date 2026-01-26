@@ -84,10 +84,7 @@ const Journey = () => {
       icon: <Stethoscope className="w-6 h-6 md:w-8 md:h-8" />,
       content:
         "Our medical team carefully reviews all your medical reports to shortlist suitable specialists.",
-      points: [
-        "Video consultations",
-        "Treatment roadmap",
-      ],
+      points: ["Video consultations", "Treatment roadmap"],
       color: "bg-emerald-500",
       image:
         "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=600",
@@ -228,7 +225,9 @@ const Journey = () => {
                 At Healing Escape, we understand that travelling for medical
                 treatment is a major decision. Our transparent, step-by-step
                 process ensures your journey is safe, smooth, and stress-free.
-                <br/>Below is a detailed explanation of how we take care of you at every stage of your treatment journey.
+                <br />
+                Below is a detailed explanation of how we take care of you at
+                every stage of your treatment journey.
               </p>
               {/* <motion.div
                 variants={fadeIn("up", 0.4)}
@@ -501,7 +500,7 @@ const Journey = () => {
                 Start Enquiry Now
               </a>
               <a
-                href="https://wa.me/919140405040"
+                href="https://wa.me/918960966629"
                 target="_blank"
                 rel="noreferrer"
                 className="bg-white/5 hover:bg-white/10 text-white font-black py-4 md:py-6 px-8 md:px-12 rounded-xl md:rounded-3xl border border-white/10 transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl"

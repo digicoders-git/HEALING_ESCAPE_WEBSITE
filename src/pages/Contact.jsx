@@ -21,7 +21,7 @@ import { citiesList } from "../data/hospitalsData";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
 import { createEnquiry } from "../apis/enquiry";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const bannerSlides = [
   {
@@ -34,8 +34,6 @@ const bannerSlides = [
   },
 ];
 
-
-
 const Contact = () => {
   const [treatment, setTreatment] = useState("");
   const [city, setCity] = useState("");
@@ -45,7 +43,7 @@ const Contact = () => {
     email: "",
     phone: "",
     preferredCity: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -54,17 +52,19 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const enquiryData = {
         ...formData,
-        preferredCity: city || "Any City"
+        preferredCity: city || "Any City",
       };
-      
+
       const response = await createEnquiry(enquiryData);
-      
+
       if (response.success) {
-        toast.success("Enquiry submitted successfully! We will contact you soon.");
+        toast.success(
+          "Enquiry submitted successfully! We will contact you soon.",
+        );
         // Reset form
         setFormData({
           fullName: "",
@@ -72,7 +72,7 @@ const Contact = () => {
           email: "",
           phone: "",
           preferredCity: "",
-          message: ""
+          message: "",
         });
         setCity("");
       }
@@ -130,7 +130,7 @@ const Contact = () => {
                 {
                   icon: <Phone size={24} />,
                   label: "Call Us",
-                  value: "+91 9506666642",
+                  value: "+91 8960966629",
                 },
                 {
                   icon: <Mail size={24} />,
@@ -200,7 +200,7 @@ const Contact = () => {
                       {
                         icon: <Phone size={20} />,
                         label: "Phone",
-                        val: "+91 9506666642",
+                        val: "+91 8960966629",
                       },
                       {
                         icon: <Mail size={20} />,
@@ -272,7 +272,10 @@ const Contact = () => {
                     </p>
                   </div>
 
-                  <form className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8" onSubmit={handleSubmit}>
+                  <form
+                    className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
+                    onSubmit={handleSubmit}
+                  >
                     <div className="space-y-2">
                       <label className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 ml-4">
                         Full Name
@@ -285,7 +288,12 @@ const Contact = () => {
                         <input
                           type="text"
                           value={formData.fullName}
-                          onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              fullName: e.target.value,
+                            })
+                          }
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Your Name"
                           required
@@ -304,7 +312,12 @@ const Contact = () => {
                         <input
                           type="text"
                           value={formData.country}
-                          onChange={(e) => setFormData({...formData, country: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({
+                              ...formData,
+                              country: e.target.value,
+                            })
+                          }
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="e.g. Oman, Kenya"
                           required
@@ -323,7 +336,9 @@ const Contact = () => {
                         <input
                           type="email"
                           value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Email"
                           required
@@ -342,7 +357,9 @@ const Contact = () => {
                         <input
                           type="tel"
                           value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                          onChange={(e) =>
+                            setFormData({ ...formData, phone: e.target.value })
+                          }
                           className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="WhatsApp Number"
                           required
@@ -382,7 +399,9 @@ const Contact = () => {
                       <textarea
                         rows="4"
                         value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
+                        onChange={(e) =>
+                          setFormData({ ...formData, message: e.target.value })
+                        }
                         className="w-full px-6 md:px-8 py-4 md:py-6 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm resize-none"
                         placeholder="Describe your medical condition..."
                         required
