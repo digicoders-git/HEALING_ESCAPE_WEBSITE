@@ -213,7 +213,7 @@ const Navbar = () => {
           </div>
 
           {/* Right Actions Group (Enquiry + Burger) */}
-          <div className="flex items-center gap-3 md:gap-6">
+          <div className="flex items-center gap-2 md:gap-4">
             <Link
               to="/contact"
               className="hidden lg:flex bg-secondary hover:bg-primary text-white font-bold py-2.5 px-4 xl:px-8 rounded-xl xl:rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-[10px] xl:text-xs uppercase tracking-widest whitespace-nowrap text-center"
@@ -221,9 +221,38 @@ const Navbar = () => {
               Enquiry
             </Link>
 
+            {/* Language Selector for Mobile/Tablet - Visible only below 1024px */}
+            <div className="lg:hidden relative group/lang-mobile cursor-pointer notranslate">
+              <div className="flex items-center gap-1.5 p-2 bg-slate-50 rounded-xl text-primary font-bold text-[11px] uppercase transition-all border border-slate-100">
+                <Globe size={18} className="text-secondary" />
+                <span>{currentLang.label}</span>
+                <ChevronDown
+                  size={14}
+                  className="group-hover/lang-mobile:rotate-180 transition-transform text-slate-400"
+                />
+              </div>
+
+              {/* Dropdown for Mobile Language */}
+              <div className="absolute top-full end-0 mt-2 w-32 bg-white shadow-2xl rounded-xl border border-slate-100 p-1.5 opacity-0 invisible group-hover/lang-mobile:opacity-100 group-hover/lang-mobile:visible transition-all duration-300 translate-y-2 group-hover/lang-mobile:translate-y-0 z-[111]">
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => changeLanguage(lang)}
+                    className={`w-full text-left px-3 py-2.5 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider ${
+                      i18n.language === lang.code
+                        ? "bg-primary text-white"
+                        : "text-slate-600 hover:bg-slate-50"
+                    }`}
+                  >
+                    {lang.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
             {/* Mobile Menu Button - Hidden from 1024px up */}
             <button
-              className="lg:hidden p-2 text-primary focus:outline-none bg-slate-50 rounded-xl"
+              className="lg:hidden p-2 text-primary focus:outline-none bg-slate-50 rounded-xl border border-slate-100"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? (
