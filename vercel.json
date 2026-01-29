@@ -15,7 +15,12 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/",
+      "missing": [
+        {
+          "type": "file"
+        }
+      ]
     }
   ]
 }
