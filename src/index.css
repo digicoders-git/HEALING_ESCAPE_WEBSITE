@@ -94,10 +94,59 @@ body {
     box-shadow: none !important;
   }
 }
+
+/* RTL Global Fixes */
+[dir="rtl"] {
+  text-align: right;
+}
+
+[dir="rtl"] .ltr-only {
+  display: none !important;
+}
+
+[dir="ltr"] .rtl-only {
+  display: none !important;
+}
+
+/* Ensure images don't flip unless requested */
+
+
+[dir="rtl"] .rtl-flip {
+  transform: scaleX(-1);
+}
+
+/* Smooth zoom transition */
+html {
+  transition: font-size 0.2s ease-out;
+}
+
+/* Fix for Google Translate top banner */
+.goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+#google_translate_element {
+  display: none !important;
+}
+
+.skiptranslate {
+  display: none !important;
+}
+
+.goog-te-spinner-pos {
+  display: none !important;
+}
+
 /* Text selection color fix */
 ::selection {
-  background: #ffffff;   /* ya koi light color */
-  color: #0a1cff;        /* ya black */
+  background: #ffffff;
+  /* ya koi light color */
+  color: #0a1cff;
+  /* ya black */
 }
 
 /* Firefox support */

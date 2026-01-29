@@ -104,14 +104,15 @@ const Navbar = () => {
   return (
     <>
       {/* 1. Top Utility Bar - Not Sticky (Will scroll away) */}
-      <div className="hidden lg:block bg-primary text-white py-2 px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110 font-['Poppins']">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex gap-8 items-center">
+      <div className="hidden lg:block bg-primary text-white py-2 px-4 md:px-8 text-[11px] font-bold tracking-widest border-b border-white/5 relative z-110 font-['Poppins']">
+        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-y-2">
+          <div className="flex gap-4 xl:gap-8 items-center">
             <Link
               to="/blogs"
-              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase"
+              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase whitespace-nowrap"
             >
-              <BookOpen size={14} className="text-secondary" /> Blogs
+              <BookOpen size={14} className="text-secondary" />{" "}
+              <span className="hidden lg:inline">Blogs</span>
             </Link>
             <Link
               to="/videos"
@@ -121,32 +122,36 @@ const Navbar = () => {
             </Link>
             <Link
               to="/gallery"
-              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase"
+              className="flex items-center gap-2 hover:text-secondary cursor-pointer transition-colors uppercase whitespace-nowrap"
             >
-              <ImageIcon size={14} className="text-secondary" /> Gallery
+              <ImageIcon size={14} className="text-secondary" />{" "}
+              <span className="hidden lg:inline">Gallery</span>
             </Link>
           </div>
-          <div className="flex gap-8 items-center">
+          <div className="flex gap-4 xl:gap-8 items-center">
             <a
               href="mailto:contactus@healingesacpeglobal.com"
-              className="flex items-center gap-2 text-white/90"
+              className="flex items-center gap-2 text-white/90 truncate max-w-[200px] xl:max-w-none"
             >
-              <Mail size={14} className="text-secondary" />{" "}
-              contactus@healingesacpeglobal.com
+              <Mail size={14} className="text-secondary shrink-0" />{" "}
+              <span className="truncate">
+                contactus@healingesacpeglobal.com
+              </span>
             </a>
             <a
-              href="tel:+91 8960966629"
-              className="flex items-center gap-2 text-white/90"
+              href="tel:+918960966629"
+              className="flex items-center gap-2 text-white/90 whitespace-nowrap"
             >
-              <Phone size={14} className="text-secondary" /> +91 8960966629
+              <Phone size={14} className="text-secondary shrink-0" />{" "}
+              <span>+91 8960966629</span>
             </a>
-            <div className="h-4 w-px bg-white/20 mx-2" />
-            <div className="relative group/lang cursor-pointer">
+            <div className="h-4 w-px bg-white/20 mx-1 xl:mx-2" />
+            <div className="relative group/lang cursor-pointer notranslate">
               <span className="flex items-center gap-2 hover:text-secondary transition-colors uppercase">
                 <Globe size={14} /> {currentLang.label}{" "}
                 <ChevronDown size={12} />
               </span>
-              <div className="absolute top-full right-0 mt-2 w-32 bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl border border-slate-100 p-1.5 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 translate-y-2 group-hover/lang:translate-y-0 z-[111]">
+              <div className="absolute top-full end-0 mt-2 w-32 bg-white/95 backdrop-blur-xl shadow-2xl rounded-xl border border-slate-100 p-1.5 opacity-0 invisible group-hover/lang:opacity-100 group-hover/lang:visible transition-all duration-300 translate-y-2 group-hover/lang:translate-y-0 z-[111]">
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
@@ -174,20 +179,20 @@ const Navbar = () => {
             : "bg-white py-4"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link to="/" className="shrink-0">
             <img
               src={landLogoo}
               alt="Healing Escape Global"
               className={`transition-all duration-500 h-auto ${
-                isScrolled ? "w-[160px] md:w-[180px]" : "w-[180px] md:w-[220px]"
+                isScrolled ? "w-[160px] lg:w-[180px]" : "w-[180px] lg:w-[220px]"
               }`}
             />
           </Link>
 
           {/* Desktop Nav Items */}
-          <div className="hidden xl:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-0.5 xl:gap-1 2xl:gap-4">
             {navLinks.map((item, index) =>
               item.dropdownItems ? (
                 <NavDropdown
@@ -207,27 +212,27 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Enquiry CTA */}
-          <div className="hidden lg:flex items-center gap-6">
+          {/* Right Actions Group (Enquiry + Burger) */}
+          <div className="flex items-center gap-3 md:gap-6">
             <Link
               to="/contact"
-              className="bg-secondary hover:bg-primary text-white font-bold py-3 px-8 rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-xs uppercase tracking-widest whitespace-nowrap text-center"
+              className="hidden lg:flex bg-secondary hover:bg-primary text-white font-bold py-2.5 px-4 xl:px-8 rounded-xl xl:rounded-2xl shadow-xl shadow-secondary/20 transition-all duration-500 text-[10px] xl:text-xs uppercase tracking-widest whitespace-nowrap text-center"
             >
               Enquiry
             </Link>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="xl:hidden p-2 text-primary focus:outline-none bg-slate-50 rounded-xl"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? (
-              <X size={28} strokeWidth={2} />
-            ) : (
-              <Menu size={28} strokeWidth={2} />
-            )}
-          </button>
+            {/* Mobile Menu Button - Hidden from 1024px up */}
+            <button
+              className="lg:hidden p-2 text-primary focus:outline-none bg-slate-50 rounded-xl"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {isOpen ? (
+                <X size={28} strokeWidth={2} />
+              ) : (
+                <Menu size={28} strokeWidth={2} />
+              )}
+            </button>
+          </div>
         </div>
       </nav>
 
@@ -295,7 +300,7 @@ const Navbar = () => {
                     to="/gallery"
                     onClick={() => setIsOpen(false)}
                   />
-                  <div className="relative group/lang-mobile w-full">
+                  <div className="relative group/lang-mobile w-full notranslate">
                     <button className="flex items-center justify-center gap-2 text-slate-500 font-bold text-[10px] uppercase tracking-widest bg-slate-50 p-4 rounded-xl border border-slate-100 active:bg-primary active:text-white transition-all w-full">
                       <Globe size={16} /> {currentLang.name}{" "}
                       <ChevronDown
@@ -303,7 +308,7 @@ const Navbar = () => {
                         className="group-hover/lang-mobile:rotate-180 transition-transform"
                       />
                     </button>
-                    <div className="absolute bottom-full left-0 w-full mb-2 bg-white shadow-2xl rounded-xl border border-slate-100 p-2 opacity-0 invisible group-hover/lang-mobile:opacity-100 group-hover/lang-mobile:visible transition-all duration-300">
+                    <div className="absolute bottom-full start-0 w-full mb-2 bg-white shadow-2xl rounded-xl border border-slate-100 p-2 opacity-0 invisible group-hover/lang-mobile:opacity-100 group-hover/lang-mobile:visible transition-all duration-300">
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
@@ -347,13 +352,13 @@ const Navbar = () => {
 const NavMenuLink = ({ to, label, active }) => (
   <Link
     to={to}
-    className={`px-3 py-2 text-[12px] font-bold uppercase tracking-wide transition-all relative group whitespace-nowrap ${
+    className={`px-1.5 xl:px-3 py-2 text-[10px] xl:text-[12px] font-bold uppercase tracking-wide transition-all relative group whitespace-nowrap ${
       active ? "text-primary" : "text-slate-600 hover:text-primary"
     }`}
   >
     {label}
     <span
-      className={`absolute bottom-0 left-3 right-3 h-[2px] bg-secondary rounded-full transform transition-all duration-300 ${
+      className={`absolute bottom-0 inset-x-3 h-[2px] bg-secondary rounded-full transform transition-all duration-300 ${
         active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
       }`}
     />
@@ -362,26 +367,26 @@ const NavMenuLink = ({ to, label, active }) => (
 
 const NavDropdown = ({ label, items, active }) => {
   return (
-    <div className="relative group px-3 py-2 cursor-pointer">
+    <div className="relative group px-1.5 xl:px-3 py-2 cursor-pointer">
       <div
-        className={`flex items-center gap-1.5 text-[12px] font-bold uppercase tracking-wide transition-all whitespace-nowrap ${
+        className={`flex items-center gap-1 text-[10px] xl:text-[12px] font-bold uppercase tracking-wide transition-all whitespace-nowrap ${
           active ? "text-primary" : "text-slate-600 group-hover:text-primary"
         }`}
       >
         {label}{" "}
         <ChevronDown
-          size={14}
+          size={12}
           className="group-hover:rotate-180 transition-transform text-slate-400 group-hover:text-secondary"
         />
       </div>
       {/* Dropdown Menu - Dynamic Width based on content */}
-      <div className="absolute top-full left-0 mt-2 min-w-[200px] w-max bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-4 group-hover:translate-y-0 z-[101]">
+      <div className="absolute top-full start-0 mt-2 min-w-[200px] w-max bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-slate-100 p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-4 group-hover:translate-y-0 z-[101]">
         {items.map((item, idx) => (
           <DropdownItem key={idx} label={item.label} to={item.path} />
         ))}
       </div>
       <span
-        className={`absolute bottom-0 left-3 right-3 h-[2px] bg-secondary rounded-full transform transition-all duration-300 ${
+        className={`absolute bottom-0 inset-x-3 h-[2px] bg-secondary rounded-full transform transition-all duration-300 ${
           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
         }`}
       />
@@ -404,8 +409,8 @@ const MobileNavLink = ({ to, label, active, onClick }) => (
     onClick={onClick}
     className={`block py-4 text-lg font-bold uppercase tracking-wide transition-all ${
       active
-        ? "text-primary border-l-4 border-secondary pl-4"
-        : "text-slate-500 pl-4"
+        ? "text-primary border-s-4 border-secondary ps-4"
+        : "text-slate-500 ps-4"
     }`}
   >
     {label}
@@ -419,7 +424,7 @@ const MobileNavDropdown = ({ label, items, onClick }) => {
     <div className="border-b border-slate-100 last:border-0">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between py-4 pl-4 text-lg font-bold uppercase tracking-wide text-slate-500 hover:text-primary transition-colors"
+        className="w-full flex items-center justify-between py-4 ps-4 text-lg font-bold uppercase tracking-wide text-slate-500 hover:text-primary transition-colors"
       >
         {label}
         <ChevronDown
@@ -439,7 +444,7 @@ const MobileNavDropdown = ({ label, items, onClick }) => {
             key={idx}
             to={item.path}
             onClick={onClick}
-            className="block py-3 pl-8 text-sm font-bold text-slate-500 hover:text-secondary uppercase tracking-wider"
+            className="block py-3 ps-8 text-sm font-bold text-slate-500 hover:text-secondary uppercase tracking-wider"
           >
             {item.label}
           </Link>

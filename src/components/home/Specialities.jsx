@@ -111,7 +111,7 @@ const Specialities = () => {
               </div>
 
               {/* Subtle Numbering */}
-              <div className="absolute -bottom-2 -right-2 text-5xl font-bold text-slate-50 group-hover:text-primary transition-colors duration-500 opacity-30 select-none">
+              <div className="absolute -bottom-2 end-[-0.5rem] text-5xl font-bold text-slate-50 group-hover:text-primary transition-colors duration-500 opacity-30 select-none">
                 {idx + 1}
               </div>
             </motion.div>

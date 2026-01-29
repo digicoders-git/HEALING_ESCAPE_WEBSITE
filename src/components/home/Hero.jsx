@@ -92,7 +92,7 @@ const Hero = () => {
           <source src={homeVideo} type="video/mp4" />
         </video>
         {/* Deep Gradient Masks */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r rtl:bg-linear-to-l from-primary via-primary/60 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white via-white/10 to-transparent" />
       </div>
 
@@ -119,9 +119,9 @@ const Hero = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
-          <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-left">
+          <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-start">
             <motion.div
-              variants={fadeIn("right", 0.2)}
+              variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.2)}
               className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
@@ -131,8 +131,8 @@ const Hero = () => {
               </h1>
             </motion.div>
             <motion.p
-              variants={fadeIn("right", 0.3)}
-              className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:mx-0"
+              variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.3)}
+              className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:ms-0"
             >
               Your trusted partner for world-class, affordable medical treatment
               in India. We help international patients access top hospitals,
@@ -141,7 +141,7 @@ const Hero = () => {
             </motion.p>
 
             <motion.div
-              variants={fadeIn("right", 0.4)}
+              variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.4)}
               className="flex flex-wrap gap-4 md:gap-6 justify-center lg:justify-start"
             >
               <div className="flex items-center gap-3">
