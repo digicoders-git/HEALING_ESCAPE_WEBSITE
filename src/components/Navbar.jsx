@@ -226,7 +226,7 @@ const Navbar = () => {
             <div className="lg:hidden relative notranslate">
               <button
                 onClick={() => setIsLangOpen(!isLangOpen)}
-                className="flex items-center gap-1.5 p-2 bg-slate-50 rounded-xl text-primary font-bold text-[11px] uppercase transition-all border border-slate-100"
+                className="flex items-center gap-1.5 p-2.5 bg-slate-50 rounded text-primary font-bold text-[11px] uppercase transition-all border border-slate-100"
               >
                 <Globe size={18} className="text-secondary" />
                 <span>{currentLang.label}</span>
@@ -237,7 +237,7 @@ const Navbar = () => {
               </button>
 
               {/* Dropdown for Mobile Language */}
-              <div className={`absolute top-full end-0 mt-2 w-32 bg-white shadow-2xl rounded-xl border border-slate-100 p-1.5 transition-all duration-300 z-[111] ${
+              <div className={`absolute top-full end-0 mt-2 w-32 bg-white shadow-2xl rounded border border-slate-100 p-1.5 transition-all duration-300 z-111 ${
                 isLangOpen
                   ? "opacity-100 visible translate-y-0"
                   : "opacity-0 invisible translate-y-2"
@@ -249,7 +249,7 @@ const Navbar = () => {
                       changeLanguage(lang);
                       setIsLangOpen(false);
                     }}
-                    className={`w-full text-left px-3 py-2.5 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider ${
+                    className={`w-full text-left px-3 py-2.5 text-[10px] font-bold rounded transition-all uppercase tracking-wider ${
                       i18n.language === lang.code
                         ? "bg-primary text-white"
                         : "text-slate-600 hover:bg-slate-50"
@@ -263,7 +263,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button - Hidden from 1024px up */}
             <button
-              className="lg:hidden p-2 text-primary focus:outline-none bg-slate-50 rounded-xl border border-slate-100"
+              className="lg:hidden p-1 text-primary focus:outline-none bg-slate-50 rounded border border-slate-100"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? (
