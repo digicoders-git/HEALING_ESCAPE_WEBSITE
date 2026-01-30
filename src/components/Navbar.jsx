@@ -24,6 +24,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const location = useLocation();
 
   const languages = [
@@ -222,22 +223,32 @@ const Navbar = () => {
             </Link>
 
             {/* Language Selector for Mobile/Tablet - Visible only below 1024px */}
-            <div className="lg:hidden relative group/lang-mobile cursor-pointer notranslate">
-              <div className="flex items-center gap-1.5 p-2 bg-slate-50 rounded-xl text-primary font-bold text-[11px] uppercase transition-all border border-slate-100">
+            <div className="lg:hidden relative notranslate">
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-1.5 p-2 bg-slate-50 rounded-xl text-primary font-bold text-[11px] uppercase transition-all border border-slate-100"
+              >
                 <Globe size={18} className="text-secondary" />
                 <span>{currentLang.label}</span>
                 <ChevronDown
                   size={14}
-                  className="group-hover/lang-mobile:rotate-180 transition-transform text-slate-400"
+                  className={`transition-transform text-slate-400 ${isLangOpen ? 'rotate-180' : ''}`}
                 />
-              </div>
+              </button>
 
               {/* Dropdown for Mobile Language */}
-              <div className="absolute top-full end-0 mt-2 w-32 bg-white shadow-2xl rounded-xl border border-slate-100 p-1.5 opacity-0 invisible group-hover/lang-mobile:opacity-100 group-hover/lang-mobile:visible transition-all duration-300 translate-y-2 group-hover/lang-mobile:translate-y-0 z-[111]">
+              <div className={`absolute top-full end-0 mt-2 w-32 bg-white shadow-2xl rounded-xl border border-slate-100 p-1.5 transition-all duration-300 z-[111] ${
+                isLangOpen
+                  ? "opacity-100 visible translate-y-0"
+                  : "opacity-0 invisible translate-y-2"
+              }`}>
                 {languages.map((lang) => (
                   <button
                     key={lang.code}
-                    onClick={() => changeLanguage(lang)}
+                    onClick={() => {
+                      changeLanguage(lang);
+                      setIsLangOpen(false);
+                    }}
                     className={`w-full text-left px-3 py-2.5 text-[10px] font-bold rounded-lg transition-all uppercase tracking-wider ${
                       i18n.language === lang.code
                         ? "bg-primary text-white"
