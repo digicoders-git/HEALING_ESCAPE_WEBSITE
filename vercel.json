@@ -15,12 +15,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/",
-      "missing": [
-        {
-          "type": "file"
-        }
-      ]
+      "destination": "/index.html"
     }
   ]
 }
