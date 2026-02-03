@@ -8,7 +8,7 @@
           "value": "healingescapeglobal.com"
         }
       ],
-      "destination": "https://www.healingescapeglobal.com/$1",
+      "destination": "https://www.healingescapeglobal.com",
       "permanent": true
     }
   ],
