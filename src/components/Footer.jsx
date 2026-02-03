@@ -233,14 +233,15 @@ const Footer = () => {
           </div>
           <div className="flex flex-wrap gap-3">
             {[
-              { Icon: Facebook, href: "#" },
-              { Icon: Twitter, href: "#" },
-              { Icon: Instagram, href: "#" },
-              { Icon: Linkedin, href: "#" },
-              { Icon: Youtube, href: "#" },
+              // { Icon: Facebook, href: "#" },
+              // { Icon: Twitter, href: "#" },
+              { Icon: Instagram, href: "https://www.instagram.com/healingescapeglobal?igsh=MzU5NmpoMWx0c21q" },
+              { Icon: Linkedin, href: "https://www.linkedin.com/company/healing-escape-global/?lipi=urn%3Ali%3Apage%3Ad_flagship3_company_posts%3BqCr9aqXDRES6OUtP6h0V4w%3D%3D" },
+              { Icon: Youtube, href: "https://www.youtube.com/channel/UC9Si-Tk-ileLi9BzzsMEjHg" },
             ].map((social, idx) => (
               <a
                 key={idx}
+                target="_blank"
                 href={social.href}
                 className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center hover:bg-secondary hover:border-secondary transition-all duration-300 hover:scale-110 hover:-translate-y-1 shadow-lg group"
               >
