@@ -22,7 +22,7 @@
         },
         {
           "key": "Content-Type",
-          "value": "image/jpeg"
+          "value": "image/jpg"
         }
       ]
     },
@@ -35,7 +35,7 @@
         },
         {
           "key": "Content-Type",
-          "value": "image/jpeg"
+          "value": "image/jpg"
         }
       ]
     }
@@ -45,8 +45,5 @@
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite"
+  ]
 }
