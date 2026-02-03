@@ -267,15 +267,7 @@ const Footer = () => {
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-linear-to-r from-transparent via-secondary to-transparent"></div>
         <p className="text-white/80 text-sm font-medium tracking-[0.15em] text-center">
-          © 2026 Healing Escape Global. Design and Developed by{" "}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://digicoders.in"
-            className="hover:text-secondary transition-colors duration-300 font-bold"
-          >
-            #TeamDigiCoders
-          </a>
+          © 2026 Healing Escape Global.
         </p>
       </motion.div>
 
