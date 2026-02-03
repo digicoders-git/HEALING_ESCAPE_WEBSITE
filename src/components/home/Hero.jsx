@@ -134,6 +134,7 @@ const Hero = () => {
               variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:ms-0"
             >
+              We help International patients get best treatment in India with full end-to-end support,
               Your trusted partner for world-class, affordable medical treatment
               in India. We help international patients access top hospitals,
               leading doctors, and seamless medical journeys across India —
