@@ -22,7 +22,7 @@
         },
         {
           "key": "Content-Type",
-          "value": "image/jpg"
+          "value": "image/jpeg"
         }
       ]
     },
@@ -35,7 +35,7 @@
         },
         {
           "key": "Content-Type",
-          "value": "image/jpg"
+          "value": "image/jpeg"
         }
       ]
     }
