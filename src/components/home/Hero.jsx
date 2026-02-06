@@ -143,19 +143,19 @@ const Hero = () => {
               variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:ms-0"
             >
-              We are a leading{" "}
+              We help International patients get best treatment in India with full{" "}
               <span className="text-secondary font-bold">
-                Medical Tourism Company in India
+                end-to-end support,
               </span>{" "}
-              providing end-to-end support. Your trusted partner for{" "}
-              <span className="text-secondary font-bold">
+              Your trusted partner for world-class, affordable medical treatment in India.We help international patients access top hospitals, leading doctors, and seamless medical journeys across India — especially North India.{" "}
+              {/* <span className="text-secondary font-bold">
                 affordable medical travel
               </span>
               , accessing top hospitals and{" "}
               <span className="text-secondary font-bold">
                 top doctors in India for surgery
               </span>{" "}
-              and seamless journeys.
+              and seamless journeys. */}
             </motion.p>
 
             <motion.div
