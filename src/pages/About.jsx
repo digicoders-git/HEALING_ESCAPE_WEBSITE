@@ -13,10 +13,12 @@ import PageHero from "../components/PageHero";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
 import abt1 from "../assets/about/abt1.png";
+import why from "../assets/about/why.png";
 import whyIndia from "../assets/about/whyIndia.png";
 import slider2 from "../assets/about/whyIndia.png";
 import mareej from "../assets/about/mareej.png";
 import doctors from "../assets/about/doctors.png";
+import puranalogo from "../assets/about/puranalogo.png";
 
 const bannerSlides = [
   {
@@ -27,7 +29,7 @@ const bannerSlides = [
     buttonLink: "/services",
   },
   {
-    image: slider2,
+    image: why,
     title: "World-Class Infrastructure",
     subtitle: "High-Tech Facilities & Internationally Accredited Hospitals",
     buttonLabel: "View Hospitals",
@@ -85,8 +87,8 @@ const About = () => {
               <div className="rounded md:rounded overflow-hidden shadow-2xl border-4 md:border-8 border-white transform md:group-hover:scale-[1.02] transition-all duration-700 relative">
                 <div className="absolute inset-0 bg-gradient-to-t from-primary/20 via-transparent to-transparent z-10"></div>
                 <img
-                  src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80&w=1000"
-                  className="w-full h-[350px] md:h-[450px] object-cover"
+                  src={puranalogo}
+                  className="w-full h-auto md:h-[450px] object-contain md:object-cover"
                   alt="Clinical Coordination"
                 />
               </div>
@@ -235,7 +237,7 @@ const About = () => {
                     <motion.div
                       key={i}
                       variants={fadeIn("right", 0.1 * (i + 1))}
-                      className="flex items-center gap-4 md:gap-6 bg-slate-50 p-4 md:p-6 rounded md:rounded border border-slate-100 shadow-sm md:hover:translate-x-4 transition-all duration-500 text-left"
+                      className="flex items-center gap-4 md:gap-6 bg-slate-50 p-2 md:p-3 rounded md:rounded border border-slate-100 shadow-sm md:hover:translate-x-4 transition-all duration-500 text-left"
                     >
                       <div className="bg-white p-3 md:p-4 rounded md:rounded shadow-md text-secondary shrink-0">
                         <MapPin size={20} md:size={24} />
@@ -256,8 +258,8 @@ const About = () => {
                 <div className="space-y-4 md:space-y-8">
                   <motion.img
                     variants={fadeIn("up", 0.3)}
-                    src={whyIndia}
-                    className="w-full h-[250px] md:h-[350px] object-cover rounded md:rounded shadow-2xl border-2 border-white"
+                    src={why}
+                    className="w-full h-auto md:h-[350px] object-contain md:object-cover rounded md:rounded shadow-2xl border-2 border-white"
                     alt="Infrastructure"
                   />
                 </div>

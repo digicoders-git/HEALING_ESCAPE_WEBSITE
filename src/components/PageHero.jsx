@@ -13,7 +13,7 @@ import "swiper/css/effect-fade";
 
 const PageHero = ({
   slides,
-  height = "h-[72vh] md:h-[82vh]",
+  height = "h-[300px] md:h-[350px]",
   showLogoLabel = true,
 }) => {
   const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
