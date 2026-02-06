@@ -86,7 +86,7 @@ const Specialities = () => {
             Institutional Expertise
           </h4>
           <h2 className="text-2xl md:text-4xl font-bold text-primary tracking-tight">
-            Advance Consent Treatment
+            Advance Treatments
           </h2>
           <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
         </motion.div>

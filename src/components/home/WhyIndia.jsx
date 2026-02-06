@@ -37,7 +37,7 @@ const WhyIndia = () => {
                 Global Medical Hub
               </h4>
               <h2 className="text-2xl md:text-4xl font-bold text-primary tracking-tight">
-                Choice of Global Patients
+                Why India is a Top Choice of Global Patients
               </h2>
               <div className="w-16 h-1 bg-secondary mx-auto rounded-full" />
             </div>

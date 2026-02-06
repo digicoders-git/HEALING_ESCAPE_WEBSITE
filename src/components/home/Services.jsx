@@ -5,6 +5,8 @@ import {
   Languages,
   HeartHandshake,
   UserRoundCheck,
+  Hospital,
+  Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer } from "../../utils/framerVariants";
@@ -14,6 +16,11 @@ const services = [
     icon: <Stethoscope size={28} />,
     title: "Clinical Opinions",
     desc: "Expert evaluation from senior institutional specialists.",
+  },
+  {
+    icon: <Hospital size={28} />,
+    title: "Clinical Proposals",
+    desc: "A prospective, randomized, double-blind study to evaluate the safety.",
   },
   {
     icon: <ClipboardList size={28} />,
@@ -40,6 +47,11 @@ const services = [
     title: "Post-Discharge",
     desc: "Extended follow-up care management after your return.",
   },
+  // {
+  //   icon: <Heart size={28} />,
+  //   title: "Complete Recovery",
+  //   desc: "Extended follow-up care management after your return.",
+  // },
 ];
 
 const Services = () => {
@@ -65,6 +77,8 @@ const Services = () => {
                 We manage clinical complexity so you focus on healing.<br/>
                 Provides seamless assistance from initial diagnosis and treatment initiation through long-term therapy, ensuring patients feel supported throughout their entire healthcare journey. <br />
                 Offers crucial support through insurance verification, prior authorization assistance, and financial programs (copay/assistance) to make treatments affordable.
+                Providing, nurse, hotlines, medication, reminders, and, education, on disease, management to improve, patient, outcomes.
+                 Coordinated efforts between providers and patients, reducing, treatment, dropouts. 
               </p>
             </div>
           </motion.div>
@@ -88,6 +102,12 @@ const Services = () => {
                   </p>
                 </motion.div>
               ))}
+              <motion.div className="p-5 border-2 border-dashed border-secondary text-primary flex flex-col justify-center items-center text-center rounded">
+            <Heart size={24} className="text-secondary mb-2 animate-pulse" />
+            <h3 className="font-bold text-xs uppercase tracking-widest text-secondary">
+              Complete Recovery
+            </h3>
+          </motion.div>
             </div>
           </div>
         </div>

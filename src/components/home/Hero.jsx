@@ -249,7 +249,7 @@ const Hero = () => {
                         className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded border border-white bg-white/80 text-center text-sm font-bold text-primary"
                       />
                       <input
-                        type="text"
+                        type="number"
                         placeholder="Mobile Number"
                         value={formData.mobile}
                         onChange={(e) =>

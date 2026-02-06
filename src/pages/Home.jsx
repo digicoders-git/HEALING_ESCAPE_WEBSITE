@@ -21,11 +21,11 @@ const Home = () => {
       <WhyIndia />
       <Specialities />
       <Services />
-      <Journey />
+      {/* <Journey /> */}
       <USP />
       <Founder />
       <Testimonials />
-      <Partners />
+      {/* <Partners /> */}
       <FinalCTA />
     </>
   );

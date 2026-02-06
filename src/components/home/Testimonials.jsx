@@ -87,13 +87,13 @@ const Testimonials = () => {
                     </p>
 
                     <div className="flex flex-col items-center gap-4">
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary shadow-lg">
+                      {/* <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-secondary shadow-lg">
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
                           className="w-full h-full object-cover"
                         />
-                      </div>
+                      </div> */}
                       <div className="text-center">
                         <p className="text-primary font-bold text-lg leading-none">
                           {testimonial.name}

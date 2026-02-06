@@ -47,7 +47,7 @@ const Founder = () => {
                   Vision & Integrity
                 </h2>
                 <p className="text-slate-400 font-bold uppercase tracking-widest text-[11px] italic tracking-tighter">
-                  A Message from our founder
+                  A Message from our founder - <span className="text-primary font-bold">Shubham Singh</span>
                 </p>
                 <div className="w-12 h-1 bg-secondary rounded-full" />
               </div>
@@ -58,12 +58,7 @@ const Founder = () => {
                   service excellence."
                 </p>
                 <p className="text-slate-500 font-medium text-base leading-relaxed">
-                  Healing Escape is founded by{" "}
-                  <span className="text-primary font-bold">Shubham Singh</span>,
-                  a multidisciplinary entrepreneur with international exposure
-                  in law and healthcare operations. He leads with a mission to
-                  transform the medical tourism experience for international
-                  patients.
+                  At Healing Escape Global, we believe that access to quality healthcare should never be limited by geography. Our mission is to connect international patients with India's leading hospitals while ensuring transparency, compassion, and seamless coordination at every step. We are committed to building trusted partnerships and delivering structured, end-to-end support so patients can focus on what truly matters Healing with confidence and dignity.
                 </p>
               </div>
             </motion.div>
