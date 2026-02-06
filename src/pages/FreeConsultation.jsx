@@ -205,7 +205,7 @@ const FreeConsultation = () => {
                           className="w-14 sm:w-16 py-3 sm:py-3.5 px-2 rounded-xl border border-primary bg-white/80 text-center text-sm font-bold text-primary"
                         />
                         <input
-                          type="tel"
+                          type="number"
                           placeholder="Mobile Number"
                           value={formData.mobile}
                           onChange={(e) =>

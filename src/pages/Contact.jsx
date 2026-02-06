@@ -150,9 +150,9 @@ const Contact = () => {
               ].map((item, i) => (
                 <div
                   key={i}
-                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500"
+                  className="group flex flex-col items-center gap-3 p-6 bg-white rounded border border-slate-100 shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-500"
                 >
-                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center border border-secondary/20 text-secondary group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 rounded bg-gradient-to-br from-secondary/10 to-primary/10 flex items-center justify-center border border-secondary/20 text-secondary group-hover:scale-110 transition-transform">
                     {item.icon}
                   </div>
                   <div className="text-center">
@@ -214,7 +214,7 @@ const Contact = () => {
                       },
                     ].map((item, i) => (
                       <div key={i} className="flex gap-4 group">
-                        <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
+                        <div className="w-10 h-10 rounded bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 group-hover:bg-secondary group-hover:text-white transition-all">
                           {item.icon}
                         </div>
                         <div>
@@ -230,7 +230,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="p-8 md:p-10 bg-slate-900 rounded-[2.5rem] md:rounded-[3rem] text-white space-y-6 relative overflow-hidden shadow-2xl">
+                <div className="p-8 md:p-10 bg-slate-900 rounded text-white space-y-6 relative overflow-hidden shadow-2xl">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full" />
                   <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/10 blur-[60px] rounded-full" />
                   {/* Badge Removed */}
@@ -294,7 +294,7 @@ const Contact = () => {
                               fullName: e.target.value,
                             })
                           }
-                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
+                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Your Name"
                           required
                         />
@@ -318,7 +318,7 @@ const Contact = () => {
                               country: e.target.value,
                             })
                           }
-                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
+                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="e.g. Oman, Kenya"
                           required
                         />
@@ -339,7 +339,7 @@ const Contact = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, email: e.target.value })
                           }
-                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
+                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="Email"
                           required
                         />
@@ -360,7 +360,7 @@ const Contact = () => {
                           onChange={(e) =>
                             setFormData({ ...formData, phone: e.target.value })
                           }
-                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
+                          className="w-full pl-14 md:pl-16 pr-6 md:pr-8 py-4 md:py-5 rounded bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm"
                           placeholder="WhatsApp Number"
                           required
                         />
@@ -402,7 +402,7 @@ const Contact = () => {
                         onChange={(e) =>
                           setFormData({ ...formData, message: e.target.value })
                         }
-                        className="w-full px-6 md:px-8 py-4 md:py-6 rounded-2xl md:rounded-3xl bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm resize-none"
+                        className="w-full px-6 md:px-8 py-4 md:py-6 rounded bg-slate-50 border border-slate-100 focus:outline-none focus:border-secondary font-bold text-sm resize-none"
                         placeholder="Describe your medical condition..."
                         required
                       />
@@ -412,7 +412,7 @@ const Contact = () => {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-primary hover:bg-secondary text-white font-bold py-5 md:py-6 rounded-xl md:rounded-2xl transition-all duration-500 uppercase tracking-[0.4em] text-[10px] md:text-[11px] shadow-2xl flex items-center justify-center gap-4 md:gap-6 group/btn disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-primary hover:bg-secondary text-white font-bold py-5 md:py-6 rounded transition-all duration-500 uppercase tracking-[0.4em] text-[10px] md:text-[11px] shadow-2xl flex items-center justify-center gap-4 md:gap-6 group/btn disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isSubmitting ? "Submitting..." : "Request Opinion"}
                         {!isSubmitting && (
@@ -452,7 +452,7 @@ const Contact = () => {
                 key={idx}
                 className="relative group text-center space-y-4 md:space-y-6"
               >
-                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-2xl md:rounded-3xl flex items-center justify-center text-secondary border border-slate-100 mx-auto group-hover:bg-secondary group-hover:text-white transition-all shadow-xl">
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded flex items-center justify-center text-secondary border border-slate-100 mx-auto group-hover:bg-secondary group-hover:text-white transition-all shadow-xl">
                   <span className="text-3xl md:text-4xl font-extrabold italic opacity-30">
                     0{idx + 1}
                   </span>
@@ -493,7 +493,7 @@ const Contact = () => {
               country.
             </p>
             <div className="flex items-center justify-center lg:justify-start gap-4 md:gap-6">
-              <div className="w-12 h-12 rounded-xl bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 shrink-0">
+              <div className="w-12 h-12 rounded bg-slate-50 flex items-center justify-center text-secondary border border-slate-100 shrink-0">
                 <ShieldCheck size={24} />
               </div>
               <p className="text-[10px] font-bold text-primary uppercase tracking-widest italic">
@@ -504,7 +504,7 @@ const Contact = () => {
 
           <motion.div
             variants={fadeIn("left", 0.2)}
-            className="h-[350px] md:h-[500px] w-full bg-slate-100 rounded-[2.5rem] md:rounded-[3rem] overflow-hidden border-4 md:border-8 border-slate-50 shadow-2xl"
+            className="h-[350px] md:h-[500px] w-full bg-slate-100 rounded overflow-hidden border-4 md:border-8 border-slate-50 shadow-2xl"
           >
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227822.6037221524!2d80.77769805023176!3d26.84859648069349!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1768289417351!5m2!1sen!2sin"
