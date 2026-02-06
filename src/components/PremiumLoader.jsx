@@ -1,7 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
+import loaderImage from "../assets/logocopy.png";
 
-const PremiumLoader = ({ imageSrc = "/src/assets/logocopy.png" }) => {
+const PremiumLoader = ({ imageSrc = loaderImage }) => {
   return (
     <div className="fixed inset-0 z-99999 flex items-center justify-center bg-white">
       <div className="relative flex flex-col items-center justify-center">
