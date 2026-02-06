@@ -26,7 +26,7 @@ const bannerSlides = [
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
     title: "Advanced Specialities",
     subtitle:
-      "You can explore treatments category-wise and select the option that best matches your medical needs. All treatments listed are provided at NABH and JCI accredited hospitals in North India.",
+      "You can explore treatments category-wise and select the option that best matches your medical needs. All treatments listed are provided at NABH and JCI accredited hospitals in india.",
     buttonLabel: "Explore Treatments",
     buttonLink: "#treatments-start",
   },

@@ -147,7 +147,7 @@ const Hero = () => {
               full end-to-end support, Your trusted partner for world-class,
               affordable medical treatment in India. We help international
               patients access top hospitals, leading doctors, and seamless
-              medical journeys across India — especially North India.
+              medical journeys across India — especially india.
             </motion.p>
 
             <motion.div

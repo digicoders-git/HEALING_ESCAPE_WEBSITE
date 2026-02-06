@@ -12,7 +12,7 @@ export const doctorsData = [
       city: "Gurugram",
       accreditation: ["NABH", "JCI"]
     },
-    summary: "Dr. Arvind Kumar is a highly respected Cardiology specialist with over 25 years of experience in treating complex and critical cases. He is currently associated with one of the leading multi-speciality hospitals in North India and has successfully treated thousands of patients, including a large number of international patients from Africa, the Middle East, and other regions.",
+    summary: "Dr. Arvind Kumar is a highly respected Cardiology specialist with over 25 years of experience in treating complex and critical cases. He is currently associated with one of the leading multi-speciality hospitals in india and has successfully treated thousands of patients, including a large number of international patients from Africa, the Middle East, and other regions.",
     about: "Dr. Arvind Kumar is known for his patient-centric approach, ethical medical practice, and commitment to achieving the best possible clinical outcomes. He has extensive experience in diagnosing and treating both routine and complex cases related to Cardiology. With a strong academic background and years of hands-on clinical experience, Dr. Arvind Kumar combines advanced medical technology with compassionate care.",
     expertise: [
       "Interventional Cardiology",

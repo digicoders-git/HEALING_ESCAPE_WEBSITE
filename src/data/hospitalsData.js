@@ -133,8 +133,8 @@ export const hospitalsData = [
     image: "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&q=80&w=1200",
     accreditations: ["NABH", "JCI"],
     specialities: ["Cardiology", "Oncology", "Orthopaedics", "Transplants"],
-    about: "Apollo Hospitals Lucknow is a multi-speciality hospital that provides healthcare services of international standards. It is one of the most trusted names in the medical hub of North India, offering comprehensive care with compassion.",
-    description: "The hospital brings together some of the finest medical experts and cutting-edge technology to ensure the best clinical outcomes in North India.",
+    about: "Apollo Hospitals Lucknow is a multi-speciality hospital that provides healthcare services of international standards. It is one of the most trusted names in the medical hub of india, offering comprehensive care with compassion.",
+    description: "The hospital brings together some of the finest medical experts and cutting-edge technology to ensure the best clinical outcomes in india.",
     departments: [
       "Cardiology & Cardiac Surgery",
       "Oncology (Medical & Surgical)",

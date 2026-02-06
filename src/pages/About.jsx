@@ -202,7 +202,7 @@ const About = () => {
         </div>
       </motion.section>
 
-      {/* 5. Why North India Focus */}
+      {/* 5. Why india Focus */}
       <motion.section
         variants={staggerContainer(0.2, 0.1)}
         initial="hidden"

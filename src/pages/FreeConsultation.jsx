@@ -646,7 +646,7 @@ const FreeConsultation = () => {
               {
                 icon: <ShieldCheck size={24} />,
                 title: "Verified Hospitals",
-                desc: "We work only with verified and reputed hospitals in North India",
+                desc: "We work only with verified and reputed hospitals in india",
               },
               {
                 icon: <Heart size={24} />,
