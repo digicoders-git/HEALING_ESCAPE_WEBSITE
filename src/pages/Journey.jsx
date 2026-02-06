@@ -15,6 +15,7 @@ import {
   Eye,
   ArrowRight,
   CheckCircle2,
+  ChevronDown,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
 import { motion } from "framer-motion";
@@ -50,7 +51,6 @@ const Journey = () => {
         const rect = timelineRef.current.getBoundingClientRect();
         const windowHeight = window.innerHeight;
         const totalHeight = rect.height;
-        // Start animating when the timeline reaches the middle of the screen
         const scrolled = windowHeight / 2 - rect.top;
         const progress = Math.min(Math.max(scrolled / totalHeight, 0), 1);
         setScrollProgress(progress * 100);
@@ -58,7 +58,7 @@ const Journey = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Initial check
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -197,30 +197,29 @@ const Journey = () => {
 
   return (
     <div className="bg-white overflow-hidden">
-      <PageHero slides={bannerSlides} />
-
-      {/* Intro Section */}
+      {/* Hero Section (Replaced PageHero with Intro Section) */}
       <motion.section
         variants={staggerContainer(0.2, 0.1)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true, amount: 0.25 }}
-        className="py-12 md:py-16 px-4 sm:px-6 md:px-8 bg-slate-50 relative overflow-hidden"
+        className="relative min-h-[250px] md:min-h-[300px] flex items-center py-8 md:py-12 px-4 sm:px-6 md:px-8 bg-slate-50 overflow-hidden pt-[70px]"
       >
+        {/* Animated Background Elements */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
+        <div className="max-w-7xl mx-auto relative z-10 w-full">
           <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12 lg:gap-16">
             <motion.div
               variants={fadeIn("right", 0.2)}
               className="lg:w-1/2 space-y-5 md:space-y-6 lg:space-y-8 text-center lg:text-left"
             >
-              {/* Badge Removed */}
-              <h2 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
+              {/* Badge Removed (as per original content) */}
+              <h1 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
                 Transparent &{" "}
                 <span className="text-secondary">Patient-Centric</span> Process
-              </h2>
+              </h1>
               <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                 At Healing Escape, we understand that travelling for medical
                 treatment is a major decision. Our transparent, step-by-step
@@ -229,17 +228,8 @@ const Journey = () => {
                 Below is a detailed explanation of how we take care of you at
                 every stage of your treatment journey.
               </p>
-              {/* <motion.div
-                variants={fadeIn("up", 0.4)}
-                className="p-5 sm:p-6 md:p-8 bg-white/80 backdrop-blur-md rounded-2xl md:rounded-[2rem] border border-white shadow-2xl relative group overflow-hidden text-left"
-              >
-                <div className="absolute top-0 left-0 w-1.5 md:w-2 h-full bg-secondary" />
-                <p className="italic text-primary font-bold text-base sm:text-lg md:text-xl relative z-10 leading-relaxed">
-                  "Below is a detailed explanation of how we take care of you at
-                  every stage of your treatment journey."
-                </p>
-              </motion.div> */}
             </motion.div>
+
             <div className="lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full">
               {promises.map((promise, index) => (
                 <motion.div
@@ -259,6 +249,43 @@ const Journey = () => {
           </div>
         </div>
       </motion.section>
+
+      {/* Unique Overlapping Scroll Button */}
+      <div className="relative h-10 -mt-5 flex justify-center z-[9999]">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1, y: [0, 10, 0] }}
+          transition={{
+            opacity: { delay: 1, duration: 0.5 },
+            scale: { delay: 1, duration: 0.5 },
+            y: { repeat: Infinity, duration: 2, ease: "easeInOut" },
+          }}
+          className="-translate-y-1/2 flex flex-col items-center gap-3 cursor-pointer group"
+          onClick={() =>
+            document
+              .getElementById("workflow-start")
+              ?.scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          <div className="relative">
+            {/* Glowing Pulse */}
+            <motion.div
+              animate={{ scale: [1, 1.4, 1], opacity: [0.4, 0, 0.4] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+              className="absolute inset-0 bg-secondary/30 rounded-full scale-150"
+            />
+            <div className="relative w-14 h-14 bg-white rounded-full shadow-2xl flex items-center justify-center border-4 border-white group-hover:bg-secondary transition-all duration-300">
+              <ChevronDown
+                className="text-secondary group-hover:text-white transition-colors"
+                size={28}
+              />
+            </div>
+          </div>
+          <span className="text-[10px] font-black text-primary uppercase tracking-[0.3em] bg-white px-4 py-1.5 rounded-full shadow-sm border border-slate-100 group-hover:text-secondary group-hover:shadow-md transition-all italic">
+            Explore Journey
+          </span>
+        </motion.div>
+      </div>
 
       {/* Steps Section */}
       <motion.section
@@ -307,9 +334,9 @@ const Journey = () => {
                       index % 2 === 0 ? "lg:text-right" : "lg:text-left"
                     }`}
                   >
-                    <div className="inline-block p-3 md:p-4 rounded-[1.5rem] md:rounded-3xl bg-slate-50 border border-slate-100 mb-6 md:mb-8 md:hover:rotate-6 transition-transform shadow-sm">
+                    <div className="inline-block p-3 md:p-4 rounded bg-slate-50 border border-slate-100 mb-6 md:mb-8 md:hover:rotate-6 transition-transform shadow-sm">
                       <div
-                        className={`p-4 rounded-xl md:rounded-2xl ${step.color} text-white shadow-xl`}
+                        className={`p-4 rounded ${step.color} text-white shadow-xl`}
                       >
                         {step.icon}
                       </div>
@@ -345,7 +372,7 @@ const Journey = () => {
                         <motion.div
                           key={idx}
                           variants={fadeIn("up", 0.1 * (idx + 1))}
-                          className="flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-500 rounded-xl md:rounded-2xl text-[9px] md:text-[10px] font-extrabold border border-slate-100 uppercase tracking-widest md:hover:border-secondary md:hover:text-secondary transition-colors italic"
+                          className="flex items-center gap-2 px-4 py-2 bg-slate-50 text-slate-500 rounded text-[9px] md:text-[10px] font-extrabold border border-slate-100 uppercase tracking-widest md:hover:border-secondary md:hover:text-secondary transition-colors italic"
                         >
                           <CheckCircle2
                             size={14}
@@ -368,8 +395,8 @@ const Journey = () => {
                     className="lg:w-1/2 w-full px-4 md:px-0"
                   >
                     <div className="relative group">
-                      <div className="absolute inset-0 bg-primary/10 rounded-[2.5rem] md:rounded-[3rem] blur-2xl md:group-hover:bg-secondary/20 transition-all duration-700" />
-                      <div className="relative rounded-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 border-white md:group-hover:-translate-y-2 transition-all duration-700">
+                      <div className="absolute inset-0 bg-primary/10 rounded blur-2xl md:group-hover:bg-secondary/20 transition-all duration-700" />
+                      <div className="relative rounded overflow-hidden shadow-2xl border-4 border-white md:group-hover:-translate-y-2 transition-all duration-700">
                         <img
                           src={step.image}
                           className="w-full h-[300px] md:h-[400px] object-cover bg-slate-100"
@@ -402,7 +429,7 @@ const Journey = () => {
         <div className="max-w-7xl mx-auto text-center text-white relative z-10">
           <motion.div
             variants={fadeIn("up", 0.1)}
-            className="inline-block p-4 md:p-6 rounded-[2rem] bg-white/10 backdrop-blur-xl border border-white/20 mb-6 md:mb-8"
+            className="inline-block p-4 md:p-6 rounded bg-white/10 backdrop-blur-xl border border-white/20 mb-6 md:mb-8"
           >
             <HeartHandshake className="w-12 h-12 md:w-16 md:h-16 text-secondary" />
           </motion.div>
@@ -433,9 +460,9 @@ const Journey = () => {
               <motion.div
                 key={i}
                 variants={fadeIn("up", 0.1 * (i + 1))}
-                className="group p-8 md:p-12 bg-white/5 backdrop-blur-2xl rounded-[2.5rem] md:rounded-[3rem] border border-white/10 text-center md:text-left md:hover:bg-white/10 transition-all duration-500 shadow-xl"
+                className="group p-8 md:p-12 bg-white/5 backdrop-blur-2xl rounded border border-white/10 text-center md:text-left md:hover:bg-white/10 transition-all duration-500 shadow-xl"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-secondary/20 flex items-center justify-center text-secondary mb-6 md:mb-8 mx-auto md:mx-0 transition-transform md:group-hover:scale-110">
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded bg-secondary/20 flex items-center justify-center text-secondary mb-6 md:mb-8 mx-auto md:mx-0 transition-transform md:group-hover:scale-110">
                   {item.icon}
                 </div>
                 <h3 className="text-secondary font-black text-xl md:text-2xl mb-4 uppercase tracking-wide italic">
@@ -473,7 +500,7 @@ const Journey = () => {
       >
         <motion.div
           variants={fadeIn("up", 0.1)}
-          className="max-w-7xl mx-auto bg-slate-900 rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-24 text-center relative overflow-hidden shadow-2xl"
+          className="max-w-7xl mx-auto bg-slate-900 rounded p-8 md:p-24 text-center relative overflow-hidden shadow-2xl"
         >
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-secondary/20 blur-[120px] rounded-full animate-float" />
           <div className="relative z-10 space-y-8 md:space-y-12">
@@ -495,7 +522,7 @@ const Journey = () => {
             >
               <a
                 href="/contact"
-                className="bg-secondary hover:bg-white hover:text-primary text-white font-black py-4 md:py-6 px-8 md:px-12 rounded-xl md:rounded-3xl transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl"
+                className="bg-secondary hover:bg-white hover:text-primary text-white font-black py-4 md:py-6 px-8 md:px-12 rounded transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl cursor-pointer"
               >
                 Start Enquiry Now
               </a>
@@ -503,7 +530,7 @@ const Journey = () => {
                 href="https://wa.me/918960966629"
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white/5 hover:bg-white/10 text-white font-black py-4 md:py-6 px-8 md:px-12 rounded-xl md:rounded-3xl border border-white/10 transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl"
+                className="bg-white/5 hover:bg-white/10 text-white font-black py-4 md:py-6 px-8 md:px-12 rounded border border-white/10 transition-all duration-500 uppercase tracking-widest text-[11px] md:text-sm shadow-xl cursor-pointer"
               >
                 Contact on WhatsApp
               </a>

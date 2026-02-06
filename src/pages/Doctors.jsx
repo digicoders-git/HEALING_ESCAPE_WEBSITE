@@ -75,7 +75,7 @@ const Doctors = () => {
               <button
                 key={spec}
                 onClick={() => setActiveFilter(spec)}
-                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+                className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer ${
                   activeFilter === spec
                     ? "bg-secondary text-white"
                     : "bg-white text-slate-600 border border-slate-200 hover:border-secondary"
@@ -135,7 +135,7 @@ const Doctors = () => {
                           </p>
                         </div>
                       </div>
-                      <div className="flex items-center gap-2">
+                      {/* <div className="flex items-center gap-2">
                         <div className="w-6 h-6 rounded bg-secondary/10 flex items-center justify-center">
                           <Award size={12} className="text-secondary" />
                         </div>
@@ -153,13 +153,13 @@ const Doctors = () => {
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
 
                     <div className="pt-2">
                       <Link
                         to={`/doctor/${doctor._id}`}
-                        className="w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm uppercase hover:bg-secondary transition-colors flex items-center justify-center gap-2"
+                        className="w-full bg-primary text-white text-center py-2 rounded-lg font-bold text-sm uppercase hover:bg-secondary transition-colors flex items-center justify-center gap-2 cursor-pointer"
                       >
                         View Profile <ArrowRight size={14} />
                       </Link>
