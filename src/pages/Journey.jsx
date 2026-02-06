@@ -217,8 +217,10 @@ const Journey = () => {
             >
               {/* Badge Removed (as per original content) */}
               <h1 className="text-3xl md:text-5xl font-extrabold text-primary leading-tight uppercase tracking-tighter italic">
-                Transparent &{" "}
-                <span className="text-secondary">Patient-Centric</span> Process
+                Medical Tourism{" "}
+                <span className="text-secondary">
+                  Journey with Healing Escape
+                </span>
               </h1>
               <p className="text-sm sm:text-base md:text-lg text-slate-600 leading-relaxed font-medium">
                 At Healing Escape, we understand that travelling for medical

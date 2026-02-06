@@ -23,8 +23,8 @@ import puranalogo from "../assets/about/puranalogo.png";
 const bannerSlides = [
   {
     image: abt1,
-    title: "About Healing Escape",
-    subtitle: "Connecting the World to India’s Healthcare Excellence",
+    title: "Healing Escape Global",
+    subtitle: "Leading Medical Tourism Company in India",
     buttonLabel: "Explore Services",
     buttonLink: "/services",
   },
@@ -283,7 +283,7 @@ const About = () => {
               variants={fadeIn("up", 0.2)}
               className="text-3xl md:text-5xl font-extrabold uppercase tracking-tighter text-white italic"
             >
-              Global Scalability
+              Medical Tourism in India
             </motion.h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">

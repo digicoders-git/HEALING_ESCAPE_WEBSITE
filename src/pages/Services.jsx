@@ -18,8 +18,8 @@ const bannerSlides = [
   {
     image:
       "https://t3.ftcdn.net/jpg/01/81/34/06/360_F_181340650_zWq2YTWtBPsDxwogn66OdtOZ0uK7QtiF.jpg",
-    title: "Our Services",
-    subtitle: "End-to-End Support for Your Medical Journey in India",
+    title: "Medical Visa Assistance",
+    subtitle: "Complete Medical Tourism Support in India",
     buttonLabel: "Explore Services",
     buttonLink: "#core-services",
   },

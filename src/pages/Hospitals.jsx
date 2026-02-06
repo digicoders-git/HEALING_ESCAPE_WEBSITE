@@ -71,9 +71,8 @@ const Hospitals = () => {
     {
       image:
         "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=2000",
-      title: "Trusted Hospital Network",
-      subtitle:
-        "Connecting You with World-Class Healthcare Infrastructure in India",
+      title: "Medical Travel India",
+      subtitle: "Affordable Medical Travel with Best Hospital Network",
       buttonLabel: "Explore Hospitals",
       buttonLink: "#listing-start",
     },

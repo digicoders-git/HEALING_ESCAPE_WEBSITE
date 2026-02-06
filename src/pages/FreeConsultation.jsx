@@ -48,8 +48,8 @@ const bannerSlides = [
   {
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
-    title: "Free Medical Consultation",
-    subtitle: "Get Expert Guidance Before You Travel",
+    title: "Medical Tourism in India",
+    subtitle: "Free Medical Consultation with Expert Guidance",
     buttonLabel: "Request Consultation",
     buttonLink: "#consultation-form",
   },
