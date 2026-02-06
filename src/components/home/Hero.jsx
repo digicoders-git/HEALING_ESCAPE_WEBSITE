@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, ShieldCheck, Globe, Activity } from "lucide-react";
 import { motion } from "framer-motion";
 import ModernSelect from "../ModernSelect";
@@ -32,6 +33,7 @@ const Hero = () => {
     countryCode: "+91",
     mobile: "",
     clinicalRequirement: "",
+    termsAccepted: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const sectionRef = useRef(null);
@@ -47,6 +49,12 @@ const Hero = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!formData.termsAccepted) {
+      toast.error("Please accept the terms and conditions to proceed.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -64,6 +72,7 @@ const Hero = () => {
           countryCode: "+91",
           mobile: "",
           clinicalRequirement: "",
+          termsAccepted: false,
         });
       }
     } catch (error) {
@@ -134,11 +143,11 @@ const Hero = () => {
               variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:ms-0"
             >
-              We help International patients get best treatment in India with full end-to-end support,
-              Your trusted partner for world-class, affordable medical treatment
-              in India. We help international patients access top hospitals,
-              leading doctors, and seamless medical journeys across India —
-              especially North India.
+              We help International patients get best treatment in India with
+              full end-to-end support, Your trusted partner for world-class,
+              affordable medical treatment in India. We help international
+              patients access top hospitals, leading doctors, and seamless
+              medical journeys across India — especially North India.
             </motion.p>
 
             <motion.div
@@ -274,12 +283,40 @@ const Hero = () => {
                       className="w-full py-3 sm:py-3.5 px-4 sm:px-5 rounded border border-white bg-white/80 focus:outline-none text-sm font-semibold text-slate-700 resize-none placeholder:text-slate-400"
                       required
                     ></textarea>
+
+                    <div className="flex items-center gap-2 mt-0">
+                      <input
+                        type="checkbox"
+                        id="termsAccepted"
+                        checked={formData.termsAccepted}
+                        onChange={(e) =>
+                          setFormData({
+                            ...formData,
+                            termsAccepted: e.target.checked,
+                          })
+                        }
+                        className="w-4 h-4 text-primary border-slate-300 rounded focus:ring-primary cursor-pointer"
+                        required
+                      />
+                      <label
+                        htmlFor="termsAccepted"
+                        className="text-[12px] font-semibold text-slate-600 cursor-pointer"
+                      >
+                        I agree to the{" "}
+                        <Link
+                          to="/terms-of-service"
+                          className="text-primary hover:text-secondary underline transition-colors"
+                        >
+                          Terms and Conditions
+                        </Link>
+                      </label>
+                    </div>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[12px] sm:text-[13px] mt-3 sm:mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-full cursor-pointer bg-primary hover:bg-secondary text-white font-bold py-3.5 sm:py-4 rounded shadow-lg transition-all uppercase tracking-widest text-[12px] sm:text-[13px] mt-3 sm:mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? "Submitting..." : "Send Enquiry"}
                   </button>

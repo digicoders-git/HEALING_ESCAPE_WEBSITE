@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import PremiumLoader from "../components/PremiumLoader";
 import { getBlogById, getBlogs } from "../apis/blog";
+import DOMPurify from "dompurify";
 
 const BlogDetail = () => {
   const { id } = useParams();
@@ -62,13 +63,13 @@ const BlogDetail = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/80 pt-[72px]">
+      <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/50 pt-[72px]">
         <img
           src={blog.image}
           className="absolute inset-0 w-full h-full object-cover opacity-20"
           alt={blog.title}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" /> */}
 
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
@@ -117,13 +118,12 @@ const BlogDetail = () => {
                 Article Content
               </h2>
             </div>
-            <div className="prose max-w-none text-slate-600">
-              {blog.content?.split("\n\n").map((para, i) => (
-                <p key={i} className="mb-4 leading-relaxed">
-                  {para}
-                </p>
-              ))}
-            </div>
+            <div
+              className="prose prose-slate max-w-none text-slate-600 prose-headings:text-primary prose-headings:font-bold prose-headings:uppercase prose-headings:italic prose-a:text-secondary prose-strong:text-slate-700"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(blog.content),
+              }}
+            ></div>
           </div>
 
           {/* Key Benefits */}
