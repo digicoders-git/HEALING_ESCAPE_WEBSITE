@@ -8,7 +8,7 @@ import {
   X,
   Maximize2,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getGalleryById, getGalleries } from "../apis/gallery";
 
 const GalleryDetail = () => {
@@ -26,13 +26,15 @@ const GalleryDetail = () => {
 
         // Fetch related images from same category
         const allGallery = await getGalleries({ page: 1, limit: 20 });
-        const related = allGallery.gallery
-          ?.filter(item => 
-            item.isActive && 
-            item._id !== id && 
-            item.category === data.category
-          )
-          .slice(0, 6) || [];
+        const related =
+          allGallery.gallery
+            ?.filter(
+              (item) =>
+                item.isActive &&
+                item._id !== id &&
+                item.category === data.category,
+            )
+            .slice(0, 6) || [];
         setRelatedImages(related);
       } catch (error) {
         console.error("Error fetching gallery detail:", error);
@@ -47,11 +49,7 @@ const GalleryDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!galleryItem) {
@@ -106,15 +104,17 @@ const GalleryDetail = () => {
               {galleryItem.createdAt && (
                 <div className="flex items-center gap-1 text-slate-500 text-xs">
                   <Calendar size={12} />
-                  <span>{new Date(galleryItem.createdAt).toLocaleDateString()}</span>
+                  <span>
+                    {new Date(galleryItem.createdAt).toLocaleDateString()}
+                  </span>
                 </div>
               )}
             </div>
-            
+
             <h1 className="text-2xl md:text-3xl font-bold text-primary">
               {galleryItem.caption}
             </h1>
-            
+
             {galleryItem.description && (
               <p className="text-slate-600 leading-relaxed">
                 {galleryItem.description}
@@ -162,7 +162,7 @@ const GalleryDetail = () => {
           className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
           onClick={() => setSelectedImage(null)}
         >
-          <button 
+          <button
             className="absolute top-4 right-4 w-10 h-10 bg-white/20 hover:bg-white/30 text-white rounded-full flex items-center justify-center transition-all z-10"
             onClick={(e) => {
               e.stopPropagation();

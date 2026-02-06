@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ScrollToTop from "./components/ScrollToTop";
 import Footer from "./components/Footer";
@@ -24,16 +24,21 @@ import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
+import PremiumLoader from "./components/PremiumLoader";
 
 const App = () => {
+  const location = useLocation();
+  const isLoaderPage = location.pathname === "/loader";
+
   return (
     <div className="min-h-screen flex flex-col font-sans selection:bg-primary/10 selection:text-primary scroll-smooth bg-white">
       {/* Sticky Navbar */}
-      <Navbar />
+      {!isLoaderPage && <Navbar />}
 
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/loader" element={<PremiumLoader />} />
           <Route path="/about" element={<About />} />
           <Route path="/journey" element={<Journey />} />
           <Route path="/services" element={<Services />} />
@@ -59,10 +64,10 @@ const App = () => {
       </main>
 
       {/* Professional Institutional Footer */}
-      <Footer />
+      {!isLoaderPage && <Footer />}
 
       {/* Global Scroll to Top Button */}
-      <ScrollToTop />
+      {!isLoaderPage && <ScrollToTop />}
     </div>
   );
 };

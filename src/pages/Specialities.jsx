@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PageHero from "../components/PageHero";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getSpecialities } from "../apis/speciality";
 
 const bannerSlides = [
@@ -25,7 +25,8 @@ const bannerSlides = [
     image:
       "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=2000",
     title: "Advanced Specialities",
-    subtitle: "World-Class Medical Treatments in India with Trusted Experts",
+    subtitle:
+      "You can explore treatments category-wise and select the option that best matches your medical needs. All treatments listed are provided at NABH and JCI accredited hospitals in North India.",
     buttonLabel: "Explore Treatments",
     buttonLink: "#treatments-start",
   },
@@ -92,11 +93,7 @@ const Specialities = () => {
   }, [pagination.page, debouncedSearch, pagination.limit]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   return (
@@ -104,7 +101,7 @@ const Specialities = () => {
       <PageHero slides={bannerSlides} />
 
       {/* 1. Intro Section */}
-      <section
+      {/* <section
         id="treatments-start"
         className="py-12 md:py-16 px-4 md:px-8 bg-gradient-to-br from-slate-50 via-white to-slate-50 relative overflow-hidden"
       >
@@ -117,12 +114,8 @@ const Specialities = () => {
             <span className="text-secondary"> Treatment</span>
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
-            {/* Left Column - Content */}
             <div className="space-y-8 md:space-y-10">
               <div className="space-y-6">
-                {/* Badge Removed */}
-
-                {/* <div className="w-20 h-1 bg-gradient-to-r from-secondary to-primary rounded-full" /> */}
               </div>
               <div className="space-y-4">
                 <p className="text-lg md:text-xl text-slate-600 leading-relaxed font-medium">
@@ -140,8 +133,6 @@ const Specialities = () => {
                 </p>
               </div>
             </div>
-
-            {/* Right Column - Feature Cards */}
             <div className="grid grid-cols-2 gap-4">
               {[
                 {
@@ -185,19 +176,16 @@ const Specialities = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* 2. Key Treatment Categories Grid */}
       <section className="py-12 md:py-16 px-4 md:px-8 bg-white text-center">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-20 space-y-4">
-            {/* Badge Removed */}
             <h2 className="text-3xl md:text-5xl font-extrabold text-primary uppercase tracking-tighter italic">
               Key Treatment Categories
             </h2>
           </div>
 
-          {/* Search Bar */}
           <div className="max-w-2xl mx-auto mb-12 relative group">
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
               <Search
@@ -233,17 +221,14 @@ const Specialities = () => {
                   onClick={() => setSelectedSpec(spec)}
                   className="group relative h-[350px] rounded overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-500"
                 >
-                  {/* Background Image */}
                   <img
                     src={spec.image}
                     alt={spec.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
-                  {/* Overlays */}
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity duration-500" />
 
-                  {/* Content Overlay */}
                   <div className="absolute inset-0 p-8 flex flex-col justify-end text-left transition-transform duration-500">
                     <div className="space-y-3">
                       <div className="w-12 h-1 bg-secondary rounded-full transform origin-left" />
@@ -263,7 +248,6 @@ const Specialities = () => {
             )}
           </div>
 
-          {/* Empty State */}
           {!loading && specialities.length === 0 && (
             <div className="py-20 text-center space-y-4">
               <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto text-slate-300">
@@ -279,14 +263,13 @@ const Specialities = () => {
               </div>
               <button
                 onClick={() => setSearchQuery("")}
-                className="text-secondary font-bold uppercase tracking-widest text-xs hover:underline"
+                className="text-secondary font-bold uppercase tracking-widest text-xs hover:underline cursor-pointer"
               >
                 Clear Search
               </button>
             </div>
           )}
 
-          {/* Pagination */}
           {!loading && pagination.pages > 1 && (
             <div className="mt-16 flex items-center justify-center gap-4">
               <button
@@ -294,7 +277,7 @@ const Specialities = () => {
                 onClick={() =>
                   setPagination((prev) => ({ ...prev, page: prev.page - 1 }))
                 }
-                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all cursor-pointer"
               >
                 Prev
               </button>
@@ -307,8 +290,8 @@ const Specialities = () => {
                     }
                     className={`w-10 h-10 rounded-full text-sm font-bold transition-all ${
                       pagination.page === i + 1
-                        ? "bg-primary text-white scale-110 shadow-lg"
-                        : "text-slate-400 hover:text-primary hover:bg-slate-50"
+                        ? "bg-primary text-white scale-110 shadow-lg cursor-pointer"
+                        : "text-slate-400 hover:text-primary hover:bg-slate-50 cursor-pointer"
                     }`}
                   >
                     {i + 1}
@@ -320,7 +303,7 @@ const Specialities = () => {
                 onClick={() =>
                   setPagination((prev) => ({ ...prev, page: prev.page + 1 }))
                 }
-                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all"
+                className="px-6 py-2 rounded-full border border-slate-200 text-sm font-bold uppercase tracking-widest text-primary hover:bg-slate-50 disabled:opacity-30 disabled:hover:bg-transparent transition-all cursor-pointer"
               >
                 Next
               </button>
@@ -329,7 +312,6 @@ const Specialities = () => {
         </div>
       </section>
 
-      {/* Full View Modal */}
       <AnimatePresence>
         {selectedSpec && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
@@ -359,7 +341,7 @@ const Specialities = () => {
                 {/* Close Button Mobile */}
                 <button
                   onClick={() => setSelectedSpec(null)}
-                  className="absolute  top-4 right-4 p-2 bg-white/20 backdrop-blur-lg rounded-full text-white md:hidden"
+                  className="absolute top-4 right-4 p-2 bg-white/20 backdrop-blur-lg rounded-full text-white md:hidden cursor-pointer"
                 >
                   <X size={24} />
                 </button>
@@ -370,7 +352,7 @@ const Specialities = () => {
                 {/* Close Button Desktop */}
                 <button
                   onClick={() => setSelectedSpec(null)}
-                  className="absolute top-8 right-8 p-2 text-slate-400 hover:text-primary transition-colors hidden md:block"
+                  className="absolute top-8 right-8 p-2 text-slate-400 hover:text-primary transition-colors hidden md:block cursor-pointer"
                 >
                   <X size={28} />
                 </button>
@@ -440,7 +422,7 @@ const Specialities = () => {
                       </div>
                       <Link
                         to="/contact"
-                        className="px-8 py-3 bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-secondary transition-all"
+                        className="px-8 py-3 bg-primary text-white text-xs font-bold uppercase tracking-[0.2em] rounded-full hover:bg-secondary transition-all cursor-pointer"
                       >
                         Inquire Now
                       </Link>

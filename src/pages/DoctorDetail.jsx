@@ -13,7 +13,7 @@ import {
   Users,
   Shield,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getDoctorById } from "../apis/doctor";
 
 const DoctorDetail = () => {
@@ -36,11 +36,7 @@ const DoctorDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!doctor) {
@@ -62,7 +58,7 @@ const DoctorDetail = () => {
       {/* Hero Section */}
       <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/80 pt-[72px]">
         <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
-        
+
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6">
             <div className="w-32 h-32 rounded-2xl overflow-hidden border-4 border-white/20 shrink-0">
@@ -105,15 +101,14 @@ const DoctorDetail = () => {
                 About Doctor
               </h2>
             </div>
-            <p className="text-slate-600 leading-relaxed">
-              {doctor.about}
-            </p>
+            <p className="text-slate-600 leading-relaxed">{doctor.about}</p>
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-start gap-4">
               <div className="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
                 <Award size={20} className="text-secondary" />
               </div>
               <p className="text-slate-600 text-sm">
-                Dr. {doctor.name.split(" ").slice(-1)} regularly updates skills through medical conferences and international training programs.
+                Dr. {doctor.name.split(" ").slice(-1)} regularly updates skills
+                through medical conferences and international training programs.
               </p>
             </div>
           </div>
@@ -129,7 +124,9 @@ const DoctorDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-3">
                 <p className="text-slate-600">
-                  With over {doctor.experience} years of experience, Dr. {doctor.name.split(" ").slice(-1)} has handled thousands of complex cases.
+                  With over {doctor.experience} years of experience, Dr.{" "}
+                  {doctor.name.split(" ").slice(-1)} has handled thousands of
+                  complex cases.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
@@ -137,8 +134,12 @@ const DoctorDetail = () => {
                       <Users className="text-secondary" size={16} />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase">Experience</p>
-                      <p className="text-xs font-bold text-primary">{doctor.experience} Years</p>
+                      <p className="text-xs font-bold text-slate-400 uppercase">
+                        Experience
+                      </p>
+                      <p className="text-xs font-bold text-primary">
+                        {doctor.experience} Years
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
@@ -146,7 +147,9 @@ const DoctorDetail = () => {
                       <Shield className="text-secondary" size={16} />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase">Success Rate</p>
+                      <p className="text-xs font-bold text-slate-400 uppercase">
+                        Success Rate
+                      </p>
                       <p className="text-xs font-bold text-primary">High</p>
                     </div>
                   </div>
@@ -155,8 +158,12 @@ const DoctorDetail = () => {
                       <Star className="text-secondary" size={16} />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-400 uppercase">Standards</p>
-                      <p className="text-xs font-bold text-primary">International</p>
+                      <p className="text-xs font-bold text-slate-400 uppercase">
+                        Standards
+                      </p>
+                      <p className="text-xs font-bold text-primary">
+                        International
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -194,9 +201,7 @@ const DoctorDetail = () => {
                   <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary shrink-0">
                     <Activity size={16} />
                   </div>
-                  <span className="text-sm text-slate-700">
-                    {proc}
-                  </span>
+                  <span className="text-sm text-slate-700">{proc}</span>
                 </div>
               ))}
             </div>
@@ -213,14 +218,17 @@ const DoctorDetail = () => {
                 </h3>
               </div>
               <div className="space-y-2">
-                {doctor.whyChoose?.length > 0 ? doctor.whyChoose.slice(0, 4).map((point, i) => (
-                  <div key={i} className="flex items-start gap-2">
-                    <CheckCircle2 size={14} className="text-secondary shrink-0 mt-0.5" />
-                    <p className="text-sm text-slate-700">
-                      {point}
-                    </p>
-                  </div>
-                )) : (
+                {doctor.whyChoose?.length > 0 ? (
+                  doctor.whyChoose.slice(0, 4).map((point, i) => (
+                    <div key={i} className="flex items-start gap-2">
+                      <CheckCircle2
+                        size={14}
+                        className="text-secondary shrink-0 mt-0.5"
+                      />
+                      <p className="text-sm text-slate-700">{point}</p>
+                    </div>
+                  ))
+                ) : (
                   <p className="text-slate-600 text-sm">
                     Highly experienced and trusted by patients worldwide
                   </p>
@@ -348,8 +356,6 @@ const DoctorDetail = () => {
           </div>
         </div>
       </section> */}
-
-
     </div>
   );
 };

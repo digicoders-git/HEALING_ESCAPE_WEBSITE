@@ -13,7 +13,7 @@ import {
   Users,
   Shield,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getHospitalById } from "../apis/hospital";
 import { doctorsData } from "../data/doctorsData";
 
@@ -38,15 +38,11 @@ const HospitalDetail = () => {
 
   // Find doctors associated with this hospital name
   const associatedDoctors = doctorsData.filter(
-    (doc) => doc.hospital.name === hospital?.name
+    (doc) => doc.hospital.name === hospital?.name,
   );
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!hospital) {
@@ -73,7 +69,7 @@ const HospitalDetail = () => {
           alt={hospital.name}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
-        
+
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <div className="flex items-center justify-center gap-2 mb-2">
@@ -107,15 +103,19 @@ const HospitalDetail = () => {
             <p className="text-slate-600 leading-relaxed">
               {hospital.description}
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mt-4">
               <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
                 <div className="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center">
                   <Users className="text-secondary" size={16} />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase">Expert Team</p>
-                  <p className="text-xs font-bold text-primary">Qualified Doctors</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">
+                    Expert Team
+                  </p>
+                  <p className="text-xs font-bold text-primary">
+                    Qualified Doctors
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
@@ -123,8 +123,12 @@ const HospitalDetail = () => {
                   <Shield className="text-secondary" size={16} />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase">Safety First</p>
-                  <p className="text-xs font-bold text-primary">Global Standards</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">
+                    Safety First
+                  </p>
+                  <p className="text-xs font-bold text-primary">
+                    Global Standards
+                  </p>
                 </div>
               </div>
               <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-lg border border-slate-100">
@@ -132,7 +136,9 @@ const HospitalDetail = () => {
                   <Star className="text-secondary" size={16} />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-slate-400 uppercase">Excellence</p>
+                  <p className="text-xs font-bold text-slate-400 uppercase">
+                    Excellence
+                  </p>
                   <p className="text-xs font-bold text-primary">Quality Care</p>
                 </div>
               </div>
@@ -179,9 +185,7 @@ const HospitalDetail = () => {
                   className="flex items-center gap-2 p-2 bg-slate-50 rounded-lg border border-slate-100 hover:border-secondary transition-colors"
                 >
                   <CheckCircle2 size={14} className="text-secondary shrink-0" />
-                  <p className="text-sm text-slate-700">
-                    {item}
-                  </p>
+                  <p className="text-sm text-slate-700">{item}</p>
                 </div>
               ))}
             </div>
@@ -219,7 +223,9 @@ const HospitalDetail = () => {
                         {doc.speciality}
                       </p>
                       <div className="flex items-center gap-1 text-secondary">
-                        <span className="text-xs font-bold uppercase">View Profile</span>
+                        <span className="text-xs font-bold uppercase">
+                          View Profile
+                        </span>
                         <ArrowRight size={10} />
                       </div>
                     </div>
@@ -254,10 +260,11 @@ const HospitalDetail = () => {
               <div className="space-y-2">
                 {hospital.whyChoose.slice(0, 4).map((point, i) => (
                   <div key={i} className="flex items-start gap-2">
-                    <CheckCircle2 size={12} className="text-secondary shrink-0 mt-0.5" />
-                    <p className="text-sm text-white/90">
-                      {point}
-                    </p>
+                    <CheckCircle2
+                      size={12}
+                      className="text-secondary shrink-0 mt-0.5"
+                    />
+                    <p className="text-sm text-white/90">{point}</p>
                   </div>
                 ))}
               </div>
@@ -272,14 +279,14 @@ const HospitalDetail = () => {
                 </h3>
               </div>
               <div className="space-y-2">
-                {hospital.internationalServices.slice(0, 4).map((service, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <Globe size={12} className="text-secondary shrink-0" />
-                    <p className="text-sm text-slate-600">
-                      {service}
-                    </p>
-                  </div>
-                ))}
+                {hospital.internationalServices
+                  .slice(0, 4)
+                  .map((service, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <Globe size={12} className="text-secondary shrink-0" />
+                      <p className="text-sm text-slate-600">{service}</p>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
@@ -386,8 +393,6 @@ const HospitalDetail = () => {
           </div>
         </div>
       </section> */}
-
-
     </div>
   );
 };

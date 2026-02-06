@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
-import {
-  X,
-  Maximize2,
-  Image as ImageIcon,
-} from "lucide-react";
+import { X, Maximize2, Image as ImageIcon } from "lucide-react";
 import PageHero from "../components/PageHero";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getGalleries } from "../apis/gallery";
 
 const bannerSlides = [
@@ -27,14 +23,14 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
   // Extract unique categories from gallery data
-  const galleryCategories = ["All", ...new Set(gallery.map(g => g.category))];
+  const galleryCategories = ["All", ...new Set(gallery.map((g) => g.category))];
 
   useEffect(() => {
     const fetchGallery = async () => {
       try {
         const data = await getGalleries({ page: 1, limit: 50 });
         // Filter only active gallery items
-        const activeGallery = data.gallery?.filter(g => g.isActive) || [];
+        const activeGallery = data.gallery?.filter((g) => g.isActive) || [];
         setGallery(activeGallery);
       } catch (error) {
         console.error("Error fetching gallery:", error);
@@ -51,11 +47,7 @@ const Gallery = () => {
       : gallery.filter((img) => img.category === activeCategory);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   return (
@@ -70,7 +62,9 @@ const Gallery = () => {
               Photo Gallery
             </h2>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span className="font-bold text-secondary">{filteredImages.length}</span>
+              <span className="font-bold text-secondary">
+                {filteredImages.length}
+              </span>
               <span>images found</span>
             </div>
           </div>
@@ -148,16 +142,19 @@ const Gallery = () => {
           onClick={() => setSelectedImage(null)}
         >
           {/* Close Button */}
-          <button 
+          <button
             className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white rounded-full flex items-center justify-center transition-all z-20 border border-white/20 hover:border-white/40 group"
             onClick={(e) => {
               e.stopPropagation();
               setSelectedImage(null);
             }}
           >
-            <X size={24} className="group-hover:scale-110 transition-transform" />
+            <X
+              size={24}
+              className="group-hover:scale-110 transition-transform"
+            />
           </button>
-          
+
           {/* Image Container */}
           <div
             className="max-w-5xl w-full relative animate-fade-in"
@@ -169,7 +166,7 @@ const Gallery = () => {
                 className="w-full max-h-[85vh] object-contain"
                 alt={selectedImage.caption}
               />
-              
+
               {/* Image Info Overlay */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 via-black/60 to-transparent">
                 <div className="flex items-center gap-3 mb-2">
@@ -183,14 +180,14 @@ const Gallery = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Click to close hint */}
           <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium">
             Click anywhere to close
           </div>
         </div>
       )}
-      
+
       <style
         dangerouslySetInnerHTML={{
           __html: `

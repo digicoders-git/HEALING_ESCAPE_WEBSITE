@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Search,
-  Calendar,
-  ArrowRight,
-  BookOpen,
-} from "lucide-react";
+import { Search, Calendar, ArrowRight, BookOpen } from "lucide-react";
 import PageHero from "../components/PageHero";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getBlogs } from "../apis/blog";
 
 const bannerSlides = [
@@ -27,14 +22,14 @@ const Blogs = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   // Extract unique categories from blogs data
-  const blogCategories = ["All", ...new Set(blogs.map(b => b.category))];
+  const blogCategories = ["All", ...new Set(blogs.map((b) => b.category))];
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const data = await getBlogs({ page: 1, limit: 50 });
         // Filter only active blogs
-        const activeBlogs = data.blogs?.filter(b => b.isActive) || [];
+        const activeBlogs = data.blogs?.filter((b) => b.isActive) || [];
         setBlogs(activeBlogs);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -51,11 +46,7 @@ const Blogs = () => {
       : blogs.filter((blog) => blog.category === activeCategory);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   return (
@@ -70,7 +61,9 @@ const Blogs = () => {
               Knowledge Hub
             </h2>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span className="font-bold text-secondary">{filteredBlogs.length}</span>
+              <span className="font-bold text-secondary">
+                {filteredBlogs.length}
+              </span>
               <span>articles found</span>
             </div>
           </div>
@@ -128,7 +121,9 @@ const Blogs = () => {
                       {blog.excerpt}
                     </p>
                     <div className="pt-2 flex items-center gap-2 text-secondary">
-                      <span className="text-xs font-bold uppercase">Read More</span>
+                      <span className="text-xs font-bold uppercase">
+                        Read More
+                      </span>
                       <ArrowRight size={12} />
                     </div>
                   </div>

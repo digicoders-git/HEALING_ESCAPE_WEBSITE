@@ -1,15 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  MapPin,
-  Clock,
-  Search,
-  ArrowRight,
-  Star,
-  Award,
-} from "lucide-react";
+import { MapPin, Clock, Search, ArrowRight, Star, Award } from "lucide-react";
 import PageHero from "../components/PageHero";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getDoctors } from "../apis/doctor";
 
 const bannerSlides = [
@@ -29,14 +22,17 @@ const Doctors = () => {
   const [activeFilter, setActiveFilter] = useState("All");
 
   // Extract unique specialities from doctors data
-  const specialitiesList = ["All", ...new Set(doctors.map(d => d.speciality))];
+  const specialitiesList = [
+    "All",
+    ...new Set(doctors.map((d) => d.speciality)),
+  ];
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
         const data = await getDoctors({ page: 1, limit: 50 });
         // Filter only active doctors
-        const activeDoctors = data.doctors?.filter(d => d.isActive) || [];
+        const activeDoctors = data.doctors?.filter((d) => d.isActive) || [];
         setDoctors(activeDoctors);
       } catch (error) {
         console.error("Error fetching doctors:", error);
@@ -53,11 +49,7 @@ const Doctors = () => {
       : doctors.filter((doc) => doc.speciality === activeFilter);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   return (
@@ -72,7 +64,9 @@ const Doctors = () => {
               Our Specialists
             </h2>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span className="font-bold text-secondary">{filteredDoctors.length}</span>
+              <span className="font-bold text-secondary">
+                {filteredDoctors.length}
+              </span>
               <span>doctors found</span>
             </div>
           </div>
@@ -133,8 +127,12 @@ const Doctors = () => {
                           <Clock size={12} className="text-secondary" />
                         </div>
                         <div>
-                          <p className="text-xs text-slate-400 uppercase font-bold">Experience</p>
-                          <p className="text-sm font-bold text-primary">{doctor.experience}+ Yrs</p>
+                          <p className="text-xs text-slate-400 uppercase font-bold">
+                            Experience
+                          </p>
+                          <p className="text-sm font-bold text-primary">
+                            {doctor.experience}+ Yrs
+                          </p>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
@@ -142,10 +140,17 @@ const Doctors = () => {
                           <Award size={12} className="text-secondary" />
                         </div>
                         <div>
-                          <p className="text-xs text-slate-400 uppercase font-bold">Rating</p>
+                          <p className="text-xs text-slate-400 uppercase font-bold">
+                            Rating
+                          </p>
                           <div className="flex items-center gap-1">
-                            <Star size={12} className="text-yellow-400 fill-current" />
-                            <span className="text-sm font-bold text-primary">4.8</span>
+                            <Star
+                              size={12}
+                              className="text-yellow-400 fill-current"
+                            />
+                            <span className="text-sm font-bold text-primary">
+                              4.8
+                            </span>
                           </div>
                         </div>
                       </div>

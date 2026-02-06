@@ -7,7 +7,7 @@ import {
   Send,
   CheckCircle2,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getBlogById, getBlogs } from "../apis/blog";
 
 const BlogDetail = () => {
@@ -21,13 +21,14 @@ const BlogDetail = () => {
       try {
         const [blogData, allBlogsData] = await Promise.all([
           getBlogById(id),
-          getBlogs({ page: 1, limit: 50 })
+          getBlogs({ page: 1, limit: 50 }),
         ]);
-        
+
         setBlog(blogData.blog);
-        
+
         // Get related articles (excluding current blog)
-        const activeBlogs = allBlogsData.blogs?.filter(b => b.isActive && b._id !== id) || [];
+        const activeBlogs =
+          allBlogsData.blogs?.filter((b) => b.isActive && b._id !== id) || [];
         setRelatedArticles(activeBlogs.slice(0, 3));
       } catch (error) {
         console.error("Error fetching blog data:", error);
@@ -39,11 +40,7 @@ const BlogDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!blog) {
@@ -72,7 +69,7 @@ const BlogDetail = () => {
           alt={blog.title}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
-        
+
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <Link
@@ -146,9 +143,7 @@ const BlogDetail = () => {
               ].map((point, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <CheckCircle2 size={14} className="text-secondary shrink-0" />
-                  <p className="text-sm text-slate-700">
-                    {point}
-                  </p>
+                  <p className="text-sm text-slate-700">{point}</p>
                 </div>
               ))}
             </div>
@@ -160,7 +155,8 @@ const BlogDetail = () => {
               Need Personal Guidance?
             </h3>
             <p className="text-white/80">
-              Get personalized medical opinion and hospital recommendations from our team.
+              Get personalized medical opinion and hospital recommendations from
+              our team.
             </p>
             <Link
               to="/contact"
@@ -201,7 +197,9 @@ const BlogDetail = () => {
                     {art.title}
                   </h4>
                   <div className="flex items-center gap-2 text-secondary">
-                    <span className="text-xs font-bold uppercase">Read More</span>
+                    <span className="text-xs font-bold uppercase">
+                      Read More
+                    </span>
                     <ArrowRight size={12} />
                   </div>
                 </div>

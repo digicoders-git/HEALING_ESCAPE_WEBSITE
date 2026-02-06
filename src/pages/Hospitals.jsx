@@ -14,12 +14,10 @@ import {
 } from "lucide-react";
 import PageHero from "../components/PageHero";
 import ModernSelect from "../components/ModernSelect";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getHospitals } from "../apis/hospital";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeIn, staggerContainer } from "../utils/framerVariants";
-
-
 
 const Hospitals = () => {
   const [hospitals, setHospitals] = useState([]);
@@ -30,16 +28,22 @@ const Hospitals = () => {
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
   // Extract unique values from hospitals data
-  const citiesList = ["All", ...new Set(hospitals.map(h => h.city))];
-  const hospitalSpecialities = ["All", ...new Set(hospitals.flatMap(h => h.specialities))];
-  const accreditationList = ["All", ...new Set(hospitals.flatMap(h => h.accreditations))];
+  const citiesList = ["All", ...new Set(hospitals.map((h) => h.city))];
+  const hospitalSpecialities = [
+    "All",
+    ...new Set(hospitals.flatMap((h) => h.specialities)),
+  ];
+  const accreditationList = [
+    "All",
+    ...new Set(hospitals.flatMap((h) => h.accreditations)),
+  ];
 
   useEffect(() => {
     const fetchHospitals = async () => {
       try {
         const data = await getHospitals({ page: 1, limit: 50 });
         // Filter only active hospitals
-        const activeHospitals = data.hospitals?.filter(h => h.isActive) || [];
+        const activeHospitals = data.hospitals?.filter((h) => h.isActive) || [];
         setHospitals(activeHospitals);
       } catch (error) {
         console.error("Error fetching hospitals:", error);
@@ -60,11 +64,7 @@ const Hospitals = () => {
   });
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   const bannerSlides = [
@@ -93,7 +93,10 @@ const Hospitals = () => {
                   Select City
                 </label>
                 <ModernSelect
-                  options={citiesList.map(c => ({ value: c, label: c === "All" ? "All Cities" : c }))}
+                  options={citiesList.map((c) => ({
+                    value: c,
+                    label: c === "All" ? "All Cities" : c,
+                  }))}
                   value={cityFilter}
                   onChange={setCityFilter}
                   placeholder="All Cities"
@@ -105,7 +108,10 @@ const Hospitals = () => {
                   Select Speciality
                 </label>
                 <ModernSelect
-                  options={hospitalSpecialities.map(s => ({ value: s, label: s === "All" ? "All Specialities" : s }))}
+                  options={hospitalSpecialities.map((s) => ({
+                    value: s,
+                    label: s === "All" ? "All Specialities" : s,
+                  }))}
                   value={specFilter}
                   onChange={setSpecFilter}
                   placeholder="All Specialities"
@@ -117,7 +123,10 @@ const Hospitals = () => {
                   Select Accreditation
                 </label>
                 <ModernSelect
-                  options={accreditationList.map(a => ({ value: a, label: a === "All" ? "All Accreditations" : a }))}
+                  options={accreditationList.map((a) => ({
+                    value: a,
+                    label: a === "All" ? "All Accreditations" : a,
+                  }))}
                   value={accFilter}
                   onChange={setAccFilter}
                   placeholder="All Accreditations"
@@ -187,7 +196,10 @@ const Hospitals = () => {
                 Location
               </label>
               <ModernSelect
-                options={citiesList.map(c => ({ value: c, label: c === "All" ? "All Cities" : c }))}
+                options={citiesList.map((c) => ({
+                  value: c,
+                  label: c === "All" ? "All Cities" : c,
+                }))}
                 value={cityFilter}
                 onChange={setCityFilter}
                 placeholder="All Cities"
@@ -199,7 +211,10 @@ const Hospitals = () => {
                 Speciality
               </label>
               <ModernSelect
-                options={hospitalSpecialities.map(s => ({ value: s, label: s === "All" ? "All Specialities" : s }))}
+                options={hospitalSpecialities.map((s) => ({
+                  value: s,
+                  label: s === "All" ? "All Specialities" : s,
+                }))}
                 value={specFilter}
                 onChange={setSpecFilter}
                 placeholder="All Specialities"
@@ -211,7 +226,10 @@ const Hospitals = () => {
                 Accreditation
               </label>
               <ModernSelect
-                options={accreditationList.map(a => ({ value: a, label: a === "All" ? "All Accreditations" : a }))}
+                options={accreditationList.map((a) => ({
+                  value: a,
+                  label: a === "All" ? "All Accreditations" : a,
+                }))}
                 value={accFilter}
                 onChange={setAccFilter}
                 placeholder="All Accreditations"
@@ -229,10 +247,7 @@ const Hospitals = () => {
       </div>
 
       {/* 4. Page Content */}
-      <section
-        id="listing-start"
-        className="py-8 px-4 md:px-8 bg-white"
-      >
+      <section id="listing-start" className="py-8 px-4 md:px-8 bg-white">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="space-y-2">
@@ -285,12 +300,12 @@ const Hospitals = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="p-5 space-y-4">
                   <h3 className="text-lg font-bold text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-tight">
                     {hosp.name}
                   </h3>
-                  
+
                   <div className="flex flex-wrap gap-1 h-12 overflow-hidden">
                     {hosp.specialities.slice(0, 3).map((spec) => (
                       <span
@@ -306,16 +321,16 @@ const Hospitals = () => {
                       </span>
                     )}
                   </div>
-                  
+
                   <div className="flex items-center justify-between pt-3 border-t border-slate-100">
                     <div className="flex items-center gap-2">
                       {/* <CheckCircle2 size={14} className="text-secondary" /> */}
-                      <span className="text-xs font-bold text-slate-400 uppercase">
-                        
-                      </span>
+                      <span className="text-xs font-bold text-slate-400 uppercase"></span>
                     </div>
                     <div className="flex items-center gap-2 text-secondary group-hover:gap-3 transition-all">
-                      <span className="text-xs font-bold uppercase">View Details</span>
+                      <span className="text-xs font-bold uppercase">
+                        View Details
+                      </span>
                       <ChevronRight size={14} />
                     </div>
                   </div>
@@ -334,7 +349,6 @@ const Hospitals = () => {
           )}
         </div>
       </section>
-
 
       <style
         dangerouslySetInnerHTML={{

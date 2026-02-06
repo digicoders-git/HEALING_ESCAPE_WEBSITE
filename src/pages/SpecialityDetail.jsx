@@ -7,7 +7,7 @@ import {
   Send,
   MapPin,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getSpecialityById } from "../apis/speciality";
 import { hospitalsData } from "../data/hospitalsData";
 
@@ -38,11 +38,7 @@ const SpecialityDetail = () => {
   );
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!treatment) {

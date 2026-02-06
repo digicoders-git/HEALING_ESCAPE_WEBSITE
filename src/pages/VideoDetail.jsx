@@ -8,7 +8,7 @@ import {
   Send,
   ArrowRight,
 } from "lucide-react";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getVideoById, getVideos } from "../apis/video";
 
 const VideoDetail = () => {
@@ -22,14 +22,17 @@ const VideoDetail = () => {
       try {
         const [videoData, allVideosData] = await Promise.all([
           getVideoById(id),
-          getVideos({ page: 1, limit: 50 })
+          getVideos({ page: 1, limit: 50 }),
         ]);
-        
+
         setVideo(videoData.video);
-        
+
         // Get related videos from same category (excluding current video)
-        const activeVideos = allVideosData.videos?.filter(v => v.isActive && v._id !== id) || [];
-        const sameCategory = activeVideos.filter(v => v.category === videoData.video?.category);
+        const activeVideos =
+          allVideosData.videos?.filter((v) => v.isActive && v._id !== id) || [];
+        const sameCategory = activeVideos.filter(
+          (v) => v.category === videoData.video?.category,
+        );
         setRelatedVideos(sameCategory.slice(0, 3));
       } catch (error) {
         console.error("Error fetching video data:", error);
@@ -41,11 +44,7 @@ const VideoDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   if (!video) {
@@ -69,7 +68,7 @@ const VideoDetail = () => {
       {/* Hero Section */}
       <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/80 pt-[72px]">
         <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/60 to-transparent" />
-        
+
         <div className="relative h-full flex items-center px-4 md:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
             <Link
@@ -135,10 +134,11 @@ const VideoDetail = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {video.whatYouWillLearn.map((item, idx) => (
                   <div key={idx} className="flex items-center gap-2">
-                    <CheckCircle2 size={14} className="text-secondary shrink-0" />
-                    <p className="text-sm text-slate-700">
-                      {item}
-                    </p>
+                    <CheckCircle2
+                      size={14}
+                      className="text-secondary shrink-0"
+                    />
+                    <p className="text-sm text-slate-700">{item}</p>
                   </div>
                 ))}
               </div>
@@ -151,7 +151,8 @@ const VideoDetail = () => {
               Need Personal Guidance?
             </h3>
             <p className="text-white/80">
-              Get personalized medical opinion and hospital recommendations from our team.
+              Get personalized medical opinion and hospital recommendations from
+              our team.
             </p>
             <Link
               to="/contact"
@@ -188,7 +189,11 @@ const VideoDetail = () => {
                   />
                   <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
                     <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/30">
-                      <Play size={12} fill="currentColor" className="text-white" />
+                      <Play
+                        size={12}
+                        fill="currentColor"
+                        className="text-white"
+                      />
                     </div>
                   </div>
                   <div className="absolute bottom-2 right-2 px-2 py-1 bg-primary/80 rounded text-white text-xs font-bold flex items-center gap-1">
@@ -200,7 +205,9 @@ const VideoDetail = () => {
                     {rv.title}
                   </h4>
                   <div className="flex items-center gap-2 text-secondary">
-                    <span className="text-xs font-bold uppercase">Watch Video</span>
+                    <span className="text-xs font-bold uppercase">
+                      Watch Video
+                    </span>
                     <ArrowRight size={12} />
                   </div>
                 </div>

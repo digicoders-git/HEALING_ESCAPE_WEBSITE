@@ -1,13 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  Play,
-  Clock,
-  ArrowRight,
-  Video,
-} from "lucide-react";
+import { Play, Clock, ArrowRight, Video } from "lucide-react";
 import PageHero from "../components/PageHero";
-import Loader from "../components/Loader";
+import PremiumLoader from "../components/PremiumLoader";
 import { getVideos } from "../apis/video";
 
 const bannerSlides = [
@@ -27,14 +22,14 @@ const Videos = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   // Extract unique categories from videos data
-  const videoCategories = ["All", ...new Set(videos.map(v => v.category))];
+  const videoCategories = ["All", ...new Set(videos.map((v) => v.category))];
 
   useEffect(() => {
     const fetchVideos = async () => {
       try {
         const data = await getVideos({ page: 1, limit: 50 });
         // Filter only active videos
-        const activeVideos = data.videos?.filter(v => v.isActive) || [];
+        const activeVideos = data.videos?.filter((v) => v.isActive) || [];
         setVideos(activeVideos);
       } catch (error) {
         console.error("Error fetching videos:", error);
@@ -51,11 +46,7 @@ const Videos = () => {
       : videos.filter((v) => v.category === activeCategory);
 
   if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader size={50} />
-      </div>
-    );
+    return <PremiumLoader />;
   }
 
   return (
@@ -70,7 +61,9 @@ const Videos = () => {
               Video Gallery
             </h2>
             <div className="flex items-center gap-2 text-sm text-slate-500">
-              <span className="font-bold text-secondary">{filteredVideos.length}</span>
+              <span className="font-bold text-secondary">
+                {filteredVideos.length}
+              </span>
               <span>videos found</span>
             </div>
           </div>
@@ -136,7 +129,9 @@ const Videos = () => {
                       {video.description}
                     </p>
                     <div className="pt-2 flex items-center gap-2 text-secondary">
-                      <span className="text-xs font-bold uppercase">Watch Video</span>
+                      <span className="text-xs font-bold uppercase">
+                        Watch Video
+                      </span>
                       <ArrowRight size={12} />
                     </div>
                   </div>
