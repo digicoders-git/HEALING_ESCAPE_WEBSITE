@@ -128,26 +128,26 @@ const Hero = () => {
       >
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-10 lg:gap-12 items-center">
           {/* Left Side: Compact High-Impact Content */}
-          <div className="lg:col-span-7 space-y-5 md:space-y-6 text-center lg:text-start">
+          <div className="lg:col-span-7 space-y-5 md:space-y-1 text-center lg:text-start">
             <motion.div
               variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.2)}
               className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight">
-                Healing Escape:{" "}
-                <span className="text-secondary">Medical Tourism in India</span>{" "}
-                Excellence
+                Healing Escape Global:{" "}
+                <span className="text-secondary">Connecting World to India’s</span>{" "}
+                Healthcare Excellence.
               </h1>
             </motion.div>
             <motion.p
               variants={fadeIn(document.dir === "rtl" ? "left" : "right", 0.3)}
               className="text-sm sm:text-base md:text-lg text-white/90 font-medium max-w-xl leading-relaxed mx-auto lg:ms-0"
             >
-              We help International patients get best treatment in India with full{" "}
+              Healing Escape Global is a trusted medical tourism partner in India, helping international patients access world-class, affordable treatment with complete{" "}
               <span className="text-secondary font-bold">
-                end-to-end support,
+                end-to-end support —
               </span>{" "}
-              Your trusted partner for world-class, affordable medical treatment in India.We help international patients access top hospitals, leading doctors, and seamless medical journeys across India — especially North India.{" "}
+              from top hospitals and leading doctors to seamless travel, stay, and care coordination across India.{" "}
               {/* <span className="text-secondary font-bold">
                 affordable medical travel
               </span>
