@@ -155,3 +155,85 @@ body {
   background: #ffffff;
   color: #0a1cff;
 }
+
+/* --- Blog Content Fixes (Jodit Styles) --- */
+.blog-content-wrapper {
+  color: #334155;
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.blog-content-wrapper p {
+  margin-bottom: 1rem !important;
+}
+
+.blog-content-wrapper h1,
+.blog-content-wrapper h2,
+.blog-content-wrapper h3,
+.blog-content-wrapper h4,
+.blog-content-wrapper h5,
+.blog-content-wrapper h6 {
+  color: #006cb5 !important;
+  /* Primary Blue */
+  font-weight: 700 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+  font-style: normal !important;
+  /* Fix italic issue */
+  text-transform: none !important;
+  /* Fix uppercase issue */
+}
+
+.blog-content-wrapper ul {
+  list-style-type: disc !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.blog-content-wrapper ol {
+  list-style-type: decimal !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.blog-content-wrapper li {
+  margin-bottom: 0.5rem !important;
+}
+
+.blog-content-wrapper img {
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Table styling fix */
+.blog-content-wrapper table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1.5rem 0 !important;
+  font-size: 0.95rem;
+}
+
+.blog-content-wrapper table th,
+.blog-content-wrapper table td {
+  border: 1px solid #e2e8f0 !important;
+  padding: 12px 15px !important;
+  text-align: left !important;
+}
+
+.blog-content-wrapper table th {
+  background-color: #f8fafc;
+  font-weight: 700;
+}
+
+/* Fix float issues for images */
+.blog-content-wrapper img[style*="float: left"],
+.blog-content-wrapper img[style*="float:left"] {
+  margin-right: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.blog-content-wrapper img[style*="float: right"],
+.blog-content-wrapper img[style*="float:right"] {
+  margin-left: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}

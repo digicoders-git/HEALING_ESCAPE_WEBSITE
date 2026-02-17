@@ -119,7 +119,7 @@ const BlogDetail = () => {
               </h2>
             </div>
             <div
-              className="prose prose-slate max-w-none text-slate-600 prose-headings:text-primary prose-headings:font-bold prose-headings:uppercase prose-headings:italic prose-a:text-secondary prose-strong:text-slate-700"
+              className="blog-content-wrapper prose prose-slate max-w-none prose-p:my-0 prose-headings:my-0"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(blog.content),
               }}
