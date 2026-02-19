@@ -63,7 +63,7 @@ const BlogDetail = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden bg-gradient-to-br from-primary to-primary/50 pt-[72px]">
+      <section className="relative h-[50vh] overflow-hidden bg-linear-to-br from-primary to-primary/50 pt-[72px]">
         <img
           src={blog.image}
           className="absolute inset-0 w-full h-full object-cover opacity-20"
@@ -119,7 +119,7 @@ const BlogDetail = () => {
               </h2>
             </div>
             <div
-              className="blog-content-wrapper prose prose-slate max-w-none prose-p:my-0 prose-headings:my-0"
+              className="blog-content-wrapper text-slate-700"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(blog.content),
               }}
